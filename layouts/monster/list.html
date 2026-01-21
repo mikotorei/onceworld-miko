@@ -8,7 +8,7 @@
       {{ with $p.Params.image }}
         {{ $img := strings.TrimPrefix "/" . }}
         <a href="{{ $p.RelPermalink }}">
-          <img src="{{ (print "/" $img) | relURL }}" alt="{{ $p.Title }}">
+          <img src="{{ $img | relURL }}" alt="{{ $p.Title }}">
         </a>
       {{ else }}
         <div class="monster-noimage">No Image</div>
