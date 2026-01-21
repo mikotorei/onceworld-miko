@@ -2,8 +2,9 @@
 <h1>{{ .Title }}</h1>
 
 {{ with .Params.image }}
+  {{ $img := (strings.TrimPrefix "/" .) }}
   <p>
-    <img class="hero" src="{{ (print "/" .) | relURL }}" alt="{{ $.Title }}">
+    <img class="hero" src="{{ (print "/" $img) | relURL }}" alt="{{ $.Title }}">
   </p>
 {{ end }}
 
