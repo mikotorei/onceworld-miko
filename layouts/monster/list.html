@@ -3,17 +3,18 @@
 
 <div class="monster-grid">
   {{ range sort .Pages ".Params.id" "asc" }}
+    {{ $p := . }}
     <div class="monster-card">
-      {{ with .Params.image }}
-        <a href="{{ .RelPermalink }}">
-          <img src="{{ (print "/" .) | relURL }}" alt="{{ $.Title }}">
+      {{ with $p.Params.image }}
+        <a href="{{ $p.RelPermalink }}">
+          <img src="{{ (print "/" .) | relURL }}" alt="{{ $p.Title }}">
         </a>
       {{ else }}
         <div class="monster-noimage">No Image</div>
       {{ end }}
 
       <div class="monster-name">
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
       </div>
     </div>
   {{ end }}
