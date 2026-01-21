@@ -5,7 +5,8 @@
   {{ range sort .Pages ".Params.id" "asc" }}
     <a class="monster-card" href="{{ .RelPermalink }}">
       {{ with .Params.image }}
-        <img src="{{ (print "/" .) | relURL }}" alt="{{ $.Title }}">
+        {{ $img := (strings.TrimPrefix "/" .) }}
+        <img src="{{ (print "/" $img) | relURL }}" alt="{{ $.Title }}">
       {{ else }}
         <div class="monster-noimage">No Image</div>
       {{ end }}
