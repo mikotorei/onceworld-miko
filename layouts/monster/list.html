@@ -6,8 +6,9 @@
     {{ $p := . }}
     <div class="monster-card">
       {{ with $p.Params.image }}
+        {{ $img := strings.TrimPrefix "/" . }}
         <a href="{{ $p.RelPermalink }}">
-          <img src="{{ (print "/" .) | relURL }}" alt="{{ $p.Title }}">
+          <img src="{{ (print "/" $img) | relURL }}" alt="{{ $p.Title }}">
         </a>
       {{ else }}
         <div class="monster-noimage">No Image</div>
