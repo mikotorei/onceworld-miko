@@ -25,7 +25,7 @@ h1{
   font-size: 1.2rem;
 }
 
-/* 一覧（細枟・仕切り完全なし） */
+/* ===== 一覧 ===== */
 .ref-grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -38,24 +38,23 @@ h1{
   background: #fff;
   text-decoration: none;
   color: inherit;
-  padding: 6px;
+  padding: 8px;
 }
 
-/* 見出し：線・下線・境界を一切持たせない */
+/* タイトル：左揃え */
 .ref-head{
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   font-weight: 700;
   font-size: 13px;
-  margin: 0 0 4px 0;   /* 余白のみ */
-  padding: 0;         /* 仕切りの原因になりやすいので0 */
-  border: none;       /* 明示的に無し */
+  margin: 0 0 6px 0;
+  padding: 0;
+  border: none;
 }
 
-.ref-name,
-.ref-id{
-  border: none;
+.ref-name{
+  text-align: left;
 }
 
 .ref-id{
@@ -63,9 +62,10 @@ h1{
   font-size: 12px;
 }
 
+/* 画像：サイズを大きく */
 .ref-img{
   width: 100%;
-  height: 140px;
+  height: 180px;          /* ← 大きく */
   object-fit: contain;
   image-rendering: pixelated;
   display: block;
@@ -74,6 +74,11 @@ h1{
 /* スマホ */
 @media (max-width: 640px){
   main{ padding: 10px; }
-  .ref-grid{ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
-  .ref-img{ height: 120px; }
+  .ref-grid{
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+  }
+  .ref-img{
+    height: 150px;
+  }
 }
