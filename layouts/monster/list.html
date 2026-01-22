@@ -4,20 +4,15 @@
 <div class="monster-grid">
   {{ range sort .Pages ".Params.id" "asc" }}
     {{ $p := . }}
-    <div class="monster-card">
+    <a class="monster-card" href="{{ $p.RelPermalink }}">
       {{ with $p.Params.image }}
         {{ $img := strings.TrimPrefix "/" . }}
-        <a href="{{ $p.RelPermalink }}">
-          <img src="{{ $img | relURL }}" alt="{{ $p.Title }}">
-        </a>
+        <img src="{{ $img | relURL }}" alt="{{ $p.Title }}">
       {{ else }}
         <div class="monster-noimage">No Image</div>
       {{ end }}
-
-      <div class="monster-name">
-        <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
-      </div>
-    </div>
+      <div class="monster-name">{{ $p.Title }}</div>
+    </a>
   {{ end }}
 </div>
 {{ end }}
