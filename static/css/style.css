@@ -41,7 +41,7 @@ h1{
   padding: 8px;
 }
 
-/* モンスター名：分かりやすく大きく */
+/* タイトル */
 .ref-head{
   display: flex;
   justify-content: space-between;
@@ -50,8 +50,8 @@ h1{
 }
 
 .ref-name{
-  font-size: 1.15rem;   /* ← 大きく */
-  font-weight: 800;     /* ← 強調 */
+  font-size: 1.15rem;
+  font-weight: 800;
   text-align: left;
 }
 
@@ -60,21 +60,18 @@ h1{
   font-weight: 600;
 }
 
-/* 画像 */
+/* ★画像：枠いっぱいに広げる */
 .ref-img{
   width: 100%;
-  height: 180px;
-  object-fit: contain;
-  image-rendering: pixelated;
+  height: auto;        /* 高さ固定をやめる */
   display: block;
+  object-fit: contain; /* 画像を切らない */
+  image-rendering: pixelated;
 }
 
 /* スマホ */
 @media (max-width: 640px){
   .ref-name{
     font-size: 1.05rem;
-  }
-  .ref-img{
-    height: 150px;
   }
 }
