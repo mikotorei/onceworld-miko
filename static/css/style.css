@@ -3,8 +3,6 @@
   --muted:#666;
   --border:#ddd;
   --bg:#fff;
-  --card-bg:#fafafa;
-  --card-hover:#f0f0f0;
 }
 
 *{ box-sizing:border-box; }
@@ -23,38 +21,32 @@ main{
   padding: 16px;
 }
 
-a{ color: inherit; text-decoration: none; }
+h1{ margin: 0 0 16px; }
 
-h1{
-  font-size: 1.6rem;
-  margin: 0 0 16px;
-}
-
-/* ===== 一覧：カード ===== */
+/* 一覧カードだけ */
 .monster-grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 16px;
 }
 
-a.monster-card{
+.monster-card{
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 12px;
-  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  background: #fafafa;
+  text-decoration: none;
+  color: inherit;
 }
 
-a.monster-card:hover{
-  background: var(--card-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0,0,0,.08);
+.monster-card:hover{
+  background: #f0f0f0;
 }
 
-a.monster-card img{
+.monster-card img{
   width: 100%;
   height: 120px;
   object-fit: cover;
@@ -76,56 +68,6 @@ a.monster-card img{
 }
 
 .monster-name{
-  font-size: 0.95rem;
   font-weight: 600;
   text-align: center;
-  line-height: 1.3;
-}
-
-/* ===== 詳細：画像（既存互換） ===== */
-.hero{
-  width: 100%;
-  max-width: 360px;
-  height: auto;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  display: block;
-  margin-bottom: 12px;
-}
-
-/* テーブル系（詳細用） */
-table{
-  width:100%;
-  border-collapse: collapse;
-  border: 1px solid var(--border);
-  background: #fff;
-}
-
-th, td{
-  border-bottom: 1px solid var(--border);
-  padding: 10px 12px;
-  text-align:left;
-  vertical-align: top;
-}
-
-thead th{
-  background: #f7f7f7;
-  font-weight: 700;
-}
-
-.table-wrap{
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-section{
-  margin: 14px 0 18px;
-}
-
-@media (max-width: 640px){
-  main{ padding: 12px; }
-  a.monster-card img,
-  .monster-noimage{
-    height: 100px;
-  }
 }
