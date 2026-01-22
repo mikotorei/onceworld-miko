@@ -1,15 +1,23 @@
 {{ define "main" }}
 <h1>{{ .Title }}</h1>
 
-<div class="monster-grid">
+<div class="ref-grid">
   {{ range sort .Pages ".Params.id" "asc" }}
-    <a class="monster-card" href="{{ .RelPermalink }}">
-      {{ with .Params.image }}
-        <img src="{{ (strings.TrimPrefix "/" .) | relURL }}" alt="{{ $.Title }}">
-      {{ else }}
-        <div class="monster-noimage">No Image</div>
-      {{ end }}
-      <div class="monster-name">{{ .Title }}</div>
+    {{ $p := . }}
+    <a class="ref-card" href="{{ $p.RelPermalink }}">
+      <div class="ref-head">
+        <span class="ref-name">{{ $p.Title }}</span>
+        <span class="ref-id">({{ $p.Params.id }})</span>
+      </div>
+
+      <div class="ref-thumb">
+        {{ with $p.Params.image }}
+          {{ $img := strings.TrimPrefix "/" . }}
+          <img src="{{ $img | relURL }}" alt="{{ $p.Title }}">
+        {{ else }}
+          <div class="ref-noimg"></div>
+        {{ end }}
+      </div>
     </a>
   {{ end }}
 </div>
