@@ -25,7 +25,7 @@ h1{
   font-size: 1.2rem;
 }
 
-/* 一覧（細枠・仕切り無し） */
+/* 一覧（細枟・仕切り完全なし） */
 .ref-grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -34,20 +34,28 @@ h1{
 
 .ref-card{
   display: block;
-  border: 1px solid var(--border); /* 細く */
+  border: 1px solid var(--border);
   background: #fff;
   text-decoration: none;
   color: inherit;
-  padding: 6px; /* 内側の余白 */
+  padding: 6px;
 }
 
+/* 見出し：線・下線・境界を一切持たせない */
 .ref-head{
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   font-weight: 700;
   font-size: 13px;
-  margin-bottom: 6px; /* 仕切り線の代わりに余白 */
+  margin: 0 0 4px 0;   /* 余白のみ */
+  padding: 0;         /* 仕切りの原因になりやすいので0 */
+  border: none;       /* 明示的に無し */
+}
+
+.ref-name,
+.ref-id{
+  border: none;
 }
 
 .ref-id{
@@ -57,8 +65,8 @@ h1{
 
 .ref-img{
   width: 100%;
-  height: 140px;          /* サイズ感は次で調整可 */
-  object-fit: contain;    /* 画像を切らずに収める */
+  height: 140px;
+  object-fit: contain;
   image-rendering: pixelated;
   display: block;
 }
