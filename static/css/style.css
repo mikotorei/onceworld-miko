@@ -41,37 +41,35 @@ h1{
   padding: 8px;
 }
 
-/* タイトル */
+/* 名前＋番号 */
 .ref-head{
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
   margin: 0 0 6px 0;
 }
 
 .ref-name{
-  font-size: 1.15rem;
+  font-size: 0.92rem;   /* ← 以前比 約0.8倍 */
   font-weight: 800;
   text-align: left;
 }
 
-.ref-id{
-  font-size: 0.85rem;
+.ref-name .ref-id,
+.ref-name span{
+  font-size: 0.74rem;   /* ← 名前の約0.8倍 */
   font-weight: 600;
 }
 
-/* ★画像：枠いっぱいに広げる */
+/* 画像 */
 .ref-img{
   width: 100%;
-  height: auto;        /* 高さ固定をやめる */
+  height: auto;
   display: block;
-  object-fit: contain; /* 画像を切らない */
+  object-fit: contain;
   image-rendering: pixelated;
 }
 
 /* スマホ */
 @media (max-width: 640px){
   .ref-name{
-    font-size: 1.05rem;
+    font-size: 0.86rem;
   }
 }
