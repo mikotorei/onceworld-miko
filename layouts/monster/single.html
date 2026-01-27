@@ -57,7 +57,18 @@
   <dl class="d-list">
     <div class="d-row"><dt>獲得経験値</dt><dd>{{ .Params.exp }}</dd></div>
     <div class="d-row"><dt>獲得ゴールド</dt><dd>{{ .Params.gold }}</dd></div>
-    <div class="d-row"><dt>捕獲率</dt><dd>{{ .Params.capture_rate }}</dd></div>
+    <div class="d-row">
+  <dt>捕獲率</dt>
+  <dd>
+    {{ $cr := .Params.capture_rate }}
+    {{ if lt $cr 1.0 }}
+      {{ mul $cr 100 }}%
+    {{ else }}
+      {{ $cr }}%
+    {{ end }}
+  </dd>
+</div>
+
   </dl>
 </section>
 
