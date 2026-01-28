@@ -4,7 +4,9 @@
   if (!section || !list) return;
 
   const monsterId = String(section.dataset.monsterId || "").trim();
-  if (!monsterId) {
+  const jsonUrl = String(section.dataset.jsonUrl || "").trim();
+
+  if (!monsterId || !jsonUrl) {
     section.style.display = "none";
     return;
   }
@@ -12,8 +14,6 @@
   const LEVELS = [31, 71, 121, 181];
 
   const keyLabel = (k) => {
-    // 表示名は必要になったらここで変換していける
-    // 例: vit→VIT, capture_rate→捕獲率, drop_rate→ドロップ率
     const map = {
       vit: "VIT",
       spd: "SPD",
@@ -38,17 +38,17 @@
 
   const fmtMul = (obj, suffix = "") =>
     Object.entries(obj)
-      .map(([k, v]) => `${keyLabel(k)}×${(Number(v) * 100)}%${suffix}`)
+      .map(([k, v]) => `${keyLabel(k)}×${Number(v) * 100}%${suffix}`)
       .join(" / ");
 
   const render = (skills) => {
     if (!Array.isArray(skills) || skills.length === 0) {
-      section.style.display = "none";
+      // ここは「無いなら非表示」でもいいけど、今は原因追跡のため表示を残す
+      list.innerHTML = `<div class="d-row"><dt>-</dt><dd>（ペットスキルデータなし）</dd></div>`;
       return;
     }
 
     list.innerHTML = "";
-
     skills.forEach((s, i) => {
       const lv = LEVELS[i] ?? "";
       const parts = [];
@@ -66,11 +66,11 @@
     });
   };
 
-  fetch(`${document.baseURI.replace(/\/$/, "")}/db/pet_skills.json`, { cache: "no-store" })
+  fetch(jsonUrl, { cache: "no-store" })
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
     .then((db) => render(db?.[monsterId]))
-    .catch(() => {
-      // JSONが無い/該当IDが無い/読めない → セクション非表示
-      section.style.display = "none";
+    .catch((e) => {
+      console.error("pet_skills load failed:", jsonUrl, e);
+      list.innerHTML = `<div class="d-row"><dt>ERR</dt><dd>pet_skills.json を読み込めません（URL: ${jsonUrl}）</dd></div>`;
     });
 })();
