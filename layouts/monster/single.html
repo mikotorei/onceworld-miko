@@ -1,6 +1,11 @@
 {{ define "main" }}
 <h1 class="d-title">{{ .Title }}</h1>
 
+<p style="margin:8px 0; font-size:12px; opacity:.7;">
+  DEBUG pet_skills type={{ printf "%T" .Params.pet_skills }} /
+  len={{ cond (isset .Params "pet_skills") (len .Params.pet_skills) 0 }}
+</p>
+
 {{ with .Params.image }}
   {{ $img := strings.TrimPrefix "/" . }}
   <div class="d-hero">
@@ -11,66 +16,6 @@
 <p class="d-line">
   名前：{{ .Title }}（{{ .Params.attack_type }}・{{ .Params.attack_range }}・{{ .Params.element }}）
 </p>
-
-<section class="d-block">
-  <div class="d-level">
-    <div class="d-level-row">
-      {{ with .Params.level_shortcuts }}
-        {{ range . }}
-          <button class="d-btn" type="button" data-lv="{{ . }}">Lv {{ . }}</button>
-        {{ end }}
-      {{ else }}
-        <button class="d-btn" type="button" data-lv="1">Lv 1</button>
-        <button class="d-btn" type="button" data-lv="700">Lv 700</button>
-      {{ end }}
-    </div>
-
-    <div class="d-level-row">
-      <label class="d-input">
-        Lv <input type="number" min="1" value="1">
-      </label>
-    </div>
-  </div>
-</section>
-
-<section class="d-block">
-  <h2 class="d-h2">ステータス</h2>
-
-  <dl class="d-list">
-    <div class="d-row"><dt>vit</dt><dd>{{ .Params.status.vit }}</dd></div>
-    <div class="d-row"><dt>spd</dt><dd>{{ .Params.status.spd }}</dd></div>
-    <div class="d-row"><dt>atk</dt><dd>{{ .Params.status.atk }}</dd></div>
-    <div class="d-row"><dt>int</dt><dd>{{ .Params.status.int }}</dd></div>
-    <div class="d-row"><dt>def</dt><dd>{{ .Params.status.def }}</dd></div>
-    <div class="d-row"><dt>mdef</dt><dd>{{ .Params.status.mdef }}</dd></div>
-    <div class="d-row"><dt>luk</dt><dd>{{ .Params.status.luk }}</dd></div>
-
-    {{ with .Params.fixed_status.mov }}
-      <div class="d-row"><dt>mov</dt><dd>{{ . }}</dd></div>
-    {{ end }}
-  </dl>
-</section>
-
-<section class="d-block">
-  <h2 class="d-h2">報酬・捕獲</h2>
-
-  <dl class="d-list">
-    <div class="d-row"><dt>獲得経験値</dt><dd>{{ .Params.exp }}</dd></div>
-    <div class="d-row"><dt>獲得ゴールド</dt><dd>{{ .Params.gold }}</dd></div>
-    <div class="d-row"><dt>捕獲率</dt><dd>{{ .Params.capture_rate }}%</dd></div>
-  </dl>
-</section>
-
-{{ with .Params.drops }}
-<section class="d-block">
-  <h2 class="d-h2">ドロップ</h2>
-  <ul class="d-bullets">
-    {{ range . }}
-      <li>{{ . }}</li>
-    {{ end }}
-  </ul>
-</section>
-{{ end }}
 
 {{ with .Params.pet_skills }}
 <section class="d-block">
@@ -83,26 +28,23 @@
       <div class="d-row">
         <dt>Lv{{ index $levels $i }}</dt>
         <dd>
-          {{/* 表示文字列を自動生成（add / mul / final_mul） */}}
           {{ $out := slice }}
 
-          {{ with $ps.add }}
+          {{ with index $ps "add" }}
             {{ range $k, $v := . }}
               {{ $out = $out | append (printf "%s+%v" $k $v) }}
             {{ end }}
           {{ end }}
 
-          {{ with $ps.mul }}
+          {{ with index $ps "mul" }}
             {{ range $k, $v := . }}
-              {{ $pct := mul $v 100 }}
-              {{ $out = $out | append (printf "%s×%v%%" $k $pct) }}
+              {{ $out = $out | append (printf "%s×%v%%" $k (mul $v 100)) }}
             {{ end }}
           {{ end }}
 
-          {{ with $ps.final_mul }}
+          {{ with index $ps "final_mul" }}
             {{ range $k, $v := . }}
-              {{ $pct := mul $v 100 }}
-              {{ $out = $out | append (printf "%s×%v%%(最終)" $k $pct) }}
+              {{ $out = $out | append (printf "%s×%v%%(最終)" $k (mul $v 100)) }}
             {{ end }}
           {{ end }}
 
@@ -111,15 +53,6 @@
       </div>
     {{ end }}
   </dl>
-</section>
-{{ end }}
-
-{{ with .Params.locations }}
-<section class="d-block">
-  <h2 class="d-h2">出現場所</h2>
-  <p class="d-places">
-    {{ range $i, $v := . }}{{ if $i }} / {{ end }}{{ $v }}{{ end }}
-  </p>
 </section>
 {{ end }}
 
