@@ -67,24 +67,12 @@
   </dl>
 </section>
 
-{{/* ▼ ドロップ：配列でも文字列でも表示できるようにする */}}
-{{ $drops := .Params.drops }}
-{{ if $drops }}
+{{ with .Params.drops }}
 <section class="d-block">
   <h2 class="d-h2">ドロップ</h2>
   <ul class="d-bullets">
-    {{ $t := printf "%T" $drops }}
-    {{ if strings.HasPrefix $t "[]" }}
-      {{/* 配列（drops=["a","b"] 等） */}}
-      {{ range $drops }}
-        <li>{{ . }}</li>
-      {{ end }}
-    {{ else }}
-      {{/* 文字列（drops="a,b,c" 等） */}}
-      {{ range (split (string $drops) ",") }}
-        {{ $s := strings.TrimSpace . }}
-        {{ if $s }}<li>{{ $s }}</li>{{ end }}
-      {{ end }}
+    {{ range . }}
+      <li>{{ . }}</li>
     {{ end }}
   </ul>
 </section>
