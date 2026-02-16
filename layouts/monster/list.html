@@ -4,11 +4,9 @@
 <div class="ref-grid">
   {{ range sort .Pages ".Params.id" "asc" }}
     {{ $p := . }}
-    {{ $type := default "" (index $p.Params "attack_type") }}
-
     <a class="ref-card"
        href="{{ $p.RelPermalink }}"
-       data-attack-type="{{ $type }}">
+       data-attack-type="{{ with $p.Params.attack_type }}{{ . }}{{ end }}">
       <div class="ref-head">
         <span class="ref-name">{{ $p.Title }} ({{ $p.Params.id }})</span>
       </div>
