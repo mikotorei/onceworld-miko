@@ -65,7 +65,7 @@
   border-radius: 12px;
 }
 
-/* ボタン・入力（押しやすさ） */
+/* ボタン（押しやすさ） */
 .d-btn{
   border: 1px solid var(--border);
   background: #fff;
@@ -76,19 +76,44 @@
   cursor: pointer;
 }
 
+/* 入力 */
 .d-input{
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-weight: 700;
 }
 
-.d-input input{
-  width: 110px;
-  height: 40px;
-  border: 1px solid var(--border);
-  padding: 6px 8px;
-  border-radius: 10px;
+/* ▼ Lv入力を「下線」＋小さめに */
+.d-input input[type="number"]{
+  width: 56px;               /* 小さく */
+  height: 28px;
+  padding: 0 2px;
+  border: none;
+  border-bottom: 2px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  outline: none;
+}
+
+/* チェックボックスは少し小さめ */
+.d-input input[type="checkbox"]{
+  width: 16px;
+  height: 16px;
+}
+
+/* ▼ Lv入力＋起源の行は1段固定 */
+.d-level-row{
+  display: flex;
+  flex-wrap: nowrap;         /* 折り返さない */
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Lvボタン列は折り返しOKのまま（ここだけ上書きされないように） */
+.d-level > .d-level-row:first-child{
+  flex-wrap: wrap;
 }
 
 /* dl（スマホで見やすい） */
@@ -162,4 +187,5 @@
   .d-line{ font-size: 15px; }
   .d-h2{ font-size: 17px; }
   .d-row{ grid-template-columns: 110px 1fr; }
+  .d-input input[type="number"]{ width: 70px; height: 30px; }
 }
