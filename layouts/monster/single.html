@@ -18,7 +18,7 @@
   <div class="d-level">
 
     <!-- Lvボタン -->
-    <div class="d-level-row" style="display:flex; gap:6px; flex-wrap:wrap;">
+    <div class="d-level-row d-level-row--wrap">
       {{ with .Params.level_shortcuts }}
         {{ range . }}
           <button class="d-btn" type="button" data-lv="{{ . }}">Lv {{ . }}</button>
@@ -29,13 +29,13 @@
       {{ end }}
     </div>
 
-    <!-- Lv入力 + 経験の起源 横並び -->
-    <div class="d-level-row" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+    <!-- Lv入力 + 経験の起源（横並び固定） -->
+    <div class="d-level-row d-level-row--nowrap">
       <label class="d-input">
         Lv <input id="monster-level" type="number" min="1" value="1">
       </label>
 
-      <label class="d-input" style="gap:6px;">
+      <label class="d-input">
         <input id="origin-exp" type="checkbox">
         経験の起源
       </label>
