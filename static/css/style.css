@@ -3,6 +3,8 @@
   --border:#000;
   --bg:#fff;
   --muted:#666;
+
+  --magic:#7a3cff; /* 魔法カラー */
 }
 
 *{ box-sizing:border-box; }
@@ -26,7 +28,7 @@ h1{
   font-size: 1.2rem;
 }
 
-/* ===== 一覧（あなたが確定したUI） ===== */
+/* ===== 一覧 ===== */
 .ref-grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -50,6 +52,11 @@ h1{
   font-size: 0.92rem;
   font-weight: 800;
   text-align: left;
+}
+
+/* ▼ 魔法タイプの名前を紫にする */
+.ref-card[data-attack-type="魔法"] .ref-name{
+  color: var(--magic);
 }
 
 .ref-img{
