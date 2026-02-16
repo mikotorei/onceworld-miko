@@ -16,29 +16,31 @@
 
 <section class="d-block">
   <div class="d-level">
-    <div class="d-level-row" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-      <div class="d-level-row" style="display:flex; gap:6px; flex-wrap:wrap;">
-        {{ with .Params.level_shortcuts }}
-          {{ range . }}
-            <button class="d-btn" type="button" data-lv="{{ . }}">Lv {{ . }}</button>
-          {{ end }}
-        {{ else }}
-          <button class="d-btn" type="button" data-lv="1">Lv 1</button>
-          <button class="d-btn" type="button" data-lv="700">Lv 700</button>
-        {{ end }}
-      </div>
 
-      <label class="d-input" style="display:flex; align-items:center; gap:6px;">
+    <!-- Lvボタン -->
+    <div class="d-level-row" style="display:flex; gap:6px; flex-wrap:wrap;">
+      {{ with .Params.level_shortcuts }}
+        {{ range . }}
+          <button class="d-btn" type="button" data-lv="{{ . }}">Lv {{ . }}</button>
+        {{ end }}
+      {{ else }}
+        <button class="d-btn" type="button" data-lv="1">Lv 1</button>
+        <button class="d-btn" type="button" data-lv="700">Lv 700</button>
+      {{ end }}
+    </div>
+
+    <!-- Lv入力 + 経験の起源 横並び -->
+    <div class="d-level-row" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+      <label class="d-input">
+        Lv <input id="monster-level" type="number" min="1" value="1">
+      </label>
+
+      <label class="d-input" style="gap:6px;">
         <input id="origin-exp" type="checkbox">
         経験の起源
       </label>
     </div>
 
-    <div class="d-level-row">
-      <label class="d-input">
-        Lv <input id="monster-level" type="number" min="1" value="1">
-      </label>
-    </div>
   </div>
 </section>
 
