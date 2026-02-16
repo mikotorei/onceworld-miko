@@ -1,0 +1,118 @@
+/* monster detail (mobile-first) */
+
+/* 画面幅が広くても読みやすい最大幅 */
+.d-title,
+.d-line,
+.d-block,
+.d-back {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* タイトル */
+.d-title {
+  font-size: 22px;
+  line-height: 1.25;
+  margin: 14px auto 10px;
+  padding: 0 12px;
+}
+
+/* 画像 */
+.d-hero {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+.d-hero-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* 基本行 */
+.d-line {
+  padding: 0 12px;
+  margin: 10px auto 14px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* ブロック */
+.d-block {
+  padding: 12px;
+  margin: 10px auto;
+  border-radius: 12px;
+}
+
+/* 見出し */
+.d-h2 {
+  font-size: 16px;
+  margin: 0 0 10px;
+}
+
+/* レベル操作 */
+.d-level-row {
+  gap: 8px;
+}
+
+/* ボタン（スマホで押しやすく） */
+.d-btn {
+  min-height: 40px;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+/* 入力 */
+.d-input input[type="number"] {
+  height: 40px;
+  width: 110px;
+}
+
+/* dl 表示（スマホ：縦気味で詰める） */
+.d-list {
+  margin: 0;
+}
+.d-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 8px;
+  padding: 8px 0;
+}
+.d-row dt {
+  font-size: 13px;
+  opacity: 0.85;
+}
+.d-row dd {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* ドロップ横並び（既にやった形を詳細向けにも保持） */
+.d-bullets {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: nowrap;
+  overflow-x: auto;        /* スマホで収まらない場合は横スクロール */
+  -webkit-overflow-scrolling: touch;
+}
+.d-bullets li {
+  white-space: nowrap;
+}
+
+/* 戻る */
+.d-back {
+  padding: 10px 12px 22px;
+}
+
+/* PCは“見にくくならない程度”に整える */
+@media (min-width: 900px) {
+  .d-title { font-size: 26px; }
+  .d-line { font-size: 15px; }
+  .d-h2 { font-size: 17px; }
+  .d-row { grid-template-columns: 110px 1fr; }
+}
