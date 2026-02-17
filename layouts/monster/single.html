@@ -18,13 +18,17 @@
   <div class="d-level">
 
     <div class="d-level-row d-level-row--wrap">
+      <!-- Lv1は常に表示 -->
+      <button class="d-btn" type="button" data-lv="1">Lv 1</button>
+
+      <!-- level_shortcuts がある場合のみ追加表示（1は除外） -->
       {{ with .Params.level_shortcuts }}
-       {{ if gt (len .) 0 }}
         {{ range . }}
-         <button class="d-btn" type="button" data-lv="{{ . }}">Lv {{ . }}</button>
+          {{ if ne . 1 }}
+            <button class="d-btn" type="button" data-lv="{{ . }}">Lv {{ . }}</button>
+          {{ end }}
         {{ end }}
       {{ end }}
-    {{ end }}
     </div>
 
     <div class="d-level-row d-level-row--nowrap">
