@@ -1,14 +1,15 @@
 (() => {
-  const LEVELSCALE = 0.1; // ステータス用（既存のまま）
+  const LEVELSCALE = 0.1;
 
   const clampLv = (v) => {
     const n = parseInt(v, 10);
     return Number.isFinite(n) && n >= 1 ? n : 1;
   };
 
+  const isDigits = (s) => /^\d+$/.test(s);
+
   const calcStat = (base, lv) => Math.floor(base * (1 + (lv - 1) * LEVELSCALE));
 
-  // 経験値：基礎経験値 × floor(0.2×Lv^1.1（最低保証1）)
   const calcExpMultiplier = (lv) => {
     const raw = 0.2 * Math.pow(lv, 1.1);
     const floored = Math.floor(raw);
@@ -54,16 +55,23 @@
     };
 
     let rafId = 0;
-    const schedule = () => {
+    const requestRecalc = (normalizeInput) => {
       if (rafId) return;
       rafId = requestAnimationFrame(() => {
         rafId = 0;
 
-        // ▼ 入力中に空なら計算しない（戻さない）
-        if (levelInput.value === "") return;
+        const raw = (levelInput.value || "").trim();
 
-        const lv = clampLv(levelInput.value);
-        levelInput.value = String(lv);
+        // 入力中に空は許可：計算しない
+        if (raw === "") return;
+
+        // 数字以外は計算しない（消し途中対策）
+        if (!isDigits(raw)) return;
+
+        const lv = clampLv(raw);
+
+        // blur / change / button のときだけ入力欄へ書き戻す
+        if (normalizeInput) levelInput.value = String(lv);
 
         recalcStats(lv);
         recalcExp(lv);
@@ -75,31 +83,43 @@
       });
     };
 
-    // ▼ フォーカスが外れたら未入力を1に戻す
-    levelInput.addEventListener("blur", () => {
-      if (levelInput.value === "") {
-        levelInput.value = "1";
-      }
-      schedule();
-    });
-
-    // 入力中（空も許可）
-    levelInput.addEventListener("input", schedule);
-    levelInput.addEventListener("change", schedule);
-
+    // ボタン
     lvBtns.forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         levelInput.value = btn.dataset.lv || "1";
-        schedule();
+        requestRecalc(true);
       });
     });
 
+    // 入力中：空OK、書き戻ししない
+    levelInput.addEventListener("input", () => {
+      // 空にした直後、前のrAFが残っていると書き戻しが起き得るので潰す
+      if ((levelInput.value || "") === "" && rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = 0;
+        return;
+      }
+      requestRecalc(false);
+    });
+
+    // 入力確定：正規化して反映
+    levelInput.addEventListener("change", () => requestRecalc(true));
+
+    // フォーカス外れ：空なら1に戻す
+    levelInput.addEventListener("blur", () => {
+      const raw = (levelInput.value || "").trim();
+      if (raw === "") {
+        levelInput.value = "1";
+      }
+      requestRecalc(true);
+    });
+
     if (originExp) {
-      originExp.addEventListener("change", schedule);
+      originExp.addEventListener("change", () => requestRecalc(true));
     }
 
-    schedule();
+    requestRecalc(true);
   };
 
   document.addEventListener("DOMContentLoaded", init);
