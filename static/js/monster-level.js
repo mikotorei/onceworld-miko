@@ -46,8 +46,8 @@
       if (!Number.isFinite(baseRaw)) return;
 
       const base = (originExp && originExp.checked) ? baseRaw * 2 : baseRaw;
-
       const mult = calcExpMultiplier(lv);
+
       expEl.textContent = String(base * mult);
     };
 
@@ -57,6 +57,11 @@
 
       recalcStats(lv);
       recalcExp(lv);
+
+      // ▼ カンマ表示（必要なときだけ）
+      if (typeof window.formatNumbers === "function") {
+        window.formatNumbers(document);
+      }
     };
 
     lvBtns.forEach((btn) => {
