@@ -19,13 +19,12 @@
 
     <div class="d-level-row d-level-row--wrap">
       {{ with .Params.level_shortcuts }}
+       {{ if gt (len .) 0 }}
         {{ range . }}
-          <button class="d-btn" type="button" data-lv="{{ . }}">Lv {{ . }}</button>
+         <button class="d-btn" type="button" data-lv="{{ . }}">Lv {{ . }}</button>
         {{ end }}
-      {{ else }}
-        <button class="d-btn" type="button" data-lv="1">Lv 1</button>
-        <button class="d-btn" type="button" data-lv="700">Lv 700</button>
       {{ end }}
+    {{ end }}
     </div>
 
     <div class="d-level-row d-level-row--nowrap">
