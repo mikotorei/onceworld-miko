@@ -1,89 +1,122 @@
 (() => {
-  const section = document.getElementById("pet-skill-section");
-  const list = document.getElementById("pet-skill-list");
-  if (!section || !list) return;
-
-  const monsterId = String(section.dataset.monsterId || "").trim();
-  const jsonUrl = String(section.dataset.jsonUrl || "").trim();
-
-  if (!monsterId || !jsonUrl) {
-    section.style.display = "none";
-    return;
-  }
-
   const LEVELS = [31, 71, 121, 181];
 
-  const keyLabel = (k) => {
-    const map = {
-      vit: "VIT",
-      spd: "SPD",
-      atk: "ATK",
-      int: "INT",
-      def: "DEF",
-      mdef: "MDEF",
-      luk: "LUK",
-      mov: "MOV",
-      heal: "回復",
-      capture_rate: "捕獲率",
-      drop_rate: "ドロップ率",
-      exp: "経験値",
-      gold: "ゴールド",
-      final_damage: "最終ダメ"
-    };
-    return map[k] || k;
+  const STAT_LABEL = {
+    vit: "VIT",
+    spd: "SPD",
+    atk: "ATK",
+    int: "INT",
+    def: "DEF",
+    mdef: "MDEF",
+    luk: "LUK",
+    mov: "MOV",
+    exp: "EXP",
+    heal: "HP回復",
+    capture: "基礎捕獲×",
+    drop: "基礎ドロップ×",
   };
 
-  const fmtAdd = (obj) =>
-    Object.entries(obj)
-      .map(([k, v]) => `${keyLabel(k)}+${v}`)
-      .join(" / ");
+  const fmtNum = (n) => {
+    if (typeof n !== "number") return String(n ?? "");
+    return Number.isInteger(n) ? n.toLocaleString("ja-JP") : String(n);
+  };
 
-  // ★ ここを変更：×% → +%
-  const fmtMul = (obj, suffix = "") =>
-    Object.entries(obj)
-      .map(([k, v]) => `${keyLabel(k)}+${Number(v) * 100}%${suffix}`)
-      .join(" / ");
+  // mul/final_mul は「×」表示（例：0.35 → ×1.35）
+  const fmtMul = (ratio) => {
+    const r = Number(ratio);
+    if (!Number.isFinite(r)) return "";
+    const x = 1 + r;
+    // 端数が出るのは想定内。不要なら round 桁数を変えてOK
+    return `×${x.toFixed(2).replace(/\.?0+$/, "")}`;
+  };
+
+  const parseOne = (entry) => {
+    if (!entry || typeof entry !== "object") return null;
+
+    if (entry.add) {
+      const stat = Object.keys(entry.add)[0];
+      const val = entry.add[stat];
+      const name = STAT_LABEL[stat] ?? stat;
+      return `${name} +${fmtNum(val)}`;
+    }
+
+    if (entry.mul) {
+      const stat = Object.keys(entry.mul)[0];
+      const val = entry.mul[stat];
+      const name = STAT_LABEL[stat] ?? stat;
+
+      // capture/drop/exp など “倍率系” は × 表示に寄せる
+      if (stat === "capture" || stat === "drop" || stat === "exp") {
+        return `${name} ${fmtMul(val)}`;
+      }
+
+      // それ以外は +〇% 表示
+      return `${name} +${fmtNum(val * 100)}%`;
+    }
+
+    if (entry.final_mul) {
+      const stat = Object.keys(entry.final_mul)[0];
+      const val = entry.final_mul[stat];
+      const name = STAT_LABEL[stat] ?? stat;
+
+      if (stat === "capture" || stat === "drop" || stat === "exp") {
+        return `${name} 最終${fmtMul(val)}`;
+      }
+
+      return `${name} 最終+${fmtNum(val * 100)}%`;
+    }
+
+    return null;
+  };
 
   const render = (skills) => {
-    if (!Array.isArray(skills) || skills.length === 0) {
-      section.style.display = "none";
-      return;
-    }
+    const list = document.getElementById("pet-skill-list");
+    if (!list) return;
 
     list.innerHTML = "";
 
-    skills.forEach((s, i) => {
-      const lv = LEVELS[i] ?? "";
-      const parts = [];
-
-      if (s.add && typeof s.add === "object") {
-        parts.push(fmtAdd(s.add));
-      }
-      if (s.mul && typeof s.mul === "object") {
-        parts.push(fmtMul(s.mul));
-      }
-      if (s.final_mul && typeof s.final_mul === "object") {
-        parts.push(fmtMul(s.final_mul, "(最終)"));
-      }
-
-      const text = parts.filter(Boolean).join(" / ") || "-";
+    for (let i = 0; i < LEVELS.length; i++) {
+      const lv = LEVELS[i];
+      const label = skills && skills[i] ? parseOne(skills[i]) : null;
 
       const row = document.createElement("div");
       row.className = "d-row";
-      row.innerHTML = `<dt>Lv${lv}</dt><dd>${text}</dd>`;
+
+      const dt = document.createElement("dt");
+      dt.textContent = `Lv${lv}`;
+
+      const dd = document.createElement("dd");
+      dd.textContent = label || "—";
+
+      row.appendChild(dt);
+      row.appendChild(dd);
       list.appendChild(row);
-    });
+    }
   };
 
-  fetch(jsonUrl, { cache: "no-store" })
-    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-    .then((db) => render(db?.[monsterId]))
-    .catch((e) => {
-  console.error("pet skills load error:", e);
-  list.innerHTML =
-    `<div class="d-row">
-       <dt>―</dt>
-       <dd>ペットスキルデータが見つかりません</dd>
-     </div>`;
-    });
+  const init = async () => {
+    const section = document.getElementById("pet-skill-section");
+    if (!section) return;
+
+    const monsterId = section.dataset.monsterId;
+    const url = section.dataset.jsonUrl;
+    if (!monsterId || !url) return;
+
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+
+      const skills = json[monsterId];
+      if (!skills) {
+        render(null);
+        return;
+      }
+      render(skills);
+    } catch (e) {
+      render(null);
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", init);
 })();
