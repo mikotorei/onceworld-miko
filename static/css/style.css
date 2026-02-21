@@ -1,104 +1,4 @@
-:root{
-  --fg:#111;
-  --border:#000;
-  --bg:#fff;
-  --muted:#666;
-
-  --magic:#7a3cff; /* 魔法カラー */
-}
-
-*{ box-sizing:border-box; }
-
-body{
-  margin:0;
-  color:var(--fg);
-  background:var(--bg);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-  line-height:1.5;
-}
-
-main{
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 12px;
-}
-
-h1{
-  margin: 0 0 10px;
-  font-size: 1.2rem;
-}
-
-/* ===== 一覧 ===== */
-.ref-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 10px;
-}
-
-.ref-card{
-  display: block;
-  border: 1px solid var(--border);
-  background: #fff;
-  text-decoration: none;
-  color: inherit;
-  padding: 8px;
-}
-
-.ref-head{
-  margin: 0 0 6px 0;
-}
-
-.ref-name{
-  font-size: 0.92rem;
-  font-weight: 800;
-  text-align: left;
-}
-
-/* ▼ 魔法タイプの名前を紫にする */
-.ref-card[data-attack-type="魔法"] .ref-name{
-  color: var(--magic);
-}
-
-.ref-img{
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  image-rendering: pixelated;
-}
-
-@media (max-width: 640px){
-  main{ padding: 10px; }
-  .ref-grid{ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
-}
-/* ===== 上部固定ヘッダー（ホームリンク付きタイトル） ===== */
-.site-header{
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-}
-
-.site-header .site-title{
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 10px 12px;
-}
-
-.site-header .site-title a{
-  color: var(--fg);
-  font-weight: 900;
-  text-decoration: none;
-  font-size: 1.05rem;
-  letter-spacing: .02em;
-}
-
-.site-header .site-title a:hover{
-  text-decoration: underline;
-}
-/* ===== 上部固定ヘッダー（タイトル中央＋ハンバーガー） ===== */
+/* ===== 上部固定ヘッダー（タイトル完全中央＋右ハンバーガー） ===== */
 .site-header{
   position: sticky;
   top: 0;
@@ -107,24 +7,20 @@ h1{
   border-bottom: 1px solid var(--border);
 }
 
-/* ヘッダー内の横並び：左(ダミー) / 中央(タイトル) / 右(ボタン) */
+/* 3カラムGrid：左 / 中央 / 右 で「中央が常に真ん中」になる */
 .site-header-inner{
   max-width: 1600px;
   margin: 0 auto;
   padding: 10px 12px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px; /* 左右の幅を固定＝完璧に中央 */
   align-items: center;
-  gap: 10px;
 }
 
-/* 左右の幅を同じにして、タイトルを厳密に中央へ */
-.site-header-side{
-  width: 44px; /* ハンバーガーボタンと同じ幅 */
-  flex: 0 0 44px;
-}
+.site-header-left{ width: 44px; height: 36px; }
+.site-header-right{ width: 44px; height: 36px; display: grid; place-items: center; }
 
 .site-title{
-  flex: 1 1 auto;
   text-align: center;
   line-height: 1;
 }
@@ -137,9 +33,7 @@ h1{
   letter-spacing: .02em;
 }
 
-.site-title a:hover{
-  text-decoration: underline;
-}
+.site-title a:hover{ text-decoration: underline; }
 
 /* ハンバーガーボタン */
 .hamburger{
@@ -148,15 +42,12 @@ h1{
   border: 1px solid var(--border);
   background: var(--bg);
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   padding: 0;
+  display: grid;
+  place-items: center;
 }
 
-.hamburger:active{
-  transform: translateY(1px);
-}
+.hamburger:active{ transform: translateY(1px); }
 
 .hamburger-bars{
   position: relative;
@@ -179,7 +70,7 @@ h1{
 .hamburger-bars::before{ top: -6px; }
 .hamburger-bars::after{ top: 6px; }
 
-/* メニュー（右上からドロップ/ドロワー風） */
+/* メニュー */
 .site-menu{
   position: absolute;
   right: 12px;
@@ -207,25 +98,19 @@ h1{
   background: #fff;
 }
 
-.site-menu a:hover{
-  background: #f6f6f6;
-}
+.site-menu a:hover{ background: #f6f6f6; }
 
-/* 開いた状態 */
 .site-header.menu-open .site-menu{
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
-/* オーバーレイ（メニュー外タップで閉じる） */
+/* オーバーレイ */
 .menu-overlay{
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,.15);
 }
 
-/* メニュー中はスクロール抑制（スマホで便利） */
-.no-scroll{
-  overflow: hidden;
-}
+.no-scroll{ overflow: hidden; }
