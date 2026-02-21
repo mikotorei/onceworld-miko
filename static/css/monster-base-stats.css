@@ -1,0 +1,59 @@
+.mbs-wrap { max-width: 1100px; margin: 0 auto; padding: 16px; }
+.mbs-head { margin-bottom: 10px; }
+.mbs-title { margin: 0 0 6px; font-size: 1.35rem; }
+.mbs-desc { opacity: .9; margin-top: 6px; }
+
+.mbs-controls { display: grid; gap: 8px; margin: 12px 0 14px; }
+.mbs-search {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(0,0,0,.18);
+  border-radius: 10px;
+  font-size: 16px;
+}
+.mbs-note { font-size: 12px; opacity: .75; }
+
+.mbs-table-wrap {
+  overflow: auto;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 12px;
+}
+.mbs-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: max-content;
+  min-width: 100%;
+  font-size: 14px;
+}
+.mbs-table th, .mbs-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  white-space: nowrap;
+}
+.mbs-table thead th {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(6px);
+  z-index: 2;
+}
+.mbs-table th.sort { cursor: pointer; user-select: none; }
+.mbs-table th.sort::after { content: " ↕"; opacity: .35; font-size: 12px; }
+
+.mbs-table td.num, .mbs-table th.num { text-align: right; }
+
+.sticky-col {
+  position: sticky;
+  left: 0;
+  background: rgba(255,255,255,.98);
+  z-index: 1;
+}
+.mbs-table thead .sticky-col { z-index: 3; }
+.mbs-table td.name a { text-decoration: none; }
+.mbs-table tr:hover td { background: rgba(0,0,0,.03); }
+.mbs-table tr:hover td.sticky-col { background: rgba(0,0,0,.03); }
+
+@media (max-width: 600px) {
+  .mbs-wrap { padding: 12px; }
+  .mbs-title { font-size: 1.2rem; }
+}
