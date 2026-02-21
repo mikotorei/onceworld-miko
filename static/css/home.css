@@ -4,28 +4,45 @@
   display:flex;
   flex-direction:column;
   align-items:center;
-  padding:30px 16px;
-  gap:24px;
+  padding:34px 16px;
+  gap:34px;
 }
 
 .home-item{
+  width:100%;
+  max-width:620px;          /* 読みやすい横幅に制限 */
   text-align:center;
 }
 
 /* タイトルだけリンク（青固定・訪問後も青） */
 .home-title a{
-  font-size:20px;
-  font-weight:700;
+  display:inline-block;
+  font-size:24px;           /* タイトルを少し大きく */
+  font-weight:800;
+  line-height:1.25;
   text-decoration:underline;
-  color:#0040ff;
+  text-underline-offset: 4px;
+  color:#0a43ff;
 }
 .home-title a:visited{
-  color:#0040ff;
+  color:#0a43ff;
 }
 
-/* 説明は黒字で下に */
+/* 説明は黒字で下に（読みやすく） */
 .home-desc{
-  margin-top:6px;
-  font-size:14px;
-  color:#000;
+  margin-top:12px;
+  font-size:16px;           /* ←ここが今回の主役（見やすいサイズ） */
+  line-height:1.9;          /* 行間を広めに */
+  color:#111;               /* 真っ黒より少し優しく */
+}
+
+/* さらにスマホで読みやすく（画面が狭い時） */
+@media (max-width: 480px){
+  .home-title a{
+    font-size:22px;
+  }
+  .home-desc{
+    font-size:16px;
+    line-height:1.95;
+  }
 }
