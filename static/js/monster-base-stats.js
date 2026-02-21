@@ -7,7 +7,10 @@
   const rows = Array.from(tbody.querySelectorAll("tr"));
   const headers = Array.from(table.querySelectorAll("thead th.sort"));
 
-  // 検索（名前/属性/攻撃タイプ/射程）
+  // 初期は id 昇順（Hugo側で並んでいる前提）
+  let sortState = { key: "id", dir: 1 };
+
+  // 検索
   function applyFilter() {
     const q = (search.value || "").trim().toLowerCase();
     if (!q) {
@@ -25,10 +28,10 @@
   }
   search.addEventListener("input", applyFilter);
 
-  // ソート
-  let sortState = { key: "name", dir: 1 }; // 1=asc, -1=desc
-
   function getValue(row, key) {
+    // 名前列は id でソートする
+    if (key === "name") key = "id";
+
     const v = row.dataset[key];
     if (v == null) return "";
 
