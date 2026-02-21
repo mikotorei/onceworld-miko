@@ -1,31 +1,113 @@
-/* ===== 上部固定ヘッダー（タイトル完全中央＋右ハンバーガー） ===== */
-.site-header{
+:root{
+  --fg:#111;
+  --border:#000;
+  --bg:#fff;
+  --muted:#666;
+
+  --magic:#7a3cff; /* 魔法カラー */
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  color:var(--fg);
+  background:var(--bg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  line-height:1.5;
+}
+
+main{
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+h1{
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+}
+
+/* ===== 一覧 ===== */
+.ref-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 10px;
+}
+
+.ref-card{
+  display: block;
+  border: 1px solid var(--border);
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  padding: 8px;
+}
+
+.ref-head{
+  margin: 0 0 6px 0;
+}
+
+.ref-name{
+  font-size: 0.92rem;
+  font-weight: 800;
+  text-align: left;
+}
+
+/* ▼ 魔法タイプの名前を紫にする */
+.ref-card[data-attack-type="魔法"] .ref-name{
+  color: var(--magic);
+}
+
+.ref-img{
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+/* ===== OnceWorld Header（タイトル中央＋右ハンバーガー / 衝突防止で ow- 接頭辞） ===== */
+.ow-header{
   position: sticky;
   top: 0;
   z-index: 1000;
   background: var(--bg);
-  border-bottom: 1px solid var(--border);
+
+  /* タイトルとサイト内部の仕切り */
+  border-bottom: 2px solid var(--border);
+
+  /* ドロップダウンや重なりの事故を減らす */
+  isolation: isolate;
 }
 
-/* 3カラムGrid：左 / 中央 / 右 で「中央が常に真ん中」になる */
-.site-header-inner{
+.ow-header-inner{
   max-width: 1600px;
   margin: 0 auto;
   padding: 10px 12px;
   display: grid;
-  grid-template-columns: 44px 1fr 44px; /* 左右の幅を固定＝完璧に中央 */
+  grid-template-columns: 44px 1fr 44px; /* 左 / 中央 / 右 */
   align-items: center;
 }
 
-.site-header-left{ width: 44px; height: 36px; }
-.site-header-right{ width: 44px; height: 36px; display: grid; place-items: center; }
+.ow-header-left{
+  width: 44px;
+  height: 36px;
+}
 
-.site-title{
+.ow-header-right{
+  width: 44px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+}
+
+.ow-header-title{
   text-align: center;
   line-height: 1;
 }
 
-.site-title a{
+.ow-header-title a{
   color: var(--fg);
   font-weight: 900;
   text-decoration: none;
@@ -33,10 +115,12 @@
   letter-spacing: .02em;
 }
 
-.site-title a:hover{ text-decoration: underline; }
+.ow-header-title a:hover{
+  text-decoration: underline;
+}
 
 /* ハンバーガーボタン */
-.hamburger{
+.ow-hamburger{
   width: 44px;
   height: 36px;
   border: 1px solid var(--border);
@@ -47,9 +131,11 @@
   place-items: center;
 }
 
-.hamburger:active{ transform: translateY(1px); }
+.ow-hamburger:active{
+  transform: translateY(1px);
+}
 
-.hamburger-bars{
+.ow-hamburger-bars{
   position: relative;
   width: 18px;
   height: 2px;
@@ -57,8 +143,8 @@
   display: block;
 }
 
-.hamburger-bars::before,
-.hamburger-bars::after{
+.ow-hamburger-bars::before,
+.ow-hamburger-bars::after{
   content: "";
   position: absolute;
   left: 0;
@@ -67,11 +153,11 @@
   background: var(--fg);
 }
 
-.hamburger-bars::before{ top: -6px; }
-.hamburger-bars::after{ top: 6px; }
+.ow-hamburger-bars::before{ top: -6px; }
+.ow-hamburger-bars::after{ top: 6px; }
 
 /* メニュー */
-.site-menu{
+.ow-menu{
   position: absolute;
   right: 12px;
   top: calc(100% + 8px);
@@ -89,7 +175,7 @@
   transition: opacity .2s ease, transform .2s ease;
 }
 
-.site-menu a{
+.ow-menu a{
   display: block;
   padding: 10px 10px;
   border: 1px solid var(--border);
@@ -98,19 +184,34 @@
   background: #fff;
 }
 
-.site-menu a:hover{ background: #f6f6f6; }
+.ow-menu a:hover{
+  background: #f6f6f6;
+}
 
-.site-header.menu-open .site-menu{
+.ow-header.ow-menu-open .ow-menu{
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
 /* オーバーレイ */
-.menu-overlay{
+.ow-overlay{
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,.15);
 }
 
-.no-scroll{ overflow: hidden; }
+/* メニュー中のスクロール抑制 */
+.ow-no-scroll{
+  overflow: hidden;
+}
+
+/* ヘッダー直下が詰まりすぎる場合に少しだけ余白 */
+main{
+  padding-top: 14px;
+}
+
+@media (max-width: 640px){
+  main{ padding: 10px; padding-top: 14px; }
+  .ref-grid{ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
+}
