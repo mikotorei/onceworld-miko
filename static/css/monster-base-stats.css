@@ -82,70 +82,39 @@
   border-bottom: 1px solid rgba(0,0,0,.18);
 }
 
-/* ★重要：ヘッダーはクリックできるよう明示 */
-.mbs-table thead th { pointer-events: auto; }
+/* ヘッダーはクリックできる */
 .mbs-table thead th.sort { cursor: pointer; user-select: none; }
-
 .mbs-table thead th.sort .arrow { margin-left: 4px; opacity: .35; font-size: 11px; }
 .mbs-table thead th.is-active .arrow { opacity: .95; }
 .mbs-table thead th.is-active { text-decoration: underline; text-underline-offset: 3px; }
 
-/* ★重要：tbodyだけクリック無効。名前リンクだけ有効 */
+/* tbodyはクリック無効、名前リンクだけ有効 */
 .mbs-table tbody { pointer-events: none; }
 .mbs-table tbody td.name a { pointer-events: auto; }
 
 .mbs-table td.num, .mbs-table th.num { text-align: right; }
 
-/* 順位列：少し広め（反映されなくても colgroup が効く） */
-.rank-col {
-  width: 40px;
-  min-width: 40px;
-  max-width: 40px;
-  padding: 4px 6px;
-  text-align: right;
-  font-size: 12px;
-  opacity: .85;
-  font-variant-numeric: tabular-nums;
-}
+/* 順位列（安定用。幅は colgroup が主） */
+.rank-col { text-align: right; font-size: 12px; opacity: .85; font-variant-numeric: tabular-nums; }
 
 /* 左固定：名前列のみ */
-.sticky-col {
-  position: sticky;
-  left: 0;
-  background: rgba(255,255,255,.98);
-  z-index: 1;
-}
+.sticky-col { position: sticky; left: 0; background: rgba(255,255,255,.98); z-index: 1; }
 .mbs-table thead .sticky-col { z-index: 3; }
-
 .mbs-table td.name { min-width: 160px; }
 .mbs-table td.name a { text-decoration: none; }
 
-.mbs-table tr:hover td { background: rgba(0,0,0,.03); }
-.mbs-table tr:hover td.sticky-col { background: rgba(0,0,0,.03); }
+/* TOTAL列を少し強調 */
+.mbs-table thead th[data-key="total"],
+.mbs-table tbody td:last-child {
+  background: rgba(0,0,0,.03);
+}
 
 /* コンパクト */
 .mbs-compact-on .mbs-table { font-size: 12.5px; }
 .mbs-compact-on .mbs-table th,
 .mbs-compact-on .mbs-table td { padding: 6px 8px; }
-
-.mbs-compact-on .rank-col {
-  width: 36px;
-  min-width: 36px;
-  max-width: 36px;
-  padding: 2px 6px;
-}
-
 .mbs-compact-on .mbs-table td.name { min-width: 150px; }
 
-/* TOTAL列を少し強調 */
-.mbs-table td[data-total],
-.mbs-table th[data-key="total"] {
-  background: rgba(0,0,0,0.03);
-}
-
-.mbs-table th[data-key="total"] {
-  font-weight: 600;
-}
 /* スマホ */
 @media (max-width: 600px) {
   .mbs-wrap { padding: 10px; }
