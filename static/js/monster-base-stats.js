@@ -21,7 +21,7 @@
   const rows = Array.from(tbody.querySelectorAll("tr"));
   const headers = Array.from(table.querySelectorAll("thead th.sort"));
 
-  // ヘッダーに矢印表示
+  // ヘッダーに矢印
   headers.forEach(h => {
     if (!h.querySelector(".arrow")) {
       const s = document.createElement("span");
@@ -31,7 +31,7 @@
     }
   });
 
-  let sortState = { key: "id", dir: 1 }; // 1=asc, -1=desc
+  let sortState = { key: "id", dir: 1 };
 
   const selected = {
     element: new Set(),
@@ -42,10 +42,8 @@
   function getValue(row, key) {
     const v = row.dataset[key];
     if (v == null) return "";
-
     const n = Number(v);
     if (Number.isFinite(n) && String(v).trim() !== "") return n;
-
     return String(v);
   }
 
@@ -71,6 +69,7 @@
     rows.forEach(r => {
       const cell = r.querySelector(".mbs-rank");
       if (!cell) return;
+
       if (r.style.display === "none") {
         cell.textContent = "";
         return;
@@ -100,19 +99,18 @@
     updateRanks();
   }
 
-  // ヘッダークリック/Enterでソート
-  function handleSortTrigger(key) {
+  function handleSort(key) {
     if (sortState.key === key) sortState.dir *= -1;
     else sortState = { key, dir: 1 };
     applySort();
   }
 
   headers.forEach(h => {
-    h.addEventListener("click", () => handleSortTrigger(h.dataset.key));
+    h.addEventListener("click", () => handleSort(h.dataset.key));
     h.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        handleSortTrigger(h.dataset.key);
+        handleSort(h.dataset.key);
       }
     });
   });
@@ -218,6 +216,6 @@
 
   // 初期化
   setSortUI();
-  applyFilter();  // 順位をまず付ける
-  applySort();    // id順を確定
+  applyFilter();
+  applySort();
 })();
