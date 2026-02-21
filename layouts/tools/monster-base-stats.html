@@ -1,0 +1,89 @@
+{{ define "main" }}
+<article class="mbs-wrap">
+  <header class="mbs-head">
+    <h1 class="mbs-title">{{ .Title }}</h1>
+    {{ with .Params.description }}<div class="mbs-desc">{{ . }}</div>{{ end }}
+    {{ with .Content }}<div class="mbs-desc">{{ . }}</div>{{ end }}
+  </header>
+
+  <section class="mbs-controls">
+    <input id="mbsSearch" class="mbs-search" type="search" placeholder="検索（名前/属性/攻撃タイプ/射程）" autocomplete="off">
+    <div class="mbs-note">※ 列見出しタップでソート（昇順↔降順） / スマホは横スクロールで閲覧</div>
+  </section>
+
+  {{ $pages := where .Site.RegularPages "Section" "monster" }}
+  {{ $pages = where $pages "Params.hidden" "ne" true }}
+
+  <div class="mbs-table-wrap" role="region" aria-label="モンスター基礎ステータス一覧（横スクロール可）" tabindex="0">
+    <table class="mbs-table" id="mbsTable">
+      <thead>
+        <tr>
+          <th class="sticky-col sort" data-key="name">名前</th>
+          <th class="sort" data-key="element">属性</th>
+          <th class="sort" data-key="attack_type">攻撃タイプ</th>
+          <th class="sort" data-key="attack_range">射程</th>
+
+          <th class="num sort" data-key="vit">VIT</th>
+          <th class="num sort" data-key="spd">SPD</th>
+          <th class="num sort" data-key="atk">ATK</th>
+          <th class="num sort" data-key="int">INT</th>
+          <th class="num sort" data-key="def">DEF</th>
+          <th class="num sort" data-key="mdef">MDEF</th>
+          <th class="num sort" data-key="luk">LUK</th>
+          <th class="num sort" data-key="mov">MOV</th>
+        </tr>
+      </thead>
+
+      <tbody id="mbsBody">
+        {{ range $pages.ByTitle }}
+          {{ $p := . }}
+          {{ $st := $p.Params.status }}
+          {{ $fx := $p.Params.fixed_status }}
+
+          {{ $vit  := cond (and $st (isset $st "vit"))  (index $st "vit")  0 }}
+          {{ $spd  := cond (and $st (isset $st "spd"))  (index $st "spd")  0 }}
+          {{ $atk  := cond (and $st (isset $st "atk"))  (index $st "atk")  0 }}
+          {{ $int  := cond (and $st (isset $st "int"))  (index $st "int")  0 }}
+          {{ $def  := cond (and $st (isset $st "def"))  (index $st "def")  0 }}
+          {{ $mdef := cond (and $st (isset $st "mdef")) (index $st "mdef") 0 }}
+          {{ $luk  := cond (and $st (isset $st "luk"))  (index $st "luk")  0 }}
+          {{ $mov  := cond (and $fx (isset $fx "mov"))  (index $fx "mov")  0 }}
+
+          <tr
+            data-name="{{ $p.Title | plainify | lower }}"
+            data-element="{{ (printf "%v" $p.Params.element) | plainify | lower }}"
+            data-attack_type="{{ (printf "%v" $p.Params.attack_type) | plainify | lower }}"
+            data-attack_range="{{ (printf "%v" $p.Params.attack_range) | plainify | lower }}"
+
+            data-vit="{{ $vit }}"
+            data-spd="{{ $spd }}"
+            data-atk="{{ $atk }}"
+            data-int="{{ $int }}"
+            data-def="{{ $def }}"
+            data-mdef="{{ $mdef }}"
+            data-luk="{{ $luk }}"
+            data-mov="{{ $mov }}"
+          >
+            <td class="sticky-col name"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></td>
+            <td>{{ $p.Params.element }}</td>
+            <td>{{ $p.Params.attack_type }}</td>
+            <td>{{ $p.Params.attack_range }}</td>
+
+            <td class="num">{{ $vit }}</td>
+            <td class="num">{{ $spd }}</td>
+            <td class="num">{{ $atk }}</td>
+            <td class="num">{{ $int }}</td>
+            <td class="num">{{ $def }}</td>
+            <td class="num">{{ $mdef }}</td>
+            <td class="num">{{ $luk }}</td>
+            <td class="num">{{ $mov }}</td>
+          </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+
+  <link rel="stylesheet" href="{{ "css/monster-base-stats.css" | relURL }}">
+  <script defer src="{{ "js/monster-base-stats.js" | relURL }}"></script>
+</article>
+{{ end }}
