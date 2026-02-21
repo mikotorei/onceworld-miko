@@ -71,3 +71,30 @@ h1{
   main{ padding: 10px; }
   .ref-grid{ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
 }
+/* ===== 上部固定ヘッダー（ホームリンク付きタイトル） ===== */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header .site-title{
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 10px 12px;
+}
+
+.site-header .site-title a{
+  color: var(--fg);
+  font-weight: 900;
+  text-decoration: none;
+  font-size: 1.05rem;
+  letter-spacing: .02em;
+}
+
+.site-header .site-title a:hover{
+  text-decoration: underline;
+}
