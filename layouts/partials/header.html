@@ -1,5 +1,34 @@
-<header class="site-header">
-  <div class="site-title">
-    <a href="{{ "/" | relURL }}">巫女のワンスワ攻略</a>
+<header class="site-header" id="siteHeader">
+  <div class="site-header-inner">
+    <!-- 左側：レイアウト用のダミー（タイトル中央寄せのため） -->
+    <div class="site-header-side" aria-hidden="true"></div>
+
+    <!-- 中央：タイトル（ホームリンク） -->
+    <div class="site-title">
+      <a href="{{ "/" | relURL }}">{{ site.Title }}</a>
+    </div>
+
+    <!-- 右側：ハンバーガー -->
+    <div class="site-header-side site-header-actions">
+      <button
+        class="hamburger"
+        type="button"
+        aria-label="メニューを開く"
+        aria-controls="siteMenu"
+        aria-expanded="false"
+      >
+        <span class="hamburger-bars" aria-hidden="true"></span>
+      </button>
+    </div>
   </div>
+
+  <!-- メニュー本体（最初は閉じてる） -->
+  <nav class="site-menu" id="siteMenu" aria-label="サイトメニュー" hidden>
+    <a href="{{ "/" | relURL }}">ホーム</a>
+    <a href="{{ "/monster/" | relURL }}">図鑑</a>
+    <a href="{{ "/tools/" | relURL }}">ツール</a>
+  </nav>
+
+  <!-- 背景オーバーレイ（メニュー開時のみ表示） -->
+  <div class="menu-overlay" id="menuOverlay" hidden></div>
 </header>
