@@ -1,5 +1,3 @@
 ---
-title: "ホーム"
+title: ""
 ---
-
-- [モンスター図鑑]({{< relref "monster" >}})
