@@ -1,0 +1,31 @@
+/* Home only */
+
+.home-menu{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:30px 16px;
+  gap:24px;
+}
+
+.home-item{
+  text-align:center;
+}
+
+/* タイトルだけリンク（青固定・訪問後も青） */
+.home-title a{
+  font-size:20px;
+  font-weight:700;
+  text-decoration:underline;
+  color:#0040ff;
+}
+.home-title a:visited{
+  color:#0040ff;
+}
+
+/* 説明は黒字で下に */
+.home-desc{
+  margin-top:6px;
+  font-size:14px;
+  color:#000;
+}
