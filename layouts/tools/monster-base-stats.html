@@ -35,7 +35,7 @@
       </thead>
 
       <tbody id="mbsBody">
-        {{ range $pages.ByTitle }}
+        {{ range sort $pages "Params.id" }}
           {{ $p := . }}
           {{ $st := $p.Params.status }}
           {{ $fx := $p.Params.fixed_status }}
