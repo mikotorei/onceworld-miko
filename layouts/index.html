@@ -4,12 +4,21 @@
   {{ $pages := where .Site.Pages "Params.home" true }}
   {{ range $pages.ByWeight }}
     <div class="home-item">
-      <a class="home-link" href="{{ .RelPermalink }}">
-        <div class="home-title">{{ .Title }}</div>
-        {{ with .Params.description }}
-          <div class="home-desc">{{ . }}</div>
-        {{ end }}
-      </a>
+
+      <!-- タイトルだけリンク -->
+      <div class="home-title">
+        <a href="{{ .RelPermalink }}">
+          {{ .Title }}
+        </a>
+      </div>
+
+      <!-- 説明はリンク外 -->
+      {{ with .Params.description }}
+        <div class="home-desc">
+          {{ . }}
+        </div>
+      {{ end }}
+
     </div>
   {{ end }}
 </section>
