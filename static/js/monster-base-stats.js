@@ -21,7 +21,7 @@
   const rows = Array.from(tbody.querySelectorAll("tr"));
   const headers = Array.from(table.querySelectorAll("thead th.sort"));
 
-  // ヘッダーに矢印要素を付与
+  // ヘッダーに矢印表示
   headers.forEach(h => {
     if (!h.querySelector(".arrow")) {
       const s = document.createElement("span");
@@ -31,9 +31,6 @@
     }
   });
 
-  // -------------------------
-  // 状態
-  // -------------------------
   let sortState = { key: "id", dir: 1 }; // 1=asc, -1=desc
 
   const selected = {
@@ -42,9 +39,6 @@
     attack_range: new Set(),
   };
 
-  // -------------------------
-  // ユーティリティ
-  // -------------------------
   function getValue(row, key) {
     const v = row.dataset[key];
     if (v == null) return "";
@@ -56,9 +50,7 @@
   }
 
   function setSortUI() {
-    if (sortStatus) {
-      sortStatus.textContent = `${sortState.key} ${sortState.dir === 1 ? "↑" : "↓"}`;
-    }
+    if (sortStatus) sortStatus.textContent = `${sortState.key} ${sortState.dir === 1 ? "↑" : "↓"}`;
 
     headers.forEach(h => {
       h.classList.remove("is-active");
@@ -88,9 +80,6 @@
     });
   }
 
-  // -------------------------
-  // 並び替え（ヘッダークリック）
-  // -------------------------
   function applySort() {
     rows.sort((a, b) => {
       const va = getValue(a, sortState.key);
@@ -108,24 +97,26 @@
     tbody.appendChild(frag);
 
     setSortUI();
-    // フィルタ結果の順位も整える
     updateRanks();
   }
 
+  // ヘッダークリック/Enterでソート
+  function handleSortTrigger(key) {
+    if (sortState.key === key) sortState.dir *= -1;
+    else sortState = { key, dir: 1 };
+    applySort();
+  }
+
   headers.forEach(h => {
-    h.addEventListener("click", () => {
-      const key = h.dataset.key;
-
-      if (sortState.key === key) sortState.dir *= -1;
-      else sortState = { key, dir: 1 };
-
-      applySort();
+    h.addEventListener("click", () => handleSortTrigger(h.dataset.key));
+    h.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleSortTrigger(h.dataset.key);
+      }
     });
   });
 
-  // -------------------------
-  // 検索 + 絞り込み（複数選択）
-  // -------------------------
   function matchesMulti(row, key, set) {
     if (!set || set.size === 0) return true;
     const v = (row.dataset[key] || "").toLowerCase();
@@ -143,7 +134,6 @@
         (r.dataset.attack_range || "");
 
       const okSearch = !q || hay.includes(q);
-
       const okElement = matchesMulti(r, "element", selected.element);
       const okType = matchesMulti(r, "attack_type", selected.attack_type);
       const okRange = matchesMulti(r, "attack_range", selected.attack_range);
@@ -156,7 +146,6 @@
 
   if (search) search.addEventListener("input", applyFilter);
 
-  // 絞り込みUI生成（チェックボックス）
   function uniqValues(key) {
     const s = new Set();
     rows.forEach(r => {
@@ -170,9 +159,7 @@
     if (!container) return;
     container.innerHTML = "";
 
-    const values = uniqValues(key);
-
-    values.forEach(v => {
+    uniqValues(key).forEach(v => {
       const id = `mbs-${key}-${v}`.replace(/[^a-z0-9\-_]/gi, "_");
 
       const label = document.createElement("label");
@@ -202,7 +189,6 @@
   renderChecks(filterAttackTypeBox, "attack_type", selected.attack_type);
   renderChecks(filterAttackRangeBox, "attack_range", selected.attack_range);
 
-  // 絞り込み開閉
   if (filterToggleBtn && filtersBox) {
     filterToggleBtn.addEventListener("click", () => {
       const closed = filtersBox.classList.toggle("is-closed");
@@ -210,7 +196,6 @@
     });
   }
 
-  // 絞り込み解除
   if (filterClearBtn) {
     filterClearBtn.addEventListener("click", () => {
       selected.element.clear();
@@ -225,9 +210,6 @@
     });
   }
 
-  // -------------------------
-  // コンパクト切替
-  // -------------------------
   if (compactToggle && wrap) {
     const sync = () => wrap.classList.toggle("mbs-compact-on", !!compactToggle.checked);
     compactToggle.addEventListener("change", sync);
@@ -236,7 +218,6 @@
 
   // 初期化
   setSortUI();
-  applyFilter(); // 初期順位
-  // Hugo側がid昇順なのでDOMは既に整っているが、UIと揃えるため一応適用
-  applySort();
+  applyFilter();  // 順位をまず付ける
+  applySort();    // id順を確定
 })();
