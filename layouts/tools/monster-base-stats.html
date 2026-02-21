@@ -9,18 +9,69 @@
   <section class="mbs-controls">
     <div class="mbs-controls-row">
       <input id="mbsSearch" class="mbs-search" type="search" placeholder="検索（名前/属性/攻撃タイプ/射程）" autocomplete="off">
+
       <label class="mbs-compact">
         <input type="checkbox" id="mbsCompactToggle" checked>
         <span>コンパクト</span>
       </label>
     </div>
 
-    <div class="mbs-status">
-      <div class="mbs-sortstatus">
-        並び替えステータス：<strong id="mbsSortStatus">id ↑</strong>
+    <div class="mbs-controls-row2">
+      <div class="mbs-sortbox">
+        <label class="mbs-label">
+          並び替え：
+          <select id="mbsSortKey" class="mbs-select">
+            <option value="id" selected>id</option>
+            <option value="vit">vit</option>
+            <option value="spd">spd</option>
+            <option value="atk">atk</option>
+            <option value="int">int</option>
+            <option value="def">def</option>
+            <option value="mdef">mdef</option>
+            <option value="luk">luk</option>
+            <option value="mov">mov</option>
+            <option value="element">element</option>
+            <option value="attack_type">attack_type</option>
+            <option value="attack_range">attack_range</option>
+          </select>
+        </label>
+
+        <button type="button" id="mbsSortDir" class="mbs-btn" aria-label="並び順切り替え">↑</button>
+
+        <span class="mbs-sortstatus">
+          現在：<strong id="mbsSortStatus">id ↑</strong>
+        </span>
       </div>
-      <div class="mbs-note">※列見出しタップでソート（昇順↔降順） / 表は横スクロールできます。</div>
+
+      <button type="button" id="mbsFilterToggle" class="mbs-btn2">
+        絞り込み項目 <span id="mbsFilterToggleIcon">開く</span>
+      </button>
     </div>
+
+    <div id="mbsFilters" class="mbs-filters is-closed">
+      <div class="mbs-filter-grid">
+        <div class="mbs-filter-block">
+          <div class="mbs-filter-title">element（複数選択可）</div>
+          <div class="mbs-filter-items" id="mbsFilterElement"></div>
+        </div>
+
+        <div class="mbs-filter-block">
+          <div class="mbs-filter-title">attack_type（複数選択可）</div>
+          <div class="mbs-filter-items" id="mbsFilterAttackType"></div>
+        </div>
+
+        <div class="mbs-filter-block">
+          <div class="mbs-filter-title">attack_range（複数選択可）</div>
+          <div class="mbs-filter-items" id="mbsFilterAttackRange"></div>
+        </div>
+      </div>
+
+      <div class="mbs-filter-actions">
+        <button type="button" id="mbsFilterClear" class="mbs-btn">絞り込み解除</button>
+      </div>
+    </div>
+
+    <div class="mbs-note">※表は横スクロールできます。表内は「名前リンク」以外クリック無効です。</div>
   </section>
 
   {{ $pages := where .Site.RegularPages "Section" "monster" }}
@@ -31,27 +82,22 @@
       <thead>
         <tr>
           <th class="rank-col">順位</th>
-
-          {{/* 名前タップでも id ソート（五十音順に戻らない） */}}
-          <th class="sticky-col sort" data-key="id">名前</th>
-
-          <th class="sort" data-key="element">属</th>
-          <th class="sort" data-key="attack_type">攻</th>
-          <th class="sort" data-key="attack_range">射</th>
-
-          <th class="num sort" data-key="vit">VIT</th>
-          <th class="num sort" data-key="spd">SPD</th>
-          <th class="num sort" data-key="atk">ATK</th>
-          <th class="num sort" data-key="int">INT</th>
-          <th class="num sort" data-key="def">DEF</th>
-          <th class="num sort" data-key="mdef">MDEF</th>
-          <th class="num sort" data-key="luk">LUK</th>
-          <th class="num sort" data-key="mov">MOV</th>
+          <th class="sticky-col">名前</th>
+          <th>属</th>
+          <th>攻</th>
+          <th>射</th>
+          <th class="num">VIT</th>
+          <th class="num">SPD</th>
+          <th class="num">ATK</th>
+          <th class="num">INT</th>
+          <th class="num">DEF</th>
+          <th class="num">MDEF</th>
+          <th class="num">LUK</th>
+          <th class="num">MOV</th>
         </tr>
       </thead>
 
       <tbody id="mbsBody">
-        {{/* 初期表示：id 昇順 */}}
         {{ range sort $pages "Params.id" }}
           {{ $p := . }}
           {{ $st := $p.Params.status }}
