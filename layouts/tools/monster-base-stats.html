@@ -7,21 +7,37 @@
   </header>
 
   <section class="mbs-controls">
-    <input id="mbsSearch" class="mbs-search" type="search" placeholder="検索（名前/属性/攻撃タイプ/射程）" autocomplete="off">
-    <div class="mbs-note">※ 列見出しタップでソート（昇順↔降順） / スマホは横スクロールで閲覧</div>
+    <div class="mbs-controls-row">
+      <input id="mbsSearch" class="mbs-search" type="search" placeholder="検索（名前/属性/攻撃タイプ/射程）" autocomplete="off">
+      <label class="mbs-compact">
+        <input type="checkbox" id="mbsCompactToggle" checked>
+        <span>コンパクト</span>
+      </label>
+    </div>
+
+    <div class="mbs-status">
+      <div class="mbs-sortstatus">
+        並び替えステータス：<strong id="mbsSortStatus">id ↑</strong>
+      </div>
+      <div class="mbs-note">※列見出しタップでソート（昇順↔降順） / 表は横スクロールできます。</div>
+    </div>
   </section>
 
   {{ $pages := where .Site.RegularPages "Section" "monster" }}
   {{ $pages = where $pages "Params.hidden" "ne" true }}
 
-  <div class="mbs-table-wrap" role="region" aria-label="モンスター基礎ステータス一覧（横スクロール可）" tabindex="0">
+  <div class="mbs-table-wrap mbs-compact-on" id="mbsWrap" role="region" aria-label="モンスター基礎ステータス一覧（横スクロール可）" tabindex="0">
     <table class="mbs-table" id="mbsTable">
       <thead>
         <tr>
-          <th class="sticky-col sort" data-key="name">名前</th>
-          <th class="sort" data-key="element">属性</th>
-          <th class="sort" data-key="attack_type">攻撃タイプ</th>
-          <th class="sort" data-key="attack_range">射程</th>
+          <th class="rank-col">順位</th>
+
+          {{/* 名前タップでも id ソートにしたいので data-key="id" にする */}}
+          <th class="sticky-col sort" data-key="id">名前</th>
+
+          <th class="sort" data-key="element">属</th>
+          <th class="sort" data-key="attack_type">攻</th>
+          <th class="sort" data-key="attack_range">射</th>
 
           <th class="num sort" data-key="vit">VIT</th>
           <th class="num sort" data-key="spd">SPD</th>
@@ -35,6 +51,7 @@
       </thead>
 
       <tbody id="mbsBody">
+        {{/* 初期表示は id 昇順 */}}
         {{ range sort $pages "Params.id" }}
           {{ $p := . }}
           {{ $st := $p.Params.status }}
@@ -50,6 +67,7 @@
           {{ $mov  := cond (and $fx (isset $fx "mov"))  (index $fx "mov")  0 }}
 
           <tr
+            data-id="{{ $p.Params.id }}"
             data-name="{{ $p.Title | plainify | lower }}"
             data-element="{{ (printf "%v" $p.Params.element) | plainify | lower }}"
             data-attack_type="{{ (printf "%v" $p.Params.attack_type) | plainify | lower }}"
@@ -64,7 +82,13 @@
             data-luk="{{ $luk }}"
             data-mov="{{ $mov }}"
           >
-            <td class="sticky-col name"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></td>
+            <td class="rank-col mbs-rank"></td>
+
+            <td class="sticky-col name">
+              <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+              <span class="mbs-id">#{{ $p.Params.id }}</span>
+            </td>
+
             <td>{{ $p.Params.element }}</td>
             <td>{{ $p.Params.attack_type }}</td>
             <td>{{ $p.Params.attack_range }}</td>
