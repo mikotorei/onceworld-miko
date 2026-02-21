@@ -1,24 +1,13 @@
 {{ define "main" }}
 
 <section class="home-menu">
-  {{/* 表示したいページだけに絞りたい場合は「where」を使う */}}
-  {{ $pages := where .Site.RegularPages "Params.home" true }}
-
-  {{/* home:true が1件も無い場合は、とりあえず全部を表示（保険） */}}
-  {{ if eq (len $pages) 0 }}
-    {{ $pages = .Site.RegularPages }}
-  {{ end }}
-
-  {{ range $pages }}
+  {{ $pages := where .Site.Pages "Params.home" true }}
+  {{ range $pages.ByWeight }}
     <div class="home-item">
       <a class="home-link" href="{{ .RelPermalink }}">
         <div class="home-title">{{ .Title }}</div>
-
         {{ with .Params.description }}
           <div class="home-desc">{{ . }}</div>
-        {{ else }}
-          {{/* descriptionが無いページは空欄でもOK。必要なら非表示にもできる */}}
-          <div class="home-desc"></div>
         {{ end }}
       </a>
     </div>
