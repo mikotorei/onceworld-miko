@@ -6,48 +6,101 @@
     {{ with .Content }}<div class="mbs-desc">{{ . }}</div>{{ end }}
   </header>
 
+  <section class="mbs-controls">
+    <div class="mbs-controls-row">
+      <input id="mbsSearch" class="mbs-search" type="search" placeholder="検索（名前/属性/攻撃タイプ/射程）" autocomplete="off">
+
+      <label class="mbs-compact">
+        <input type="checkbox" id="mbsCompactToggle" checked>
+        <span>コンパクト</span>
+      </label>
+    </div>
+
+    <div class="mbs-controls-row2">
+      <div class="mbs-sortstatus">
+        並び替えステータス：<strong id="mbsSortStatus">id ↑</strong>
+      </div>
+
+      <button type="button" id="mbsFilterToggle" class="mbs-btn2">
+        絞り込み項目 <span id="mbsFilterToggleIcon">開く</span>
+      </button>
+    </div>
+
+    <div id="mbsFilters" class="mbs-filters is-closed">
+      <div class="mbs-filter-grid">
+        <div class="mbs-filter-block">
+          <div class="mbs-filter-title">element（複数選択可）</div>
+          <div class="mbs-filter-items" id="mbsFilterElement"></div>
+        </div>
+
+        <div class="mbs-filter-block">
+          <div class="mbs-filter-title">attack_type（複数選択可）</div>
+          <div class="mbs-filter-items" id="mbsFilterAttackType"></div>
+        </div>
+
+        <div class="mbs-filter-block">
+          <div class="mbs-filter-title">attack_range（複数選択可）</div>
+          <div class="mbs-filter-items" id="mbsFilterAttackRange"></div>
+        </div>
+      </div>
+
+      <div class="mbs-filter-actions">
+        <button type="button" id="mbsFilterClear" class="mbs-btn">絞り込み解除</button>
+      </div>
+    </div>
+
+    <div class="mbs-note">
+      ※並び替えは「表の項目欄（ヘッダー）」タップで操作できます。表内は「名前リンク」以外クリック無効です。
+    </div>
+  </section>
+
   {{ $pages := where .Site.RegularPages "Section" "monster" }}
   {{ $pages = where $pages "Params.hidden" "ne" true }}
 
-  <div class="mbs-table-wrap mbs-compact-on" id="mbsWrap">
+  <div class="mbs-table-wrap mbs-compact-on" id="mbsWrap" role="region" aria-label="モンスター基礎ステータス一覧（横スクロール可）" tabindex="0">
     <table class="mbs-table" id="mbsTable">
 
-      <!-- 列幅をやや縮小 -->
+      {{/* 列幅（数値列を少し狭く + TOTAL追加） */}}
       <colgroup>
         <col style="width:40px">
         <col>
         <col style="width:44px">
         <col style="width:56px">
         <col style="width:60px">
-        <col style="width:48px">
-        <col style="width:48px">
-        <col style="width:48px">
-        <col style="width:48px">
-        <col style="width:48px">
+
+        <col style="width:46px">
+        <col style="width:46px">
+        <col style="width:46px">
+        <col style="width:46px">
+        <col style="width:46px">
         <col style="width:52px">
-        <col style="width:48px">
-        <col style="width:48px">
-        <col style="width:64px"> <!-- TOTAL -->
+        <col style="width:46px">
+        <col style="width:46px">
+
+        <col style="width:58px"> <!-- TOTAL -->
       </colgroup>
 
       <thead>
         <tr>
           <th class="rank-col">順位</th>
-          <th class="sticky-col sort" data-key="id">名前</th>
-          <th class="sort" data-key="element">属</th>
-          <th class="sort" data-key="attack_type">攻</th>
-          <th class="sort" data-key="attack_range">射</th>
 
-          <th class="num sort" data-key="vit">VIT</th>
-          <th class="num sort" data-key="spd">SPD</th>
-          <th class="num sort" data-key="atk">ATK</th>
-          <th class="num sort" data-key="int">INT</th>
-          <th class="num sort" data-key="def">DEF</th>
-          <th class="num sort" data-key="mdef">MDEF</th>
-          <th class="num sort" data-key="luk">LUK</th>
-          <th class="num sort" data-key="mov">MOV</th>
+          {{/* 名前タップでも id ソート（五十音順に戻らない） */}}
+          <th class="sticky-col sort" data-key="id" tabindex="0" role="button">名前</th>
 
-          <th class="num sort" data-key="total">TOTAL</th>
+          <th class="sort" data-key="element" tabindex="0" role="button">属</th>
+          <th class="sort" data-key="attack_type" tabindex="0" role="button">攻</th>
+          <th class="sort" data-key="attack_range" tabindex="0" role="button">射</th>
+
+          <th class="num sort" data-key="vit" tabindex="0" role="button">VIT</th>
+          <th class="num sort" data-key="spd" tabindex="0" role="button">SPD</th>
+          <th class="num sort" data-key="atk" tabindex="0" role="button">ATK</th>
+          <th class="num sort" data-key="int" tabindex="0" role="button">INT</th>
+          <th class="num sort" data-key="def" tabindex="0" role="button">DEF</th>
+          <th class="num sort" data-key="mdef" tabindex="0" role="button">MDEF</th>
+          <th class="num sort" data-key="luk" tabindex="0" role="button">LUK</th>
+          <th class="num sort" data-key="mov" tabindex="0" role="button">MOV</th>
+
+          <th class="num sort" data-key="total" tabindex="0" role="button">TOTAL</th>
         </tr>
       </thead>
 
@@ -70,6 +123,7 @@
 
           <tr
             data-id="{{ $p.Params.id }}"
+            data-name="{{ $p.Title | plainify | lower }}"
             data-element="{{ (printf "%v" $p.Params.element) | plainify | lower }}"
             data-attack_type="{{ (printf "%v" $p.Params.attack_type) | plainify | lower }}"
             data-attack_range="{{ (printf "%v" $p.Params.attack_range) | plainify | lower }}"
