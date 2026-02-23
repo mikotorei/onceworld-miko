@@ -9,35 +9,37 @@
   <h2>主人公ステータス</h2>
 
   <div class="hero-grid">
-    <label class="hero-field">
-      <span>atk</span>
+
+    <div class="hero-row">
+      <span class="hero-label">atk:</span>
       <input id="hero-atk" type="number" inputmode="numeric" min="0" step="1" value="0">
-    </label>
+    </div>
 
-    <label class="hero-field">
-      <span>int</span>
+    <div class="hero-row">
+      <span class="hero-label">int:</span>
       <input id="hero-int" type="number" inputmode="numeric" min="0" step="1" value="0">
-    </label>
+    </div>
 
-    <label class="hero-field">
-      <span>spd</span>
+    <div class="hero-row">
+      <span class="hero-label">spd:</span>
       <input id="hero-spd" type="number" inputmode="numeric" min="0" step="1" value="0">
-    </label>
+    </div>
 
-    <label class="hero-field">
-      <span>luk</span>
+    <div class="hero-row">
+      <span class="hero-label">luk:</span>
       <input id="hero-luk" type="number" inputmode="numeric" min="0" step="1" value="0">
-    </label>
+    </div>
 
-    <label class="hero-field">
-      <span>def</span>
+    <div class="hero-row">
+      <span class="hero-label">def:</span>
       <input id="hero-def" type="number" inputmode="numeric" min="0" step="1" value="0">
-    </label>
+    </div>
 
-    <label class="hero-field">
-      <span>mdef</span>
+    <div class="hero-row">
+      <span class="hero-label">mdef:</span>
       <input id="hero-mdef" type="number" inputmode="numeric" min="0" step="1" value="0">
-    </label>
+    </div>
+
   </div>
 </section>
 
@@ -50,19 +52,28 @@
     gap: 12px;
     max-width: 720px;
   }
-  .hero-field{
+
+  .hero-row{
     display:flex;
-    flex-direction:column;
-    gap: 6px;
+    align-items:center;
+    gap: 8px;
   }
-  .hero-field span{
+
+  .hero-label{
     font-weight: 600;
+    white-space: nowrap;
   }
-  .hero-field input{
-    padding: 10px;
-    border: 1px solid #000;
-    border-radius: 10px;
+
+  .hero-row input{
+    flex: 1;
+    min-width: 0;
+    padding: 8px 10px;
+    border: none;
+    outline: none;
+    background: transparent;
     font-size: 16px;
+    border-bottom: 1px solid #000;
+    border-radius: 0;
   }
 </style>
 
@@ -82,11 +93,8 @@
     ids.forEach(id => {
       const el = document.getElementById(id);
       if (!el) return;
-      // 初期も正規化
       normalize(el);
-      // 確定時に0へ戻す
       el.addEventListener("blur", () => normalize(el));
-      // 直接マイナス入力などの対策（入力中は邪魔しないが、離れたら矯正）
     });
   })();
 </script>
