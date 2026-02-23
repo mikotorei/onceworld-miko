@@ -30,19 +30,16 @@
       選択中: <strong id="monster-selected-name"></strong>
     </div>
 
-    <!-- level_shortcut -->
     <div class="enemy-row mt" aria-label="level shortcuts">
       <span class="enemy-label">Lv:</span>
       <div class="lv-shortcuts" id="lv-shortcuts"></div>
     </div>
 
-    <!-- Lv input -->
     <div class="enemy-row mt">
       <span class="enemy-label">Lv:</span>
       <input id="enemy-lv" class="lv-input" type="number" inputmode="numeric" min="1" step="1" value="1" disabled>
     </div>
 
-    <!-- 木魔法 / 闇魔法 -->
     <div class="enemy-row mt">
       <span class="enemy-label">magic:</span>
       <div class="magic-buttons">
@@ -117,32 +114,124 @@
 <div id="calc-app"></div>
 
 <style>
-  .hero-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:720px;}
-  .hero-row{display:flex;align-items:center;gap:8px;}
-  .hero-label{font-weight:600;white-space:nowrap;}
-  .hero-row input{flex:1;min-width:0;padding:8px 10px;border:none;outline:none;background:transparent;font-size:16px;border-bottom:1px solid #000;border-radius:0;}
+  .hero-grid{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 720px;
+  }
+  .hero-row{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+  }
+  .hero-label{
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .hero-row input{
+    flex: 1;
+    min-width: 0;
+    padding: 8px 10px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    border-bottom: 1px solid #000;
+    border-radius: 0;
+  }
 
-  .enemy-section{margin-top:22px;}
-  .enemy-picker{max-width:720px;}
-  .enemy-row{display:flex;align-items:center;gap:8px;}
-  .enemy-label{font-weight:600;white-space:nowrap;min-width:56px;}
-  .enemy-input-wrap{position:relative;flex:1;min-width:0;}
-  #monster-search{width:100%;padding:10px;border:1px solid #000;border-radius:10px;font-size:16px;}
-  .suggest{position:absolute;left:0;right:0;top:calc(100% + 6px);border:1px solid #000;border-radius:10px;background:#fff;overflow:hidden;max-height:260px;overflow-y:auto;z-index:20;}
-  .suggest button{display:block;width:100%;text-align:left;padding:10px 12px;border:none;background:transparent;font-size:16px;}
-  .suggest button:active{background:rgba(0,0,0,0.06);}
-  .enemy-selected{margin-top:10px;}
-  .mt{margin-top:12px;}
-  .lv-shortcuts{display:flex;flex-wrap:wrap;gap:8px;flex:1;}
-  .lv-shortcuts button{padding:8px 10px;border:1px solid #000;background:#fff;border-radius:10px;font-size:14px;}
-  .lv-input{flex:1;min-width:0;padding:10px;border:1px solid #000;border-radius:10px;font-size:16px;}
+  .enemy-section{ margin-top: 22px; }
+  .enemy-picker{ max-width: 720px; }
 
-  .magic-buttons{display:flex;gap:10px;flex:1;}
-  .magic-buttons button{padding:10px 12px;border:1px solid #000;background:#fff;border-radius:10px;font-size:14px;}
-  .magic-buttons button[aria-pressed="true"]{background:rgba(0,0,0,0.08);}
-  .magic-buttons button:disabled{opacity:.4;}
+  .enemy-row{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+  }
+  .enemy-label{
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 56px;
+  }
+  .enemy-input-wrap{
+    position: relative;
+    flex: 1;
+    min-width: 0;
+  }
+  #monster-search{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  .suggest{
+    position:absolute;
+    left:0; right:0;
+    top: calc(100% + 6px);
+    border: 1px solid #000;
+    border-radius: 10px;
+    background:#fff;
+    overflow:hidden;
+    max-height: 260px;
+    overflow-y: auto;
+    z-index: 20;
+  }
+  .suggest button{
+    display:block;
+    width:100%;
+    text-align:left;
+    padding: 10px 12px;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+  }
+  .suggest button:active{ background: rgba(0,0,0,0.06); }
 
-  .action-section{margin-top:16px;max-width:720px;}
+  .enemy-selected{ margin-top: 10px; }
+
+  .mt{ margin-top: 12px; }
+
+  .lv-shortcuts{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
+  }
+  .lv-shortcuts button{
+    padding: 8px 10px;
+    border: 1px solid #000;
+    background: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .lv-input{
+    flex: 1;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+
+  .magic-buttons{
+    display:flex;
+    gap:10px;
+    flex:1;
+  }
+  .magic-buttons button{
+    padding: 10px 12px;
+    border: 1px solid #000;
+    background: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .magic-buttons button[aria-pressed="true"]{ background: rgba(0,0,0,0.08); }
+  .magic-buttons button:disabled{ opacity:.4; }
+
+  .action-section{ margin-top: 16px; max-width: 720px; }
   #calc-btn{
     width:100%;
     padding:12px 14px;
@@ -151,17 +240,44 @@
     background:#fff;
     font-size:16px;
   }
-  #calc-btn:disabled{opacity:.35;background:#eee;}
-  #calc-btn:not(:disabled){background:#fff;box-shadow:0 0 0 2px #000 inset;}
-  #calc-btn:active:not(:disabled){transform:scale(0.99);}
+  #calc-btn:disabled{
+    opacity:.35;
+    background:#eee;
+  }
+  #calc-btn:not(:disabled){
+    background:#fff;
+    box-shadow: 0 0 0 2px #000 inset;
+  }
+  #calc-btn:active:not(:disabled){
+    transform: scale(0.99);
+  }
 
-  .result-section{margin-top:20px;max-width:720px;}
-  .result-block{border:1px solid #000;border-radius:14px;padding:12px;margin-top:12px;}
-  .result-title{font-weight:700;margin-bottom:8px;}
-  .result-row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;}
-  .result-label{font-weight:600;white-space:nowrap;}
-  .result-value{flex:1;text-align:right;}
-  .muted{opacity:.7;}
+  .result-section{ margin-top:20px; max-width:720px; }
+  .result-block{
+    border:1px solid #000;
+    border-radius:14px;
+    padding:12px;
+    margin-top:12px;
+  }
+  .result-title{
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .result-row{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:6px 0;
+  }
+  .result-label{
+    font-weight:600;
+    white-space:nowrap;
+  }
+  .result-value{
+    flex:1;
+    text-align:right;
+  }
+  .muted{ opacity:.7; }
 </style>
 
 <script>
@@ -191,6 +307,13 @@
     if (!Number.isFinite(n) || n < 1) { el.value = "1"; return 1; }
     el.value = String(n);
     return n;
+  }
+
+  // ========== 表示：カンマ ==========
+  function fmt(n){
+    const v = Math.floor(Number(n));
+    if (!Number.isFinite(v)) return "0";
+    return v.toLocaleString("ja-JP");
   }
 
   // ========== 多段（主人公SPD） ==========
@@ -240,7 +363,9 @@
     const max = Math.floor(base * 1.1 * hits);
     return { min: Math.max(0, min), max: Math.max(0, max), base };
   }
-  function formatMinMax(min, max){ return `${min}～${max}`; }
+  function formatMinMax(min, max){
+    return `${fmt(min)}～${fmt(max)}`;
+  }
 
   // 確定ワンパンライン（最小乱数でHP以上）
   function oneShotLineRequiredAttack(defense, hits, hp){
@@ -425,12 +550,11 @@
       setCalcEnabled();
     }
 
-    // ひら/カタゆれ対応（「すら」で「スライム」等）
+    // ひら/カタゆれ対応
     function normalizeJP(s){
       const str = (s ?? "").toString().trim().toLowerCase();
       return str.replace(/[\u30A1-\u30F6]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
     }
-
     function filterMonsters(q){
       if (!Array.isArray(window.MONSTERS)) return [];
       const query = normalizeJP(q);
@@ -491,7 +615,6 @@
         return;
       }
 
-      // 選択済みの状態でテキストが選択名と違ってきたら、選択解除
       if (picked && q !== picked.title) {
         clearPicked();
       }
@@ -540,44 +663,37 @@
       saveState();
     });
 
-    // 計算ボタン：結果更新（表示は「○○以上」）
+    // 計算ボタン：結果更新（表示はカンマ + 「以上」）
     calcBtn.addEventListener("click", () => {
       if (!picked || !enemyScaled) return;
 
       const hero = getHeroInts();
 
-      // 多段（物理のみ）
       const hits = hitsFromSpd(hero.spd);
-      outHits.textContent = String(hits);
+      outHits.textContent = fmt(hits);
 
-      // 敵防御（物理/魔法）
       const enemyPhysDef = enemyScaled.def + enemyScaled.mdef * 0.1;
       const enemyMagDef  = enemyScaled.mdef + enemyScaled.def * 0.1;
 
-      // 与ダメ範囲（総ダメージ）
       const phy = damageRangeTotal(hero.atk, enemyPhysDef, hits);
       outPhyDmg.textContent = formatMinMax(phy.min, phy.max);
 
       const mag = damageRangeTotal(hero.int, enemyMagDef, 1);
       outMagDmg.textContent = formatMinMax(mag.min, mag.max);
 
-      // 敵HP（ワンパン判定用）
       const enemyHp = enemyScaled.vit * 18 + 100;
 
-      // ワンパンライン（確定：最小乱数でHP以上）
       const reqAtk = oneShotLineRequiredAttack(enemyPhysDef, hits, enemyHp);
-      outPhyOne.textContent = `atk${reqAtk}以上`;
+      outPhyOne.textContent = `atk${fmt(reqAtk)}以上`;
 
       const reqInt = oneShotLineRequiredAttack(enemyMagDef, 1, enemyHp);
-      outMagOne.textContent = `int${reqInt}以上`;
+      outMagOne.textContent = `int${fmt(reqInt)}以上`;
 
-      // 命中 / 回避（必要lukのみ）
-      outHitLuk.textContent = `${Math.floor(enemyScaled.luk / 2)}以上`;
-      outEvadeLuk.textContent = `${Math.floor(enemyScaled.luk * 3)}以上`;
+      outHitLuk.textContent = `${fmt(Math.floor(enemyScaled.luk / 2))}以上`;
+      outEvadeLuk.textContent = `${fmt(Math.floor(enemyScaled.luk * 3))}以上`;
 
-      // 無効化（必要防御 / 必要魔法防御）
-      outNullDef.textContent = `${requiredDefenseForNullify(enemyScaled.atk)}以上`;
-      outNullMdef.textContent = `${requiredDefenseForNullify(enemyScaled.int)}以上`;
+      outNullDef.textContent = `${fmt(requiredDefenseForNullify(enemyScaled.atk))}以上`;
+      outNullMdef.textContent = `${fmt(requiredDefenseForNullify(enemyScaled.int))}以上`;
     });
   })();
 </script>
