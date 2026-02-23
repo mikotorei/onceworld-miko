@@ -57,6 +57,58 @@
   <button id="calc-btn" type="button" disabled>計算</button>
 </section>
 
+<section class="result-section">
+  <h2>結果</h2>
+
+  <div class="result-block">
+    <div class="result-title">物理</div>
+    <div class="result-row">
+      <div class="result-label">与ダメ範囲</div>
+      <div class="result-value"><span id="out-phy-dmg">-</span> <span class="muted">（多段: <span id="out-hits">-</span>）</span></div>
+    </div>
+    <div class="result-row">
+      <div class="result-label">ワンパンライン</div>
+      <div class="result-value" id="out-phy-one">-</div>
+    </div>
+  </div>
+
+  <div class="result-block">
+    <div class="result-title">魔法</div>
+    <div class="result-row">
+      <div class="result-label">与ダメ範囲</div>
+      <div class="result-value" id="out-mag-dmg">-</div>
+    </div>
+    <div class="result-row">
+      <div class="result-label">ワンパンライン</div>
+      <div class="result-value" id="out-mag-one">-</div>
+    </div>
+  </div>
+
+  <div class="result-block">
+    <div class="result-title">命中 / 回避</div>
+    <div class="result-row">
+      <div class="result-label">命中luk</div>
+      <div class="result-value" id="out-hit-luk">-</div>
+    </div>
+    <div class="result-row">
+      <div class="result-label">回避luk</div>
+      <div class="result-value" id="out-evade-luk">-</div>
+    </div>
+  </div>
+
+  <div class="result-block">
+    <div class="result-title">無効化</div>
+    <div class="result-row">
+      <div class="result-label">無効化def</div>
+      <div class="result-value" id="out-null-def">-</div>
+    </div>
+    <div class="result-row">
+      <div class="result-label">無効化mdef</div>
+      <div class="result-value" id="out-null-mdef">-</div>
+    </div>
+  </div>
+</section>
+
 <div id="calc-app"></div>
 
 <style>
@@ -87,24 +139,32 @@
 
   .action-section{margin-top:16px;max-width:720px;}
   #calc-btn{
-  width:100%;
-  padding:12px 14px;
-  border:1px solid #000;
-  border-radius:12px;
-  background:#fff;
-  font-size:16px;
+    width:100%;
+    padding:12px 14px;
+    border:1px solid #000;
+    border-radius:12px;
+    background:#fff;
+    font-size:16px;
   }
   #calc-btn:disabled{
-  opacity:.35;
-  background: #eee;
+    opacity:.35;
+    background: #eee;
   }
   #calc-btn:not(:disabled){
-  background: #fff;
-  box-shadow: 0 0 0 2px #000 inset;
+    background: #fff;
+    box-shadow: 0 0 0 2px #000 inset;
   }
   #calc-btn:active:not(:disabled){
-  transform: scale(0.99);
+    transform: scale(0.99);
   }
+
+  .result-section{margin-top:20px;max-width:720px;}
+  .result-block{border:1px solid #000;border-radius:14px;padding:12px;margin-top:12px;}
+  .result-title{font-weight:700;margin-bottom:8px;}
+  .result-row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;}
+  .result-label{font-weight:600;white-space:nowrap;}
+  .result-value{flex:1;text-align:right;}
+  .muted{opacity:.7;}
 </style>
 
 <script>
@@ -415,11 +475,12 @@
       saveState();
     });
 
-    // 計算ボタン：今は結果更新の起点だけ（後でここに計算処理を足す）
+    // 計算ボタン：現時点は「結果更新の起点」だけ
     calcBtn.addEventListener("click", () => {
       if (!picked || !enemyScaled) return;
-      // 後で結果エリア更新を実装
-      // console.log("calc", { enemyScaled, magic });
+
+      // 後でここに計算処理を追加して、下の out-* を更新する
+      // いまは仮で「押した」だけ分かるように out-phy-dmg だけ変える…等も可能だが、今回は入れない
     });
   })();
 </script>
