@@ -8,3 +8,16 @@ disableKinds = ["taxonomy", "term"]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+[mediaTypes]
+  [mediaTypes."application/javascript"]
+    suffixes = ["js"]
+
+[outputFormats]
+  [outputFormats.MonsterData]
+    mediaType = "application/javascript"
+    baseName = "monsters-data"
+    isPlainText = true
+    notAlternative = true
+
+[outputs]
+  home = ["HTML", "MonsterData"]
