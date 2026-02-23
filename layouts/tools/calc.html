@@ -11,9 +11,6 @@
     <div class="hero-row"><span class="hero-label">atk:</span><input id="hero-atk" type="number" inputmode="numeric" min="0" step="1" value="0"></div>
     <div class="hero-row"><span class="hero-label">int:</span><input id="hero-int" type="number" inputmode="numeric" min="0" step="1" value="0"></div>
     <div class="hero-row"><span class="hero-label">spd:</span><input id="hero-spd" type="number" inputmode="numeric" min="0" step="1" value="0"></div>
-    <div class="hero-row"><span class="hero-label">luk:</span><input id="hero-luk" type="number" inputmode="numeric" min="0" step="1" value="0"></div>
-    <div class="hero-row"><span class="hero-label">def:</span><input id="hero-def" type="number" inputmode="numeric" min="0" step="1" value="0"></div>
-    <div class="hero-row"><span class="hero-label">mdef:</span><input id="hero-mdef" type="number" inputmode="numeric" min="0" step="1" value="0"></div>
   </div>
 </section>
 
@@ -97,13 +94,15 @@
   </div>
 
   <div class="result-block">
-    <div class="result-title">無効化</div>
+    <div class="result-title">
+      無効化 <span class="muted">（防御=def+0.1mdef / 魔法防御=mdef+0.1def）</span>
+    </div>
     <div class="result-row">
-      <div class="result-label">無効化def</div>
+      <div class="result-label">必要防御</div>
       <div class="result-value" id="out-null-def">-</div>
     </div>
     <div class="result-row">
-      <div class="result-label">無効化mdef</div>
+      <div class="result-label">必要魔法防御</div>
       <div class="result-value" id="out-null-mdef">-</div>
     </div>
   </div>
@@ -170,7 +169,7 @@
 <script>
   // ========== 共通：整数・0以上（主人公） ==========
   (function () {
-    const ids = ["hero-atk","hero-int","hero-spd","hero-luk","hero-def","hero-mdef"];
+    const ids = ["hero-atk","hero-int","hero-spd"];
     function normalizeNonNegInt(el){
       const raw = (el.value ?? "").toString().trim();
       if (raw === "") { el.value = "0"; return; }
@@ -259,28 +258,17 @@
     return Math.max(0, req);
   }
 
-  // 無効化（主人公が敵からの攻撃を無効化できるか）
-  // 主人公の場合：(敵攻撃*7 - 主防御*4) < 10 で無効化
-  function minIntGreaterThan(x){
-    if (!Number.isFinite(x)) return 0;
-    return Math.floor(x) + 1;
+  // 必要防御/必要魔法防御（主人公ステ不要）
+  // (敵攻撃*7 - 防御*4) < 10  →  防御 > (敵攻撃*7 - 10)/4
+  function requiredDefenseForNullify(enemyAttack){
+    const a = Math.floor(Number(enemyAttack));
+    if (!Number.isFinite(a)) return 0;
+    const x = (a * 7 - 10) / 4;
+    const req = Math.floor(x) + 1; // > を満たす最小整数
+    return Math.max(0, req);
   }
 
-  function requiredDefForNullify(enemyAtk, heroMdef){
-    // defense = DEF + MDEF*0.1
-    const threshold = (enemyAtk * 7 - 10) / 4;
-    const x = threshold - (heroMdef * 0.1);
-    return Math.max(0, minIntGreaterThan(x));
-  }
-
-  function requiredMdefForNullify(enemyInt, heroDef){
-    // defense = MDEF + DEF*0.1
-    const threshold = (enemyInt * 7 - 10) / 4;
-    const x = threshold - (heroDef * 0.1);
-    return Math.max(0, minIntGreaterThan(x));
-  }
-
-  // ========== モンスター検索・選択 + level_shortcut + Lv入力 + 魔法 + 計算ボタン ==========
+  // ========== メイン（検索・選択・保存・計算） ==========
   (function () {
     const LS_KEY = "calc_state_v1";
 
@@ -326,10 +314,7 @@
         const hero = {
           atk: document.getElementById("hero-atk").value,
           int: document.getElementById("hero-int").value,
-          spd: document.getElementById("hero-spd").value,
-          luk: document.getElementById("hero-luk").value,
-          def: document.getElementById("hero-def").value,
-          mdef: document.getElementById("hero-mdef").value
+          spd: document.getElementById("hero-spd").value
         };
         const st = { monster_id: picked ? picked.id : "", lv: currentLv, hero, magic };
         localStorage.setItem(LS_KEY, JSON.stringify(st));
@@ -343,9 +328,7 @@
         const st = JSON.parse(raw);
 
         if (st?.hero){
-          const map = {
-            "hero-atk":"atk","hero-int":"int","hero-spd":"spd","hero-luk":"luk","hero-def":"def","hero-mdef":"mdef"
-          };
+          const map = { "hero-atk":"atk","hero-int":"int","hero-spd":"spd" };
           Object.keys(map).forEach(id=>{
             const el = document.getElementById(id);
             if (!el) return;
@@ -466,6 +449,17 @@
       return window.MONSTERS.filter(m => normalizeJP(m.title ?? "").includes(query)).slice(0, 50);
     }
 
+    function getHeroInts(){
+      const atk = Math.floor(Number(document.getElementById("hero-atk").value));
+      const intl = Math.floor(Number(document.getElementById("hero-int").value));
+      const spd = Math.floor(Number(document.getElementById("hero-spd").value));
+      return {
+        atk: Number.isFinite(atk) ? Math.max(0, atk) : 0,
+        int: Number.isFinite(intl) ? Math.max(0, intl) : 0,
+        spd: Number.isFinite(spd) ? Math.max(0, spd) : 0
+      };
+    }
+
     // 初期：保存状態復元
     loadState();
     lvInput.value = String(currentLv);
@@ -473,7 +467,7 @@
     enableMagicButtons(false);
     setCalcEnabled();
 
-    ["hero-atk","hero-int","hero-spd","hero-luk","hero-def","hero-mdef"].forEach(id=>{
+    ["hero-atk","hero-int","hero-spd"].forEach(id=>{
       const el = document.getElementById(id);
       if (!el) return;
       el.addEventListener("blur", saveState);
@@ -547,35 +541,6 @@
       saveState();
     });
 
-    function getHeroInts(){
-      const atk = Math.floor(Number(document.getElementById("hero-atk").value));
-      const intl = Math.floor(Number(document.getElementById("hero-int").value));
-      const spd = Math.floor(Number(document.getElementById("hero-spd").value));
-      const luk = Math.floor(Number(document.getElementById("hero-luk").value));
-      const def = Math.floor(Number(document.getElementById("hero-def").value));
-      const mdef = Math.floor(Number(document.getElementById("hero-mdef").value));
-      return {
-        atk: Number.isFinite(atk) ? Math.max(0, atk) : 0,
-        int: Number.isFinite(intl) ? Math.max(0, intl) : 0,
-        spd: Number.isFinite(spd) ? Math.max(0, spd) : 0,
-        luk: Number.isFinite(luk) ? Math.max(0, luk) : 0,
-        def: Number.isFinite(def) ? Math.max(0, def) : 0,
-        mdef: Number.isFinite(mdef) ? Math.max(0, mdef) : 0
-      };
-    }
-
-    function resetOutputs(){
-      outPhyDmg.textContent = "-";
-      outHits.textContent = "-";
-      outPhyOne.textContent = "-";
-      outMagDmg.textContent = "-";
-      outMagOne.textContent = "-";
-      outHitLuk.textContent = "-";
-      outEvadeLuk.textContent = "-";
-      outNullDef.textContent = "-";
-      outNullMdef.textContent = "-";
-    }
-
     // 計算ボタン：結果更新
     calcBtn.addEventListener("click", () => {
       if (!picked || !enemyScaled) return;
@@ -611,14 +576,9 @@
       outHitLuk.textContent = String(Math.floor(enemyScaled.luk / 2));
       outEvadeLuk.textContent = String(Math.floor(enemyScaled.luk * 3));
 
-      // 無効化（主人公が敵の攻撃を無効化できるための必要def/mdef）
-      // 物理：敵ATK vs 主(DEF + MDEF*0.1)
-      const reqDef = requiredDefForNullify(enemyScaled.atk, hero.mdef);
-      outNullDef.textContent = `def>=${reqDef}`;
-
-      // 魔法：敵INT vs 主(MDEF + DEF*0.1)
-      const reqMdef = requiredMdefForNullify(enemyScaled.int, hero.def);
-      outNullMdef.textContent = `mdef>=${reqMdef}`;
+      // 無効化（必要防御 / 必要魔法防御）
+      outNullDef.textContent = String(requiredDefenseForNullify(enemyScaled.atk));
+      outNullMdef.textContent = String(requiredDefenseForNullify(enemyScaled.int));
     });
   })();
 </script>
