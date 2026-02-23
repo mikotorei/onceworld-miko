@@ -196,10 +196,22 @@
     return n;
   }
 
+  // ========== 多段（主人公SPD） ==========
+  function hitsFromSpd(spd){
+    const s = Math.floor(Number(spd));
+    if (!Number.isFinite(s)) return 1;
+    if (s <= 3000) return 1;
+    if (s <= 9999) return 2;
+    if (s <= 29999) return 3;
+    if (s <= 99999) return 4;
+    return 5;
+  }
+
   // ========== 敵ステ計算（Lv反映：切り捨て） ==========
   function scaleStat(base, lv){
-    return Math.floor(base * (1 + lv * 0.1));
+    return Math.floor(Number(base) * (1 + lv * 0.1));
   }
+
   function buildEnemyScaled(monster, lv, magic){
     const wood = !!magic?.wood;
     const dark = !!magic?.dark;
@@ -222,9 +234,69 @@
     };
   }
 
+  // ========== ダメージ計算 ==========
+  // 乱数補正: 0.9～1.1 / 属性補正: 今回は1.0固定
+  function damageRangeTotal(attack, defense, hits){
+    const base = (attack * 7) - (defense * 4);
+    // 敵側（主人公→敵）は base<=0 で無効化（0も無効化）→ 0
+    if (base <= 0) return { min: 0, max: 0, base };
+    const attr = 1.0;
+    const min = Math.floor(base * attr * 0.9 * hits);
+    const max = Math.floor(base * attr * 1.1 * hits);
+    return { min: Math.max(0, min), max: Math.max(0, max), base };
+  }
+
+  function formatMinMax(min, max){
+    return `${min}～${max}`;
+  }
+
+  // 確定ワンパンライン（最小乱数でHP以上になる最小攻撃値）
+  // floor((atk*7 - def*4) *0.9*hits) >= HP を満たす最小atk/int
+  function oneShotLineRequiredAttack(defense, hits, hp){
+    const need = hp / (0.9 * hits); // これ以上の「(atk*7 - def*4)」が必要
+    const x = (defense * 4 + need) / 7;
+    const req = Math.ceil(x);
+    return Math.max(0, req);
+  }
+
+  // 無効化（主人公が敵からの攻撃を無効化できるか）
+  // 主人公の場合：(敵攻撃*7 - 主防御*4) < 10 で無効化
+  function minIntGreaterThan(x){
+    if (!Number.isFinite(x)) return 0;
+    return Math.floor(x) + 1;
+  }
+
+  function requiredDefForNullify(enemyAtk, heroMdef){
+    // defense = DEF + MDEF*0.1
+    const threshold = (enemyAtk * 7 - 10) / 4;
+    const x = threshold - (heroMdef * 0.1);
+    return Math.max(0, minIntGreaterThan(x));
+  }
+
+  function requiredMdefForNullify(enemyInt, heroDef){
+    // defense = MDEF + DEF*0.1
+    const threshold = (enemyInt * 7 - 10) / 4;
+    const x = threshold - (heroDef * 0.1);
+    return Math.max(0, minIntGreaterThan(x));
+  }
+
   // ========== モンスター検索・選択 + level_shortcut + Lv入力 + 魔法 + 計算ボタン ==========
   (function () {
     const LS_KEY = "calc_state_v1";
+
+    // outputs
+    const outPhyDmg = document.getElementById("out-phy-dmg");
+    const outHits = document.getElementById("out-hits");
+    const outPhyOne = document.getElementById("out-phy-one");
+
+    const outMagDmg = document.getElementById("out-mag-dmg");
+    const outMagOne = document.getElementById("out-mag-one");
+
+    const outHitLuk = document.getElementById("out-hit-luk");
+    const outEvadeLuk = document.getElementById("out-evade-luk");
+
+    const outNullDef = document.getElementById("out-null-def");
+    const outNullMdef = document.getElementById("out-null-mdef");
 
     const calcBtn = document.getElementById("calc-btn");
 
@@ -475,12 +547,78 @@
       saveState();
     });
 
-    // 計算ボタン：現時点は「結果更新の起点」だけ
+    function getHeroInts(){
+      const atk = Math.floor(Number(document.getElementById("hero-atk").value));
+      const intl = Math.floor(Number(document.getElementById("hero-int").value));
+      const spd = Math.floor(Number(document.getElementById("hero-spd").value));
+      const luk = Math.floor(Number(document.getElementById("hero-luk").value));
+      const def = Math.floor(Number(document.getElementById("hero-def").value));
+      const mdef = Math.floor(Number(document.getElementById("hero-mdef").value));
+      return {
+        atk: Number.isFinite(atk) ? Math.max(0, atk) : 0,
+        int: Number.isFinite(intl) ? Math.max(0, intl) : 0,
+        spd: Number.isFinite(spd) ? Math.max(0, spd) : 0,
+        luk: Number.isFinite(luk) ? Math.max(0, luk) : 0,
+        def: Number.isFinite(def) ? Math.max(0, def) : 0,
+        mdef: Number.isFinite(mdef) ? Math.max(0, mdef) : 0
+      };
+    }
+
+    function resetOutputs(){
+      outPhyDmg.textContent = "-";
+      outHits.textContent = "-";
+      outPhyOne.textContent = "-";
+      outMagDmg.textContent = "-";
+      outMagOne.textContent = "-";
+      outHitLuk.textContent = "-";
+      outEvadeLuk.textContent = "-";
+      outNullDef.textContent = "-";
+      outNullMdef.textContent = "-";
+    }
+
+    // 計算ボタン：結果更新
     calcBtn.addEventListener("click", () => {
       if (!picked || !enemyScaled) return;
 
-      // 後でここに計算処理を追加して、下の out-* を更新する
-      // いまは仮で「押した」だけ分かるように out-phy-dmg だけ変える…等も可能だが、今回は入れない
+      const hero = getHeroInts();
+
+      // 多段（物理のみ）
+      const hits = hitsFromSpd(hero.spd);
+      outHits.textContent = String(hits);
+
+      // 敵防御（物理/魔法）
+      const enemyPhysDef = enemyScaled.def + enemyScaled.mdef * 0.1;
+      const enemyMagDef  = enemyScaled.mdef + enemyScaled.def * 0.1;
+
+      // 与ダメ範囲（総ダメージ）
+      const phy = damageRangeTotal(hero.atk, enemyPhysDef, hits);
+      outPhyDmg.textContent = formatMinMax(phy.min, phy.max);
+
+      const mag = damageRangeTotal(hero.int, enemyMagDef, 1);
+      outMagDmg.textContent = formatMinMax(mag.min, mag.max);
+
+      // 敵HP（ワンパン判定用）
+      const enemyHp = enemyScaled.vit * 18 + 100;
+
+      // ワンパンライン（確定：最小乱数でHP以上）
+      const reqAtk = oneShotLineRequiredAttack(enemyPhysDef, hits, enemyHp);
+      outPhyOne.textContent = `atk>=${reqAtk}`;
+
+      const reqInt = oneShotLineRequiredAttack(enemyMagDef, 1, enemyHp);
+      outMagOne.textContent = `int>=${reqInt}`;
+
+      // 命中 / 回避（必要lukのみ、切り捨て）
+      outHitLuk.textContent = String(Math.floor(enemyScaled.luk / 2));
+      outEvadeLuk.textContent = String(Math.floor(enemyScaled.luk * 3));
+
+      // 無効化（主人公が敵の攻撃を無効化できるための必要def/mdef）
+      // 物理：敵ATK vs 主(DEF + MDEF*0.1)
+      const reqDef = requiredDefForNullify(enemyScaled.atk, hero.mdef);
+      outNullDef.textContent = `def>=${reqDef}`;
+
+      // 魔法：敵INT vs 主(MDEF + DEF*0.1)
+      const reqMdef = requiredMdefForNullify(enemyScaled.int, hero.def);
+      outNullMdef.textContent = `mdef>=${reqMdef}`;
     });
   })();
 </script>
