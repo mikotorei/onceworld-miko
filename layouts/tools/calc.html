@@ -33,6 +33,18 @@
     <div class="enemy-selected" id="monster-selected" hidden>
       選択中: <strong id="monster-selected-name"></strong>
     </div>
+
+    <!-- level_shortcut -->
+    <div class="enemy-row mt" aria-label="level shortcuts">
+      <span class="enemy-label">Lv:</span>
+      <div class="lv-shortcuts" id="lv-shortcuts"></div>
+    </div>
+
+    <!-- Lv input -->
+    <div class="enemy-row mt">
+      <span class="enemy-label">Lv:</span>
+      <input id="enemy-lv" class="lv-input" type="number" inputmode="numeric" min="1" step="1" value="1" disabled>
+    </div>
   </div>
 </section>
 
@@ -77,6 +89,7 @@
   .enemy-label{
     font-weight: 600;
     white-space: nowrap;
+    min-width: 56px;
   }
   .enemy-input-wrap{
     position: relative;
@@ -111,19 +124,44 @@
     background: transparent;
     font-size: 16px;
   }
-  .suggest button:active{
-    background: rgba(0,0,0,0.06);
+  .suggest button:active{ background: rgba(0,0,0,0.06); }
+
+  .enemy-selected{ margin-top: 10px; }
+
+  .mt{ margin-top: 12px; }
+
+  .lv-shortcuts{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
   }
-  .enemy-selected{
-    margin-top: 10px;
+  .lv-shortcuts button{
+    padding: 8px 10px;
+    border: 1px solid #000;
+    background: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .lv-shortcuts button:disabled{
+    opacity: .4;
+  }
+
+  .lv-input{
+    flex: 1;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    font-size: 16px;
   }
 </style>
 
 <script>
-  // 主人公入力：整数・0以上・空欄は0
+  // ========== 共通：整数・0以上（主人公） ==========
   (function () {
     const ids = ["hero-atk","hero-int","hero-spd","hero-luk","hero-def","hero-mdef"];
-    function normalize(el){
+    function normalizeNonNegInt(el){
       const raw = (el.value ?? "").toString().trim();
       if (raw === "") { el.value = "0"; return; }
       const n = Math.floor(Number(raw));
@@ -133,23 +171,152 @@
     ids.forEach(id => {
       const el = document.getElementById(id);
       if (!el) return;
-      normalize(el);
-      el.addEventListener("blur", () => normalize(el));
+      normalizeNonNegInt(el);
+      el.addEventListener("blur", () => normalizeNonNegInt(el));
     });
   })();
 
-  // モンスター検索・選択（部分一致 / id昇順前提）
+  // ========== 敵Lv：1以上整数 ==========
+  function normalizeLv(el){
+    const raw = (el.value ?? "").toString().trim();
+    if (raw === "") { el.value = "1"; return 1; }
+    const n = Math.floor(Number(raw));
+    if (!Number.isFinite(n) || n < 1) { el.value = "1"; return 1; }
+    el.value = String(n);
+    return n;
+  }
+
+  // ========== 敵ステ計算（Lv反映：切り捨て） ==========
+  function scaleStat(base, lv){
+    return Math.floor(base * (1 + lv * 0.1));
+  }
+  function buildEnemyScaled(monster, lv){
+    return {
+      id: monster.id,
+      title: monster.title,
+      lv,
+      vit: scaleStat(monster.vit, lv),
+      spd: scaleStat(monster.spd, lv),
+      atk: scaleStat(monster.atk, lv),
+      int: scaleStat(monster.int, lv),
+      def: scaleStat(monster.def, lv),
+      mdef: scaleStat(monster.mdef, lv),
+      luk: scaleStat(monster.luk, lv),
+      level_shortcuts: Array.isArray(monster.level_shortcuts) ? monster.level_shortcuts : []
+    };
+  }
+
+  // ========== モンスター検索・選択 + level_shortcut + Lv入力 ==========
   (function () {
+    const LS_KEY = "calc_state_v1";
+
     const search = document.getElementById("monster-search");
     const suggest = document.getElementById("monster-suggest");
     const selectedBox = document.getElementById("monster-selected");
     const selectedName = document.getElementById("monster-selected-name");
 
+    const lvInput = document.getElementById("enemy-lv");
+    const shortcutWrap = document.getElementById("lv-shortcuts");
+
     let picked = null;
+    let currentLv = 1;
+    let enemyScaled = null;
+
+    function saveState(){
+      try{
+        const hero = {
+          atk: document.getElementById("hero-atk").value,
+          int: document.getElementById("hero-int").value,
+          spd: document.getElementById("hero-spd").value,
+          luk: document.getElementById("hero-luk").value,
+          def: document.getElementById("hero-def").value,
+          mdef: document.getElementById("hero-mdef").value
+        };
+        const st = {
+          monster_id: picked ? picked.id : "",
+          monster_title: picked ? picked.title : "",
+          lv: currentLv,
+          hero
+        };
+        localStorage.setItem(LS_KEY, JSON.stringify(st));
+      }catch(e){}
+    }
+
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(LS_KEY);
+        if (!raw) return;
+        const st = JSON.parse(raw);
+        if (st?.hero){
+          const map = {
+            "hero-atk":"atk","hero-int":"int","hero-spd":"spd","hero-luk":"luk","hero-def":"def","hero-mdef":"mdef"
+          };
+          Object.keys(map).forEach(id=>{
+            const el = document.getElementById(id);
+            if (!el) return;
+            const v = st.hero[map[id]];
+            if (v !== undefined && v !== null) el.value = String(v);
+          });
+        }
+        if (Number.isFinite(Number(st?.lv))) currentLv = Math.max(1, Math.floor(Number(st.lv)));
+      }catch(e){}
+    }
 
     function closeSuggest(){
       suggest.hidden = true;
       suggest.innerHTML = "";
+    }
+
+    function renderShortcuts(shortcuts){
+      shortcutWrap.innerHTML = "";
+      const arr = Array.isArray(shortcuts) ? shortcuts : [];
+      if (!picked){
+        // 未選択時は無効見せ（何も出さない）
+        return;
+      }
+      if (arr.length === 0){
+        // 何も無い場合は表示しない
+        return;
+      }
+      arr.forEach(v => {
+        const lv = Math.floor(Number(v));
+        if (!Number.isFinite(lv) || lv < 1) return;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = String(lv);
+        btn.addEventListener("click", () => {
+          currentLv = lv;          // Lvは保持仕様
+          lvInput.value = String(lv);
+          // クリックは確定扱いで即更新
+          enemyScaled = buildEnemyScaled(picked, currentLv);
+          saveState();
+        });
+        shortcutWrap.appendChild(btn);
+      });
+    }
+
+    function applyPickedUI(){
+      if (!picked){
+        selectedBox.hidden = true;
+        selectedName.textContent = "";
+        lvInput.disabled = true;
+        lvInput.value = "1";
+        shortcutWrap.innerHTML = "";
+        enemyScaled = null;
+        return;
+      }
+      selectedName.textContent = picked.title;
+      selectedBox.hidden = false;
+
+      lvInput.disabled = false;
+      lvInput.value = String(currentLv);
+
+      // shortcuts
+      renderShortcuts(picked.level_shortcuts);
+
+      // 内部ステ更新（Lv確定扱い：ここでは既存Lvで作る）
+      enemyScaled = buildEnemyScaled(picked, currentLv);
+      saveState();
     }
 
     function openSuggest(items){
@@ -162,10 +329,9 @@
         btn.addEventListener("click", () => {
           picked = m;
           search.value = m.title;
-          selectedName.textContent = m.title;
-          selectedBox.hidden = false;
+          // Lvは保持（リセットしない）
+          applyPickedUI();
           closeSuggest();
-          // ここで次のUI（Lvや計算ボタン等）の有効化に繋げる予定
         });
         suggest.appendChild(btn);
       });
@@ -175,30 +341,61 @@
       if (!Array.isArray(window.MONSTERS)) return [];
       const query = (q ?? "").toString();
       if (query.length === 0) return [];
-      // 部分一致（そのまま一致）
       return window.MONSTERS.filter(m => (m.title ?? "").includes(query)).slice(0, 50);
     }
 
+    // 初期：保存状態復元
+    loadState();
+    lvInput.value = String(currentLv);
+
+    // 保存のため、主人公入力のblurで保存
+    ["hero-atk","hero-int","hero-spd","hero-luk","hero-def","hero-mdef"].forEach(id=>{
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener("blur", saveState);
+    });
+
+    // 保存データにモンスターが居たら復元
+    (function restorePicked(){
+      try{
+        const raw = localStorage.getItem(LS_KEY);
+        if (!raw) return;
+        const st = JSON.parse(raw);
+        const mid = (st?.monster_id ?? "").toString();
+        if (!mid || !Array.isArray(window.MONSTERS)) return;
+        const found = window.MONSTERS.find(m => String(m.id) === mid);
+        if (!found) return;
+        picked = found;
+        search.value = found.title;
+        applyPickedUI();
+      }catch(e){}
+    })();
+
+    // 検索
     search.addEventListener("input", () => {
-      const q = search.value;
-      const items = filterMonsters(q);
+      const items = filterMonsters(search.value);
       if (items.length === 0) closeSuggest();
       else openSuggest(items);
     });
 
-    // フォーカス時に再表示（入力があれば）
     search.addEventListener("focus", () => {
-      const q = search.value;
-      const items = filterMonsters(q);
+      const items = filterMonsters(search.value);
       if (items.length === 0) closeSuggest();
       else openSuggest(items);
     });
 
-    // 外側タップで閉じる（スマホ向け）
     document.addEventListener("click", (e) => {
       const t = e.target;
       if (t === search || suggest.contains(t)) return;
       closeSuggest();
+    });
+
+    // Lv入力：確定（blur）時に内部ステ更新
+    lvInput.addEventListener("blur", () => {
+      if (!picked) return;
+      currentLv = normalizeLv(lvInput);
+      enemyScaled = buildEnemyScaled(picked, currentLv);
+      saveState();
     });
   })();
 </script>
