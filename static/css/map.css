@@ -1,0 +1,11 @@
+.map-image img{
+  max-width:100%;
+  height:auto;
+  display:block;
+  margin:20px 0;
+}
+
+.map-content{
+  max-width:900px;
+  line-height:1.7;
+}
