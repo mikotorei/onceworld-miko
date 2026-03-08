@@ -1,11 +1,25 @@
+.map-image{
+  margin: 20px 0 24px;
+}
+
 .map-image img{
-  max-width:100%;
-  height:auto;
-  display:block;
-  margin:20px 0;
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .map-content{
-  max-width:900px;
-  line-height:1.7;
+  max-width: 100%;
+  line-height: 1.8;
+}
+
+.map-content p{
+  margin: 0 0 1.2em;
+}
+
+.map-content img{
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
 }
