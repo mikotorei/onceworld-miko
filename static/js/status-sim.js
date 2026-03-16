@@ -49,4 +49,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     const equipmentDB = Array.isArray(equipData.items) ? equipData.items : [];
 
     const weaponItems = equipmentDB.filter((i) => i.category === "weapon");
-    const armorItems = equipmentDB.filter((i) => i.category ===
+    const armorItems = equipmentDB.filter((i) => i.category === "armor");
+    const accessoryItems = equipmentDB.filter((i) => i.category === "accessory");
+
+    fillSelect(slots.weapon, weaponItems);
+    fillSelect(slots.head, armorItems.filter((i) => i.slot === "head"));
+    fillSelect(slots.body, armorItems.filter((i) => i.slot === "body"));
+    fillSelect(slots.hands, armorItems.filter((i) => i.slot === "hands"));
+    fillSelect(slots.feet, armorItems.filter((i) => i.slot === "feet"));
+    fillSelect(slots.shield, armorItems.filter((i) => i.slot === "shield"));
+    slots.accessory.forEach((sel) => fillSelect(sel, accessoryItems));
+  } catch (e) {
+    console.error("equipment.json 読み込み失敗", e);
+  }
+
+  try {
+    const petRes = await fetch(PET_URL, { cache: "no-store" });
+    if (!petRes.ok) throw new Error(`pet_skills.json HTTP ${petRes.status}`);
+
+    const petData = await petRes.json();
+    const petDB = Array.isArray(petData.pets) ? petData.pets : [];
+
+    pets.forEach((select) => {
+      if (!select) return;
+      select.innerHTML = "";
+      select.appendChild(new Option("（なし）", ""));
+      petDB.forEach((p) => {
+        select.appendChild(new Option(p.name, p.id));
+      });
+    });
+  } catch (e) {
+    console.error("pet_skills.json 読み込み失敗", e);
+  }
+});
