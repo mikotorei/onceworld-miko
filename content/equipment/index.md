@@ -78,5 +78,5 @@ description = "武器・防具・アクセサリーの装備データ一覧"
 
 </div>
 
-<link rel="stylesheet" href="/css/equipment.css">
-<script src="/js/equipment-db.js"></script>
+<link rel="stylesheet" href="../css/equipment.css">
+<script src="../js/equipment-db.js"></script>
