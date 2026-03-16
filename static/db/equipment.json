@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "id": "azure_wand",
+      "name": "アズールワンド",
+      "category": "weapon",
+      "slot": "weapon",
+      "series": "",
+      "base_add": {
+        "vit": 0,
+        "spd": 0,
+        "atk": 0,
+        "int": 323,
+        "def": 0,
+        "mdef": 223,
+        "luk": 0,
+        "mov": 0
+      },
+      "base_rate": {
+        "vit": 0,
+        "spd": 0,
+        "atk": 0,
+        "int": 0,
+        "def": 0,
+        "mdef": 0,
+        "luk": 0,
+        "mov": 0
+      }
+    }
+  ]
+}
