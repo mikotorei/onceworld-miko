@@ -63,7 +63,7 @@ description = "武器・防具・アクセサリーの装備データ一覧"
         <tr>
           <th>名前</th>
           <th>効果</th>
-          <th>最大値</th>
+          <th>効果量</th>
           <th>最大Lv</th>
         </tr>
       </thead>
