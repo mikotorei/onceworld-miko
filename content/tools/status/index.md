@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const BASE_STATS = ["vit", "spd", "atk", "int", "def", "mdef", "luk"];
   const ACCESSORY_KEYS = ["accessory1", "accessory2", "accessory3", "accessory4"];
   const PET_KEYS = ["pet1", "pet2", "pet3"];
-  const STORAGE_KEY = "status_sim_inline_v1";
+  const STORAGE_KEY = "status_sim_inline_v2";
 
   const base = window.location.origin + window.location.pathname.split("/tools/status/")[0];
   const EQUIP_URL = base + "/db/equipment.json";
@@ -365,37 +365,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     return out;
   }
-  function getArmorSetSeries(equipState) {
-  const keys = ["head", "body", "hands", "feet", "shield"];
-  let series = null;
-
-  for (const key of keys) {
-    const picked = equipState[key];
-    if (!picked?.id) return "";
-
-    const item = equipmentMap.get(String(picked.id));
-    if (!item) return "";
-
-    const s = String(item.series || "").trim();
-    if (!s) return "";
-
-    if (series === null) series = s;
-    if (series !== s) return "";
-  }
-
-  return series || "";
-  }
-
-  function applyArmorSetBonus(sumStats, enabled) {
-  if (!enabled) return { ...sumStats };
-
-  const out = zeroStats();
-  STATS.forEach((k) => {
-    if (k === "mov") out[k] = sumStats?.[k] || 0;
-    else out[k] = floorSafe((sumStats?.[k] || 0) * 1.1);
-  });
-  return out;
-  }
 
   function scaleAccessoryBaseAdd(baseAdd, lv) {
     const internal = clamp1(lv) - 1;
@@ -470,6 +439,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { add: outAdd, mul: outMul, final: outFinal };
   }
 
+  function getArmorSetSeries(equipState) {
+    const keys = ["head", "body", "hands", "feet", "shield"];
+    let series = null;
+
+    for (const key of keys) {
+      const picked = equipState[key];
+      if (!picked?.id) return "";
+
+      const item = equipmentMap.get(String(picked.id));
+      if (!item) return "";
+
+      const s = String(item.series || "").trim();
+      if (!s) return "";
+
+      if (series === null) series = s;
+      if (series !== s) return "";
+    }
+
+    return series || "";
+  }
+
+  function applyArmorSetBonus(sumStats, enabled) {
+    if (!enabled) return { ...sumStats };
+
+    const out = zeroStats();
+    STATS.forEach((k) => {
+      if (k === "mov") out[k] = sumStats?.[k] || 0;
+      else out[k] = floorSafe((sumStats?.[k] || 0) * 1.1);
+    });
+    return out;
+  }
+
   function collectState() {
     return {
       basePointTotal: clamp0($("basePointTotal")?.value),
@@ -537,7 +538,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function recalc() {
     const err = [];
-
     const state = collectState();
 
     const baseStats = zeroStats();
@@ -561,6 +561,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (!item) return;
       weaponArmorSum = addStats(weaponArmorSum, scaleEquipBaseAdd(item.base_add || {}, picked.lv));
     });
+
+    const armorSetSeries = getArmorSetSeries(state.equip);
+    const sumBeforeSet = addStats(basePlusProtein, weaponArmorSum);
+    const sumAfterSet = applyArmorSetBonus(sumBeforeSet, !!armorSetSeries);
 
     let accessoryFlat = zeroStats();
     let accessoryRate = zeroStats();
@@ -587,10 +591,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       petFinal = addStats(petFinal, summed.final);
     });
 
-    const armorSetSeries = getArmorSetSeries(state.equip);
-    const sumBeforeSet = addStats(basePlusProtein, weaponArmorSum);
-    const sumAfterSet = applyArmorSetBonus(sumBeforeSet, !!armorSetSeries);
-
     const equipDisplay = addStats(addStats(weaponArmorSum, accessoryFlat), petAdd);
 
     const sumAfterFlat = addStats(sumAfterSet, addStats(accessoryFlat, petAdd));
@@ -601,9 +601,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const remain = state.basePointTotal - used;
 
     if ($("basePointInfo")) {
-      $("basePointInfo").textContent = armorSetSeries? `使用 $
-        {fmtSafe(used)} / 残り ${fmtSafe(remain)}（シリーズ補正O: `使用 ${fmtSafe(used)} / 残り $
-      {fmtSafe(remain)}`;
+      $("basePointInfo").textContent = armorSetSeries
+        ? `使用 ${fmtSafe(used)} / 残り ${fmtSafe(remain)}（シリーズ補正ON）`
+        : `使用 ${fmtSafe(used)} / 残り ${fmtSafe(remain)}`;
     }
 
     if (remain < 0) err.push(`ポイント超過：残り ${remain}`);
@@ -680,26 +680,27 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if ($("resetBtn")) {
     $("resetBtn").addEventListener("click", () => {
-      $("basePointTotal").value = "0";
+      if ($("basePointTotal")) $("basePointTotal").value = "0";
+      if ($("shakerCount")) $("shakerCount").value = "0";
+
       BASE_STATS.forEach((k) => {
-        $("base_" + k).value = "0";
-        $("protein_" + k).value = "0";
+        if ($("base_" + k)) $("base_" + k).value = "0";
+        if ($("protein_" + k)) $("protein_" + k).value = "0";
       });
-      $("shakerCount").value = "0";
 
       ["weapon", "head", "body", "hands", "feet", "shield"].forEach((k) => {
-        $("select_" + k).value = "";
-        $("level_" + k).value = "0";
+        if ($("select_" + k)) $("select_" + k).value = "";
+        if ($("level_" + k)) $("level_" + k).value = "0";
       });
 
       ACCESSORY_KEYS.forEach((k) => {
-        $("select_" + k).value = "";
-        $("level_" + k).value = "1";
+        if ($("select_" + k)) $("select_" + k).value = "";
+        if ($("level_" + k)) $("level_" + k).value = "1";
       });
 
       PET_KEYS.forEach((k) => {
-        $("select_" + k).value = "";
-        $("stage_" + k).value = "0";
+        if ($("select_" + k)) $("select_" + k).value = "";
+        if ($("stage_" + k)) $("stage_" + k).value = "0";
       });
 
       recalc();
