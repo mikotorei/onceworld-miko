@@ -210,7 +210,8 @@ description = "主人公の装備・ペット・ステータスを確認でき�
 document.addEventListener("DOMContentLoaded", async () => {
   const base = window.location.origin + window.location.pathname.split("/tools/status/")[0];
   const EQUIP_URL = base + "/db/equipment.json";
-  const PET_URL = base + "/db/pet-skills.json";
+  const PET_SKILLS_URL = base + "/db/pet-skills.json";
+  const PET_NAMES_URL = base + "/pet-names/index.json";
 
   const slots = {
     weapon: document.getElementById("select_weapon"),
@@ -227,7 +228,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     ]
   };
 
-  const pets = [
+  const petSelects = [
     document.getElementById("select_pet1"),
     document.getElementById("select_pet2"),
     document.getElementById("select_pet3")
@@ -240,18 +241,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     items.forEach((item) => {
       select.appendChild(new Option(item.name, String(item.id)));
     });
-  }
-
-  function safeParsePets(text) {
-    try {
-      return JSON.parse(text);
-    } catch {
-      const fixed = text
-        .replace(/^\uFEFF/, "")
-        .replace(/"id"\s*:\s*172""/g, '"id":"172"')
-        .replace(/,\s*([}\]])/g, "$1");
-      return JSON.parse(fixed);
-    }
   }
 
   try {
@@ -274,22 +263,28 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const petRes = await fetch(PET_URL, { cache: "no-store" });
-    if (!petRes.ok) throw new Error(`HTTP ${petRes.status}`);
-    const petText = await petRes.text();
-    const petData = safeParsePets(petText);
-    const petItems = Array.isArray(petData.pets) ? petData.pets : [];
+    const namesRes = await fetch(PET_NAMES_URL, { cache: "no-store" });
+    if (!namesRes.ok) throw new Error(`HTTP ${namesRes.status}`);
+    const namesData = await namesRes.json();
+    const nameItems = Array.isArray(namesData.items) ? namesData.items : [];
 
-    pets.forEach((select) => {
-      if (!select) return;
-      select.innerHTML = "";
-      select.appendChild(new Option("（なし）", ""));
-      petItems.forEach((p) => {
-        select.appendChild(new Option(p.name, String(p.id)));
-      });
-    });
+    const skillsRes = await fetch(PET_SKILLS_URL, { cache: "no-store" });
+    if (!skillsRes.ok) throw new Error(`HTTP ${skillsRes.status}`);
+    const skillsData = await skillsRes.json();
+
+    const validIds = new Set(Object.keys(skillsData || {}));
+
+    const petItems = nameItems
+      .filter((item) => validIds.has(String(item.id)))
+      .map((item) => ({
+        id: String(item.id),
+        name: item.title
+      }))
+      .sort((a, b) => String(a.id).localeCompare(String(b.id), "ja"));
+
+    petSelects.forEach((select) => fillSelect(select, petItems));
   } catch (e) {
-    console.error("pet-skills.json 読み込み失敗", e);
+    console.error("pet 読み込み失敗", e);
   }
 });
 </script>
