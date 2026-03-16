@@ -36,16 +36,11 @@
 
 .equip-table.active {
   display: block;
-}
-
-/* ---- 表ラップ ---- */
-.equip-table {
   overflow: auto;
   border: 1px solid rgba(0,0,0,.14);
   border-radius: 12px;
 }
 
-/* ---- 表本体 ---- */
 .equip-table table {
   border-collapse: separate;
   border-spacing: 0;
@@ -55,20 +50,19 @@
   line-height: 1.25;
 }
 
-/* 枠組み */
 .equip-table th,
 .equip-table td {
   padding: 8px 10px;
   white-space: nowrap;
   border-bottom: 1px solid rgba(0,0,0,.12);
   border-right: 1px solid rgba(0,0,0,.12);
+  vertical-align: middle;
 }
 
 .equip-table tr > *:first-child {
   border-left: 1px solid rgba(0,0,0,.12);
 }
 
-/* ヘッダー */
 .equip-table thead th {
   position: sticky;
   top: 0;
@@ -78,7 +72,6 @@
   border-bottom: 1px solid rgba(0,0,0,.18);
 }
 
-/* 名前列 */
 .equip-table th:first-child,
 .equip-table td:first-child {
   position: sticky;
@@ -96,7 +89,6 @@
   text-align: left;
 }
 
-/* 数値列 */
 .equip-table th:not(:first-child),
 .equip-table td:not(:first-child) {
   text-align: right;
@@ -104,12 +96,40 @@
   min-width: 68px;
 }
 
-/* 0は少し控えめに見せる余地を残す */
-.equip-table td {
-  vertical-align: middle;
+/* 防具の部位・シリーズ列は中央寄せ */
+#tab-armor th:nth-child(2),
+#tab-armor td:nth-child(2),
+#tab-armor th:nth-child(3),
+#tab-armor td:nth-child(3) {
+  text-align: center;
+  min-width: 72px;
 }
 
-/* スマホ */
+/* アクセ専用表 */
+.accessory-list-table th:nth-child(2),
+.accessory-list-table td:nth-child(2),
+.accessory-list-table th:nth-child(3),
+.accessory-list-table td:nth-child(3) {
+  text-align: left;
+  min-width: 280px;
+  white-space: normal;
+}
+
+.accessory-list-table th:nth-child(4),
+.accessory-list-table td:nth-child(4) {
+  text-align: center;
+  min-width: 90px;
+}
+
+.accessory-list-table td.acc-name {
+  min-width: 170px;
+}
+
+.accessory-list-table td.acc-effect,
+.accessory-list-table td.acc-max {
+  line-height: 1.45;
+}
+
 @media (max-width: 600px) {
   .equip-db {
     padding: 10px;
@@ -135,5 +155,12 @@
   .equip-table th:not(:first-child),
   .equip-table td:not(:first-child) {
     min-width: 60px;
+  }
+
+  .accessory-list-table th:nth-child(2),
+  .accessory-list-table td:nth-child(2),
+  .accessory-list-table th:nth-child(3),
+  .accessory-list-table td:nth-child(3) {
+    min-width: 220px;
   }
 }
