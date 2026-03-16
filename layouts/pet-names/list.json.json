@@ -1,0 +1,12 @@
+{{- $pages := where site.RegularPages "Section" "monster" -}}
+{
+  "items": [
+    {{- range $i, $p := $pages.ByParam "id" -}}
+      {{- if $i }},{{ end }}
+      {
+        "id": {{ $p.Params.id | jsonify }},
+        "title": {{ $p.Title | jsonify }}
+      }
+    {{- end -}}
+  ]
+}
