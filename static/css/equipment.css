@@ -1,41 +1,139 @@
-.equip-tabs{
-  display:flex;
-  gap:8px;
-  margin-bottom:12px;
+.equip-db {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px;
 }
 
-.equip-tab{
-  border:1px solid rgba(0,0,0,.2);
-  border-radius:8px;
-  padding:6px 12px;
-  background:#fff;
-  cursor:pointer;
+.equip-db h1 {
+  margin: 0 0 10px;
+  font-size: 1.25rem;
 }
 
-.equip-tab.active{
-  background:#eee;
+.equip-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 10px;
+  flex-wrap: wrap;
 }
 
-.equip-table{
-  display:none;
+.equip-tab {
+  border: 1px solid rgba(0,0,0,.18);
+  background: #fff;
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
-.equip-table.active{
-  display:block;
+.equip-tab.active {
+  background: rgba(0,0,0,.06);
 }
 
-.equip-table table{
-  width:100%;
-  border-collapse:collapse;
+.equip-table {
+  display: none;
 }
 
+.equip-table.active {
+  display: block;
+}
+
+/* ---- 表ラップ ---- */
+.equip-table {
+  overflow: auto;
+  border: 1px solid rgba(0,0,0,.14);
+  border-radius: 12px;
+}
+
+/* ---- 表本体 ---- */
+.equip-table table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: max-content;
+  min-width: 100%;
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+/* 枠組み */
 .equip-table th,
-.equip-table td{
-  border:1px solid rgba(0,0,0,.15);
-  padding:6px;
-  text-align:center;
+.equip-table td {
+  padding: 8px 10px;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+  border-right: 1px solid rgba(0,0,0,.12);
 }
 
-.equip-table th{
-  background:rgba(0,0,0,.05);
+.equip-table tr > *:first-child {
+  border-left: 1px solid rgba(0,0,0,.12);
+}
+
+/* ヘッダー */
+.equip-table thead th {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(6px);
+  z-index: 2;
+  border-bottom: 1px solid rgba(0,0,0,.18);
+}
+
+/* 名前列 */
+.equip-table th:first-child,
+.equip-table td:first-child {
+  position: sticky;
+  left: 0;
+  background: rgba(255,255,255,.98);
+  z-index: 1;
+}
+
+.equip-table thead th:first-child {
+  z-index: 3;
+}
+
+.equip-table td:first-child {
+  min-width: 160px;
+  text-align: left;
+}
+
+/* 数値列 */
+.equip-table th:not(:first-child),
+.equip-table td:not(:first-child) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  min-width: 68px;
+}
+
+/* 0は少し控えめに見せる余地を残す */
+.equip-table td {
+  vertical-align: middle;
+}
+
+/* スマホ */
+@media (max-width: 600px) {
+  .equip-db {
+    padding: 10px;
+  }
+
+  .equip-db h1 {
+    font-size: 1.15rem;
+  }
+
+  .equip-table table {
+    font-size: 12.5px;
+  }
+
+  .equip-table th,
+  .equip-table td {
+    padding: 6px 8px;
+  }
+
+  .equip-table td:first-child {
+    min-width: 150px;
+  }
+
+  .equip-table th:not(:first-child),
+  .equip-table td:not(:first-child) {
+    min-width: 60px;
+  }
 }
