@@ -2,7 +2,7 @@
 title = "主人公ステータス・シミュレーター"
 home = true
 weight = 30
-description = "ステータスをシミュレーションして理想のビルドを探そう！"
+description = "主人公の装備・ペット・ステータスを確認できるシミュレーター"
 +++
 
 <div class="status-sim">
@@ -135,32 +135,36 @@ description = "ステータスをシミュレーションして理想のビル�
       <div class="lvbox"><input id="level_shield" type="number" min="0" value="0"></div>
     </div>
 
-  <div class="equip-row">
+  <div class="equip-row accessory-row">
       <div class="slot">アクセ1</div>
       <div class="main"><select id="select_accessory1"></select></div>
       <div class="lvtag">Lv</div>
       <div class="lvbox"><input id="level_accessory1" type="number" min="1" value="1"></div>
+      <div class="effectbox"><div class="acc-effect-preview" id="effect_accessory1">-</div></div>
     </div>
 
-  <div class="equip-row">
+  <div class="equip-row accessory-row">
       <div class="slot">アクセ2</div>
       <div class="main"><select id="select_accessory2"></select></div>
       <div class="lvtag">Lv</div>
       <div class="lvbox"><input id="level_accessory2" type="number" min="1" value="1"></div>
+      <div class="effectbox"><div class="acc-effect-preview" id="effect_accessory2">-</div></div>
     </div>
 
-  <div class="equip-row">
+  <div class="equip-row accessory-row">
       <div class="slot">アクセ3</div>
       <div class="main"><select id="select_accessory3"></select></div>
       <div class="lvtag">Lv</div>
       <div class="lvbox"><input id="level_accessory3" type="number" min="1" value="1"></div>
+      <div class="effectbox"><div class="acc-effect-preview" id="effect_accessory3">-</div></div>
     </div>
 
-  <div class="equip-row">
+  <div class="equip-row accessory-row">
       <div class="slot">アクセ4</div>
       <div class="main"><select id="select_accessory4"></select></div>
       <div class="lvtag">Lv</div>
       <div class="lvbox"><input id="level_accessory4" type="number" min="1" value="1"></div>
+      <div class="effectbox"><div class="acc-effect-preview" id="effect_accessory4">-</div></div>
     </div>
 
   </div>
@@ -275,6 +279,37 @@ description = "ステータスをシミュレーションして理想のビル�
 .pet-suggest button:active{
   background: rgba(0,0,0,.06);
 }
+.accessory-row{
+  grid-template-columns: 72px minmax(0, 1fr) 44px 110px minmax(180px, 1.2fr);
+}
+.effectbox{
+  min-width: 0;
+}
+.acc-effect-preview{
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 12px;
+  background: rgba(0,0,0,.02);
+  font-size: 12px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 800px){
+  .accessory-row{
+    grid-template-columns: 72px 1fr;
+    grid-template-areas:
+      "slot main"
+      "lvtag lvbox"
+      "effect effect";
+    row-gap: 8px;
+  }
+  .accessory-row .slot{ grid-area: slot; }
+  .accessory-row .main{ grid-area: main; }
+  .accessory-row .lvtag{ grid-area: lvtag; text-align:left; padding-left:2px; }
+  .accessory-row .lvbox{ grid-area: lvbox; }
+  .accessory-row .effectbox{ grid-area: effect; }
+}
 </style>
 
 <script>
@@ -283,7 +318,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const BASE_STATS = ["vit", "spd", "atk", "int", "def", "mdef", "luk"];
   const ACCESSORY_KEYS = ["accessory1", "accessory2", "accessory3", "accessory4"];
   const PET_KEYS = ["pet1", "pet2", "pet3"];
-  const AUTO_STORAGE_KEY = "status_sim_inline_v5";
+  const AUTO_STORAGE_KEY = "status_sim_inline_v6";
   const BUILD_STORAGE_KEY = "status_sim_build_slots_v1";
 
   const base = window.location.origin + window.location.pathname.split("/tools/status/")[0];
@@ -330,6 +365,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (typeof window.fmt === "function") return window.fmt(x);
     } catch {}
     return String(Number(x) || 0);
+  }
+
+  function fmtRate(v) {
+    const num = Number(v) || 0;
+    if (Math.abs(num - Math.round(num)) < 1e-9) return `${Math.round(num)}%`;
+    return `${num.toFixed(2).replace(/\.?0+$/, "")}%`;
   }
 
   function normalizeJP(s) {
@@ -463,6 +504,61 @@ document.addEventListener("DOMContentLoaded", async () => {
       out[k] = (baseRate?.[k] || 0) * mul;
     });
     return out;
+  }
+
+  function getStatLabel(key) {
+    const map = {
+      vit: "VIT",
+      spd: "SPD",
+      atk: "ATK",
+      int: "INT",
+      def: "DEF",
+      mdef: "MDEF",
+      luk: "LUK",
+      mov: "MOV"
+    };
+    return map[key] || String(key).toUpperCase();
+  }
+
+  function buildAccessoryEffectPreview(item, lv) {
+    if (!item) return "-";
+
+    const addStatsNow = scaleAccessoryBaseAdd(item.base_add || {}, lv);
+    const rateStatsNow = scaleAccessoryBaseRate(item.base_rate || {}, lv);
+    const parts = [];
+
+    STATS.forEach((k) => {
+      const add = addStatsNow[k] || 0;
+      const rate = rateStatsNow[k] || 0;
+
+      if (add !== 0) {
+        if (Number.isInteger(add)) parts.push(`${getStatLabel(k)}+${add}`);
+        else parts.push(`${getStatLabel(k)}+${Number(add).toFixed(2).replace(/\.?0+$/, "")}`);
+      }
+
+      if (rate !== 0) {
+        parts.push(`${getStatLabel(k)}+${fmtRate(rate)}`);
+      }
+    });
+
+    return parts.length ? parts.join(" / ") : "-";
+  }
+
+  function updateAccessoryEffectDisplays() {
+    ACCESSORY_KEYS.forEach((key) => {
+      const box = $("effect_" + key);
+      if (!box) return;
+
+      const id = $("select_" + key)?.value || "";
+      const lv = clamp1($("level_" + key)?.value);
+      if (!id) {
+        box.textContent = "-";
+        return;
+      }
+
+      const item = equipmentMap.get(String(id));
+      box.textContent = buildAccessoryEffectPreview(item, lv);
+    });
   }
 
   function convertPetStageList(rawStages) {
@@ -884,6 +980,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (remain < 0) err.push(`ポイント超過：残り ${remain}`);
 
+    updateAccessoryEffectDisplays();
     renderTable(basePlusProtein, equipDisplay, finalTotal);
     setErr(err.join("\n"));
     saveAutoState(state);
@@ -1027,6 +1124,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ACCESSORY_KEYS.forEach((k) => {
         if ($("select_" + k)) $("select_" + k).value = "";
         if ($("level_" + k)) $("level_" + k).value = "1";
+        if ($("effect_" + k)) $("effect_" + k).textContent = "-";
       });
 
       PET_KEYS.forEach((k) => {
