@@ -1,0 +1,41 @@
+.equip-tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.equip-tab{
+  border:1px solid rgba(0,0,0,.2);
+  border-radius:8px;
+  padding:6px 12px;
+  background:#fff;
+  cursor:pointer;
+}
+
+.equip-tab.active{
+  background:#eee;
+}
+
+.equip-table{
+  display:none;
+}
+
+.equip-table.active{
+  display:block;
+}
+
+.equip-table table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.equip-table th,
+.equip-table td{
+  border:1px solid rgba(0,0,0,.15);
+  padding:6px;
+  text-align:center;
+}
+
+.equip-table th{
+  background:rgba(0,0,0,.05);
+}
