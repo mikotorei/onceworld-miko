@@ -224,6 +224,69 @@
       "series": "",
       "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
       "base_rate": {}
-    }
+    },
+    {
+  "id": "no_helmet",
+  "name": "未装備",
+  "category": "armor",
+  "slot": "head",
+  "series": "",
+  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+  "base_rate": {}
+},
+{
+  "id": "leather_cap",
+  "name": "皮の帽子",
+  "category": "armor",
+  "slot": "head",
+  "series": "leather",
+  "base_add": {"vit":0,"spd":0,"atk":0,"int":9,"def":0,"mdef":0,"luk":9,"mov":0},
+  "base_rate": {}
+},
+{
+  "id": "metal_helm",
+  "name": "メタルヘルム",
+  "category": "armor",
+  "slot": "head",
+  "series": "metal",
+  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":51,"mdef":0,"luk":0,"mov":0},
+  "base_rate": {}
+},
+{
+  "id": "platinum_helm",
+  "name": "白金ヘルム",
+  "category": "armor",
+  "slot": "head",
+  "series": "platinum",
+  "base_add": {"vit":0,"spd":31,"atk":0,"int":0,"def":78,"mdef":78,"luk":0,"mov":0},
+  "base_rate": {}
+},
+{
+  "id": "mage_hood",
+  "name": "魔道士フード",
+  "category": "armor",
+  "slot": "head",
+  "series": "mage",
+  "base_add": {"vit":0,"spd":0,"atk":0,"int":96,"def":0,"mdef":121,"luk":0,"mov":0},
+  "base_rate": {}
+},
+{
+  "id": "inferno_helm",
+  "name": "獄炎兜",
+  "category": "armor",
+  "slot": "head",
+  "series": "inferno",
+  "base_add": {"vit":0,"spd":0,"atk":140,"int":140,"def":0,"mdef":0,"luk":100,"mov":0},
+  "base_rate": {}
+},
+{
+  "id": "dragon_head",
+  "name": "ドラゴンヘッド",
+  "category": "armor",
+  "slot": "head",
+  "series": "dragon",
+  "base_add": {"vit":0,"spd":0,"atk":1050,"int":550,"def":0,"mdef":0,"luk":350,"mov":0},
+  "base_rate": {}
+}
   ]
 }
