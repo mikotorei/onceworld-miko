@@ -17,62 +17,59 @@ description = "武器・防具・アクセサリーの装備データ一覧"
 
 <div id="equipTables">
 
-<div class="equip-table active" id="tab-weapon">
-<table>
-<thead>
-<tr>
-<th>名前</th>
-<th>VIT</th>
-<th>SPD</th>
-<th>ATK</th>
-<th>INT</th>
-<th>DEF</th>
-<th>MDEF</th>
-<th>LUK</th>
-<th>MOV</th>
-</tr>
-</thead>
-<tbody id="weaponBody"></tbody>
-</table>
-</div>
+  <div class="equip-table active" id="tab-weapon">
+    <table>
+      <thead>
+        <tr>
+          <th>名前</th>
+          <th>VIT</th>
+          <th>SPD</th>
+          <th>ATK</th>
+          <th>INT</th>
+          <th>DEF</th>
+          <th>MDEF</th>
+          <th>LUK</th>
+          <th>MOV</th>
+        </tr>
+      </thead>
+      <tbody id="weaponBody"></tbody>
+    </table>
+  </div>
 
-<div class="equip-table" id="tab-armor">
-<table>
-<thead>
-<tr>
-<th>名前</th>
-<th>VIT</th>
-<th>SPD</th>
-<th>ATK</th>
-<th>INT</th>
-<th>DEF</th>
-<th>MDEF</th>
-<th>LUK</th>
-<th>MOV</th>
-</tr>
-</thead>
-<tbody id="armorBody"></tbody>
-</table>
-</div>
+  <div class="equip-table" id="tab-armor">
+    <table>
+      <thead>
+        <tr>
+          <th>名前</th>
+          <th>部位</th>
+          <th>シリーズ</th>
+          <th>VIT</th>
+          <th>SPD</th>
+          <th>ATK</th>
+          <th>INT</th>
+          <th>DEF</th>
+          <th>MDEF</th>
+          <th>LUK</th>
+          <th>MOV</th>
+        </tr>
+      </thead>
+      <tbody id="armorBody"></tbody>
+    </table>
+  </div>
 
-<div class="equip-table" id="tab-accessory">
-<table>
-<thead>
-<tr>
-<th>名前</th>
-<th>VIT</th>
-<th>SPD</th>
-<th>ATK</th>
-<th>INT</th>
-<th>DEF</th>
-<th>MDEF</th>
-<th>LUK</th>
-<th>MOV</th>
-</tr>
-</thead>
-<tbody id="accessoryBody"></tbody>
-</table>
-</div>
+  <div class="equip-table" id="tab-accessory">
+    <table class="accessory-list-table">
+      <thead>
+        <tr>
+          <th>名前</th>
+          <th>効果</th>
+          <th>最大値</th>
+          <th>最大Lv</th>
+        </tr>
+      </thead>
+      <tbody id="accessoryBody"></tbody>
+    </table>
+  </div>
 
 </div>
 
