@@ -18,12 +18,18 @@
 
 .hero-top-row,
 .mode-row,
-.enemy-row,
-.hero-row{
+.enemy-row{
   display:flex;
   flex-direction:column;
   align-items:stretch;
   gap:8px;
+}
+
+.hero-row{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:10px;
 }
 
 .hero-top-row + .hero-top-row,
@@ -37,6 +43,10 @@
 .hero-label{
   font-weight:700;
   white-space:nowrap;
+}
+
+.hero-label{
+  min-width:78px;
 }
 
 .chip-group{
@@ -75,6 +85,7 @@
 }
 
 .hero-row input{
+  flex:1;
   padding:10px 8px;
   border:none;
   outline:none;
@@ -239,8 +250,7 @@
 @media (min-width: 700px){
   .hero-top-row,
   .mode-row,
-  .enemy-row,
-  .hero-row{
+  .enemy-row{
     flex-direction:row;
     align-items:center;
     gap:10px;
@@ -251,8 +261,7 @@
     line-height:40px;
   }
 
-  .mode-label,
-  .hero-label{
+  .mode-label{
     min-width:78px;
     line-height:40px;
   }
