@@ -489,12 +489,12 @@
       def: wood ? Math.floor(defScaled / 2) : defScaled,
       mdef: scaleStat(monster.mdef, lv),
       luk: dark ? Math.floor(lukScaled / 2) : lukScaled,
-      element: monster.element ?? "",
+      element: (monster.element ?? "").toString().toLowerCase(),
       level_shortcuts: Array.isArray(monster.level_shortcuts) ? monster.level_shortcuts : []
     };
   }
 
-  // ========== ダメージ ==========
+  // ========== 既存ダメージ（物理用） ==========
   function damageRangeTotal(attack, defense, hits){
     const base = (attack * 7) - (defense * 4);
     if (base <= 0) return { min: 0, max: 0, base };
@@ -506,7 +506,7 @@
     return `${fmt(min)}～${fmt(max)}`;
   }
 
-  // 確定ワンパンライン（最小乱数でHP以上）
+  // 確定ワンパンライン（既存物理用）
   function oneShotLineRequiredAttack(defense, hits, hp){
     const need = hp / (0.9 * hits);
     const x = (defense * 4 + need) / 7;
@@ -521,11 +521,123 @@
     return Math.max(0, Math.floor(x) + 1);
   }
 
+  // ========== 新魔法仕様 ==========
+  function clampAnalysisBonus(v){
+    return Math.min(101000, Math.max(0, Math.floor(Number(v) || 0)));
+  }
+
+  function getSpellMultiplier(spell){
+    switch ((spell ?? "").toString()){
+      case "fire": return 1.0;
+      case "water": return 1.0;
+      case "wood": return 1.3;
+      case "light": return 2.0;
+      case "dark": return 1.4;
+      default: return 1.0;
+    }
+  }
+
+  function getElementModifier(heroElement, enemyElement){
+    const h = (heroElement ?? "").toString().toLowerCase();
+    const e = (enemyElement ?? "").toString().toLowerCase();
+
+    if (!h || !e) return 1.0;
+
+    if (
+      (h === "fire" && e === "wood") ||
+      (h === "wood" && e === "water") ||
+      (h === "water" && e === "fire") ||
+      (h === "light" && e === "dark") ||
+      (h === "dark" && e === "light")
+    ) return 1.2;
+
+    if (
+      (h === "fire" && e === "water") ||
+      (h === "water" && e === "wood") ||
+      (h === "wood" && e === "fire") ||
+      (h === "light" && e === "light") ||
+      (h === "dark" && e === "dark")
+    ) return 0.8;
+
+    return 1.0;
+  }
+
+  function getCriticalModifier(isCritical){
+    return isCritical ? 2.5 : 1.0;
+  }
+
+  function calcAnalysisBonus(bookCount, advancedBookCount){
+    const book = Math.max(0, Math.floor(Number(bookCount) || 0));
+    const adv = Math.max(0, Math.floor(Number(advancedBookCount) || 0));
+    const value = book * (1 + adv / 10);
+    return clampAnalysisBonus(value);
+  }
+
+  function calcMagicDamageRange(params){
+    const heroInt = Math.max(0, Math.floor(Number(params.heroInt) || 0));
+    const analysisBonus = calcAnalysisBonus(params.analysisBook, params.analysisBookAdvanced);
+    const spellMultiplier = getSpellMultiplier(params.spell);
+    const enemyMagDef = Number(params.enemyMagDef) || 0;
+    const elementModifier = getElementModifier(params.heroElement, params.enemyElement);
+    const criticalModifier = getCriticalModifier(!!params.critical);
+
+    const preDefense = (heroInt + analysisBonus) * 1.25 * spellMultiplier;
+    const afterDefense = preDefense - enemyMagDef;
+    const base = afterDefense * 4;
+    const finalBase = base * elementModifier * criticalModifier;
+
+    if (finalBase <= 0) {
+      return {
+        min: 0,
+        max: 0,
+        analysisBonus,
+        spellMultiplier,
+        elementModifier,
+        criticalModifier,
+        enemyMagDef,
+        finalBase: 0
+      };
+    }
+
+    const min = Math.floor(finalBase * 0.9);
+    const max = Math.floor(finalBase * 1.1);
+
+    return {
+      min: Math.max(0, min),
+      max: Math.max(0, max),
+      analysisBonus,
+      spellMultiplier,
+      elementModifier,
+      criticalModifier,
+      enemyMagDef,
+      finalBase
+    };
+  }
+
+  // 新魔法式のワンパンライン
+  function calcMagicOneShotRequiredInt(params){
+    const hp = Math.max(0, Number(params.hp) || 0);
+    const analysisBonus = calcAnalysisBonus(params.analysisBook, params.analysisBookAdvanced);
+    const spellMultiplier = getSpellMultiplier(params.spell);
+    const enemyMagDef = Number(params.enemyMagDef) || 0;
+    const elementModifier = getElementModifier(params.heroElement, params.enemyElement);
+    const criticalModifier = getCriticalModifier(!!params.critical);
+
+    const totalModifier = 0.9 * 4 * elementModifier * criticalModifier;
+    if (totalModifier <= 0 || spellMultiplier <= 0) return 0;
+
+    const neededAfterDefense = hp / totalModifier;
+    const neededPreDefense = neededAfterDefense + enemyMagDef;
+    const neededIntPlusBook = neededPreDefense / (1.25 * spellMultiplier);
+    const neededInt = Math.ceil(neededIntPlusBook - analysisBonus);
+
+    return Math.max(0, neededInt);
+  }
+
   // ========== 検索・保存・計算 ==========
   (function () {
-    const LS_KEY = "calc_state_v2";
+    const LS_KEY = "calc_state_v3";
 
-    // outputs
     const outPhyDmg = document.getElementById("out-phy-dmg");
     const outHits = document.getElementById("out-hits");
     const outPhyOne = document.getElementById("out-phy-one");
@@ -573,7 +685,9 @@
       critical: false
     };
 
-    function setCalcEnabled(){ calcBtn.disabled = !picked; }
+    function setCalcEnabled(){
+      calcBtn.disabled = !picked;
+    }
 
     function setPressed(buttons, selectedValue, attrName){
       buttons.forEach(btn => {
@@ -603,10 +717,6 @@
       setPressed(heroElementButtons, state.heroElement, "data-hero-element");
       setPressed(spellButtons, state.spell, "data-spell");
       setDebuffButtons();
-
-      if (!isMagic) {
-        state.spell = state.spell || "fire";
-      }
 
       if (picked) {
         enemyScaled = buildEnemyScaled(picked, currentLv, state);
@@ -655,7 +765,9 @@
           });
         }
 
-        if (Number.isFinite(Number(st?.lv))) currentLv = Math.max(1, Math.floor(Number(st.lv)));
+        if (Number.isFinite(Number(st?.lv))) {
+          currentLv = Math.max(1, Math.floor(Number(st.lv)));
+        }
 
         if (st?.state){
           if (["fire","water","wood","light","dark"].includes(st.state.heroElement)) {
@@ -682,8 +794,7 @@
     function renderShortcuts(shortcuts){
       shortcutWrap.innerHTML = "";
       const arr = Array.isArray(shortcuts) ? shortcuts : [];
-      if (!picked) return;
-      if (arr.length === 0) return;
+      if (!picked || arr.length === 0) return;
 
       arr.forEach(v => {
         const lv = Math.floor(Number(v));
@@ -715,7 +826,6 @@
 
       selectedName.textContent = picked.title;
       selectedBox.hidden = false;
-
       lvInput.disabled = false;
       lvInput.value = String(currentLv);
 
@@ -773,14 +883,18 @@
       const atk = Math.floor(Number(document.getElementById("hero-atk").value));
       const intl = Math.floor(Number(document.getElementById("hero-int").value));
       const spd = Math.floor(Number(document.getElementById("hero-spd").value));
+      const analysisBook = Math.floor(Number(document.getElementById("analysis-book").value));
+      const analysisBookAdvanced = Math.floor(Number(document.getElementById("analysis-book-advanced").value));
+
       return {
         atk: Number.isFinite(atk) ? Math.max(0, atk) : 0,
         int: Number.isFinite(intl) ? Math.max(0, intl) : 0,
-        spd: Number.isFinite(spd) ? Math.max(0, spd) : 0
+        spd: Number.isFinite(spd) ? Math.max(0, spd) : 0,
+        analysisBook: Number.isFinite(analysisBook) ? Math.max(0, analysisBook) : 0,
+        analysisBookAdvanced: Number.isFinite(analysisBookAdvanced) ? Math.max(0, analysisBookAdvanced) : 0
       };
     }
 
-    // 初期：保存状態復元
     loadState();
     lvInput.value = String(currentLv);
     applyModeUI();
@@ -792,7 +906,6 @@
       el.addEventListener("blur", saveState);
     });
 
-    // 保存データにモンスターが居たら復元
     (function restorePicked(){
       try{
         const raw = localStorage.getItem(LS_KEY);
@@ -808,7 +921,6 @@
       }catch(e){}
     })();
 
-    // 主人公属性
     heroElementButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         state.heroElement = btn.getAttribute("data-hero-element") || "fire";
@@ -816,20 +928,16 @@
       });
     });
 
-    // 攻撃タイプ
     attackTypeButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         state.attackType = btn.getAttribute("data-attack-type") || "physical";
-        if (state.attackType === "physical") {
-          state.debuffDark = state.debuffDark;
-        } else {
+        if (state.attackType !== "physical") {
           state.debuffDark = false;
         }
         applyModeUI();
       });
     });
 
-    // 使用魔法
     spellButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         state.spell = btn.getAttribute("data-spell") || "fire";
@@ -837,7 +945,6 @@
       });
     });
 
-    // 物理デバフ
     debuffWoodBtn.addEventListener("click", () => {
       if (state.attackType !== "physical") return;
       state.debuffWood = !state.debuffWood;
@@ -854,7 +961,6 @@
       saveState();
     });
 
-    // 魔法デバフ
     debuffWoodMagicBtn.addEventListener("click", () => {
       if (state.attackType !== "magic") return;
       state.debuffWood = !state.debuffWood;
@@ -863,14 +969,12 @@
       saveState();
     });
 
-    // クリティカル
     criticalToggle.addEventListener("click", () => {
       state.critical = !state.critical;
       setDebuffButtons();
       saveState();
     });
 
-    // 検索（空欄でリセット）
     search.addEventListener("input", () => {
       const q = search.value;
 
@@ -908,31 +1012,76 @@
       saveState();
     });
 
-    // 計算ボタン
     calcBtn.addEventListener("click", () => {
       if (!picked || !enemyScaled) return;
 
       const hero = getHeroInts();
-
-      const hits = hitsFromSpd(hero.spd);
-      outHits.textContent = fmt(hits);
-
       const enemyPhysDef = enemyScaled.def + enemyScaled.mdef * 0.1;
       const enemyMagDef  = enemyScaled.mdef + enemyScaled.def * 0.1;
-
-      const phy = damageRangeTotal(hero.atk, enemyPhysDef, hits);
-      outPhyDmg.textContent = formatMinMax(phy.min, phy.max);
-
-      const mag = damageRangeTotal(hero.int, enemyMagDef, 1);
-      outMagDmg.textContent = formatMinMax(mag.min, mag.max);
-
       const enemyHp = enemyScaled.vit * 18 + 100;
 
-      const reqAtk = oneShotLineRequiredAttack(enemyPhysDef, hits, enemyHp);
-      outPhyOne.textContent = `atk${fmt(reqAtk)}以上`;
+      if (state.attackType === "physical") {
+        const hits = hitsFromSpd(hero.spd);
+        outHits.textContent = fmt(hits);
 
-      const reqInt = oneShotLineRequiredAttack(enemyMagDef, 1, enemyHp);
-      outMagOne.textContent = `int${fmt(reqInt)}以上`;
+        const phy = damageRangeTotal(hero.atk, enemyPhysDef, hits);
+        outPhyDmg.textContent = formatMinMax(phy.min, phy.max);
+
+        const reqAtk = oneShotLineRequiredAttack(enemyPhysDef, hits, enemyHp);
+        outPhyOne.textContent = `atk${fmt(reqAtk)}以上`;
+
+        const mag = calcMagicDamageRange({
+          heroInt: hero.int,
+          analysisBook: hero.analysisBook,
+          analysisBookAdvanced: hero.analysisBookAdvanced,
+          spell: state.spell,
+          enemyMagDef,
+          heroElement: state.heroElement,
+          enemyElement: enemyScaled.element,
+          critical: state.critical
+        });
+        outMagDmg.textContent = `${formatMinMax(mag.min, mag.max)}（この範囲内）`;
+
+        const reqInt = calcMagicOneShotRequiredInt({
+          hp: enemyHp,
+          analysisBook: hero.analysisBook,
+          analysisBookAdvanced: hero.analysisBookAdvanced,
+          spell: state.spell,
+          enemyMagDef,
+          heroElement: state.heroElement,
+          enemyElement: enemyScaled.element,
+          critical: state.critical
+        });
+        outMagOne.textContent = `int${fmt(reqInt)}以上`;
+      } else {
+        outHits.textContent = "-";
+        outPhyDmg.textContent = "-";
+        outPhyOne.textContent = "-";
+
+        const mag = calcMagicDamageRange({
+          heroInt: hero.int,
+          analysisBook: hero.analysisBook,
+          analysisBookAdvanced: hero.analysisBookAdvanced,
+          spell: state.spell,
+          enemyMagDef,
+          heroElement: state.heroElement,
+          enemyElement: enemyScaled.element,
+          critical: state.critical
+        });
+        outMagDmg.textContent = `${formatMinMax(mag.min, mag.max)}（この範囲内）`;
+
+        const reqInt = calcMagicOneShotRequiredInt({
+          hp: enemyHp,
+          analysisBook: hero.analysisBook,
+          analysisBookAdvanced: hero.analysisBookAdvanced,
+          spell: state.spell,
+          enemyMagDef,
+          heroElement: state.heroElement,
+          enemyElement: enemyScaled.element,
+          critical: state.critical
+        });
+        outMagOne.textContent = `int${fmt(reqInt)}以上`;
+      }
 
       outHitLuk.textContent = `${fmt(Math.floor(enemyScaled.luk / 2))}以上`;
       outEvadeLuk.textContent = `${fmt(Math.floor(enemyScaled.luk * 3))}以上`;
