@@ -30,14 +30,23 @@
   flex-direction:column;
   align-items:stretch;
   gap:8px;
+  min-width:0;
 }
 
 .hero-stat-row{
-  display:flex !important;
-  flex-direction:row !important;
+  display:grid !important;
+  grid-template-columns: 88px minmax(0, 1fr) !important;
   align-items:center !important;
   gap:10px !important;
   min-width:0;
+}
+
+#analysis-book-row.hero-stat-row{
+  grid-template-columns: 96px minmax(0, 1fr) !important;
+}
+
+#analysis-book-advanced-row.hero-stat-row{
+  grid-template-columns: 170px minmax(0, 1fr) !important;
 }
 
 .hero-top-row + .hero-top-row,
@@ -54,12 +63,12 @@
 }
 
 .hero-label{
-  min-width:78px;
+  min-width:0;
 }
 
 .hero-stat-row .hero-label{
-  min-width:78px;
-  flex:0 0 78px;
+  min-width:0 !important;
+  width:auto !important;
 }
 
 .chip-group{
@@ -107,26 +116,14 @@
 }
 
 .hero-stat-row input{
-  flex:1 1 auto !important;
-  width:auto !important;
+  width:100% !important;
   min-width:0 !important;
+  flex:none !important;
 }
 
-/* 長い項目名の行 */
 #analysis-book-row,
 #analysis-book-advanced-row{
   grid-column:1 / -1;
-}
-
-/* スマホで被らないように十分広く取る */
-#analysis-book-row .hero-label{
-  min-width:96px;
-  flex:0 0 96px;
-}
-
-#analysis-book-advanced-row .hero-label{
-  min-width:170px;
-  flex:0 0 170px;
 }
 
 .mode-panels{
@@ -309,14 +306,16 @@
     grid-template-columns:repeat(2, minmax(0, 1fr));
   }
 
-  #analysis-book-row .hero-label{
-    min-width:110px;
-    flex:0 0 110px;
+  .hero-stat-row{
+    grid-template-columns: 88px minmax(0, 1fr) !important;
   }
 
-  #analysis-book-advanced-row .hero-label{
-    min-width:180px;
-    flex:0 0 180px;
+  #analysis-book-row.hero-stat-row{
+    grid-template-columns: 110px minmax(0, 1fr) !important;
+  }
+
+  #analysis-book-advanced-row.hero-stat-row{
+    grid-template-columns: 190px minmax(0, 1fr) !important;
   }
 
   .result-row{
