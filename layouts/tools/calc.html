@@ -31,27 +31,27 @@
   <div class="hero-grid">
     <div class="hero-row hero-stat-row">
       <span class="hero-label">atk:</span>
-      <input id="hero-atk" type="number" inputmode="numeric" min="0" step="1" value="0">
+      <input id="hero-atk" type="text" inputmode="numeric" value="0" autocomplete="off">
     </div>
     <div class="hero-row hero-stat-row">
       <span class="hero-label">int:</span>
-      <input id="hero-int" type="number" inputmode="numeric" min="0" step="1" value="0">
+      <input id="hero-int" type="text" inputmode="numeric" value="0" autocomplete="off">
     </div>
     <div class="hero-row hero-stat-row">
       <span class="hero-label">spd:</span>
-      <input id="hero-spd" type="number" inputmode="numeric" min="0" step="1" value="0">
+      <input id="hero-spd" type="text" inputmode="numeric" value="0" autocomplete="off">
     </div>
 
     <div class="hero-row hero-stat-row" id="analysis-book-row" hidden>
       <span class="hero-label">解析書:</span>
-      <input id="analysis-book" type="number" inputmode="numeric" min="0" step="1" value="0">
+      <input id="analysis-book" type="text" inputmode="numeric" value="0" autocomplete="off">
     </div>
     <div class="hero-row hero-stat-row" id="analysis-book-advanced-row" hidden>
       <span class="hero-label">解析書の解析書:</span>
-      <input id="analysis-book-advanced" type="number" inputmode="numeric" min="0" step="1" value="0">
+      <input id="analysis-book-advanced" type="text" inputmode="numeric" value="0" autocomplete="off">
     </div>
   </div>
-  
+
   <div class="mode-panels">
     <div class="mode-panel" id="physical-panel">
       <div class="mode-row">
@@ -107,7 +107,7 @@
 
     <div class="enemy-row mt">
       <span class="enemy-label">Lv:</span>
-      <input id="enemy-lv" class="lv-input" type="number" inputmode="numeric" min="1" step="1" value="1" disabled>
+      <input id="enemy-lv" class="lv-input" type="text" inputmode="numeric" value="1" disabled autocomplete="off">
     </div>
   </div>
 </section>
@@ -179,15 +179,19 @@
 <div id="calc-app"></div>
 
 <script>
-  function normalizeFormattedNonNegIntValue(raw, fallback = 0){
-    const s = (raw ?? "").toString().replace(/,/g, "").trim();
-    if (s === "") return String(fallback);
-    const n = Math.floor(Number(s));
+  function normalizeDigitsOnly(raw) {
+    return (raw ?? "").toString().replace(/[^\d]/g, "");
+  }
+
+  function normalizeFormattedNonNegIntValue(raw, fallback = 0) {
+    const digits = normalizeDigitsOnly(raw);
+    if (digits === "") return String(fallback);
+    const n = Math.floor(Number(digits));
     if (!Number.isFinite(n) || n < 0) return String(fallback);
     return String(n);
   }
 
-  function parseFormattedInt(el, fallback = 0){
+  function parseFormattedInt(el, fallback = 0) {
     if (!el) return fallback;
     const s = normalizeFormattedNonNegIntValue(el.value, fallback);
     const n = Math.floor(Number(s));
@@ -195,64 +199,65 @@
     return n;
   }
 
-  function formatIntString(value){
+  function formatIntString(value) {
     const n = Math.floor(Number(value));
     if (!Number.isFinite(n)) return "0";
     return n.toLocaleString("ja-JP");
   }
 
-  function applyCommaFormatting(el, fallback = 0){
+  function applyCommaFormatting(el, fallback = 0) {
     if (!el) return;
     const normalized = normalizeFormattedNonNegIntValue(el.value, fallback);
     el.value = formatIntString(normalized);
   }
 
-  function removeCommaFormatting(el, fallback = 0){
+  function removeCommaFormatting(el, fallback = 0) {
     if (!el) return;
     el.value = normalizeFormattedNonNegIntValue(el.value, fallback);
   }
 
-  // ========== 主人公・入力欄のカンマ表示 ==========
-  (function () {
-    const defs = [
-      { id: "hero-atk", fallback: 0 },
-      { id: "hero-int", fallback: 0 },
-      { id: "hero-spd", fallback: 0 },
-      { id: "analysis-book", fallback: 0 },
-      { id: "analysis-book-advanced", fallback: 0 },
-      { id: "enemy-lv", fallback: 1 }
-    ];
+  function attachCommaInputBehavior(id, fallback = 0) {
+    const el = document.getElementById(id);
+    if (!el) return;
 
-    defs.forEach(({ id, fallback }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
+    applyCommaFormatting(el, fallback);
 
-      applyCommaFormatting(el, fallback);
-
-      el.addEventListener("focus", () => {
-        removeCommaFormatting(el, fallback);
-      });
-
-      el.addEventListener("blur", () => {
-        applyCommaFormatting(el, fallback);
-      });
+    el.addEventListener("focus", () => {
+      removeCommaFormatting(el, fallback);
     });
-  })();
 
-  function normalizeLv(el){
-    const n = parseFormattedInt(el, 1);
-    const v = Math.max(1, n);
-    el.value = formatIntString(v);
-    return v;
+    el.addEventListener("input", () => {
+      const normalized = normalizeDigitsOnly(el.value);
+      el.value = normalized;
+    });
+
+    el.addEventListener("blur", () => {
+      applyCommaFormatting(el, fallback);
+    });
   }
 
-  function fmt(n){
+  (function () {
+    attachCommaInputBehavior("hero-atk", 0);
+    attachCommaInputBehavior("hero-int", 0);
+    attachCommaInputBehavior("hero-spd", 0);
+    attachCommaInputBehavior("analysis-book", 0);
+    attachCommaInputBehavior("analysis-book-advanced", 0);
+    attachCommaInputBehavior("enemy-lv", 1);
+  })();
+
+  function normalizeLv(el) {
+    const n = Math.max(1, parseFormattedInt(el, 1));
+    el.value = formatIntString(n);
+    return n;
+  }
+
+  function fmt(n) {
     const v = Math.floor(Number(n));
     if (!Number.isFinite(v)) return "0";
     return v.toLocaleString("ja-JP");
   }
 
-  function hitsFromSpd(spd){
+  function hitsFromSpd(spd) {
     const s = Math.floor(Number(spd));
     if (!Number.isFinite(s)) return 1;
     if (s <= 3000) return 1;
@@ -262,11 +267,11 @@
     return 5;
   }
 
-  function scaleStat(base, lv){
+  function scaleStat(base, lv) {
     return Math.floor(Number(base) * (1 + lv * 0.1));
   }
 
-  function buildEnemyScaled(monster, lv, state){
+  function buildEnemyScaled(monster, lv, state) {
     const wood = !!state.debuffWood;
     const dark = !!state.debuffDark;
 
@@ -289,7 +294,7 @@
     };
   }
 
-  function damageRangeTotal(attack, defense, hits){
+  function damageRangeTotal(attack, defense, hits) {
     const base = (attack * 7) - (defense * 4);
     if (base <= 0) return { min: 0, max: 0, base };
     const min = Math.floor(base * 0.9 * hits);
@@ -297,29 +302,29 @@
     return { min: Math.max(0, min), max: Math.max(0, max), base };
   }
 
-  function formatMinMax(min, max){
+  function formatMinMax(min, max) {
     return `${fmt(min)}～${fmt(max)}`;
   }
 
-  function oneShotLineRequiredAttack(defense, hits, hp){
+  function oneShotLineRequiredAttack(defense, hits, hp) {
     const need = hp / (0.9 * hits);
     const x = (defense * 4 + need) / 7;
     return Math.max(0, Math.ceil(x));
   }
 
-  function requiredDefenseForNullify(enemyAttack){
+  function requiredDefenseForNullify(enemyAttack) {
     const a = Math.floor(Number(enemyAttack));
     if (!Number.isFinite(a)) return 0;
     const x = (a * 7 - 10) / 4;
     return Math.max(0, Math.floor(x) + 1);
   }
 
-  function clampAnalysisBonus(v){
+  function clampAnalysisBonus(v) {
     return Math.min(101000, Math.max(0, Math.floor(Number(v) || 0)));
   }
 
-  function getSpellMultiplier(spell){
-    switch ((spell ?? "").toString()){
+  function getSpellMultiplier(spell) {
+    switch ((spell ?? "").toString()) {
       case "fire": return 1.0;
       case "water": return 1.0;
       case "wood": return 1.3;
@@ -329,7 +334,7 @@
     }
   }
 
-  function getElementModifier(heroElement, enemyElement){
+  function getElementModifier(heroElement, enemyElement) {
     const h = (heroElement ?? "").toString().toLowerCase();
     const e = (enemyElement ?? "").toString().toLowerCase();
 
@@ -354,18 +359,18 @@
     return 1.0;
   }
 
-  function getCriticalModifier(isCritical){
+  function getCriticalModifier(isCritical) {
     return isCritical ? 2.5 : 1.0;
   }
 
-  function calcAnalysisBonus(bookCount, advancedBookCount){
+  function calcAnalysisBonus(bookCount, advancedBookCount) {
     const book = Math.max(0, Math.floor(Number(bookCount) || 0));
     const adv = Math.max(0, Math.floor(Number(advancedBookCount) || 0));
     const value = book * (1 + adv / 10);
     return clampAnalysisBonus(value);
   }
 
-  function calcMagicDamageRange(params){
+  function calcMagicDamageRange(params) {
     const heroInt = Math.max(0, Math.floor(Number(params.heroInt) || 0));
     const analysisBonus = calcAnalysisBonus(params.analysisBook, params.analysisBookAdvanced);
     const spellMultiplier = getSpellMultiplier(params.spell);
@@ -406,7 +411,7 @@
     };
   }
 
-  function calcMagicOneShotRequiredInt(params){
+  function calcMagicOneShotRequiredInt(params) {
     const hp = Math.max(0, Number(params.hp) || 0);
     const analysisBonus = calcAnalysisBonus(params.analysisBook, params.analysisBookAdvanced);
     const spellMultiplier = getSpellMultiplier(params.spell);
@@ -426,7 +431,7 @@
   }
 
   (function () {
-    const LS_KEY = "calc_state_v4";
+    const LS_KEY = "calc_state_v5";
 
     const outPhyDmg = document.getElementById("out-phy-dmg");
     const outHits = document.getElementById("out-hits");
@@ -475,24 +480,24 @@
       critical: false
     };
 
-    function setCalcEnabled(){
+    function setCalcEnabled() {
       calcBtn.disabled = !picked;
     }
 
-    function setPressed(buttons, selectedValue, attrName){
+    function setPressed(buttons, selectedValue, attrName) {
       buttons.forEach(btn => {
         const value = btn.getAttribute(attrName);
         btn.setAttribute("aria-pressed", value === selectedValue ? "true" : "false");
       });
     }
 
-    function setHiddenForce(el, isHidden){
+    function setHiddenForce(el, isHidden) {
       if (!el) return;
       el.hidden = isHidden;
       el.style.display = isHidden ? "none" : "";
     }
 
-    function setDebuffButtons(){
+    function setDebuffButtons() {
       debuffWoodBtn.setAttribute("aria-pressed", state.debuffWood && state.attackType === "physical" ? "true" : "false");
       debuffDarkBtn.setAttribute("aria-pressed", state.debuffDark && state.attackType === "physical" ? "true" : "false");
       debuffWoodMagicBtn.setAttribute("aria-pressed", state.debuffWood && state.attackType === "magic" ? "true" : "false");
@@ -500,7 +505,7 @@
       criticalToggle.textContent = state.critical ? "クリティカルON" : "クリティカルOFF";
     }
 
-    function applyModeUI(){
+    function applyModeUI() {
       const isMagic = state.attackType === "magic";
 
       setHiddenForce(physicalPanel, isMagic);
@@ -519,8 +524,8 @@
       saveState();
     }
 
-    function saveState(){
-      try{
+    function saveState() {
+      try {
         const hero = {
           atk: normalizeFormattedNonNegIntValue(document.getElementById("hero-atk").value, 0),
           int: normalizeFormattedNonNegIntValue(document.getElementById("hero-int").value, 0),
@@ -535,24 +540,24 @@
           state
         };
         localStorage.setItem(LS_KEY, JSON.stringify(st));
-      }catch(e){}
+      } catch (e) {}
     }
 
-    function loadState(){
-      try{
+    function loadState() {
+      try {
         const raw = localStorage.getItem(LS_KEY);
         if (!raw) return;
         const st = JSON.parse(raw);
 
-        if (st?.hero){
+        if (st?.hero) {
           const map = {
-            "hero-atk":"atk",
-            "hero-int":"int",
-            "hero-spd":"spd",
-            "analysis-book":"analysisBook",
-            "analysis-book-advanced":"analysisBookAdvanced"
+            "hero-atk": "atk",
+            "hero-int": "int",
+            "hero-spd": "spd",
+            "analysis-book": "analysisBook",
+            "analysis-book-advanced": "analysisBookAdvanced"
           };
-          Object.keys(map).forEach(id=>{
+          Object.keys(map).forEach(id => {
             const el = document.getElementById(id);
             if (!el) return;
             const v = st.hero[map[id]];
@@ -566,29 +571,29 @@
           currentLv = Math.max(1, Math.floor(Number(st.lv)));
         }
 
-        if (st?.state){
-          if (["fire","water","wood","light","dark"].includes(st.state.heroElement)) {
+        if (st?.state) {
+          if (["fire", "water", "wood", "light", "dark"].includes(st.state.heroElement)) {
             state.heroElement = st.state.heroElement;
           }
-          if (["physical","magic"].includes(st.state.attackType)) {
+          if (["physical", "magic"].includes(st.state.attackType)) {
             state.attackType = st.state.attackType;
           }
-          if (["fire","water","wood","light","dark"].includes(st.state.spell)) {
+          if (["fire", "water", "wood", "light", "dark"].includes(st.state.spell)) {
             state.spell = st.state.spell;
           }
           state.debuffWood = !!st.state.debuffWood;
           state.debuffDark = !!st.state.debuffDark;
           state.critical = !!st.state.critical;
         }
-      }catch(e){}
+      } catch (e) {}
     }
 
-    function closeSuggest(){
+    function closeSuggest() {
       suggest.hidden = true;
       suggest.innerHTML = "";
     }
 
-    function renderShortcuts(shortcuts){
+    function renderShortcuts(shortcuts) {
       shortcutWrap.innerHTML = "";
       const arr = Array.isArray(shortcuts) ? shortcuts : [];
       if (!picked || arr.length === 0) return;
@@ -609,8 +614,8 @@
       });
     }
 
-    function applyPickedUI(){
-      if (!picked){
+    function applyPickedUI() {
+      if (!picked) {
         selectedBox.hidden = true;
         selectedName.textContent = "";
         lvInput.disabled = true;
@@ -633,7 +638,7 @@
       setCalcEnabled();
     }
 
-    function openSuggest(items){
+    function openSuggest(items) {
       suggest.hidden = false;
       suggest.innerHTML = "";
       items.forEach(m => {
@@ -650,7 +655,7 @@
       });
     }
 
-    function clearPicked(){
+    function clearPicked() {
       picked = null;
       enemyScaled = null;
       selectedBox.hidden = true;
@@ -662,12 +667,12 @@
       setCalcEnabled();
     }
 
-    function normalizeJP(s){
+    function normalizeJP(s) {
       const str = (s ?? "").toString().trim().toLowerCase();
       return str.replace(/[\u30A1-\u30F6]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
     }
 
-    function filterMonsters(q){
+    function filterMonsters(q) {
       if (!Array.isArray(window.MONSTERS)) return [];
       const query = normalizeJP(q);
       if (query.length === 0) return [];
@@ -676,7 +681,7 @@
         .slice(0, 50);
     }
 
-    function getHeroInts(){
+    function getHeroInts() {
       return {
         atk: Math.max(0, parseFormattedInt(document.getElementById("hero-atk"), 0)),
         int: Math.max(0, parseFormattedInt(document.getElementById("hero-int"), 0)),
@@ -691,14 +696,14 @@
     applyModeUI();
     setCalcEnabled();
 
-    ["hero-atk","hero-int","hero-spd","analysis-book","analysis-book-advanced"].forEach(id=>{
+    ["hero-atk", "hero-int", "hero-spd", "analysis-book", "analysis-book-advanced"].forEach(id => {
       const el = document.getElementById(id);
       if (!el) return;
       el.addEventListener("blur", saveState);
     });
 
-    (function restorePicked(){
-      try{
+    (function restorePicked() {
+      try {
         const raw = localStorage.getItem(LS_KEY);
         if (!raw) return;
         const st = JSON.parse(raw);
@@ -709,7 +714,7 @@
         picked = found;
         search.value = found.title;
         applyPickedUI();
-      }catch(e){}
+      } catch (e) {}
     })();
 
     heroElementButtons.forEach(btn => {
@@ -808,7 +813,7 @@
 
       const hero = getHeroInts();
       const enemyPhysDef = enemyScaled.def + enemyScaled.mdef * 0.1;
-      const enemyMagDef  = enemyScaled.mdef + enemyScaled.def * 0.1;
+      const enemyMagDef = enemyScaled.mdef + enemyScaled.def * 0.1;
       const enemyHp = enemyScaled.vit * 18 + 100;
 
       if (state.attackType === "physical") {
