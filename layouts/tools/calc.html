@@ -41,11 +41,11 @@
       <input id="hero-spd" type="number" inputmode="numeric" min="0" step="1" value="0">
     </div>
 
-    <div class="hero-row magic-only" id="analysis-book-row" hidden>
+    <div class="hero-row" id="analysis-book-row" hidden>
       <span class="hero-label">解析書:</span>
       <input id="analysis-book" type="number" inputmode="numeric" min="0" step="1" value="0">
     </div>
-    <div class="hero-row magic-only" id="analysis-book-advanced-row" hidden>
+    <div class="hero-row" id="analysis-book-advanced-row" hidden>
       <span class="hero-label">解析書の解析書:</span>
       <input id="analysis-book-advanced" type="number" inputmode="numeric" min="0" step="1" value="0">
     </div>
@@ -178,6 +178,10 @@
 <div id="calc-app"></div>
 
 <style>
+  [hidden]{
+    display:none !important;
+  }
+
   .hero-top-block{
     max-width: 960px;
     margin-bottom: 14px;
@@ -419,7 +423,6 @@
 </style>
 
 <script>
-  // ========== 共通：整数・0以上（主人公） ==========
   (function () {
     const ids = ["hero-atk","hero-int","hero-spd","analysis-book","analysis-book-advanced"];
     function normalizeNonNegInt(el){
@@ -437,7 +440,6 @@
     });
   })();
 
-  // ========== 敵Lv：1以上整数 ==========
   function normalizeLv(el){
     const raw = (el.value ?? "").toString().trim();
     if (raw === "") { el.value = "1"; return 1; }
@@ -447,14 +449,12 @@
     return n;
   }
 
-  // ========== 表示：カンマ ==========
   function fmt(n){
     const v = Math.floor(Number(n));
     if (!Number.isFinite(v)) return "0";
     return v.toLocaleString("ja-JP");
   }
 
-  // ========== 多段（主人公SPD） ==========
   function hitsFromSpd(spd){
     const s = Math.floor(Number(spd));
     if (!Number.isFinite(s)) return 1;
@@ -465,12 +465,10 @@
     return 5;
   }
 
-  // ========== レベルスケール（切り捨て） ==========
   function scaleStat(base, lv){
     return Math.floor(Number(base) * (1 + lv * 0.1));
   }
 
-  // ========== 敵ステ（デバフ反映） ==========
   function buildEnemyScaled(monster, lv, state){
     const wood = !!state.debuffWood;
     const dark = !!state.debuffDark;
@@ -494,7 +492,6 @@
     };
   }
 
-  // ========== 既存ダメージ（物理用） ==========
   function damageRangeTotal(attack, defense, hits){
     const base = (attack * 7) - (defense * 4);
     if (base <= 0) return { min: 0, max: 0, base };
@@ -506,14 +503,12 @@
     return `${fmt(min)}～${fmt(max)}`;
   }
 
-  // 確定ワンパンライン（既存物理用）
   function oneShotLineRequiredAttack(defense, hits, hp){
     const need = hp / (0.9 * hits);
     const x = (defense * 4 + need) / 7;
     return Math.max(0, Math.ceil(x));
   }
 
-  // 必要防御（主人公ステ不要）
   function requiredDefenseForNullify(enemyAttack){
     const a = Math.floor(Number(enemyAttack));
     if (!Number.isFinite(a)) return 0;
@@ -521,7 +516,6 @@
     return Math.max(0, Math.floor(x) + 1);
   }
 
-  // ========== 新魔法仕様 ==========
   function clampAnalysisBonus(v){
     return Math.min(101000, Math.max(0, Math.floor(Number(v) || 0)));
   }
@@ -614,7 +608,6 @@
     };
   }
 
-  // 新魔法式のワンパンライン
   function calcMagicOneShotRequiredInt(params){
     const hp = Math.max(0, Number(params.hp) || 0);
     const analysisBonus = calcAnalysisBonus(params.analysisBook, params.analysisBookAdvanced);
@@ -634,9 +627,8 @@
     return Math.max(0, neededInt);
   }
 
-  // ========== 検索・保存・計算 ==========
   (function () {
-    const LS_KEY = "calc_state_v3";
+    const LS_KEY = "calc_state_v4";
 
     const outPhyDmg = document.getElementById("out-phy-dmg");
     const outHits = document.getElementById("out-hits");
@@ -696,6 +688,12 @@
       });
     }
 
+    function setHiddenForce(el, isHidden){
+      if (!el) return;
+      el.hidden = isHidden;
+      el.style.display = isHidden ? "none" : "";
+    }
+
     function setDebuffButtons(){
       debuffWoodBtn.setAttribute("aria-pressed", state.debuffWood && state.attackType === "physical" ? "true" : "false");
       debuffDarkBtn.setAttribute("aria-pressed", state.debuffDark && state.attackType === "physical" ? "true" : "false");
@@ -707,11 +705,10 @@
     function applyModeUI(){
       const isMagic = state.attackType === "magic";
 
-      physicalPanel.hidden = isMagic;
-      magicPanel.hidden = !isMagic;
-
-      analysisBookRow.hidden = !isMagic;
-      analysisBookAdvancedRow.hidden = !isMagic;
+      setHiddenForce(physicalPanel, isMagic);
+      setHiddenForce(magicPanel, !isMagic);
+      setHiddenForce(analysisBookRow, !isMagic);
+      setHiddenForce(analysisBookAdvancedRow, !isMagic);
 
       setPressed(attackTypeButtons, state.attackType, "data-attack-type");
       setPressed(heroElementButtons, state.heroElement, "data-hero-element");
