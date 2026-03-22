@@ -257,6 +257,35 @@
     return v.toLocaleString("ja-JP");
   }
 
+  function normalizeElement(value) {
+    const raw = (value ?? "").toString().trim().toLowerCase();
+
+    const map = {
+      fire: "fire",
+      "火": "fire",
+      "火属性": "fire",
+
+      water: "water",
+      "水": "water",
+      "水属性": "water",
+
+      wood: "wood",
+      tree: "wood",
+      "木": "wood",
+      "木属性": "wood",
+
+      light: "light",
+      "光": "light",
+      "光属性": "light",
+
+      dark: "dark",
+      "闇": "dark",
+      "闇属性": "dark"
+    };
+
+    return map[raw] || raw;
+  }
+
   function hitsFromSpd(spd) {
     const s = Math.floor(Number(spd));
     if (!Number.isFinite(s)) return 1;
@@ -289,7 +318,7 @@
       def: wood ? Math.floor(defScaled / 2) : defScaled,
       mdef: scaleStat(monster.mdef, lv),
       luk: dark ? Math.floor(lukScaled / 2) : lukScaled,
-      element: (monster.element ?? "").toString().toLowerCase(),
+      element: normalizeElement(monster.element),
       level_shortcuts: Array.isArray(monster.level_shortcuts) ? monster.level_shortcuts : []
     };
   }
@@ -324,7 +353,7 @@
   }
 
   function getSpellMultiplier(spell) {
-    switch ((spell ?? "").toString()) {
+    switch (normalizeElement(spell)) {
       case "fire": return 1.0;
       case "water": return 1.0;
       case "wood": return 1.3;
@@ -335,8 +364,8 @@
   }
 
   function getElementModifier(heroElement, enemyElement) {
-    const h = (heroElement ?? "").toString().toLowerCase();
-    const e = (enemyElement ?? "").toString().toLowerCase();
+    const h = normalizeElement(heroElement);
+    const e = normalizeElement(enemyElement);
 
     if (!h || !e) return 1.0;
 
