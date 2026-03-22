@@ -264,20 +264,16 @@
       fire: "fire",
       "火": "fire",
       "火属性": "fire",
-
       water: "water",
       "水": "water",
       "水属性": "water",
-
       wood: "wood",
       tree: "wood",
       "木": "wood",
       "木属性": "wood",
-
       light: "light",
       "光": "light",
       "光属性": "light",
-
       dark: "dark",
       "闇": "dark",
       "闇属性": "dark"
@@ -405,7 +401,7 @@
     const spellMultiplier = getSpellMultiplier(params.spell);
     const enemyMagDef = Number(params.enemyMagDef) || 0;
     const elementModifier = getElementModifier(params.heroElement, params.enemyElement);
-    const criticalModifier = getCriticalModifier(!!params.critical);
+    const criticalModifier = 1.0;
 
     const preDefense = (heroInt + analysisBonus) * 1.25 * spellMultiplier;
     const afterDefense = preDefense - enemyMagDef;
@@ -446,7 +442,7 @@
     const spellMultiplier = getSpellMultiplier(params.spell);
     const enemyMagDef = Number(params.enemyMagDef) || 0;
     const elementModifier = getElementModifier(params.heroElement, params.enemyElement);
-    const criticalModifier = getCriticalModifier(!!params.critical);
+    const criticalModifier = 1.0;
 
     const totalModifier = 0.9 * 4 * elementModifier * criticalModifier;
     if (totalModifier <= 0 || spellMultiplier <= 0) return 0;
@@ -541,6 +537,7 @@
       setHiddenForce(magicPanel, !isMagic);
       setHiddenForce(analysisBookRow, !isMagic);
       setHiddenForce(analysisBookAdvancedRow, !isMagic);
+      setHiddenForce(criticalToggle, isMagic);
 
       setPressed(attackTypeButtons, state.attackType, "data-attack-type");
       setPressed(heroElementButtons, state.heroElement, "data-hero-element");
@@ -612,7 +609,7 @@
           }
           state.debuffWood = !!st.state.debuffWood;
           state.debuffDark = !!st.state.debuffDark;
-          state.critical = !!st.state.critical;
+          state.critical = state.attackType === "physical" ? !!st.state.critical : false;
         }
       } catch (e) {}
     }
@@ -758,6 +755,7 @@
         state.attackType = btn.getAttribute("data-attack-type") || "physical";
         if (state.attackType !== "physical") {
           state.debuffDark = false;
+          state.critical = false;
         }
         applyModeUI();
       });
@@ -795,6 +793,7 @@
     });
 
     criticalToggle.addEventListener("click", () => {
+      if (state.attackType !== "physical") return;
       state.critical = !state.critical;
       setDebuffButtons();
       saveState();
@@ -862,8 +861,7 @@
           spell: state.spell,
           enemyMagDef,
           heroElement: state.heroElement,
-          enemyElement: enemyScaled.element,
-          critical: state.critical
+          enemyElement: enemyScaled.element
         });
         outMagDmg.textContent = `${formatMinMax(mag.min, mag.max)}（この範囲内）`;
 
@@ -874,8 +872,7 @@
           spell: state.spell,
           enemyMagDef,
           heroElement: state.heroElement,
-          enemyElement: enemyScaled.element,
-          critical: state.critical
+          enemyElement: enemyScaled.element
         });
         outMagOne.textContent = `int${fmt(reqInt)}以上`;
       } else {
@@ -890,8 +887,7 @@
           spell: state.spell,
           enemyMagDef,
           heroElement: state.heroElement,
-          enemyElement: enemyScaled.element,
-          critical: state.critical
+          enemyElement: enemyScaled.element
         });
         outMagDmg.textContent = `${formatMinMax(mag.min, mag.max)}（この範囲内）`;
 
@@ -902,8 +898,7 @@
           spell: state.spell,
           enemyMagDef,
           heroElement: state.heroElement,
-          enemyElement: enemyScaled.element,
-          critical: state.critical
+          enemyElement: enemyScaled.element
         });
         outMagOne.textContent = `int${fmt(reqInt)}以上`;
       }
