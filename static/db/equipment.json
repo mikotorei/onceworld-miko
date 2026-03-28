@@ -109,6 +109,15 @@
       "base_rate": {}
     },
     {
+      "id": "odin_axe",
+      "name": "オーディンアックス"
+      "category": "weapon",
+      "slot": "weapon",
+      "series": "",
+      "base_add": {"vit": 500,"spd": 0,"atk": 0,"int": 0,"def": 500,"mdef": 0,"luk": 0,"mov": 0},
+      "base_rate": {}
+    },
+    {
       "id": "nightmare_staff",
       "name": "悪夢の杖",
       "category": "weapon",
@@ -289,6 +298,15 @@
   "base_rate": {}
 },
     {
+  "id": "tyrant_helm",
+  "name": "暴君ヘルム",
+  "category": "armor",
+  "slot": "head",
+  "series": "tyrant",
+  "base_add": {"vit": 0,"spd": 0,"atk": 2900,"int": 0,"def": 600,"mdef": 0,"luk": 1200,"mov": 0},
+  "base_rate": {}
+    },
+    {
   "id": "cloth_clothes",
   "name": "布の服",
   "category": "armor",
@@ -349,6 +367,15 @@
   "slot": "body",
   "series": "dragon",
   "base_add": {"vit":750,"spd":0,"atk":0,"int":0,"def":650,"mdef":450,"luk":0,"mov":0},
+  "base_rate": {}
+},
+    {
+  "id": "tyrant_jacket",
+  "name": "暴君ジャケット",
+  "category": "armor",
+  "slot": "body",
+  "series": "tyrant",
+  "base_add": {"vit":2500,"spd":0,"atk":800,"int":400,"def":950,"mdef":0,"luk":0,"mov":333},
   "base_rate": {}
 },
     {
@@ -487,6 +514,15 @@
   "base_rate": {}
 },
     {
+  "id": "tyrant_arm",
+  "name": "暴君アーム",
+  "category": "armor",
+  "slot": "hands",
+  "series": "tyrant",
+  "base_add": {"vit":800,"spd":0,"atk":800,"int":800,"def":0,"mdef":800,"luk":400,"mov":0},
+  "base_rate": {}
+},
+    {
   "id": "basic_shoes",
   "name": "ただのくつ",
   "category": "armor",
@@ -550,6 +586,15 @@
   "base_rate": {}
 },
     {
+  "id": "tyrant_shoes",
+  "name": "暴君シューズ",
+  "category": "armor",
+  "slot": "feet",
+  "series": "tyrant",
+  "base_add": {"vit":0,"spd":1300,"atk":600,"int":0,"def":1200,"mdef":600,"luk":0,"mov":4},
+  "base_rate": {}
+}
+    {
   "id": "life_formula",
   "name": "命脈の科学式",
   "category": "accessory",
@@ -572,7 +617,20 @@
   "base_rate": {"vit":15,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
   "max_level": 300,
   "display_effects": [
-    {"type":"rate","target":"vit","initial":"15%","max":"59.9%"}
+    {"type":"rate","target":"vit","initial":"15%","max":"89.9%"}
+  ]
+},
+    {
+  "id": "sun_soul_ring_vit",
+  "name": "陽魂環(VIT)",
+  "category": "accessory",
+  "slot": "accessory",
+  "series": "",
+  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+  "base_rate": {"vit":30,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+  "max_level": 300,
+  "display_effects": [
+    {"type":"rate","target":"vit","initial":"30%","max":"329.7%"}
   ]
 },
 {
@@ -598,7 +656,7 @@
   "base_rate": {"vit":0,"spd":15,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
   "max_level": 300,
   "display_effects": [
-    {"type":"rate","target":"spd","initial":"15%","max":"59.9%"}
+    {"type":"rate","target":"spd","initial":"15%","max":"89.9%"}
   ]
 },
 {
@@ -625,7 +683,20 @@
   "base_rate": {"vit":0,"spd":0,"atk":20,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
   "max_level": 300,
   "display_effects": [
-    {"type":"rate","target":"atk","initial":"20%","max":"79.8%"}
+    {"type":"rate","target":"atk","initial":"20%","max":"119.8%"}
+  ]
+},
+    {
+  "id": "weapon_sync_atk",
+  "name": "武器照合(ATK)",
+  "category": "accessory",
+  "slot": "accessory",
+  "series": "",
+  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+  "base_rate": {"vit":0,"spd":0,"atk":30,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+  "max_level": 300,
+  "display_effects": [
+    {"type":"rate","target":"atk","initial":"30%","max":"329.7%"}
   ]
 },
 {
@@ -652,9 +723,22 @@
   "base_rate": {"vit":0,"spd":0,"atk":0,"int":20,"def":0,"mdef":0,"luk":0,"mov":0},
   "max_level": 300,
   "display_effects": [
-    {"type":"rate","target":"int","initial":"20%","max":"79.8%"}
+    {"type":"rate","target":"int","initial":"20%","max":"119.8%"}
   ]
 },
+    {
+  "id": "mana_lantern_int",
+  "name": "マナランタン(INT)",
+  "category": "accessory",
+  "slot": "accessory",
+  "series": "",
+  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+  "base_rate": {"vit":0,"spd":0,"atk":0,"int":30,"def":0,"mdef":0,"luk":0,"mov":0},
+  "max_level": 300,
+  "display_effects": [
+    {"type":"rate","target":"int","initial":"30%","max":"329.7%"}
+  ]
+    },
 {
   "id": "force_module",
   "name": "フォースモジュール",
@@ -679,7 +763,7 @@
   "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":15,"mdef":0,"luk":0,"mov":0},
   "max_level": 300,
   "display_effects": [
-    {"type":"rate","target":"def","initial":"15%","max":"59.9%"}
+    {"type":"rate","target":"def","initial":"15%","max":"89.9%"}
   ]
 },
 {
@@ -692,7 +776,7 @@
   "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":50,"mdef":0,"luk":0,"mov":0},
   "max_level": 300,
   "display_effects": [
-    {"type":"rate","target":"def","initial":"50%","max":"199.5%"}
+    {"type":"rate","target":"def","initial":"50%","max":"549.5%"}
   ]
 },
 {
@@ -718,7 +802,7 @@
   "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":15,"luk":0,"mov":0},
   "max_level": 300,
   "display_effects": [
-    {"type":"rate","target":"mdef","initial":"15%","max":"59.9%"}
+    {"type":"rate","target":"mdef","initial":"15%","max":"89.9%"}
   ]
 },
 {
@@ -731,7 +815,7 @@
   "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":50,"luk":0,"mov":0},
   "max_level": 300,
   "display_effects": [
-    {"type":"rate","target":"mdef","initial":"50%","max":"1.995"}
+    {"type":"rate","target":"mdef","initial":"50%","max":"549.5%"}
   ]
 },
 {
@@ -758,7 +842,7 @@
   "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":25,"mov":0},
   "max_level": 30,
   "display_effects": [
-    {"type":"rate","target":"luk","initial":"25%","max":"32.3%"}
+    {"type":"rate","target":"luk","initial":"25%","max":"149.8%"}
   ]
 },
 {
@@ -836,7 +920,7 @@
   "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
   "max_level": 300,
   "display_effects": [
-    {"type":"special_rate","target":"exp","initial":"180%","max":"718.2%"}
+    {"type":"special_rate","target":"exp","initial":"180%","max":"1978.2%"}
   ]
 },
 {
@@ -888,7 +972,7 @@
   "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
   "max_level": 300,
   "display_effects": [
-    {"type":"special_rate","target":"capture","initial":"100%","max":"399.0%"}
+    {"type":"special_rate","target":"capture","initial":"100%","max":"1099.0%"}
   ]
 },
 {
@@ -914,7 +998,7 @@
   "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
   "max_level": 300,
   "display_effects": [
-    {"type":"special_rate","target":"drop","initial":"50%","max":"199.5%"}
+    {"type":"special_rate","target":"drop","initial":"50%","max":"549.5%"}
   ]
 }
   ]
