@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     platinum: "白金",
     mage: "魔道士",
     inferno: "獄炎",
-    dragon: "ドラゴン"
+    dragon: "ドラゴン",
+    tyrant: "暴君",
   };
 
   const statLabelMap = {
