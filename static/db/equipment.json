@@ -110,11 +110,11 @@
     },
     {
       "id": "odin_axe",
-      "name": "オーディンアックス"
+      "name": "オーディンアックス",
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {"vit": 500,"spd": 0,"atk": 0,"int": 0,"def": 500,"mdef": 0,"luk": 0,"mov": 0},
+      "base_add": {"vit":500,"spd":0,"atk":0,"int":0,"def":500,"mdef":0,"luk":0,"mov":0},
       "base_rate": {}
     },
     {
@@ -234,772 +234,778 @@
       "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
       "base_rate": {}
     },
+
     {
-  "id": "no_helmet",
-  "name": "未装備",
-  "category": "armor",
-  "slot": "head",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "leather_cap",
-  "name": "皮の帽子",
-  "category": "armor",
-  "slot": "head",
-  "series": "leather",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":9,"def":0,"mdef":0,"luk":9,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "metal_helm",
-  "name": "メタルヘルム",
-  "category": "armor",
-  "slot": "head",
-  "series": "metal",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":51,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "platinum_helm",
-  "name": "白金ヘルム",
-  "category": "armor",
-  "slot": "head",
-  "series": "platinum",
-  "base_add": {"vit":0,"spd":31,"atk":0,"int":0,"def":78,"mdef":78,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "mage_hood",
-  "name": "魔道士フード",
-  "category": "armor",
-  "slot": "head",
-  "series": "mage",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":96,"def":0,"mdef":121,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "inferno_helm",
-  "name": "獄炎兜",
-  "category": "armor",
-  "slot": "head",
-  "series": "inferno",
-  "base_add": {"vit":0,"spd":0,"atk":140,"int":140,"def":0,"mdef":0,"luk":100,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "dragon_head",
-  "name": "ドラゴンヘッド",
-  "category": "armor",
-  "slot": "head",
-  "series": "dragon",
-  "base_add": {"vit":0,"spd":0,"atk":1050,"int":550,"def":0,"mdef":0,"luk":350,"mov":0},
-  "base_rate": {}
-},
-    {
-  "id": "tyrant_helm",
-  "name": "暴君ヘルム",
-  "category": "armor",
-  "slot": "head",
-  "series": "tyrant",
-  "base_add": {"vit": 0,"spd": 0,"atk": 2900,"int": 0,"def": 600,"mdef": 0,"luk": 1200,"mov": 0},
-  "base_rate": {}
+      "id": "no_helmet",
+      "name": "未装備",
+      "category": "armor",
+      "slot": "head",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {}
     },
     {
-  "id": "cloth_clothes",
-  "name": "布の服",
-  "category": "armor",
-  "slot": "body",
-  "series": "cloth",
-  "base_add": {"vit":11,"spd":0,"atk":0,"int":0,"def":5,"mdef":3,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "leather_clothes",
-  "name": "皮の服",
-  "category": "armor",
-  "slot": "body",
-  "series": "leather",
-  "base_add": {"vit":21,"spd":0,"atk":0,"int":0,"def":8,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "iron_armor",
-  "name": "鉄の鎧",
-  "category": "armor",
-  "slot": "body",
-  "series": "metal",
-  "base_add": {"vit":40,"spd":0,"atk":0,"int":0,"def":38,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "platinum_armor",
-  "name": "プラチナアーマー",
-  "category": "armor",
-  "slot": "body",
-  "series": "platinum",
-  "base_add": {"vit":115,"spd":0,"atk":0,"int":0,"def":40,"mdef":88,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "mage_robe",
-  "name": "魔道士ローブ",
-  "category": "armor",
-  "slot": "body",
-  "series": "mage",
-  "base_add": {"vit":88,"spd":0,"atk":0,"int":65,"def":38,"mdef":38,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "inferno_armor",
-  "name": "獄炎の鎧",
-  "category": "armor",
-  "slot": "body",
-  "series": "inferno",
-  "base_add": {"vit":188,"spd":0,"atk":0,"int":0,"def":131,"mdef":31,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "dragon_armor",
-  "name": "ドラゴンアーマー",
-  "category": "armor",
-  "slot": "body",
-  "series": "dragon",
-  "base_add": {"vit":750,"spd":0,"atk":0,"int":0,"def":650,"mdef":450,"luk":0,"mov":0},
-  "base_rate": {}
-},
-    {
-  "id": "tyrant_jacket",
-  "name": "暴君ジャケット",
-  "category": "armor",
-  "slot": "body",
-  "series": "tyrant",
-  "base_add": {"vit":2500,"spd":0,"atk":800,"int":400,"def":950,"mdef":0,"luk":0,"mov":333},
-  "base_rate": {}
-},
-    {
-  "id": "no_shield",
-  "name": "未装備",
-  "category": "armor",
-  "slot": "shield",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "leather_shield",
-  "name": "皮の盾",
-  "category": "armor",
-  "slot": "shield",
-  "series": "leather",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":15,"mdef":14,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "iron_shield",
-  "name": "鉄の盾",
-  "category": "armor",
-  "slot": "shield",
-  "series": "metal",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":70,"mdef":33,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "platinum_shield",
-  "name": "プラチナの盾",
-  "category": "armor",
-  "slot": "shield",
-  "series": "platinum",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":130,"mdef":109,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "mage_shield",
-  "name": "魔道士の盾",
-  "category": "armor",
-  "slot": "shield",
-  "series": "mage",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":55,"def":25,"mdef":155,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "inferno_shield",
-  "name": "獄炎の盾",
-  "category": "armor",
-  "slot": "shield",
-  "series": "inferno",
-  "base_add": {"vit":0,"spd":0,"atk":155,"int":0,"def":155,"mdef":155,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "dragon_shield",
-  "name": "ドラゴンの盾",
-  "category": "armor",
-  "slot": "shield",
-  "series": "dragon",
-  "base_add": {"vit":0,"spd":0,"atk":850,"int":0,"def":550,"mdef":550,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "tyrant_shield",
-  "name": "暴君盾",
-  "category": "armor",
-  "slot": "shield",
-  "series": "",
-  "base_add": {"vit":99000,"spd":0,"atk":99000,"int":0,"def":99000,"mdef":99000,"luk":0,"mov":0},
-  "base_rate": {}
-},
-    {
-  "id": "no_gloves",
-  "name": "未装備",
-  "category": "armor",
-  "slot": "hands",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "leather_gloves",
-  "name": "皮の手袋",
-  "category": "armor",
-  "slot": "hands",
-  "series": "leather",
-  "base_add": {"vit":0,"spd":11,"atk":0,"int":0,"def":0,"mdef":0,"luk":13,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "iron_gauntlets",
-  "name": "鉄の小手",
-  "category": "armor",
-  "slot": "hands",
-  "series": "metal",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":23,"mdef":23,"luk":23,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "platinum_arm",
-  "name": "プラチナアーム",
-  "category": "armor",
-  "slot": "hands",
-  "series": "platinum",
-  "base_add": {"vit":0,"spd":79,"atk":0,"int":0,"def":0,"mdef":0,"luk":125,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "mage_gauntlet",
-  "name": "魔道士のガントレット",
-  "category": "armor",
-  "slot": "hands",
-  "series": "mage",
-  "base_add": {"vit":0,"spd":57,"atk":0,"int":57,"def":0,"mdef":45,"luk":0,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "inferno_arm",
-  "name": "獄炎アーム",
-  "category": "armor",
-  "slot": "hands",
-  "series": "inferno",
-  "base_add": {"vit":0,"spd":200,"atk":0,"int":0,"def":0,"mdef":0,"luk":130,"mov":0},
-  "base_rate": {}
-},
-{
-  "id": "dragon_bracer",
-  "name": "ドラゴンブレイサー",
-  "category": "armor",
-  "slot": "hands",
-  "series": "dragon",
-  "base_add": {"vit":0,"spd":1250,"atk":0,"int":0,"def":0,"mdef":0,"luk":350,"mov":0},
-  "base_rate": {}
-},
-    {
-  "id": "tyrant_arm",
-  "name": "暴君アーム",
-  "category": "armor",
-  "slot": "hands",
-  "series": "tyrant",
-  "base_add": {"vit":800,"spd":0,"atk":800,"int":800,"def":0,"mdef":800,"luk":400,"mov":0},
-  "base_rate": {}
-},
-    {
-  "id": "basic_shoes",
-  "name": "ただのくつ",
-  "category": "armor",
-  "slot": "feet",
-  "series": "",
-  "base_add": {"vit":0,"spd":5,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":4},
-  "base_rate": {}
-},
-{
-  "id": "leather_shoes",
-  "name": "皮のシューズ",
-  "category": "armor",
-  "slot": "feet",
-  "series": "leather",
-  "base_add": {"vit":0,"spd":16,"atk":0,"int":0,"def":11,"mdef":0,"luk":0,"mov":5},
-  "base_rate": {}
-},
-{
-  "id": "iron_boots",
-  "name": "鉄のブーツ",
-  "category": "armor",
-  "slot": "feet",
-  "series": "metal",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":41,"mdef":11,"luk":11,"mov":3},
-  "base_rate": {}
-},
-{
-  "id": "platinum_boots",
-  "name": "プラチナブーツ",
-  "category": "armor",
-  "slot": "feet",
-  "series": "platinum",
-  "base_add": {"vit":0,"spd":53,"atk":0,"int":0,"def":25,"mdef":75,"luk":0,"mov":6},
-  "base_rate": {}
-},
-{
-  "id": "mage_shoes",
-  "name": "魔道士の靴",
-  "category": "armor",
-  "slot": "feet",
-  "series": "mage",
-  "base_add": {"vit":0,"spd":70,"atk":0,"int":0,"def":50,"mdef":63,"luk":0,"mov":5},
-  "base_rate": {}
-},
-{
-  "id": "inferno_boots",
-  "name": "獄炎ブーツ",
-  "category": "armor",
-  "slot": "feet",
-  "series": "inferno",
-  "base_add": {"vit":0,"spd":140,"atk":170,"int":0,"def":90,"mdef":0,"luk":0,"mov":5},
-  "base_rate": {}
-},
-{
-  "id": "dragon_leg",
-  "name": "ドラゴンレッグ",
-  "category": "armor",
-  "slot": "feet",
-  "series": "dragon",
-  "base_add": {"vit":0,"spd":350,"atk":850,"int":0,"def":350,"mdef":0,"luk":0,"mov":6},
-  "base_rate": {}
-},
-    {
-  "id": "tyrant_shoes",
-  "name": "暴君シューズ",
-  "category": "armor",
-  "slot": "feet",
-  "series": "tyrant",
-  "base_add": {"vit":0,"spd":1300,"atk":600,"int":0,"def":1200,"mdef":600,"luk":0,"mov":4},
-  "base_rate": {}
-}
-    {
-  "id": "life_formula",
-  "name": "命脈の科学式",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":155,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 100,
-  "display_effects": [
-    {"type":"flat","target":"vit","initial":155,"max":1690}
-  ]
-},
-{
-  "id": "heartbeat_core",
-  "name": "鼓動核",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":15,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"rate","target":"vit","initial":"15%","max":"89.9%"}
-  ]
-},
-    {
-  "id": "sun_soul_ring_vit",
-  "name": "陽魂環(VIT)",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":30,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"rate","target":"vit","initial":"30%","max":"329.7%"}
-  ]
-},
-{
-  "id": "wind_crest",
-  "name": "ウィンドクレスト",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":135,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 100,
-  "display_effects": [
-    {"type":"flat","target":"spd","initial":135,"max":1472}
-  ]
-},
-{
-  "id": "sen_ga_star",
-  "name": "閃牙星",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":15,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"rate","target":"spd","initial":"15%","max":"89.9%"}
-  ]
-},
-{
-  "id": "blood_tonic",
-  "name": "ブラッドトニック",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":90,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":5,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 100,
-  "display_effects": [
-    {"type":"flat","target":"atk","initial":90,"max":981},
-    {"type":"rate","target":"atk","initial":"5%","max":"10.0%"}
-  ]
-},
-{
-  "id": "power_bottle",
-  "name": "力瓶",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":20,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"rate","target":"atk","initial":"20%","max":"119.8%"}
-  ]
-},
-    {
-  "id": "weapon_sync_atk",
-  "name": "武器照合(ATK)",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":30,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"rate","target":"atk","initial":"30%","max":"329.7%"}
-  ]
-},
-{
-  "id": "arc_grimoire",
-  "name": "アークグリモワール",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":30,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":25,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 100,
-  "display_effects": [
-    {"type":"flat","target":"int","initial":30,"max":327},
-    {"type":"rate","target":"int","initial":"25%","max":"49.8%"}
-  ]
-},
-{
-  "id": "creation_orb",
-  "name": "創胎珠",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":20,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"rate","target":"int","initial":"20%","max":"119.8%"}
-  ]
-},
-    {
-  "id": "mana_lantern_int",
-  "name": "マナランタン(INT)",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":30,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"rate","target":"int","initial":"30%","max":"329.7%"}
-  ]
+      "id": "leather_cap",
+      "name": "皮の帽子",
+      "category": "armor",
+      "slot": "head",
+      "series": "leather",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":9,"def":0,"mdef":0,"luk":9,"mov":0},
+      "base_rate": {}
     },
-{
-  "id": "force_module",
-  "name": "フォースモジュール",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":80,"mdef":90,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 100,
-  "display_effects": [
-    {"type":"flat","target":"def","initial":80,"max":872},
-    {"type":"flat","target":"mdef","initial":90,"max":981}
-  ]
-},
-{
-  "id": "knights_mind",
-  "name": "騎士の心得",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":15,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"rate","target":"def","initial":"15%","max":"89.9%"}
-  ]
-},
-{
-  "id": "meijin_jin",
-  "name": "迷盾陣",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":50,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"rate","target":"def","initial":"50%","max":"549.5%"}
-  ]
-},
-{
-  "id": "magi_bind",
-  "name": "マギバインド",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":25,"luk":0,"mov":0},
-  "max_level": 100,
-  "display_effects": [
-    {"type":"rate","target":"mdef","initial":"25%","max":"49.8%"}
-  ]
-},
-{
-  "id": "barrier_storm",
-  "name": "結界嵐",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":15,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"rate","target":"mdef","initial":"15%","max":"89.9%"}
-  ]
-},
-{
-  "id": "hexa_skull",
-  "name": "ヘキサスカル",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":50,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"rate","target":"mdef","initial":"50%","max":"549.5%"}
-  ]
-},
-{
-  "id": "lucky_trump",
-  "name": "ラッキートランプ",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":99,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":15,"mov":0},
-  "max_level": 100,
-  "display_effects": [
-    {"type":"flat","target":"luk","initial":99,"max":1079},
-    {"type":"rate","target":"luk","initial":"15%","max":"29.9%"}
-  ]
-},
-{
-  "id": "fate_eye",
-  "name": "運命眼",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":25,"mov":0},
-  "max_level": 30,
-  "display_effects": [
-    {"type":"rate","target":"luk","initial":"25%","max":"149.8%"}
-  ]
-},
-{
-  "id": "gallop_talisman",
-  "name": "ギャロップタリスマン",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":2},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 1,
-  "display_effects": [
-    {"type":"flat","target":"mov","initial":2,"max":2}
-  ]
-},
-{
-  "id": "jibakushin",
-  "name": "慈縛心",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 1000,
-  "display_effects": [
-    {"type":"special","target":"recovery","initial":100,"max":20080}
-  ]
-},
-{
-  "id": "memorial_page",
-  "name": "メモリアルページ",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"special_rate","target":"exp","initial":"30%","max":"119.7%"}
-  ]
-},
-{
-  "id": "sages_cup",
-  "name": "賢者の盃",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"special_rate","target":"exp","initial":"50%","max":"199.5%"}
-  ]
-},
-{
-  "id": "expedia_compass",
-  "name": "エクスペディアコンパス",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"special_rate","target":"exp","initial":"100%","max":"399.0%"}
-  ]
-},
-{
-  "id": "chiyou_hai",
-  "name": "知耀杯",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"special_rate","target":"exp","initial":"180%","max":"1978.2%"}
-  ]
-},
-{
-  "id": "tame_mask",
-  "name": "テイムマスク",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"special_rate","target":"capture","initial":"30%","max":"119.7%"}
-  ]
-},
-{
-  "id": "miyuu_hai",
-  "name": "魅誘盃",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"special_rate","target":"capture","initial":"50%","max":"199.5%"}
-  ]
-},
-{
-  "id": "contact_letter",
-  "name": "コンタクトレター",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"special_rate","target":"capture","initial":"80%","max":"319.2%"}
-  ]
-},
-{
-  "id": "soul_chain",
-  "name": "拘魂鎖",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"special_rate","target":"capture","initial":"100%","max":"1099.0%"}
-  ]
-},
-{
-  "id": "orbital_ring",
-  "name": "オービタルリング",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"special_rate","target":"drop","initial":"30%","max":"119.7%"}
-  ]
-},
-{
-  "id": "search_unit",
-  "name": "収索機",
-  "category": "accessory",
-  "slot": "accessory",
-  "series": "",
-  "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
-  "max_level": 300,
-  "display_effects": [
-    {"type":"special_rate","target":"drop","initial":"50%","max":"549.5%"}
-  ]
-}
+    {
+      "id": "metal_helm",
+      "name": "メタルヘルム",
+      "category": "armor",
+      "slot": "head",
+      "series": "metal",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":51,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "platinum_helm",
+      "name": "白金ヘルム",
+      "category": "armor",
+      "slot": "head",
+      "series": "platinum",
+      "base_add": {"vit":0,"spd":31,"atk":0,"int":0,"def":78,"mdef":78,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "mage_hood",
+      "name": "魔道士フード",
+      "category": "armor",
+      "slot": "head",
+      "series": "mage",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":96,"def":0,"mdef":121,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "inferno_helm",
+      "name": "獄炎兜",
+      "category": "armor",
+      "slot": "head",
+      "series": "inferno",
+      "base_add": {"vit":0,"spd":0,"atk":140,"int":140,"def":0,"mdef":0,"luk":100,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "dragon_head",
+      "name": "ドラゴンヘッド",
+      "category": "armor",
+      "slot": "head",
+      "series": "dragon",
+      "base_add": {"vit":0,"spd":0,"atk":1050,"int":550,"def":0,"mdef":0,"luk":350,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "tyrant_helm",
+      "name": "暴君ヘルム",
+      "category": "armor",
+      "slot": "head",
+      "series": "tyrant",
+      "base_add": {"vit":0,"spd":0,"atk":2900,"int":0,"def":600,"mdef":0,"luk":1200,"mov":0},
+      "base_rate": {}
+    },
+
+    {
+      "id": "cloth_clothes",
+      "name": "布の服",
+      "category": "armor",
+      "slot": "body",
+      "series": "cloth",
+      "base_add": {"vit":11,"spd":0,"atk":0,"int":0,"def":5,"mdef":3,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "leather_clothes",
+      "name": "皮の服",
+      "category": "armor",
+      "slot": "body",
+      "series": "leather",
+      "base_add": {"vit":21,"spd":0,"atk":0,"int":0,"def":8,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "iron_armor",
+      "name": "鉄の鎧",
+      "category": "armor",
+      "slot": "body",
+      "series": "metal",
+      "base_add": {"vit":40,"spd":0,"atk":0,"int":0,"def":38,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "platinum_armor",
+      "name": "プラチナアーマー",
+      "category": "armor",
+      "slot": "body",
+      "series": "platinum",
+      "base_add": {"vit":115,"spd":0,"atk":0,"int":0,"def":40,"mdef":88,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "mage_robe",
+      "name": "魔道士ローブ",
+      "category": "armor",
+      "slot": "body",
+      "series": "mage",
+      "base_add": {"vit":88,"spd":0,"atk":0,"int":65,"def":38,"mdef":38,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "inferno_armor",
+      "name": "獄炎の鎧",
+      "category": "armor",
+      "slot": "body",
+      "series": "inferno",
+      "base_add": {"vit":188,"spd":0,"atk":0,"int":0,"def":131,"mdef":31,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "dragon_armor",
+      "name": "ドラゴンアーマー",
+      "category": "armor",
+      "slot": "body",
+      "series": "dragon",
+      "base_add": {"vit":750,"spd":0,"atk":0,"int":0,"def":650,"mdef":450,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "tyrant_jacket",
+      "name": "暴君ジャケット",
+      "category": "armor",
+      "slot": "body",
+      "series": "tyrant",
+      "base_add": {"vit":2500,"spd":0,"atk":800,"int":400,"def":950,"mdef":0,"luk":0,"mov":333},
+      "base_rate": {}
+    },
+
+    {
+      "id": "no_shield",
+      "name": "未装備",
+      "category": "armor",
+      "slot": "shield",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "leather_shield",
+      "name": "皮の盾",
+      "category": "armor",
+      "slot": "shield",
+      "series": "leather",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":15,"mdef":14,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "iron_shield",
+      "name": "鉄の盾",
+      "category": "armor",
+      "slot": "shield",
+      "series": "metal",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":70,"mdef":33,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "platinum_shield",
+      "name": "プラチナの盾",
+      "category": "armor",
+      "slot": "shield",
+      "series": "platinum",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":130,"mdef":109,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "mage_shield",
+      "name": "魔道士の盾",
+      "category": "armor",
+      "slot": "shield",
+      "series": "mage",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":55,"def":25,"mdef":155,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "inferno_shield",
+      "name": "獄炎の盾",
+      "category": "armor",
+      "slot": "shield",
+      "series": "inferno",
+      "base_add": {"vit":0,"spd":0,"atk":155,"int":0,"def":155,"mdef":155,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "dragon_shield",
+      "name": "ドラゴンの盾",
+      "category": "armor",
+      "slot": "shield",
+      "series": "dragon",
+      "base_add": {"vit":0,"spd":0,"atk":850,"int":0,"def":550,"mdef":550,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "tyrant_shield",
+      "name": "暴君盾",
+      "category": "armor",
+      "slot": "shield",
+      "series": "tyrant",
+      "base_add": {"vit":99000,"spd":0,"atk":99000,"int":0,"def":99000,"mdef":99000,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+
+    {
+      "id": "no_gloves",
+      "name": "未装備",
+      "category": "armor",
+      "slot": "hands",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "leather_gloves",
+      "name": "皮の手袋",
+      "category": "armor",
+      "slot": "hands",
+      "series": "leather",
+      "base_add": {"vit":0,"spd":11,"atk":0,"int":0,"def":0,"mdef":0,"luk":13,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "iron_gauntlets",
+      "name": "鉄の小手",
+      "category": "armor",
+      "slot": "hands",
+      "series": "metal",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":23,"mdef":23,"luk":23,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "platinum_arm",
+      "name": "プラチナアーム",
+      "category": "armor",
+      "slot": "hands",
+      "series": "platinum",
+      "base_add": {"vit":0,"spd":79,"atk":0,"int":0,"def":0,"mdef":0,"luk":125,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "mage_gauntlet",
+      "name": "魔道士のガントレット",
+      "category": "armor",
+      "slot": "hands",
+      "series": "mage",
+      "base_add": {"vit":0,"spd":57,"atk":0,"int":57,"def":0,"mdef":45,"luk":0,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "inferno_arm",
+      "name": "獄炎アーム",
+      "category": "armor",
+      "slot": "hands",
+      "series": "inferno",
+      "base_add": {"vit":0,"spd":200,"atk":0,"int":0,"def":0,"mdef":0,"luk":130,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "dragon_bracer",
+      "name": "ドラゴンブレイサー",
+      "category": "armor",
+      "slot": "hands",
+      "series": "dragon",
+      "base_add": {"vit":0,"spd":1250,"atk":0,"int":0,"def":0,"mdef":0,"luk":350,"mov":0},
+      "base_rate": {}
+    },
+    {
+      "id": "tyrant_arm",
+      "name": "暴君アーム",
+      "category": "armor",
+      "slot": "hands",
+      "series": "tyrant",
+      "base_add": {"vit":800,"spd":0,"atk":800,"int":800,"def":0,"mdef":800,"luk":400,"mov":0},
+      "base_rate": {}
+    },
+
+    {
+      "id": "basic_shoes",
+      "name": "ただのくつ",
+      "category": "armor",
+      "slot": "feet",
+      "series": "",
+      "base_add": {"vit":0,"spd":5,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":4},
+      "base_rate": {}
+    },
+    {
+      "id": "leather_shoes",
+      "name": "皮のシューズ",
+      "category": "armor",
+      "slot": "feet",
+      "series": "leather",
+      "base_add": {"vit":0,"spd":16,"atk":0,"int":0,"def":11,"mdef":0,"luk":0,"mov":5},
+      "base_rate": {}
+    },
+    {
+      "id": "iron_boots",
+      "name": "鉄のブーツ",
+      "category": "armor",
+      "slot": "feet",
+      "series": "metal",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":41,"mdef":11,"luk":11,"mov":3},
+      "base_rate": {}
+    },
+    {
+      "id": "platinum_boots",
+      "name": "プラチナブーツ",
+      "category": "armor",
+      "slot": "feet",
+      "series": "platinum",
+      "base_add": {"vit":0,"spd":53,"atk":0,"int":0,"def":25,"mdef":75,"luk":0,"mov":6},
+      "base_rate": {}
+    },
+    {
+      "id": "mage_shoes",
+      "name": "魔道士の靴",
+      "category": "armor",
+      "slot": "feet",
+      "series": "mage",
+      "base_add": {"vit":0,"spd":70,"atk":0,"int":0,"def":50,"mdef":63,"luk":0,"mov":5},
+      "base_rate": {}
+    },
+    {
+      "id": "inferno_boots",
+      "name": "獄炎ブーツ",
+      "category": "armor",
+      "slot": "feet",
+      "series": "inferno",
+      "base_add": {"vit":0,"spd":140,"atk":170,"int":0,"def":90,"mdef":0,"luk":0,"mov":5},
+      "base_rate": {}
+    },
+    {
+      "id": "dragon_leg",
+      "name": "ドラゴンレッグ",
+      "category": "armor",
+      "slot": "feet",
+      "series": "dragon",
+      "base_add": {"vit":0,"spd":350,"atk":850,"int":0,"def":350,"mdef":0,"luk":0,"mov":6},
+      "base_rate": {}
+    },
+    {
+      "id": "tyrant_shoes",
+      "name": "暴君シューズ",
+      "category": "armor",
+      "slot": "feet",
+      "series": "tyrant",
+      "base_add": {"vit":0,"spd":1300,"atk":600,"int":0,"def":1200,"mdef":600,"luk":0,"mov":4},
+      "base_rate": {}
+    },
+
+    {
+      "id": "life_formula",
+      "name": "命脈の科学式",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":155,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 100,
+      "display_effects": [
+        {"type":"flat","target":"vit","initial":155,"max":1690}
+      ]
+    },
+    {
+      "id": "heartbeat_core",
+      "name": "鼓動核",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":15,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"rate","target":"vit","initial":"15%","max":"89.9%"}
+      ]
+    },
+    {
+      "id": "sun_soul_ring_vit",
+      "name": "陽魂環(VIT)",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":30,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"rate","target":"vit","initial":"30%","max":"329.7%"}
+      ]
+    },
+    {
+      "id": "wind_crest",
+      "name": "ウィンドクレスト",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":135,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 100,
+      "display_effects": [
+        {"type":"flat","target":"spd","initial":135,"max":1472}
+      ]
+    },
+    {
+      "id": "sen_ga_star",
+      "name": "閃牙星",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":15,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"rate","target":"spd","initial":"15%","max":"89.9%"}
+      ]
+    },
+    {
+      "id": "blood_tonic",
+      "name": "ブラッドトニック",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":90,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":5,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 100,
+      "display_effects": [
+        {"type":"flat","target":"atk","initial":90,"max":981},
+        {"type":"rate","target":"atk","initial":"5%","max":"10.0%"}
+      ]
+    },
+    {
+      "id": "power_bottle",
+      "name": "力瓶",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":20,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"rate","target":"atk","initial":"20%","max":"119.8%"}
+      ]
+    },
+    {
+      "id": "weapon_sync_atk",
+      "name": "武器照合(ATK)",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":30,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"rate","target":"atk","initial":"30%","max":"329.7%"}
+      ]
+    },
+    {
+      "id": "arc_grimoire",
+      "name": "アークグリモワール",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":30,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":25,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 100,
+      "display_effects": [
+        {"type":"flat","target":"int","initial":30,"max":327},
+        {"type":"rate","target":"int","initial":"25%","max":"49.8%"}
+      ]
+    },
+    {
+      "id": "creation_orb",
+      "name": "創胎珠",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":20,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"rate","target":"int","initial":"20%","max":"119.8%"}
+      ]
+    },
+    {
+      "id": "mana_lantern_int",
+      "name": "マナランタン(INT)",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":30,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"rate","target":"int","initial":"30%","max":"329.7%"}
+      ]
+    },
+    {
+      "id": "force_module",
+      "name": "フォースモジュール",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":80,"mdef":90,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 100,
+      "display_effects": [
+        {"type":"flat","target":"def","initial":80,"max":872},
+        {"type":"flat","target":"mdef","initial":90,"max":981}
+      ]
+    },
+    {
+      "id": "knights_mind",
+      "name": "騎士の心得",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":15,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"rate","target":"def","initial":"15%","max":"89.9%"}
+      ]
+    },
+    {
+      "id": "meijin_jin",
+      "name": "迷盾陣",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":50,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"rate","target":"def","initial":"50%","max":"549.5%"}
+      ]
+    },
+    {
+      "id": "magi_bind",
+      "name": "マギバインド",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":25,"luk":0,"mov":0},
+      "max_level": 100,
+      "display_effects": [
+        {"type":"rate","target":"mdef","initial":"25%","max":"49.8%"}
+      ]
+    },
+    {
+      "id": "barrier_storm",
+      "name": "結界嵐",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":15,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"rate","target":"mdef","initial":"15%","max":"89.9%"}
+      ]
+    },
+    {
+      "id": "hexa_skull",
+      "name": "ヘキサスカル",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":50,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"rate","target":"mdef","initial":"50%","max":"549.5%"}
+      ]
+    },
+    {
+      "id": "lucky_trump",
+      "name": "ラッキートランプ",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":99,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":15,"mov":0},
+      "max_level": 100,
+      "display_effects": [
+        {"type":"flat","target":"luk","initial":99,"max":1079},
+        {"type":"rate","target":"luk","initial":"15%","max":"29.9%"}
+      ]
+    },
+    {
+      "id": "fate_eye",
+      "name": "運命眼",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":25,"mov":0},
+      "max_level": 30,
+      "display_effects": [
+        {"type":"rate","target":"luk","initial":"25%","max":"149.8%"}
+      ]
+    },
+    {
+      "id": "gallop_talisman",
+      "name": "ギャロップタリスマン",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":2},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 1,
+      "display_effects": [
+        {"type":"flat","target":"mov","initial":2,"max":2}
+      ]
+    },
+    {
+      "id": "jibakushin",
+      "name": "慈縛心",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 1000,
+      "display_effects": [
+        {"type":"special","target":"recovery","initial":100,"max":20080}
+      ]
+    },
+    {
+      "id": "memorial_page",
+      "name": "メモリアルページ",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"special_rate","target":"exp","initial":"30%","max":"119.7%"}
+      ]
+    },
+    {
+      "id": "sages_cup",
+      "name": "賢者の盃",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"special_rate","target":"exp","initial":"50%","max":"199.5%"}
+      ]
+    },
+    {
+      "id": "expedia_compass",
+      "name": "エクスペディアコンパス",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"special_rate","target":"exp","initial":"100%","max":"399.0%"}
+      ]
+    },
+    {
+      "id": "chiyou_hai",
+      "name": "知耀杯",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"special_rate","target":"exp","initial":"180%","max":"1978.2%"}
+      ]
+    },
+    {
+      "id": "tame_mask",
+      "name": "テイムマスク",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"special_rate","target":"capture","initial":"30%","max":"119.7%"}
+      ]
+    },
+    {
+      "id": "miyuu_hai",
+      "name": "魅誘盃",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"special_rate","target":"capture","initial":"50%","max":"199.5%"}
+      ]
+    },
+    {
+      "id": "contact_letter",
+      "name": "コンタクトレター",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"special_rate","target":"capture","initial":"80%","max":"319.2%"}
+      ]
+    },
+    {
+      "id": "soul_chain",
+      "name": "拘魂鎖",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"special_rate","target":"capture","initial":"100%","max":"1099.0%"}
+      ]
+    },
+    {
+      "id": "orbital_ring",
+      "name": "オービタルリング",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"special_rate","target":"drop","initial":"30%","max":"119.7%"}
+      ]
+    },
+    {
+      "id": "search_unit",
+      "name": "収索機",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 300,
+      "display_effects": [
+        {"type":"special_rate","target":"drop","initial":"50%","max":"549.5%"}
+      ]
+    }
   ]
 }
