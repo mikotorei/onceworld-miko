@@ -2,10 +2,6 @@
 
 <h1>{{ .Title }}</h1>
 <link rel="stylesheet" href="{{ "css/integrated-tool.css" | relURL }}">
-<script src="{{ "monsters-data.js" | relURL }}"></script>
-<script src="{{ "js/calc-utils.js" | relURL }}"></script>
-<script src="{{ "js/calc-logic.js" | relURL }}"></script>
-<script src="{{ "js/calc-ui.js" | relURL }}"></script>
 
 <section>
   <h2>主人公ステータス</h2>
@@ -180,5 +176,10 @@
 </section>
 
 <div id="calc-app"></div>
+
+<script src="{{ "monsters-data.js" | relURL }}"></script>
+<script src="{{ "js/calc-utils.js" | relURL }}"></script>
+<script src="{{ "js/calc-logic.js" | relURL }}"></script>
+<script src="{{ "js/calc-ui.js" | relURL }}"></script>
 
 {{ end }}
