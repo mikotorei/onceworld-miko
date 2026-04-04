@@ -2,6 +2,8 @@
 // calc-ui.js  UI・状態管理・イベント処理
 // ============================================================
 
+document.addEventListener("DOMContentLoaded", function () {
+
 (function () {
   // --- 入力フィールドのカンマ整形 ---
   attachCommaInputBehavior("hero-atk", 0);
@@ -474,3 +476,5 @@
     outNullMdef.textContent = `${fmt(requiredDefenseForNullify(enemyScaled.int))}以上`;
   });
 })();
+
+}); // DOMContentLoaded
