@@ -21,8 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const outPhyDmg  = document.getElementById("out-phy-dmg");
   const outHits    = document.getElementById("out-hits");
   const outPhyOne  = document.getElementById("out-phy-one");
+  const outPhyOverkill = document.getElementById("out-phy-overkill");
   const outMagDmg  = document.getElementById("out-mag-dmg");
   const outMagOne  = document.getElementById("out-mag-one");
+  const outMagOverkill = document.getElementById("out-mag-overkill");
   const outHitLuk  = document.getElementById("out-hit-luk");
   const outEvadeLuk = document.getElementById("out-evade-luk");
   const outNullDef  = document.getElementById("out-null-def");
@@ -419,6 +421,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const reqAtk = oneShotLineRequiredAttack(enemyPhysDef, hits, enemyHp, elementModifier);
       outPhyOne.textContent = `atk${fmt(reqAtk)}以上`;
 
+      const reqAtkOverkill = oneShotLineRequiredAttack(enemyPhysDef, hits, enemyHp * 10, elementModifier);
+      outPhyOverkill.textContent = `atk${fmt(reqAtkOverkill)}以上`;
+
       const mag = calcMagicDamageRange({
         heroInt: hero.int,
         analysisBook: hero.analysisBook,
@@ -440,11 +445,23 @@ document.addEventListener("DOMContentLoaded", function () {
         enemyElement: enemyScaled.element
       });
       outMagOne.textContent = `int${fmt(reqInt)}以上`;
+
+      const reqIntOverkill = calcMagicOneShotRequiredInt({
+        hp: enemyHp * 10,
+        analysisBook: hero.analysisBook,
+        analysisBookAdvanced: hero.analysisBookAdvanced,
+        spell: state.spell,
+        enemyMagDef,
+        heroElement: state.heroElement,
+        enemyElement: enemyScaled.element
+      });
+      outMagOverkill.textContent = `int${fmt(reqIntOverkill)}以上`;
 
     } else {
-      outHits.textContent   = "-";
-      outPhyDmg.textContent = "-";
-      outPhyOne.textContent = "-";
+      outHits.textContent       = "-";
+      outPhyDmg.textContent     = "-";
+      outPhyOne.textContent     = "-";
+      outPhyOverkill.textContent = "-";
 
       const mag = calcMagicDamageRange({
         heroInt: hero.int,
@@ -467,6 +484,17 @@ document.addEventListener("DOMContentLoaded", function () {
         enemyElement: enemyScaled.element
       });
       outMagOne.textContent = `int${fmt(reqInt)}以上`;
+
+      const reqIntOverkill = calcMagicOneShotRequiredInt({
+        hp: enemyHp * 10,
+        analysisBook: hero.analysisBook,
+        analysisBookAdvanced: hero.analysisBookAdvanced,
+        spell: state.spell,
+        enemyMagDef,
+        heroElement: state.heroElement,
+        enemyElement: enemyScaled.element
+      });
+      outMagOverkill.textContent = `int${fmt(reqIntOverkill)}以上`;
     }
 
     outHitLuk.textContent   = `${fmt(Math.floor(enemyScaled.luk / 2))}以上`;
