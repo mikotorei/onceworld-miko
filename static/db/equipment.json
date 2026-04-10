@@ -601,8 +601,19 @@
     },
 
     {
+      "id": "unreleased",
+      "name": "未開放",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 100000,
+      "display_effects": []
+    },
+    {
       "id": "life_formula",
-      "name": "命脈の科学式",
+      "name": "命脈の科学式(VIT)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -615,7 +626,7 @@
     },
     {
       "id": "heartbeat_core",
-      "name": "鼓動核",
+      "name": "鼓動核(VIT)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -641,7 +652,7 @@
     },
     {
       "id": "wind_crest",
-      "name": "ウィンドクレスト",
+      "name": "ウィンドクレスト(SPD)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -654,7 +665,7 @@
     },
     {
       "id": "sen_ga_star",
-      "name": "閃牙星",
+      "name": "閃牙星(SPD)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -667,7 +678,7 @@
     },
     {
       "id": "blood_tonic",
-      "name": "ブラッドトニック",
+      "name": "ブラッドトニック(ATK)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -681,7 +692,7 @@
     },
     {
       "id": "power_bottle",
-      "name": "力瓶",
+      "name": "力瓶(ATK)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -707,7 +718,7 @@
     },
     {
       "id": "arc_grimoire",
-      "name": "アークグリモワール",
+      "name": "アークグリモワール(INT)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -721,7 +732,7 @@
     },
     {
       "id": "creation_orb",
-      "name": "創胎珠",
+      "name": "創胎珠(INT)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -747,7 +758,7 @@
     },
     {
       "id": "force_module",
-      "name": "フォースモジュール",
+      "name": "フォースモジュール(DEF)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -761,7 +772,7 @@
     },
     {
       "id": "knights_mind",
-      "name": "騎士の心得",
+      "name": "騎士の心得(DEF)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -774,7 +785,7 @@
     },
     {
       "id": "meijin_jin",
-      "name": "迷盾陣",
+      "name": "迷盾陣(DEF)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -787,7 +798,7 @@
     },
     {
       "id": "magi_bind",
-      "name": "マギバインド",
+      "name": "マギバインド(MDEF)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -800,7 +811,7 @@
     },
     {
       "id": "barrier_storm",
-      "name": "結界嵐",
+      "name": "結界嵐(MDEF)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -813,7 +824,7 @@
     },
     {
       "id": "hexa_skull",
-      "name": "ヘキサスカル",
+      "name": "ヘキサスカル(MDEF)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -826,7 +837,7 @@
     },
     {
       "id": "lucky_trump",
-      "name": "ラッキートランプ",
+      "name": "ラッキートランプ(LUCK)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -840,7 +851,7 @@
     },
     {
       "id": "fate_eye",
-      "name": "運命眼",
+      "name": "運命眼(LUCK)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -853,7 +864,7 @@
     },
     {
       "id": "gallop_talisman",
-      "name": "ギャロップタリスマン",
+      "name": "ギャロップタリスマン(MOV)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -865,8 +876,21 @@
       ]
     },
     {
+      "id": "vortex_core",
+      "name": "ヴォルテクスコア(MOV)",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":3},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 1,
+      "display_effects": [
+        {"type":"flat","target":"mov","initial":3,"max":3}
+      ]
+    },
+    {
       "id": "jibakushin",
-      "name": "慈縛心",
+      "name": "慈縛心(回復)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -879,7 +903,7 @@
     },
     {
       "id": "memorial_page",
-      "name": "メモリアルページ",
+      "name": "メモリアルページ(経験値)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -892,7 +916,7 @@
     },
     {
       "id": "sages_cup",
-      "name": "賢者の盃",
+      "name": "賢者の盃(経験値)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -905,7 +929,7 @@
     },
     {
       "id": "expedia_compass",
-      "name": "エクスペディアコンパス",
+      "name": "エクスペディアコンパス(経験値)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -918,7 +942,7 @@
     },
     {
       "id": "chiyou_hai",
-      "name": "知耀杯",
+      "name": "知耀杯(経験値)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -930,8 +954,22 @@
       ]
     },
     {
+      "id": "arc_gate",
+      "name": "アークゲート(経験値ドロ)",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 10,
+      "display_effects": [
+        {"type":"special_rate","target":"exp","initial":"500%","max":"545.0%"},
+        {"type":"special_rate","target":"drop","initial":"500%","max":"545.0%"}
+      ]
+    },
+    {
       "id": "tame_mask",
-      "name": "テイムマスク",
+      "name": "テイムマスク(捕獲)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -944,7 +982,7 @@
     },
     {
       "id": "miyuu_hai",
-      "name": "魅誘盃",
+      "name": "魅誘盃(捕獲)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -957,7 +995,7 @@
     },
     {
       "id": "contact_letter",
-      "name": "コンタクトレター",
+      "name": "コンタクトレター(捕獲)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -970,7 +1008,7 @@
     },
     {
       "id": "soul_chain",
-      "name": "拘魂鎖",
+      "name": "拘魂鎖(捕獲)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -982,8 +1020,22 @@
       ]
     },
     {
+      "id": "dominus_throne",
+      "name": "ドミナススローン(経験値捕獲)",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 10,
+      "display_effects": [
+        {"type":"special_rate","target":"exp","initial":"500%","max":"545.0%"},
+        {"type":"special_rate","target":"capture","initial":"500%","max":"545.0%"}
+      ]
+    },
+    {
       "id": "orbital_ring",
-      "name": "オービタルリング",
+      "name": "オービタルリング(ドロップ)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -996,7 +1048,7 @@
     },
     {
       "id": "search_unit",
-      "name": "収索機",
+      "name": "収索機(ドロップ)",
       "category": "accessory",
       "slot": "accessory",
       "series": "",
@@ -1005,6 +1057,19 @@
       "max_level": 1000,
       "display_effects": [
         {"type":"special_rate","target":"drop","initial":"50%","max":"549.5%"}
+      ]
+    },
+    {
+      "id": "fortune_pot",
+      "name": "フォーチュンポット(ドロップ)",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "max_level": 10,
+      "display_effects": [
+        {"type":"special_rate","target":"drop","initial":"1000%","max":"1090.0%"}
       ]
     }
   ]
