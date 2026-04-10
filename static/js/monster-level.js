@@ -12,6 +12,7 @@
   const isDigits = (s) => /^\d+$/.test(s);
 
   const calcStat = (base, lv) => Math.floor(base * (1 + (lv - 1) * LEVELSCALE));
+  const calcRealHp = (vit) => vit * 18;
 
   const calcExpMultiplier = (lv) => {
     const raw = 0.2 * Math.pow(lv, 1.1);
@@ -25,6 +26,7 @@
     const lvBtns = document.querySelectorAll(".d-btn[data-lv]");
     const originExp = document.getElementById("origin-exp");
     const expEl = document.getElementById("exp-value");
+    const realHpEl = document.getElementById("real-hp");
 
     const statusRoot = document.getElementById("status-table");
     const rewardRoot = expEl ? expEl.closest(".d-list") : null;
@@ -41,6 +43,8 @@
     }
 
     const recalcStats = (lv) => {
+      let scaledVit = null;
+
       statEls.forEach((el) => {
         const base = Number(el.dataset.base);
         const stat = el.dataset.stat || "";
@@ -50,8 +54,18 @@
           el.textContent = String(base);
           return;
         }
-        el.textContent = String(calcStat(base, lv));
+
+        const value = calcStat(base, lv);
+        el.textContent = String(value);
+
+        if (stat === "vit") {
+          scaledVit = value;
+        }
       });
+
+      if (realHpEl && scaledVit !== null) {
+        realHpEl.textContent = String(calcRealHp(scaledVit));
+      }
     };
 
     const recalcExp = (lv) => {
