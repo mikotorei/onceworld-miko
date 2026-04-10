@@ -30,11 +30,16 @@ function normalizeElement(value) {
 function hitsFromSpd(spd) {
   const s = Math.floor(Number(spd));
   if (!Number.isFinite(s)) return 1;
-  if (s <= 3000)  return 1;
-  if (s <= 9999)  return 2;
-  if (s <= 29999) return 3;
-  if (s <= 99999) return 4;
-  return 5;
+  if (s < 3000)       return 1;
+  if (s < 9000)       return 2;
+  if (s < 27000)      return 3;
+  if (s < 81000)      return 4;
+  if (s < 243000)     return 5;
+  if (s < 729000)     return 6;
+  if (s < 2187000)    return 7;
+  if (s < 6561000)    return 8;
+  if (s < 19683000)   return 9;
+  return 10;
 }
 
 function scaleStat(base, lv) {
