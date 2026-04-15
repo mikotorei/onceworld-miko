@@ -20,7 +20,8 @@ window.MONSTERS = [
   int: {{ $m.Params.status.int }},
   def: {{ $m.Params.status.def }},
   mdef: {{ $m.Params.status.mdef }},
-  luk: {{ $m.Params.status.luk }}
+  luk: {{ $m.Params.status.luk }},
+  mov: {{ $m.Params.fixed_status.mov }}
 }{{ if lt (add $i 1) (len $sorted) }},{{ end }}
 {{- end }}
 ];
