@@ -685,6 +685,24 @@
       "base_rate": {}
     },
     {
+      "id": "demon_helm",
+      "name": "悪魔ヘルム",
+      "category": "armor",
+      "slot": "head",
+      "series": "",
+      "base_add": {
+        "vit": 0,
+        "spd": 0,
+        "atk": 2555,
+        "int": 0,
+        "def": 1555,
+        "mdef": 3555,
+        "luk": 555,
+        "mov": 0
+      },
+      "base_rate": {}
+    },
+    {
       "id": "cloth_clothes",
       "name": "布の服",
       "category": "armor",
@@ -829,6 +847,24 @@
       "base_rate": {}
     },
     {
+      "id": "demon_armor",
+      "name": "悪魔の鎧",
+      "category": "armor",
+      "slot": "body",
+      "series": "",
+      "base_add": {
+        "vit": 7555,
+        "spd": 0,
+        "atk": 0,
+        "int": 0,
+        "def": 955,
+        "mdef": 0,
+        "luk": 955,
+        "mov": 0
+      },
+      "base_rate": {}
+    },
+    {
       "id": "no_shield",
       "name": "未装備",
       "category": "armor",
@@ -967,6 +1003,24 @@
         "int": 0,
         "def": 99000,
         "mdef": 99000,
+        "luk": 0,
+        "mov": 0
+      },
+      "base_rate": {}
+    },
+    {
+      "id": "demon_shield",
+      "name": "悪魔の盾",
+      "category": "armor",
+      "slot": "shield",
+      "series": "",
+      "base_add": {
+        "vit": 0,
+        "spd": 0,
+        "atk": 0,
+        "int": 0,
+        "def": 6565,
+        "mdef": 2555,
         "luk": 0,
         "mov": 0
       },
@@ -1117,6 +1171,24 @@
       "base_rate": {}
     },
     {
+      "id": "demon_gauntlets",
+      "name": "悪魔の小手",
+      "category": "armor",
+      "slot": "hands",
+      "series": "",
+      "base_add": {
+        "vit": 0,
+        "spd": 0,
+        "atk": 0,
+        "int": 2555,
+        "def": 0,
+        "mdef": 1655,
+        "luk": 4655,
+        "mov": 0
+      },
+      "base_rate": {}
+    },
+    {
       "id": "basic_shoes",
       "name": "ただのくつ",
       "category": "armor",
@@ -1257,6 +1329,24 @@
         "mdef": 600,
         "luk": 0,
         "mov": 4
+      },
+      "base_rate": {}
+    },
+    {
+      "id": "demon_shoes",
+      "name": "悪魔の靴",
+      "category": "armor",
+      "slot": "feet",
+      "series": "",
+      "base_add": {
+        "vit": 0,
+        "spd": 5515,
+        "atk": 0,
+        "int": 0,
+        "def": 3315,
+        "mdef": 0,
+        "luk": 0,
+        "mov": 5
       },
       "base_rate": {}
     },
