@@ -1,0 +1,27 @@
+{{ define "main" }}
+<link rel="stylesheet" href="{{ "css/tools.css" | relURL }}">
+
+<div class="tool-container">
+  <div class="search-row">
+    <input type="text" id="searchInput" placeholder="モンスター名または番号で検索..." autocomplete="off" />
+  </div>
+  <div class="dropdown" id="dropdown"></div>
+
+  <div id="selectedBadge" class="selected-badge" style="display:none;">
+    <span id="selectedName"></span>
+    <button id="clearBtn" class="clear-btn" aria-label="選択解除">✕</button>
+  </div>
+
+  <div class="level-row">
+    <label for="lvInput">レベル</label>
+    <input type="number" id="lvInput" min="1" max="1200" value="1" placeholder="1〜1200" />
+  </div>
+
+  <div id="result">
+    <p class="empty-msg">モンスターを選択してください</p>
+  </div>
+</div>
+
+<script src="{{ "monsters-data.js" | relURL }}"></script>
+<script src="{{ "js/pet-sim.js" | relURL }}"></script>
+{{ end }}
