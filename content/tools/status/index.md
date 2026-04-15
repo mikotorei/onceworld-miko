@@ -95,49 +95,91 @@ description = "主人公の装備・ペット・ステータスを確認でき�
 
   <div class="equip-row">
       <div class="slot">武器</div>
-      <div class="main"><select id="select_weapon"></select></div>
+      <div class="main">
+        <div class="equip-search-wrap">
+          <input id="equip_search_weapon" type="text" placeholder="名前で検索して選択" autocomplete="off">
+          <div id="equip_suggest_weapon" class="equip-suggest" hidden></div>
+          <select id="select_weapon" hidden></select>
+        </div>
+      </div>
       <div class="lvtag">+</div>
       <div class="lvbox"><input id="level_weapon" type="number" min="0" value="0"></div>
     </div>
 
   <div class="equip-row">
       <div class="slot">頭</div>
-      <div class="main"><select id="select_head"></select></div>
+      <div class="main">
+        <div class="equip-search-wrap">
+          <input id="equip_search_head" type="text" placeholder="名前で検索して選択" autocomplete="off">
+          <div id="equip_suggest_head" class="equip-suggest" hidden></div>
+          <select id="select_head" hidden></select>
+        </div>
+      </div>
       <div class="lvtag">+</div>
       <div class="lvbox"><input id="level_head" type="number" min="0" value="0"></div>
     </div>
 
   <div class="equip-row">
       <div class="slot">体</div>
-      <div class="main"><select id="select_body"></select></div>
+      <div class="main">
+        <div class="equip-search-wrap">
+          <input id="equip_search_body" type="text" placeholder="名前で検索して選択" autocomplete="off">
+          <div id="equip_suggest_body" class="equip-suggest" hidden></div>
+          <select id="select_body" hidden></select>
+        </div>
+      </div>
       <div class="lvtag">+</div>
       <div class="lvbox"><input id="level_body" type="number" min="0" value="0"></div>
     </div>
 
   <div class="equip-row">
       <div class="slot">手</div>
-      <div class="main"><select id="select_hands"></select></div>
+      <div class="main">
+        <div class="equip-search-wrap">
+          <input id="equip_search_hands" type="text" placeholder="名前で検索して選択" autocomplete="off">
+          <div id="equip_suggest_hands" class="equip-suggest" hidden></div>
+          <select id="select_hands" hidden></select>
+        </div>
+      </div>
       <div class="lvtag">+</div>
       <div class="lvbox"><input id="level_hands" type="number" min="0" value="0"></div>
     </div>
 
   <div class="equip-row">
       <div class="slot">脚</div>
-      <div class="main"><select id="select_feet"></select></div>
+      <div class="main">
+        <div class="equip-search-wrap">
+          <input id="equip_search_feet" type="text" placeholder="名前で検索して選択" autocomplete="off">
+          <div id="equip_suggest_feet" class="equip-suggest" hidden></div>
+          <select id="select_feet" hidden></select>
+        </div>
+      </div>
       <div class="lvtag">+</div>
       <div class="lvbox"><input id="level_feet" type="number" min="0" value="0"></div>
     </div>
 
   <div class="equip-row">
       <div class="slot">盾</div>
-      <div class="main"><select id="select_shield"></select></div>
+      <div class="main">
+        <div class="equip-search-wrap">
+          <input id="equip_search_shield" type="text" placeholder="名前で検索して選択" autocomplete="off">
+          <div id="equip_suggest_shield" class="equip-suggest" hidden></div>
+          <select id="select_shield" hidden></select>
+        </div>
+      </div>
       <div class="lvtag">+</div>
       <div class="lvbox"><input id="level_shield" type="number" min="0" value="0"></div>
     </div>
 
   <div class="equip-row accessory-row">
       <div class="slot">アクセ1</div>
-      <div class="main"><select id="select_accessory1"></select></div>
+      <div class="main">
+        <div class="equip-search-wrap">
+          <input id="equip_search_accessory1" type="text" placeholder="名前で検索して選択" autocomplete="off">
+          <div id="equip_suggest_accessory1" class="equip-suggest" hidden></div>
+          <select id="select_accessory1" hidden></select>
+        </div>
+      </div>
       <div class="lvtag">Lv</div>
       <div class="lvbox"><input id="level_accessory1" type="number" min="1" value="1"></div>
       <div class="effectbox"><div class="acc-effect-preview" id="effect_accessory1">-</div></div>
@@ -145,7 +187,13 @@ description = "主人公の装備・ペット・ステータスを確認でき�
 
   <div class="equip-row accessory-row">
       <div class="slot">アクセ2</div>
-      <div class="main"><select id="select_accessory2"></select></div>
+      <div class="main">
+        <div class="equip-search-wrap">
+          <input id="equip_search_accessory2" type="text" placeholder="名前で検索して選択" autocomplete="off">
+          <div id="equip_suggest_accessory2" class="equip-suggest" hidden></div>
+          <select id="select_accessory2" hidden></select>
+        </div>
+      </div>
       <div class="lvtag">Lv</div>
       <div class="lvbox"><input id="level_accessory2" type="number" min="1" value="1"></div>
       <div class="effectbox"><div class="acc-effect-preview" id="effect_accessory2">-</div></div>
@@ -153,7 +201,13 @@ description = "主人公の装備・ペット・ステータスを確認でき�
 
   <div class="equip-row accessory-row">
       <div class="slot">アクセ3</div>
-      <div class="main"><select id="select_accessory3"></select></div>
+      <div class="main">
+        <div class="equip-search-wrap">
+          <input id="equip_search_accessory3" type="text" placeholder="名前で検索して選択" autocomplete="off">
+          <div id="equip_suggest_accessory3" class="equip-suggest" hidden></div>
+          <select id="select_accessory3" hidden></select>
+        </div>
+      </div>
       <div class="lvtag">Lv</div>
       <div class="lvbox"><input id="level_accessory3" type="number" min="1" value="1"></div>
       <div class="effectbox"><div class="acc-effect-preview" id="effect_accessory3">-</div></div>
@@ -161,7 +215,13 @@ description = "主人公の装備・ペット・ステータスを確認でき�
 
   <div class="equip-row accessory-row">
       <div class="slot">アクセ4</div>
-      <div class="main"><select id="select_accessory4"></select></div>
+      <div class="main">
+        <div class="equip-search-wrap">
+          <input id="equip_search_accessory4" type="text" placeholder="名前で検索して選択" autocomplete="off">
+          <div id="equip_suggest_accessory4" class="equip-suggest" hidden></div>
+          <select id="select_accessory4" hidden></select>
+        </div>
+      </div>
       <div class="lvtag">Lv</div>
       <div class="lvbox"><input id="level_accessory4" type="number" min="1" value="1"></div>
       <div class="effectbox"><div class="acc-effect-preview" id="effect_accessory4">-</div></div>
@@ -246,14 +306,18 @@ description = "主人公の装備・ペット・ステータスを確認でき�
 <link rel="stylesheet" href="../../css/status-sim.css">
 
 <style>
-.pet-search-wrap{
+/* ---- 共通：検索ラッパー（装備・ペット共用） ---- */
+.equip-search-wrap,
+.pet-search-wrap {
   position: relative;
   width: 100%;
 }
-.pet-search-wrap input{
+.equip-search-wrap input,
+.pet-search-wrap input {
   width: 100%;
 }
-.pet-suggest{
+.equip-suggest,
+.pet-suggest {
   position: absolute;
   left: 0;
   right: 0;
@@ -266,7 +330,8 @@ description = "主人公の装備・ペット・ステータスを確認でき�
   overflow-y: auto;
   z-index: 30;
 }
-.pet-suggest button{
+.equip-suggest button,
+.pet-suggest button {
   display: block;
   width: 100%;
   text-align: left;
@@ -275,16 +340,18 @@ description = "主人公の装備・ペット・ステータスを確認でき�
   background: transparent;
   font-size: 16px;
 }
-.pet-suggest button:active{
+.equip-suggest button:active,
+.pet-suggest button:active {
   background: rgba(0,0,0,.06);
 }
-.accessory-row{
+/* ---- アクセサリー行 ---- */
+.accessory-row {
   grid-template-columns: 72px minmax(0, 1fr) 44px 110px minmax(180px, 1.2fr);
 }
-.effectbox{
+.effectbox {
   min-width: 0;
 }
-.acc-effect-preview{
+.acc-effect-preview {
   min-height: 40px;
   padding: 8px 10px;
   border: 1px solid rgba(0,0,0,.12);
@@ -294,8 +361,8 @@ description = "主人公の装備・ペット・ステータスを確認でき�
   line-height: 1.35;
   overflow-wrap: anywhere;
 }
-@media (max-width: 800px){
-  .accessory-row{
+@media (max-width: 800px) {
+  .accessory-row {
     grid-template-columns: 72px 1fr;
     grid-template-areas:
       "slot main"
@@ -303,10 +370,10 @@ description = "主人公の装備・ペット・ステータスを確認でき�
       "effect effect";
     row-gap: 8px;
   }
-  .accessory-row .slot{ grid-area: slot; }
-  .accessory-row .main{ grid-area: main; }
-  .accessory-row .lvtag{ grid-area: lvtag; text-align:left; padding-left:2px; }
-  .accessory-row .lvbox{ grid-area: lvbox; }
+  .accessory-row .slot     { grid-area: slot; }
+  .accessory-row .main     { grid-area: main; }
+  .accessory-row .lvtag    { grid-area: lvtag; text-align: left; padding-left: 2px; }
+  .accessory-row .lvbox    { grid-area: lvbox; }
   .accessory-row .effectbox{ grid-area: effect; }
 }
 </style>
@@ -315,62 +382,42 @@ description = "主人公の装備・ペット・ステータスを確認でき�
 document.addEventListener("DOMContentLoaded", async () => {
   const STATS = ["vit", "spd", "atk", "int", "def", "mdef", "luk", "mov"];
   const BASE_STATS = ["vit", "spd", "atk", "int", "def", "mdef", "luk"];
+  const EQUIP_KEYS = ["weapon", "head", "body", "hands", "feet", "shield",
+                      "accessory1", "accessory2", "accessory3", "accessory4"];
   const ACCESSORY_KEYS = ["accessory1", "accessory2", "accessory3", "accessory4"];
   const PET_KEYS = ["pet1", "pet2", "pet3"];
   const AUTO_STORAGE_KEY = "status_sim_inline_v7";
   const BUILD_STORAGE_KEY = "status_sim_build_slots_v1";
 
   const base = window.location.origin + window.location.pathname.split("/tools/status/")[0];
-  const EQUIP_URL = base + "/db/equipment.json";
+  const EQUIP_URL      = base + "/db/equipment.json";
   const PET_SKILLS_URL = base + "/db/pet-skills.json";
-  const PET_NAMES_URL = base + "/pet-names/index.json";
+  const PET_NAMES_URL  = base + "/pet-names/index.json";
 
   const equipmentMap = new Map();
-  const petSkillMap = new Map();
-  const petNameMap = new Map();
+  const petSkillMap  = new Map();
+  const petNameMap   = new Map();
+  const equipNameMap = new Map();                // id → 装備名
+  const equipItemsCacheBySlot = new Map();       // slotKey → [{id, name}]
   let petItemsCache = [];
 
-  function $(id) {
-    return document.getElementById(id);
-  }
+  function $(id) { return document.getElementById(id); }
 
   function n(v, fb = 0) {
     const x = Number(v);
     return Number.isFinite(x) ? x : fb;
   }
-
-  function clamp0(v) {
-    return Math.max(0, n(v, 0));
-  }
-
-  function clamp1(v) {
-    return Math.max(1, n(v, 1));
-  }
-
-  function clampStage(v) {
-    return Math.max(0, Math.min(4, n(v, 0)));
-  }
-
-  function floorSafe(x) {
-    return Math.floor((Number(x) || 0) + 1e-6);
-  }
-
-  function roundSafe(x) {
-    return Math.round((Number(x) || 0) + 1e-6);
-  }
+  function clamp0(v)     { return Math.max(0, n(v, 0)); }
+  function clamp1(v)     { return Math.max(1, n(v, 1)); }
+  function clampStage(v) { return Math.max(0, Math.min(4, n(v, 0))); }
+  function floorSafe(x)  { return Math.floor((Number(x) || 0) + 1e-6); }
+  function roundSafe(x)  { return Math.round((Number(x) || 0) + 1e-6); }
 
   function fmtSafe(x) {
     const num = Number(x);
     if (!Number.isFinite(num)) return "0";
-
-    if (Number.isInteger(num)) {
-      return num.toLocaleString("ja-JP");
-    }
-
-    return num.toLocaleString("ja-JP", {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2
-    });
+    if (Number.isInteger(num)) return num.toLocaleString("ja-JP");
+    return num.toLocaleString("ja-JP", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
   }
 
   function fmtRate(v) {
@@ -385,47 +432,30 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function zeroStats() {
-    return {
-      vit: 0,
-      spd: 0,
-      atk: 0,
-      int: 0,
-      def: 0,
-      mdef: 0,
-      luk: 0,
-      mov: 0
-    };
+    return { vit: 0, spd: 0, atk: 0, int: 0, def: 0, mdef: 0, luk: 0, mov: 0 };
   }
 
   function addStats(a, b) {
     const out = zeroStats();
-    STATS.forEach((k) => {
-      out[k] = (a?.[k] || 0) + (b?.[k] || 0);
-    });
+    STATS.forEach((k) => { out[k] = (a?.[k] || 0) + (b?.[k] || 0); });
     return out;
   }
 
   function mulStats(a, m) {
     const out = zeroStats();
-    STATS.forEach((k) => {
-      out[k] = (a?.[k] || 0) * m;
-    });
+    STATS.forEach((k) => { out[k] = (a?.[k] || 0) * m; });
     return out;
   }
 
   function applyRate(stats, rateStats) {
     const out = zeroStats();
-    STATS.forEach((k) => {
-      out[k] = (stats?.[k] || 0) * (1 + (rateStats?.[k] || 0) / 100);
-    });
+    STATS.forEach((k) => { out[k] = (stats?.[k] || 0) * (1 + (rateStats?.[k] || 0) / 100); });
     return out;
   }
 
   function roundStats(stats) {
     const out = zeroStats();
-    STATS.forEach((k) => {
-      out[k] = roundSafe(stats?.[k] || 0);
-    });
+    STATS.forEach((k) => { out[k] = roundSafe(stats?.[k] || 0); });
     return out;
   }
 
@@ -439,7 +469,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tbody = $("statsTbody");
     if (!tbody) return;
     tbody.innerHTML = "";
-
     STATS.forEach((stat) => {
       const tr = document.createElement("tr");
       tr.dataset.stat = stat;
@@ -456,10 +485,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   function renderTable(baseStats, equipStats, totalStats) {
     const tbody = $("statsTbody");
     if (!tbody) return;
-
     Array.from(tbody.querySelectorAll("tr")).forEach((tr) => {
       const stat = tr.dataset.stat;
-      tr.querySelector('[data-col="base"]').textContent = fmtSafe(floorSafe(baseStats?.[stat] || 0));
+      tr.querySelector('[data-col="base"]').textContent  = fmtSafe(floorSafe(baseStats?.[stat]  || 0));
       tr.querySelector('[data-col="equip"]').textContent = fmtSafe(floorSafe(equipStats?.[stat] || 0));
       tr.querySelector('[data-col="total"]').textContent = fmtSafe(totalStats?.[stat] || 0);
     });
@@ -477,9 +505,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!select) return;
     select.innerHTML = "";
     select.appendChild(new Option("（なし）", ""));
-    items.forEach((item) => {
-      select.appendChild(new Option(item.name, String(item.id)));
-    });
+    items.forEach((item) => { select.appendChild(new Option(item.name, String(item.id))); });
   }
 
   function scaleEquipBaseAdd(baseAdd, lv) {
@@ -496,9 +522,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const internal = clamp1(lv) - 1;
     const mul = 1 + internal * 0.1;
     const out = zeroStats();
-    STATS.forEach((k) => {
-      out[k] = (baseAdd?.[k] || 0) * mul;
-    });
+    STATS.forEach((k) => { out[k] = (baseAdd?.[k] || 0) * mul; });
     return out;
   }
 
@@ -506,47 +530,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     const internal = clamp1(lv) - 1;
     const mul = 1 + internal * 0.01;
     const out = zeroStats();
-    STATS.forEach((k) => {
-      out[k] = (baseRate?.[k] || 0) * mul;
-    });
+    STATS.forEach((k) => { out[k] = (baseRate?.[k] || 0) * mul; });
     return out;
   }
 
   function getStatLabel(key) {
-    const map = {
-      vit: "VIT",
-      spd: "SPD",
-      atk: "ATK",
-      int: "INT",
-      def: "DEF",
-      mdef: "MDEF",
-      luk: "LUK",
-      mov: "MOV"
-    };
+    const map = { vit: "VIT", spd: "SPD", atk: "ATK", int: "INT",
+                  def: "DEF", mdef: "MDEF", luk: "LUK", mov: "MOV" };
     return map[key] || String(key).toUpperCase();
   }
 
   function buildAccessoryEffectPreview(item, lv) {
     if (!item) return "-";
-
-    const addStatsNow = scaleAccessoryBaseAdd(item.base_add || {}, lv);
+    const addStatsNow  = scaleAccessoryBaseAdd(item.base_add   || {}, lv);
     const rateStatsNow = scaleAccessoryBaseRate(item.base_rate || {}, lv);
     const parts = [];
-
     STATS.forEach((k) => {
-      const add = addStatsNow[k] || 0;
+      const add  = addStatsNow[k]  || 0;
       const rate = rateStatsNow[k] || 0;
-
-      if (add !== 0) {
-        if (Number.isInteger(add)) parts.push(`${getStatLabel(k)}+${add}`);
-        else parts.push(`${getStatLabel(k)}+${Number(add).toFixed(2).replace(/\.?0+$/, "")}`);
-      }
-
-      if (rate !== 0) {
-        parts.push(`${getStatLabel(k)}+${fmtRate(rate)}`);
-      }
+      if (add  !== 0) parts.push(Number.isInteger(add)
+        ? `${getStatLabel(k)}+${add}`
+        : `${getStatLabel(k)}+${Number(add).toFixed(2).replace(/\.?0+$/, "")}`);
+      if (rate !== 0) parts.push(`${getStatLabel(k)}+${fmtRate(rate)}`);
     });
-
     return parts.length ? parts.join(" / ") : "-";
   }
 
@@ -554,14 +560,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     ACCESSORY_KEYS.forEach((key) => {
       const box = $("effect_" + key);
       if (!box) return;
-
       const id = $("select_" + key)?.value || "";
       const lv = clamp1($("level_" + key)?.value);
-      if (!id) {
-        box.textContent = "-";
-        return;
-      }
-
+      if (!id) { box.textContent = "-"; return; }
       const item = equipmentMap.get(String(id));
       box.textContent = buildAccessoryEffectPreview(item, lv);
     });
@@ -569,81 +570,49 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function convertPetStageList(rawStages) {
     const stages = [{ add: {}, mul: {}, final_mul: {} }];
-
     (Array.isArray(rawStages) ? rawStages : []).forEach((stage) => {
-      const add = {};
-      const mul = {};
-      const finalMul = {};
-
-      Object.entries(stage?.add || {}).forEach(([k, v]) => {
-        const key = normalizeStatKey(k);
-        if (STATS.includes(key)) add[key] = Number(v) || 0;
-      });
-
-      Object.entries(stage?.mul || {}).forEach(([k, v]) => {
-        const key = normalizeStatKey(k);
-        if (STATS.includes(key)) mul[key] = Number(v) || 0;
-      });
-
-      Object.entries(stage?.final_mul || {}).forEach(([k, v]) => {
-        const key = normalizeStatKey(k);
-        if (STATS.includes(key)) finalMul[key] = Number(v) || 0;
-      });
-
-      stages.push({
-        add,
-        mul,
-        final_mul: finalMul
-      });
+      const add = {}, mul = {}, finalMul = {};
+      Object.entries(stage?.add       || {}).forEach(([k, v]) => { const key = normalizeStatKey(k); if (STATS.includes(key)) add[key]      = Number(v) || 0; });
+      Object.entries(stage?.mul       || {}).forEach(([k, v]) => { const key = normalizeStatKey(k); if (STATS.includes(key)) mul[key]      = Number(v) || 0; });
+      Object.entries(stage?.final_mul || {}).forEach(([k, v]) => { const key = normalizeStatKey(k); if (STATS.includes(key)) finalMul[key] = Number(v) || 0; });
+      stages.push({ add, mul, final_mul: finalMul });
     });
-
     return stages;
   }
 
   function sumPetUpToStage(id, stageValue) {
-    const outAdd = zeroStats();
-    const outMul = zeroStats();
-    const outFinal = zeroStats();
-
-    const stage = clampStage(stageValue);
+    const outAdd = zeroStats(), outMul = zeroStats(), outFinal = zeroStats();
+    const stage  = clampStage(stageValue);
     const stages = petSkillMap.get(String(id)) || [];
-
-    for (let i = 1; i <= stage; i += 1) {
+    for (let i = 1; i <= stage; i++) {
       const s = stages[i] || {};
       STATS.forEach((k) => {
-        outAdd[k] += Number(s.add?.[k] || 0);
-        outMul[k] += Number(s.mul?.[k] || 0);
+        outAdd[k]   += Number(s.add?.[k]       || 0);
+        outMul[k]   += Number(s.mul?.[k]       || 0);
         outFinal[k] += Number(s.final_mul?.[k] || 0);
       });
     }
-
     return { add: outAdd, mul: outMul, final: outFinal };
   }
 
   function getArmorSetSeries(equipState) {
     const keys = ["head", "body", "hands", "feet", "shield"];
     let series = null;
-
     for (const key of keys) {
       const picked = equipState[key];
       if (!picked?.id) return "";
-
       const item = equipmentMap.get(String(picked.id));
       if (!item) return "";
-
       const s = String(item.series || "").trim();
       if (!s) return "";
-
       if (series === null) series = s;
       if (series !== s) return "";
     }
-
     return series || "";
   }
 
   function applyArmorSetBonus(sumStats, enabled) {
     if (!enabled) return { ...sumStats };
-
     const out = zeroStats();
     STATS.forEach((k) => {
       if (k === "mov") out[k] = sumStats?.[k] || 0;
@@ -652,13 +621,101 @@ document.addEventListener("DOMContentLoaded", async () => {
     return out;
   }
 
-  function petInputId(key) {
-    return "pet_search_" + key;
+  // ---- 装備検索 ----
+
+  function equipSearchId(key)  { return "equip_search_" + key; }
+  function equipSuggestId(key) { return "equip_suggest_" + key; }
+
+  function closeEquipSuggest(key) {
+    const suggest = $(equipSuggestId(key));
+    if (!suggest) return;
+    suggest.hidden = true;
+    suggest.innerHTML = "";
   }
 
-  function petSuggestId(key) {
-    return "pet_suggest_" + key;
+  function closeAllEquipSuggests() {
+    EQUIP_KEYS.forEach((key) => closeEquipSuggest(key));
   }
+
+  function setEquipInputFromSelected(key, id) {
+    const input = $(equipSearchId(key));
+    if (!input) return;
+    input.value = id ? (equipNameMap.get(String(id)) || "") : "";
+  }
+
+  function selectEquipById(key, id) {
+    const select = $("select_" + key);
+    if (!select) return;
+    select.value = String(id || "");
+    setEquipInputFromSelected(key, id);
+    closeEquipSuggest(key);
+    recalc();
+  }
+
+  function filterEquipItems(key, query) {
+    const q = normalizeJP(query);
+    if (!q) return [];
+    const cache = equipItemsCacheBySlot.get(key) || [];
+    return cache.filter((item) => normalizeJP(item.name).includes(q)).slice(0, 50);
+  }
+
+  function openEquipSuggest(key, items) {
+    const suggest = $(equipSuggestId(key));
+    if (!suggest) return;
+    suggest.hidden = false;
+    suggest.innerHTML = "";
+    items.forEach((item) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = item.name;
+      btn.addEventListener("click", () => { selectEquipById(key, item.id); });
+      suggest.appendChild(btn);
+    });
+  }
+
+  function wireEquipSearch(key) {
+    const input  = $(equipSearchId(key));
+    const select = $("select_" + key);
+    if (!input || !select) return;
+
+    input.addEventListener("input", () => {
+      const q = input.value || "";
+      if (q.trim() === "") {
+        select.value = "";
+        closeEquipSuggest(key);
+        recalc();
+        return;
+      }
+      if (select.value && q !== (equipNameMap.get(String(select.value)) || "")) {
+        select.value = "";
+        recalc();
+      }
+      const items = filterEquipItems(key, q);
+      if (items.length === 0) {
+        closeEquipSuggest(key);
+      } else {
+        closeAllEquipSuggests();
+        closeAllPetSuggests();
+        openEquipSuggest(key, items);
+      }
+    });
+
+    input.addEventListener("focus", () => {
+      const items = filterEquipItems(key, input.value || "");
+      if (items.length === 0) {
+        closeEquipSuggest(key);
+      } else {
+        closeAllEquipSuggests();
+        closeAllPetSuggests();
+        openEquipSuggest(key, items);
+      }
+    });
+  }
+
+  // ---- ペット検索 ----
+
+  function petInputId(key)   { return "pet_search_" + key; }
+  function petSuggestId(key) { return "pet_suggest_" + key; }
 
   function closePetSuggest(key) {
     const suggest = $(petSuggestId(key));
@@ -690,7 +747,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const q = normalizeJP(query);
     if (!q) return [];
     return petItemsCache.filter((item) => {
-      const title = normalizeJP(item.name);
+      const title      = normalizeJP(item.name);
       const searchText = normalizeJP(item.search || "");
       return title.includes(q) || searchText.includes(q);
     }).slice(0, 50);
@@ -699,46 +756,40 @@ document.addEventListener("DOMContentLoaded", async () => {
   function openPetSuggest(key, items) {
     const suggest = $(petSuggestId(key));
     if (!suggest) return;
-
     suggest.hidden = false;
     suggest.innerHTML = "";
-
     items.forEach((item) => {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.textContent = item.name;
-      btn.addEventListener("click", () => {
-        selectPetById(key, item.id);
-      });
+      btn.addEventListener("click", () => { selectPetById(key, item.id); });
       suggest.appendChild(btn);
     });
   }
 
   function wirePetSearch(key) {
-    const input = $(petInputId(key));
+    const input  = $(petInputId(key));
     const select = $("select_" + key);
     if (!input || !select) return;
 
     input.addEventListener("input", () => {
       const q = input.value || "";
-
       if (q.trim() === "") {
         select.value = "";
         closePetSuggest(key);
         recalc();
         return;
       }
-
       if (select.value && q !== (petNameMap.get(String(select.value)) || "")) {
         select.value = "";
         recalc();
       }
-
       const items = filterPetItems(q);
       if (items.length === 0) {
         closePetSuggest(key);
       } else {
         closeAllPetSuggests();
+        closeAllEquipSuggests();
         openPetSuggest(key, items);
       }
     });
@@ -749,113 +800,88 @@ document.addEventListener("DOMContentLoaded", async () => {
         closePetSuggest(key);
       } else {
         closeAllPetSuggests();
+        closeAllEquipSuggests();
         openPetSuggest(key, items);
       }
     });
   }
 
+  // ---- State ----
+
   function collectState() {
     return {
       basePointTotal: clamp0($("basePointTotal")?.value),
-      base: Object.fromEntries(BASE_STATS.map((k) => [k, clamp0($("base_" + k)?.value)])),
-      shaker: clamp0($("shakerCount")?.value),
+      base:    Object.fromEntries(BASE_STATS.map((k) => [k, clamp0($("base_"    + k)?.value)])),
+      shaker:  clamp0($("shakerCount")?.value),
       protein: Object.fromEntries(BASE_STATS.map((k) => [k, clamp0($("protein_" + k)?.value)])),
       equip: {
-        weapon: { id: $("select_weapon")?.value || "", lv: clamp0($("level_weapon")?.value) },
-        head: { id: $("select_head")?.value || "", lv: clamp0($("level_head")?.value) },
-        body: { id: $("select_body")?.value || "", lv: clamp0($("level_body")?.value) },
-        hands: { id: $("select_hands")?.value || "", lv: clamp0($("level_hands")?.value) },
-        feet: { id: $("select_feet")?.value || "", lv: clamp0($("level_feet")?.value) },
-        shield: { id: $("select_shield")?.value || "", lv: clamp0($("level_shield")?.value) },
+        weapon:     { id: $("select_weapon")?.value     || "", lv: clamp0($("level_weapon")?.value) },
+        head:       { id: $("select_head")?.value       || "", lv: clamp0($("level_head")?.value) },
+        body:       { id: $("select_body")?.value       || "", lv: clamp0($("level_body")?.value) },
+        hands:      { id: $("select_hands")?.value      || "", lv: clamp0($("level_hands")?.value) },
+        feet:       { id: $("select_feet")?.value       || "", lv: clamp0($("level_feet")?.value) },
+        shield:     { id: $("select_shield")?.value     || "", lv: clamp0($("level_shield")?.value) },
         accessory1: { id: $("select_accessory1")?.value || "", lv: clamp1($("level_accessory1")?.value) },
         accessory2: { id: $("select_accessory2")?.value || "", lv: clamp1($("level_accessory2")?.value) },
         accessory3: { id: $("select_accessory3")?.value || "", lv: clamp1($("level_accessory3")?.value) },
-        accessory4: { id: $("select_accessory4")?.value || "", lv: clamp1($("level_accessory4")?.value) }
+        accessory4: { id: $("select_accessory4")?.value || "", lv: clamp1($("level_accessory4")?.value) },
       },
       pets: {
         pet1: { id: $("select_pet1")?.value || "", stage: clampStage($("stage_pet1")?.value) },
         pet2: { id: $("select_pet2")?.value || "", stage: clampStage($("stage_pet2")?.value) },
-        pet3: { id: $("select_pet3")?.value || "", stage: clampStage($("stage_pet3")?.value) }
+        pet3: { id: $("select_pet3")?.value || "", stage: clampStage($("stage_pet3")?.value) },
       }
     };
   }
 
   function applyState(saved) {
     if (!saved) return;
-
     if ($("basePointTotal")) $("basePointTotal").value = String(clamp0(saved.basePointTotal || 0));
-
     BASE_STATS.forEach((k) => {
-      if ($("base_" + k)) $("base_" + k).value = String(clamp0(saved.base?.[k] || 0));
+      if ($("base_"    + k)) $("base_"    + k).value = String(clamp0(saved.base?.[k]    || 0));
       if ($("protein_" + k)) $("protein_" + k).value = String(clamp0(saved.protein?.[k] || 0));
     });
-
     if ($("shakerCount")) $("shakerCount").value = String(clamp0(saved.shaker || 0));
 
     Object.entries(saved.equip || {}).forEach(([k, v]) => {
       if ($("select_" + k)) $("select_" + k).value = String(v?.id || "");
-      if ($("level_" + k)) $("level_" + k).value = String(k.startsWith("accessory") ? clamp1(v?.lv || 1) : clamp0(v?.lv || 0));
+      if ($("level_"  + k)) $("level_"  + k).value = String(k.startsWith("accessory") ? clamp1(v?.lv || 1) : clamp0(v?.lv || 0));
+      setEquipInputFromSelected(k, v?.id || "");  // 検索inputに名前を復元
     });
 
     Object.entries(saved.pets || {}).forEach(([k, v]) => {
       if ($("select_" + k)) $("select_" + k).value = String(v?.id || "");
-      if ($("stage_" + k)) $("stage_" + k).value = String(clampStage(v?.stage || 0));
+      if ($("stage_"  + k)) $("stage_"  + k).value = String(clampStage(v?.stage || 0));
       setPetInputFromSelected(k, v?.id || "");
     });
   }
 
-  function saveAutoState(state) {
-    localStorage.setItem(AUTO_STORAGE_KEY, JSON.stringify(state));
-  }
-
+  function saveAutoState(state)  { localStorage.setItem(AUTO_STORAGE_KEY, JSON.stringify(state)); }
   function loadAutoState() {
-    try {
-      return JSON.parse(localStorage.getItem(AUTO_STORAGE_KEY) || "{}");
-    } catch {
-      return {};
-    }
+    try { return JSON.parse(localStorage.getItem(AUTO_STORAGE_KEY) || "{}"); } catch { return {}; }
   }
-
-  function clearAutoState() {
-    localStorage.removeItem(AUTO_STORAGE_KEY);
-  }
+  function clearAutoState()      { localStorage.removeItem(AUTO_STORAGE_KEY); }
 
   function loadBuildSlots() {
-    try {
-      return JSON.parse(localStorage.getItem(BUILD_STORAGE_KEY) || "{}");
-    } catch {
-      return {};
-    }
+    try { return JSON.parse(localStorage.getItem(BUILD_STORAGE_KEY) || "{}"); } catch { return {}; }
   }
-
-  function saveBuildSlots(data) {
-    localStorage.setItem(BUILD_STORAGE_KEY, JSON.stringify(data));
-  }
+  function saveBuildSlots(data)  { localStorage.setItem(BUILD_STORAGE_KEY, JSON.stringify(data)); }
 
   function refreshBuildSelect() {
     const select = $("buildSlotSelect");
     if (!select) return;
-
     const builds = loadBuildSlots();
-    const names = Object.keys(builds).sort((a, b) => a.localeCompare(b, "ja"));
-
+    const names  = Object.keys(builds).sort((a, b) => a.localeCompare(b, "ja"));
     select.innerHTML = "";
     select.appendChild(new Option("（未選択）", ""));
-    names.forEach((name) => {
-      select.appendChild(new Option(name, name));
-    });
+    names.forEach((name) => { select.appendChild(new Option(name, name)); });
   }
 
   function saveNamedBuild() {
     const input = $("buildNameInput");
     if (!input) return;
-
     const name = String(input.value || "").trim();
-    if (!name) {
-      setErr("保存名を入力してください");
-      return;
-    }
-
+    if (!name) { setErr("保存名を入力してください"); return; }
     const builds = loadBuildSlots();
     builds[name] = collectState();
     saveBuildSlots(builds);
@@ -868,20 +894,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   function loadNamedBuild() {
     const select = $("buildSlotSelect");
     if (!select) return;
-
     const name = String(select.value || "").trim();
-    if (!name) {
-      setErr("読込するビルドを選択してください");
-      return;
-    }
-
+    if (!name) { setErr("読込するビルドを選択してください"); return; }
     const builds = loadBuildSlots();
-    const state = builds[name];
-    if (!state) {
-      setErr("ビルドが見つかりません");
-      return;
-    }
-
+    const state  = builds[name];
+    if (!state)  { setErr("ビルドが見つかりません"); return; }
     if ($("buildNameInput")) $("buildNameInput").value = name;
     applyState(state);
     recalc();
@@ -892,19 +909,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   function deleteNamedBuild() {
     const select = $("buildSlotSelect");
     if (!select) return;
-
     const name = String(select.value || "").trim();
-    if (!name) {
-      setErr("削除するビルドを選択してください");
-      return;
-    }
-
+    if (!name)           { setErr("削除するビルドを選択してください"); return; }
     const builds = loadBuildSlots();
-    if (!builds[name]) {
-      setErr("ビルドが見つかりません");
-      return;
-    }
-
+    if (!builds[name])   { setErr("ビルドが見つかりません"); return; }
     delete builds[name];
     saveBuildSlots(builds);
     refreshBuildSelect();
@@ -913,22 +921,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.setTimeout(() => setErr(""), 1200);
   }
 
+  // ---- 計算 ----
+
   function recalc() {
-    const err = [];
+    const err   = [];
     const state = collectState();
 
     const baseStats = zeroStats();
-    BASE_STATS.forEach((k) => {
-      baseStats[k] = state.base[k] || 0;
-    });
+    BASE_STATS.forEach((k) => { baseStats[k] = state.base[k] || 0; });
     baseStats.mov = 6;
 
     const proteinRaw = zeroStats();
-    BASE_STATS.forEach((k) => {
-      proteinRaw[k] = state.protein[k] || 0;
-    });
+    BASE_STATS.forEach((k) => { proteinRaw[k] = state.protein[k] || 0; });
 
-    const proteinApplied = mulStats(proteinRaw, 1 + state.shaker * 0.01);
+    const proteinApplied  = mulStats(proteinRaw, 1 + state.shaker * 0.01);
     const basePlusProtein = addStats(baseStats, proteinApplied);
 
     let weaponArmorSum = zeroStats();
@@ -941,41 +947,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     const armorSetSeries = getArmorSetSeries(state.equip);
-    const sumBeforeSet = addStats(basePlusProtein, weaponArmorSum);
-    const sumAfterSet = applyArmorSetBonus(sumBeforeSet, !!armorSetSeries);
+    const sumBeforeSet   = addStats(basePlusProtein, weaponArmorSum);
+    const sumAfterSet    = applyArmorSetBonus(sumBeforeSet, !!armorSetSeries);
 
     let accessoryFlat = zeroStats();
     let accessoryRate = zeroStats();
-
     ACCESSORY_KEYS.forEach((key) => {
       const picked = state.equip[key];
       if (!picked?.id) return;
       const item = equipmentMap.get(String(picked.id));
       if (!item) return;
-      accessoryFlat = addStats(accessoryFlat, scaleAccessoryBaseAdd(item.base_add || {}, picked.lv));
+      accessoryFlat = addStats(accessoryFlat, scaleAccessoryBaseAdd(item.base_add   || {}, picked.lv));
       accessoryRate = addStats(accessoryRate, scaleAccessoryBaseRate(item.base_rate || {}, picked.lv));
     });
 
-    let petAdd = zeroStats();
-    let petMul = zeroStats();
-    let petFinal = zeroStats();
-
+    let petAdd = zeroStats(), petMul = zeroStats(), petFinal = zeroStats();
     PET_KEYS.forEach((key) => {
       const picked = state.pets[key];
       if (!picked?.id || picked.stage <= 0) return;
       const summed = sumPetUpToStage(picked.id, picked.stage);
-      petAdd = addStats(petAdd, summed.add);
-      petMul = addStats(petMul, summed.mul);
+      petAdd   = addStats(petAdd,   summed.add);
+      petMul   = addStats(petMul,   summed.mul);
       petFinal = addStats(petFinal, summed.final);
     });
 
     const equipDisplay = addStats(addStats(weaponArmorSum, accessoryFlat), petAdd);
-
     const sumAfterFlat = addStats(sumAfterSet, addStats(accessoryFlat, petAdd));
-    const afterRate = applyRate(sumAfterFlat, addStats(accessoryRate, petMul));
-    const finalTotal = roundStats(applyRate(afterRate, petFinal));
+    const afterRate    = applyRate(sumAfterFlat, addStats(accessoryRate, petMul));
+    const finalTotal   = roundStats(applyRate(afterRate, petFinal));
 
-    const used = BASE_STATS.reduce((s, k) => s + (state.base[k] || 0), 0);
+    const used   = BASE_STATS.reduce((s, k) => s + (state.base[k] || 0), 0);
     const remain = state.basePointTotal - used;
 
     if ($("basePointInfo")) {
@@ -994,44 +995,60 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function setProteinAll1000() {
     if ($("shakerCount")) $("shakerCount").value = "1000";
-    BASE_STATS.forEach((k) => {
-      if ($("protein_" + k)) $("protein_" + k).value = "1000";
-    });
+    BASE_STATS.forEach((k) => { if ($("protein_" + k)) $("protein_" + k).value = "1000"; });
     recalc();
   }
 
+  // ---- 初期化 ----
+
   buildTable();
 
+  // 装備データ読み込み
   try {
-    const equipRes = await fetch(EQUIP_URL, { cache: "no-store" });
+    const equipRes  = await fetch(EQUIP_URL, { cache: "no-store" });
     if (!equipRes.ok) throw new Error(`HTTP ${equipRes.status}`);
     const equipData = await equipRes.json();
-    const items = Array.isArray(equipData.items) ? equipData.items : [];
+    const items     = Array.isArray(equipData.items) ? equipData.items : [];
 
     items.forEach((item) => {
       equipmentMap.set(String(item.id), item);
+      equipNameMap.set(String(item.id), item.name);
     });
 
-    fillSelect($("select_weapon"), items.filter((i) => i.category === "weapon"));
-    fillSelect($("select_head"), items.filter((i) => i.category === "armor" && i.slot === "head"));
-    fillSelect($("select_body"), items.filter((i) => i.category === "armor" && i.slot === "body"));
-    fillSelect($("select_hands"), items.filter((i) => i.category === "armor" && i.slot === "hands"));
-    fillSelect($("select_feet"), items.filter((i) => i.category === "armor" && i.slot === "feet"));
-    fillSelect($("select_shield"), items.filter((i) => i.category === "armor" && i.slot === "shield"));
-
+    const slotDefs = [
+      { key: "weapon",     filter: (i) => i.category === "weapon" },
+      { key: "head",       filter: (i) => i.category === "armor" && i.slot === "head" },
+      { key: "body",       filter: (i) => i.category === "armor" && i.slot === "body" },
+      { key: "hands",      filter: (i) => i.category === "armor" && i.slot === "hands" },
+      { key: "feet",       filter: (i) => i.category === "armor" && i.slot === "feet" },
+      { key: "shield",     filter: (i) => i.category === "armor" && i.slot === "shield" },
+    ];
     const accessoryItems = items.filter((i) => i.category === "accessory");
-    ACCESSORY_KEYS.forEach((k) => fillSelect($("select_" + k), accessoryItems));
+
+    slotDefs.forEach(({ key, filter }) => {
+      const filtered = items.filter(filter);
+      equipItemsCacheBySlot.set(key, filtered.map((i) => ({ id: String(i.id), name: i.name })));
+      fillSelect($("select_" + key), filtered);
+      wireEquipSearch(key);
+    });
+
+    ACCESSORY_KEYS.forEach((key) => {
+      equipItemsCacheBySlot.set(key, accessoryItems.map((i) => ({ id: String(i.id), name: i.name })));
+      fillSelect($("select_" + key), accessoryItems);
+      wireEquipSearch(key);
+    });
   } catch (e) {
     console.error("equipment.json 読み込み失敗", e);
   }
 
+  // ペットデータ読み込み
   try {
-    const namesRes = await fetch(PET_NAMES_URL, { cache: "no-store" });
+    const namesRes  = await fetch(PET_NAMES_URL, { cache: "no-store" });
     if (!namesRes.ok) throw new Error(`HTTP ${namesRes.status}`);
     const namesData = await namesRes.json();
     const nameItems = Array.isArray(namesData.items) ? namesData.items : [];
 
-    const skillsRes = await fetch(PET_SKILLS_URL, { cache: "no-store" });
+    const skillsRes  = await fetch(PET_SKILLS_URL, { cache: "no-store" });
     if (!skillsRes.ok) throw new Error(`HTTP ${skillsRes.status}`);
     const skillsData = await skillsRes.json();
 
@@ -1040,21 +1057,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     const validIds = new Set(Object.keys(skillsData || {}));
-
     const petItems = nameItems
       .filter((item) => validIds.has(String(item.id)))
-      .map((item) => ({
-        id: String(item.id),
-        name: item.title,
-        search: item.search || item.title
-      }))
+      .map((item) => ({ id: String(item.id), name: item.title, search: item.search || item.title }))
       .sort((a, b) => String(a.id).localeCompare(String(b.id), "ja"));
 
     petItemsCache = petItems;
-
-    petItems.forEach((item) => {
-      petNameMap.set(String(item.id), item.name);
-    });
+    petItems.forEach((item) => { petNameMap.set(String(item.id), item.name); });
 
     PET_KEYS.forEach((k) => {
       fillSelect($("select_" + k), petItems);
@@ -1067,43 +1076,39 @@ document.addEventListener("DOMContentLoaded", async () => {
   refreshBuildSelect();
   applyState(loadAutoState());
 
-  document.querySelectorAll("input, select").forEach((el) => {
-    el.addEventListener("input", recalc);
+  // 数値inputとステージselectのみ recalc を登録（検索inputは wireEquipSearch/wirePetSearch で管理）
+  document.querySelectorAll("input[type=number], select:not([hidden])").forEach((el) => {
+    el.addEventListener("input",  recalc);
     el.addEventListener("change", recalc);
   });
 
+  // 外クリックで全サジェストを閉じる
   document.addEventListener("click", (e) => {
     const target = e.target;
     let inside = false;
 
+    EQUIP_KEYS.forEach((key) => {
+      const input   = $(equipSearchId(key));
+      const suggest = $(equipSuggestId(key));
+      if (target === input || (suggest && suggest.contains(target))) inside = true;
+    });
     PET_KEYS.forEach((key) => {
-      const input = $(petInputId(key));
+      const input   = $(petInputId(key));
       const suggest = $(petSuggestId(key));
       if (target === input || (suggest && suggest.contains(target))) inside = true;
     });
 
-    if (!inside) closeAllPetSuggests();
+    if (!inside) {
+      closeAllEquipSuggests();
+      closeAllPetSuggests();
+    }
   });
 
-  if ($("recalcBtn")) {
-    $("recalcBtn").addEventListener("click", recalc);
-  }
-
-  if ($("proteinAll1000Btn")) {
-    $("proteinAll1000Btn").addEventListener("click", setProteinAll1000);
-  }
-
-  if ($("saveBuildBtn")) {
-    $("saveBuildBtn").addEventListener("click", saveNamedBuild);
-  }
-
-  if ($("loadBuildBtn")) {
-    $("loadBuildBtn").addEventListener("click", loadNamedBuild);
-  }
-
-  if ($("deleteBuildBtn")) {
-    $("deleteBuildBtn").addEventListener("click", deleteNamedBuild);
-  }
+  if ($("recalcBtn"))       $("recalcBtn").addEventListener("click", recalc);
+  if ($("proteinAll1000Btn")) $("proteinAll1000Btn").addEventListener("click", setProteinAll1000);
+  if ($("saveBuildBtn"))    $("saveBuildBtn").addEventListener("click", saveNamedBuild);
+  if ($("loadBuildBtn"))    $("loadBuildBtn").addEventListener("click", loadNamedBuild);
+  if ($("deleteBuildBtn"))  $("deleteBuildBtn").addEventListener("click", deleteNamedBuild);
 
   if ($("buildSlotSelect")) {
     $("buildSlotSelect").addEventListener("change", () => {
@@ -1115,28 +1120,27 @@ document.addEventListener("DOMContentLoaded", async () => {
   if ($("resetBtn")) {
     $("resetBtn").addEventListener("click", () => {
       if ($("basePointTotal")) $("basePointTotal").value = "0";
-      if ($("shakerCount")) $("shakerCount").value = "0";
+      if ($("shakerCount"))    $("shakerCount").value    = "0";
 
       BASE_STATS.forEach((k) => {
-        if ($("base_" + k)) $("base_" + k).value = "0";
+        if ($("base_"    + k)) $("base_"    + k).value = "0";
         if ($("protein_" + k)) $("protein_" + k).value = "0";
       });
 
-      ["weapon", "head", "body", "hands", "feet", "shield"].forEach((k) => {
+      EQUIP_KEYS.forEach((k) => {
         if ($("select_" + k)) $("select_" + k).value = "";
-        if ($("level_" + k)) $("level_" + k).value = "0";
-      });
-
-      ACCESSORY_KEYS.forEach((k) => {
-        if ($("select_" + k)) $("select_" + k).value = "";
-        if ($("level_" + k)) $("level_" + k).value = "1";
+        if ($("level_"  + k)) $("level_"  + k).value = k.startsWith("accessory") ? "1" : "0";
         if ($("effect_" + k)) $("effect_" + k).textContent = "-";
+        const input = $(equipSearchId(k));
+        if (input) input.value = "";
+        closeEquipSuggest(k);
       });
 
       PET_KEYS.forEach((k) => {
         if ($("select_" + k)) $("select_" + k).value = "";
-        if ($("stage_" + k)) $("stage_" + k).value = "0";
-        if ($(petInputId(k))) $(petInputId(k)).value = "";
+        if ($("stage_"  + k)) $("stage_"  + k).value = "0";
+        const input = $(petInputId(k));
+        if (input) input.value = "";
         closePetSuggest(k);
       });
 
