@@ -1071,6 +1071,25 @@
       "display_effects": [
         {"type":"special_rate","target":"drop","initial":"1000%","max":"1090.0%"}
       ]
+    },
+    {
+      "id": "shichiri_houkan",
+      "name": "七理の宝環",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit":0,"spd":0,"atk":0,"int":0,"def":0,"mdef":0,"luk":0,"mov":0},
+      "base_rate": {"vit":50,"spd":50,"atk":50,"int":50,"def":50,"mdef":50,"luk":50,"mov":0},
+      "max_level": 100,
+      "display_effects": [
+        {"type":"rate","target":"vit","initial":"50%","max":"99.5%"},
+        {"type":"rate","target":"spd","initial":"50%","max":"99.5%"},
+        {"type":"rate","target":"atk","initial":"50%","max":"99.5%"},
+        {"type":"rate","target":"int","initial":"50%","max":"99.5%"},
+        {"type":"rate","target":"def","initial":"50%","max":"99.5%"},
+        {"type":"rate","target":"mdef","initial":"50%","max":"99.5%"},
+        {"type":"rate","target":"luk","initial":"50%","max":"99.5%"}
+      ]
     }
   ]
 }
