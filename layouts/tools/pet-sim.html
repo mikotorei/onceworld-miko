@@ -2,24 +2,54 @@
 <link rel="stylesheet" href="{{ "css/pet-sim.css" | relURL }}">
 
 <div class="tool-container">
-  <div class="search-row">
-    <input type="text" id="searchInput" placeholder="モンスター名または番号で検索..." autocomplete="off" />
-  </div>
-  <div class="dropdown" id="dropdown"></div>
 
-  <div id="selectedBadge" class="selected-badge" style="display:none;">
-    <span id="selectedName"></span>
-    <button id="clearBtn" class="clear-btn" aria-label="選択解除">✕</button>
-  </div>
+  <section>
+    <h2>モンスター選択</h2>
+    <div class="search-row">
+      <input type="text" id="searchInput" placeholder="名前または番号で検索..." autocomplete="off" />
+    </div>
+    <div class="dropdown" id="dropdown"></div>
+    <div id="selectedBadge" class="selected-badge" style="display:none;">
+      <span id="selectedName"></span>
+      <button id="clearBtn" class="clear-btn" aria-label="選択解除">✕</button>
+    </div>
+  </section>
 
-  <div class="level-row">
-    <label for="lvInput">レベル</label>
-    <input type="number" id="lvInput" min="1" max="1200" value="1" placeholder="1〜1200" />
-  </div>
+  <section>
+    <h2>レベル</h2>
+    <div class="input-row">
+      <input type="number" id="lvInput" min="1" max="1200" value="1" placeholder="1〜1200" />
+    </div>
+  </section>
 
-  <div id="result">
-    <p class="empty-msg">モンスターを選択してください</p>
-  </div>
+  <section>
+    <h2>殲儀回数</h2>
+    <div class="input-row">
+      <input type="number" id="sengiInput" min="0" max="30" value="0" placeholder="0〜30" />
+    </div>
+  </section>
+
+  <section>
+    <h2>粉使用数</h2>
+    <div class="powder-grid" id="powderGrid"></div>
+  </section>
+
+  <section>
+    <h2>キノコ</h2>
+    <div class="kinoko-row">
+      <label class="kinoko-label">所持数</label>
+      <input type="number" id="kinokoInput" min="0" max="1000" value="0" placeholder="0〜1000" />
+      <button type="button" id="houseBtn" class="chip-btn" aria-pressed="false">キノコハウス OFF</button>
+    </div>
+  </section>
+
+  <section class="result-section">
+    <h2>ステータス</h2>
+    <div id="result">
+      <p class="empty-msg">モンスターを選択してください</p>
+    </div>
+  </section>
+
 </div>
 
 <script src="{{ "monsters-data.js" | relURL }}"></script>
