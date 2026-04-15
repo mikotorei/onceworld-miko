@@ -7,6 +7,14 @@
   max-width:720px;
 }
 
+.tool-container section{
+  margin-top:22px;
+}
+
+.tool-container section:first-child{
+  margin-top:0;
+}
+
 /* 検索 */
 .search-row{
   margin-bottom:8px;
@@ -78,7 +86,7 @@
   border-radius:12px;
   padding:8px 12px;
   font-size:15px;
-  margin-bottom:14px;
+  margin-top:4px;
 }
 
 .clear-btn{
@@ -95,26 +103,92 @@
   opacity:1;
 }
 
-/* レベル入力 */
-.level-row{
+/* 汎用入力行 */
+.input-row{
   display:flex;
-  flex-direction:column;
-  gap:8px;
-  margin-bottom:20px;
+  align-items:center;
+  gap:10px;
 }
 
-.level-row label{
-  font-weight:700;
-  white-space:nowrap;
-}
-
-#lvInput{
-  width:100%;
-  box-sizing:border-box;
+.input-row input{
+  width:160px;
   padding:10px;
   border:1px solid #000;
   border-radius:10px;
   font-size:16px;
+  box-sizing:border-box;
+}
+
+/* 粉グリッド */
+.powder-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+
+.powder-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.powder-label{
+  font-weight:700;
+  font-size:14px;
+  width:48px;
+  flex-shrink:0;
+}
+
+.powder-item input{
+  flex:1;
+  min-width:0;
+  padding:10px;
+  border:1px solid #000;
+  border-radius:10px;
+  font-size:16px;
+  box-sizing:border-box;
+}
+
+.powder-max-btn{
+  flex-shrink:0;
+}
+
+/* キノコ行 */
+.kinoko-row{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:flex-start;
+}
+
+.kinoko-label{
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.kinoko-row input{
+  width:160px;
+  padding:10px;
+  border:1px solid #000;
+  border-radius:10px;
+  font-size:16px;
+  box-sizing:border-box;
+}
+
+/* チップボタン共通 */
+.chip-btn{
+  padding:10px 12px;
+  border:1px solid #000;
+  background:#fff;
+  border-radius:12px;
+  font-size:14px;
+  line-height:1.2;
+  cursor:pointer;
+}
+
+.chip-btn[aria-pressed="true"]{
+  background:rgba(0,0,0,0.08);
+  box-shadow:0 0 0 2px #000 inset;
 }
 
 /* ステータスグリッド */
@@ -132,6 +206,10 @@
   text-align:center;
 }
 
+.stat-card--top{
+  box-shadow:0 0 0 2px #000 inset;
+}
+
 .stat-label{
   font-weight:700;
   font-size:14px;
@@ -147,6 +225,12 @@
 .stat-val{
   font-size:22px;
   font-weight:700;
+}
+
+.stat-kinoko{
+  font-size:12px;
+  opacity:.65;
+  margin-top:4px;
 }
 
 /* 固定ステータス */
@@ -169,14 +253,12 @@
   margin-left:6px;
 }
 
-/* セクションラベル */
 .section-label{
   font-weight:700;
   margin-bottom:8px;
   margin-top:0;
 }
 
-/* 空メッセージ */
 .empty-msg{
   opacity:.45;
   font-size:15px;
@@ -184,17 +266,13 @@
 }
 
 @media (min-width:700px){
-  .level-row{
+  .powder-grid{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+  }
+
+  .kinoko-row{
     flex-direction:row;
     align-items:center;
-  }
-
-  .level-row label{
-    min-width:56px;
-  }
-
-  #lvInput{
-    width:160px;
   }
 
   .stats-grid{
@@ -203,6 +281,10 @@
 }
 
 @media (min-width:980px){
+  .powder-grid{
+    grid-template-columns:repeat(4, minmax(0,1fr));
+  }
+
   .stats-grid{
     grid-template-columns:repeat(7, minmax(0,1fr));
   }
