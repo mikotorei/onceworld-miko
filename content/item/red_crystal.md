@@ -1,0 +1,7 @@
++++
+title = "赤の結晶"
+image = "img/item/red_crystal.png"
+category = "通常素材"
+sell = 850
+effect = "強化に使います"
++++

@@ -1,0 +1,7 @@
++++
+title = "閉ざされた記憶"
+image = "img/item/sealed_memory.png"
+category = "通常素材"
+sell = 2200
+effect = "交換に使います"
++++
