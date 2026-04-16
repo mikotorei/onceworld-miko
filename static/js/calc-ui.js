@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function setHiddenForce(el, isHidden) {
     if (!el) return;
     el.hidden = isHidden;
-    el.style.display = isHidden ? "none" : "";
+    el.style.setProperty("display", isHidden ? "none" : "", isHidden ? "important" : "");
   }
 
   function setDebuffButtons() {
