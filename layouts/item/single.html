@@ -1,0 +1,74 @@
+{{ define "main" }}
+<link rel="stylesheet" href="{{ "css/item.css" | relURL }}">
+
+<nav class="d-breadcrumb">
+  <a href="{{ "/" | relURL }}">HOME</a> &gt;
+  <a href="{{ "/item/" | relURL }}">素材一覧</a> &gt;
+  {{ .Title }}
+</nav>
+
+<h1 class="d-title">{{ .Title }}</h1>
+
+<div class="item-layout">
+
+  <div class="item-image-box">
+    {{ with .Params.image }}
+      {{ $img := strings.TrimPrefix "/" . }}
+      <img src="{{ $img | relURL }}" alt="{{ $.Title }}">
+    {{ else }}
+      <div class="item-image-placeholder"></div>
+    {{ end }}
+  </div>
+
+  <table class="item-info-table">
+    <tr>
+      <th>名前</th>
+      <td>{{ .Title }}</td>
+    </tr>
+    {{ with .Params.category }}
+    <tr>
+      <th>種類</th>
+      <td>{{ . }}</td>
+    </tr>
+    {{ end }}
+    {{ with .Params.sell }}
+    <tr>
+      <th>売値</th>
+      <td>{{ . }}</td>
+    </tr>
+    {{ end }}
+    {{ with .Params.effect }}
+    <tr>
+      <th>効果</th>
+      <td>{{ . }}</td>
+    </tr>
+    {{ end }}
+    {{ with .Params.exchange }}
+    <tr>
+      <th>交換場所</th>
+      <td>{{ . }}</td>
+    </tr>
+    {{ end }}
+  </table>
+
+</div>
+
+{{/* 逆引き：このアイテムをドロップするモンスター一覧 */}}
+{{ $itemName := .Title }}
+{{ $monsters := where (where site.Pages "Section" "monster") ".Params.drops" "intersect" (slice $itemName) }}
+{{ with $monsters }}
+<section class="d-block">
+  <h2 class="d-h2">メインドロップするモンスター</h2>
+  <ul class="item-monster-list">
+    {{ range . }}
+    <li>- <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+
+<p class="d-back">
+  <a href="{{ "/item/" | relURL }}">← 素材一覧に戻る</a>
+</p>
+
+{{ end }}
