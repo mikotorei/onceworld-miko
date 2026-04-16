@@ -1,7 +1,7 @@
 +++
 title = "装備データベース"
 home = true
-weight = 40
+weight = 20
 description = "武器・防具・アクセサリーの装備データ一覧"
 +++
 
