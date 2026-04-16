@@ -1,7 +1,0 @@
-+++
-title = "緑キノコ"
-image = "img/item/green_mushroom.png"
-category = "効果素材"
-sell = 2900
-effect = "木属性ペットの最も高いステータス+1"
-+++

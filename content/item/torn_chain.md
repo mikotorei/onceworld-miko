@@ -1,7 +1,0 @@
-+++
-title = "引きちぎられた鎖"
-image = "img/item/torn_chain.png"
-category = "通常素材"
-sell = 8200
-effect = "交換に使います"
-+++

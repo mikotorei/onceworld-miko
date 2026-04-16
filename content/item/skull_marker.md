@@ -1,7 +1,0 @@
-+++
-title = "頭骨標"
-image = "img/item/skull_marker.png"
-category = "通常素材"
-sell = 700
-effect = "交換に使います"
-+++

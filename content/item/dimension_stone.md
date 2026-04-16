@@ -1,7 +1,0 @@
-+++
-title = "次元石"
-image = "img/item/dimension_stone.png"
-category = "通常素材"
-sell = 400000
-effect = "交換に使います。ギミック"
-+++
