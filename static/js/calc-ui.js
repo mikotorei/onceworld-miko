@@ -25,8 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const outMagDmg  = document.getElementById("out-mag-dmg");
   const outMagOne  = document.getElementById("out-mag-one");
   const outMagOverkill = document.getElementById("out-mag-overkill");
-  const outHitLuk  = document.getElementById("out-hit-luk");
-  const outEvadeLuk = document.getElementById("out-evade-luk");
+  const outHitLuk      = document.getElementById("out-hit-luk");
+  const outHitLukStable = document.getElementById("out-hit-luk-stable");
+  const outEvadeLuk    = document.getElementById("out-evade-luk");
   const outNullDef  = document.getElementById("out-null-def");
   const outNullMdef = document.getElementById("out-null-mdef");
 
@@ -497,8 +498,9 @@ document.addEventListener("DOMContentLoaded", function () {
       outMagOverkill.textContent = `int${fmt(reqIntOverkill)}以上`;
     }
 
-    outHitLuk.textContent   = `${fmt(Math.floor(enemyScaled.luk / 2))}以上`;
-    outEvadeLuk.textContent = `${fmt(Math.floor(enemyScaled.luk * 3))}以上`;
+    outHitLuk.textContent      = `${fmt(Math.floor(enemyScaled.luk / 2))}以上`;
+    outHitLukStable.textContent = `${fmt(enemyScaled.luk)}以上`;
+    outEvadeLuk.textContent    = `${fmt(Math.floor(enemyScaled.luk * 3))}以上`;
 
     outNullDef.textContent  = `${fmt(requiredDefenseForNullify(enemyScaled.atk))}以上`;
     outNullMdef.textContent = `${fmt(requiredDefenseForNullify(enemyScaled.int))}以上`;
