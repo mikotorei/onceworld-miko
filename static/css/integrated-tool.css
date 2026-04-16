@@ -250,20 +250,20 @@
 .result-block{
   border:1px solid #000;
   border-radius:14px;
-  padding:12px;
-  margin-top:12px;
+  padding:9px;
+  margin-top:9px;
 }
 
 .result-title{
   font-weight:700;
-  margin-bottom:8px;
+  margin-bottom:6px;
 }
 
 .result-row{
   display:flex;
   flex-direction:column;
   gap:4px;
-  padding:6px 0;
+  padding:4px 0;
 }
 
 .result-label{
