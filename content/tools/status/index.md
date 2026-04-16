@@ -1,7 +1,7 @@
 +++
 title = "主人公ステータス・シミュレーター"
 home = true
-weight = 30
+weight = 40
 description = "主人公の装備・ペット・ステータスを確認できるシミュレーター"
 +++
 
