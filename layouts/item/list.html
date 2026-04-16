@@ -1,0 +1,66 @@
+{{ define "main" }}
+<link rel="stylesheet" href="{{ "css/item.css" | relURL }}">
+
+<h1 class="d-title">素材一覧</h1>
+
+{{/* カテゴリでグループ化 */}}
+{{ $items := where site.Pages "Section" "item" }}
+{{ $items = where $items "Kind" "page" }}
+
+{{ $categories := slice }}
+{{ range $items }}
+  {{ $cat := .Params.category | default "その他" }}
+  {{ if not (in $categories $cat) }}
+    {{ $categories = $categories | append $cat }}
+  {{ end }}
+{{ end }}
+
+{{ range $categories }}
+{{ $cat := . }}
+{{ $catItems := where $items ".Params.category" $cat }}
+{{ with $catItems }}
+<section class="d-block">
+  <h2 class="d-h2">{{ $cat }}</h2>
+  <ul class="item-list-grid">
+    {{ range . }}
+    <li class="item-list-card">
+      <a href="{{ .RelPermalink }}">
+        {{ with .Params.image }}
+          {{ $img := strings.TrimPrefix "/" . }}
+          <img src="{{ $img | relURL }}" alt="{{ $.Title }}">
+        {{ else }}
+          <div class="item-thumb-placeholder"></div>
+        {{ end }}
+        <span>{{ .Title }}</span>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+{{ end }}
+
+{{/* カテゴリ未設定のアイテム */}}
+{{ $uncategorized := where $items ".Params.category" nil }}
+{{ with $uncategorized }}
+<section class="d-block">
+  <h2 class="d-h2">その他</h2>
+  <ul class="item-list-grid">
+    {{ range . }}
+    <li class="item-list-card">
+      <a href="{{ .RelPermalink }}">
+        {{ with .Params.image }}
+          {{ $img := strings.TrimPrefix "/" . }}
+          <img src="{{ $img | relURL }}" alt="{{ $.Title }}">
+        {{ else }}
+          <div class="item-thumb-placeholder"></div>
+        {{ end }}
+        <span>{{ .Title }}</span>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+
+{{ end }}
