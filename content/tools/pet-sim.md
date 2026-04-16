@@ -2,6 +2,6 @@
 title = "ペットステータスシミュレーター"
 layout = "pet-sim"
 home = true
-weight = 20
+weight = 50
 description = "ペットのステータスをレベル別にシミュレートするツールです！"
 +++
