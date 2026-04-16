@@ -88,7 +88,7 @@
   <p>
     {{ range $i, $v := . }}
       {{ if $i }}, {{ end }}
-      <a href="{{ (printf "/item/%s/" ($v | urlize)) | relURL }}">{{ $v }}</a>
+      <a href="{{ (printf "item/%s/" ($v | urlize)) | relURL }}">{{ $v }}</a>
     {{ end }}
   </p>
 </section>
