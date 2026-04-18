@@ -55,7 +55,7 @@
   border-radius: 12px;
   padding: 10px;
 }
-.mbs-options.is-closed { display: none !important; }
+.mbs-options.is-closed { display: none; }
 
 .mbs-option-grid { display: grid; gap: 10px; }
 .mbs-option-block { border: 1px solid rgba(0,0,0,.12); border-radius: 10px; padding: 8px; }
