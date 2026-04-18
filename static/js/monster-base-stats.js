@@ -23,6 +23,11 @@
   const levelInput = document.getElementById("mbsLevelInput");
   const levelResetBtn = document.getElementById("mbsLevelReset");
 
+  // SPD倍率
+  const spdMinusBtn = document.getElementById("mbsSpdMinus");
+  const spdPlusBtn = document.getElementById("mbsSpdPlus");
+  const spdMultDisplay = document.getElementById("mbsSpdMultDisplay");
+
   if (!tbody || !table) return;
 
   const rows = Array.from(tbody.querySelectorAll("tr"));
@@ -42,7 +47,8 @@
   });
 
   let sortState = { key: "id", dir: 1 };
-  let currentLevel = 0;
+  let currentLevel = 1;
+  let spdMultiplier = 1;
 
   const selected = {
     element: new Set(),
@@ -64,9 +70,9 @@
         const cell = r.querySelector(`td[data-col="${key}"]`);
         if (!cell) return;
         const base = Number(r.dataset[key]) || 0;
-        const scaled = level === 0 ? base : scaleValue(base, level);
+        let scaled = level === 0 ? base : scaleValue(base, level);
+        if (key === "spd") scaled = Math.floor(scaled * spdMultiplier);
         cell.textContent = scaled;
-        // ソート用にdata属性も一時更新（data-*はbaseのまま保持、scaled値は別属性で持つ）
         r.dataset[`scaled_${key}`] = scaled;
       });
     });
@@ -273,12 +279,31 @@
 
   if (levelResetBtn) {
     levelResetBtn.addEventListener("click", () => {
-      levelInput.value = 0;
-      currentLevel = 0;
+      levelInput.value = 1;
+      currentLevel = 1;
+      spdMultiplier = 1;
+      if (spdMultDisplay) spdMultDisplay.textContent = "1";
       applyLevelScale();
       applySort();
     });
   }
+
+  // SPD倍率ステッパー
+  function updateSpdMult(delta) {
+    const next = spdMultiplier + delta;
+    if (next < 1 || next > 10) return;
+    spdMultiplier = next;
+    const disp = document.getElementById("mbsSpdMultDisplay");
+    if (disp) disp.textContent = spdMultiplier;
+    applyLevelScale();
+    applySort();
+  }
+
+  // event delegationでオプションパネル全体を監視（display:none問題を回避）
+  document.addEventListener("click", (e) => {
+    if (e.target.id === "mbsSpdMinus") updateSpdMult(-1);
+    if (e.target.id === "mbsSpdPlus")  updateSpdMult(1);
+  });
 
   // ---- コンパクト ----
 
@@ -289,6 +314,10 @@
   }
 
   // ---- 初期化 ----
+  // levelInputのvalue属性をcurrentLevelに同期
+  if (levelInput) {
+    levelInput.value = currentLevel;
+  }
   applyLevelScale();
   setSortUI();
   applyFilter();
