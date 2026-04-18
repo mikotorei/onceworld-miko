@@ -21,9 +21,28 @@
         並び替えステータス：<strong id="mbsSortStatus">id ↑</strong>
       </div>
 
+      <button type="button" id="mbsOptionToggle" class="mbs-btn2">
+        オプション <span id="mbsOptionToggleIcon">開く</span>
+      </button>
+
       <button type="button" id="mbsFilterToggle" class="mbs-btn2">
         絞り込み項目 <span id="mbsFilterToggleIcon">開く</span>
       </button>
+    </div>
+
+    {{/* オプションパネル */}}
+    <div id="mbsOptions" class="mbs-options is-closed">
+      <div class="mbs-option-grid">
+        <div class="mbs-option-block">
+          <div class="mbs-option-title">レベルスケール</div>
+          <div class="mbs-option-row">
+            <label for="mbsLevelInput" class="mbs-option-label">Lv</label>
+            <input type="number" id="mbsLevelInput" class="mbs-level-input" value="0" min="0">
+            <button type="button" id="mbsLevelReset" class="mbs-btn">リセット</button>
+          </div>
+          <div class="mbs-option-note">計算式：基礎値 × (1 + Lv × 0.1)　／　対象：VIT / SPD / ATK / INT / DEF / MDEF / LUK</div>
+        </div>
+      </div>
     </div>
 
     <div id="mbsFilters" class="mbs-filters is-closed">
@@ -105,7 +124,7 @@
       </thead>
 
       <tbody id="mbsBody">
-        {{ range sort $pages "Params.id" }}
+       {{ range sort $pages "Params.id" }}
           {{ $p := . }}
           {{ $st := $p.Params.status }}
           {{ $fx := $p.Params.fixed_status }}
@@ -148,13 +167,13 @@
             <td>{{ $p.Params.attack_type }}</td>
             <td>{{ $p.Params.attack_range }}</td>
 
-            <td class="num">{{ $vit }}</td>
-            <td class="num">{{ $spd }}</td>
-            <td class="num">{{ $atk }}</td>
-            <td class="num">{{ $int }}</td>
-            <td class="num">{{ $def }}</td>
-            <td class="num">{{ $mdef }}</td>
-            <td class="num">{{ $luk }}</td>
+            <td class="num" data-col="vit">{{ $vit }}</td>
+            <td class="num" data-col="spd">{{ $spd }}</td>
+            <td class="num" data-col="atk">{{ $atk }}</td>
+            <td class="num" data-col="int">{{ $int }}</td>
+            <td class="num" data-col="def">{{ $def }}</td>
+            <td class="num" data-col="mdef">{{ $mdef }}</td>
+            <td class="num" data-col="luk">{{ $luk }}</td>
             <td class="num">{{ $mov }}</td>
 
             <td class="num"><strong>{{ $total }}</strong></td>
