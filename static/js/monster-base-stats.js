@@ -299,11 +299,8 @@
     applySort();
   }
 
-  // event delegationでオプションパネル全体を監視（display:none問題を回避）
-  document.addEventListener("click", (e) => {
-    if (e.target.id === "mbsSpdMinus") updateSpdMult(-1);
-    if (e.target.id === "mbsSpdPlus")  updateSpdMult(1);
-  });
+  if (spdMinusBtn) spdMinusBtn.addEventListener("click", () => updateSpdMult(-1));
+  if (spdPlusBtn)  spdPlusBtn.addEventListener("click",  () => updateSpdMult(1));
 
   // ---- コンパクト ----
 
