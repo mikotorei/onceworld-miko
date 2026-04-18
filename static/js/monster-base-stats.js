@@ -16,10 +16,20 @@
   const filterAttackTypeBox = document.getElementById("mbsFilterAttackType");
   const filterAttackRangeBox = document.getElementById("mbsFilterAttackRange");
 
+  // オプションパネル
+  const optionToggleBtn = document.getElementById("mbsOptionToggle");
+  const optionToggleIcon = document.getElementById("mbsOptionToggleIcon");
+  const optionsBox = document.getElementById("mbsOptions");
+  const levelInput = document.getElementById("mbsLevelInput");
+  const levelResetBtn = document.getElementById("mbsLevelReset");
+
   if (!tbody || !table) return;
 
   const rows = Array.from(tbody.querySelectorAll("tr"));
   const headers = Array.from(table.querySelectorAll("thead th.sort"));
+
+  // レベルスケール対象の列キー
+  const SCALE_KEYS = ["vit", "spd", "atk", "int", "def", "mdef", "luk"];
 
   // ヘッダーに矢印
   headers.forEach(h => {
@@ -32,6 +42,7 @@
   });
 
   let sortState = { key: "id", dir: 1 };
+  let currentLevel = 0;
 
   const selected = {
     element: new Set(),
@@ -39,7 +50,39 @@
     attack_range: new Set(),
   };
 
+  // ---- レベルスケール ----
+
+  function scaleValue(base, level) {
+    return Math.floor(base * (1 + level * 0.1));
+  }
+
+  function applyLevelScale() {
+    const level = currentLevel;
+
+    rows.forEach(r => {
+      SCALE_KEYS.forEach(key => {
+        const cell = r.querySelector(`td[data-col="${key}"]`);
+        if (!cell) return;
+        const base = Number(r.dataset[key]) || 0;
+        const scaled = level === 0 ? base : scaleValue(base, level);
+        cell.textContent = scaled;
+        // ソート用にdata属性も一時更新（data-*はbaseのまま保持、scaled値は別属性で持つ）
+        r.dataset[`scaled_${key}`] = scaled;
+      });
+    });
+  }
+
+  // ---- ソート ----
+
   function getValue(row, key) {
+    // スケール対象キーはscaled値を優先して使う
+    if (currentLevel !== 0 && SCALE_KEYS.includes(key)) {
+      const sv = row.dataset[`scaled_${key}`];
+      if (sv != null) {
+        const n = Number(sv);
+        if (Number.isFinite(n)) return n;
+      }
+    }
     const v = row.dataset[key];
     if (v == null) return "";
     const n = Number(v);
@@ -114,6 +157,8 @@
       }
     });
   });
+
+  // ---- フィルター ----
 
   function matchesMulti(row, key, set) {
     if (!set || set.size === 0) return true;
@@ -208,13 +253,43 @@
     });
   }
 
+  // ---- オプションパネル ----
+
+  if (optionToggleBtn && optionsBox) {
+    optionToggleBtn.addEventListener("click", () => {
+      const closed = optionsBox.classList.toggle("is-closed");
+      if (optionToggleIcon) optionToggleIcon.textContent = closed ? "開く" : "閉じる";
+    });
+  }
+
+  if (levelInput) {
+    levelInput.addEventListener("input", () => {
+      const val = parseInt(levelInput.value, 10);
+      currentLevel = Number.isFinite(val) && val >= 0 ? val : 0;
+      applyLevelScale();
+      applySort();
+    });
+  }
+
+  if (levelResetBtn) {
+    levelResetBtn.addEventListener("click", () => {
+      levelInput.value = 0;
+      currentLevel = 0;
+      applyLevelScale();
+      applySort();
+    });
+  }
+
+  // ---- コンパクト ----
+
   if (compactToggle && wrap) {
     const sync = () => wrap.classList.toggle("mbs-compact-on", !!compactToggle.checked);
     compactToggle.addEventListener("change", sync);
     sync();
   }
 
-  // 初期化
+  // ---- 初期化 ----
+  applyLevelScale();
   setSortUI();
   applyFilter();
   applySort();
