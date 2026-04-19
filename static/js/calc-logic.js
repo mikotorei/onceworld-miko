@@ -142,21 +142,27 @@ function calcAnalysisBonus(bookCount, advancedBookCount) {
   return clampAnalysisBonus(value);
 }
 
-function calcMagicDamageRange(params) {
-  const heroInt       = Math.max(0, Math.floor(Number(params.heroInt) || 0));
-  const analysisBonus = calcAnalysisBonus(params.analysisBook, params.analysisBookAdvanced);
-  const spellMultiplier  = getSpellMultiplier(params.spell);
-  const enemyMagDef   = Number(params.enemyMagDef) || 0;
-  const elementModifier  = getElementModifier(params.heroElement, params.enemyElement);
-  const criticalModifier = 1.0;
+function getCrystalMultiplier(crystalCount) {
+  const count = Math.max(0, Math.floor(Number(crystalCount) || 0));
+  return Math.min(11.0, 1 + count * 0.01);
+}
 
-  const preDefense  = (heroInt + analysisBonus) * 1.25 * spellMultiplier;
+function calcMagicDamageRange(params) {
+  const heroInt           = Math.max(0, Math.floor(Number(params.heroInt) || 0));
+  const analysisBonus     = calcAnalysisBonus(params.analysisBook, params.analysisBookAdvanced);
+  const spellMultiplier   = getSpellMultiplier(params.spell);
+  const crystalMultiplier = getCrystalMultiplier(params.crystalCount);
+  const enemyMagDef       = Number(params.enemyMagDef) || 0;
+  const elementModifier   = getElementModifier(params.heroElement, params.enemyElement);
+  const criticalModifier  = 1.0;
+
+  const preDefense   = (heroInt + analysisBonus) * 1.25 * spellMultiplier * crystalMultiplier;
   const afterDefense = preDefense - enemyMagDef;
-  const base        = afterDefense * 4;
-  const finalBase   = base * elementModifier * criticalModifier;
+  const base         = afterDefense * 4;
+  const finalBase    = base * elementModifier * criticalModifier;
 
   if (finalBase <= 0) {
-    return { min: 0, max: 0, analysisBonus, spellMultiplier, elementModifier, criticalModifier, enemyMagDef, finalBase: 0 };
+    return { min: 0, max: 0, analysisBonus, spellMultiplier, crystalMultiplier, elementModifier, criticalModifier, enemyMagDef, finalBase: 0 };
   }
 
   const min = Math.floor(finalBase * 0.9);
@@ -167,6 +173,7 @@ function calcMagicDamageRange(params) {
     max: Math.max(0, max),
     analysisBonus,
     spellMultiplier,
+    crystalMultiplier,
     elementModifier,
     criticalModifier,
     enemyMagDef,
@@ -175,20 +182,21 @@ function calcMagicDamageRange(params) {
 }
 
 function calcMagicOneShotRequiredInt(params) {
-  const hp            = Math.max(0, Number(params.hp) || 0);
-  const analysisBonus = calcAnalysisBonus(params.analysisBook, params.analysisBookAdvanced);
-  const spellMultiplier  = getSpellMultiplier(params.spell);
-  const enemyMagDef   = Number(params.enemyMagDef) || 0;
-  const elementModifier  = getElementModifier(params.heroElement, params.enemyElement);
-  const criticalModifier = 1.0;
+  const hp                = Math.max(0, Number(params.hp) || 0);
+  const analysisBonus     = calcAnalysisBonus(params.analysisBook, params.analysisBookAdvanced);
+  const spellMultiplier   = getSpellMultiplier(params.spell);
+  const crystalMultiplier = getCrystalMultiplier(params.crystalCount);
+  const enemyMagDef       = Number(params.enemyMagDef) || 0;
+  const elementModifier   = getElementModifier(params.heroElement, params.enemyElement);
+  const criticalModifier  = 1.0;
 
   const totalModifier = 0.9 * 4 * elementModifier * criticalModifier;
-  if (totalModifier <= 0 || spellMultiplier <= 0) return 0;
+  if (totalModifier <= 0 || spellMultiplier <= 0 || crystalMultiplier <= 0) return 0;
 
-  const neededAfterDefense  = hp / totalModifier;
-  const neededPreDefense    = neededAfterDefense + enemyMagDef;
-  const neededIntPlusBook   = neededPreDefense / (1.25 * spellMultiplier);
-  const neededInt           = Math.ceil(neededIntPlusBook - analysisBonus);
+  const neededAfterDefense = hp / totalModifier;
+  const neededPreDefense   = neededAfterDefense + enemyMagDef;
+  const neededIntPlusBook  = neededPreDefense / (1.25 * spellMultiplier * crystalMultiplier);
+  const neededInt          = Math.ceil(neededIntPlusBook - analysisBonus);
 
   return Math.max(0, neededInt);
 }
