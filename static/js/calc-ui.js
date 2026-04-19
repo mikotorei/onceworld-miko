@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   attachCommaInputBehavior("hero-spd", 0);
   attachCommaInputBehavior("analysis-book", 0);
   attachCommaInputBehavior("analysis-book-advanced", 0);
+  attachCommaInputBehavior("crystal-count", 0);
   attachCommaInputBehavior("enemy-lv", 1);
 })();
 
@@ -45,8 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const physicalPanel          = document.getElementById("physical-panel");
   const magicPanel             = document.getElementById("magic-panel");
-  const analysisBookRow        = document.getElementById("analysis-book-row");
+  const analysisBookRow         = document.getElementById("analysis-book-row");
   const analysisBookAdvancedRow = document.getElementById("analysis-book-advanced-row");
+  const crystalRow              = document.getElementById("crystal-row");
 
   const attackTypeButtons  = Array.from(document.querySelectorAll("[data-attack-type]"));
   const heroElementButtons = Array.from(document.querySelectorAll("[data-hero-element]"));
@@ -103,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setHiddenForce(magicPanel,              !isMagic);
     setHiddenForce(analysisBookRow,         !isMagic);
     setHiddenForce(analysisBookAdvancedRow, !isMagic);
+    setHiddenForce(crystalRow,              !isMagic);
     setHiddenForce(criticalToggle,          isMagic);
 
     setPressed(attackTypeButtons,  state.attackType,  "data-attack-type");
@@ -123,8 +126,9 @@ document.addEventListener("DOMContentLoaded", function () {
         atk:                 normalizeFormattedNonNegIntValue(document.getElementById("hero-atk").value, 0),
         int:                 normalizeFormattedNonNegIntValue(document.getElementById("hero-int").value, 0),
         spd:                 normalizeFormattedNonNegIntValue(document.getElementById("hero-spd").value, 0),
-        analysisBook:        normalizeFormattedNonNegIntValue(document.getElementById("analysis-book").value, 0),
-        analysisBookAdvanced: normalizeFormattedNonNegIntValue(document.getElementById("analysis-book-advanced").value, 0)
+        analysisBook:         normalizeFormattedNonNegIntValue(document.getElementById("analysis-book").value, 0),
+        analysisBookAdvanced: normalizeFormattedNonNegIntValue(document.getElementById("analysis-book-advanced").value, 0),
+        crystalCount:         normalizeFormattedNonNegIntValue(document.getElementById("crystal-count").value, 0)
       };
       const st = { monster_id: picked ? picked.id : "", lv: currentLv, hero, state };
       localStorage.setItem(LS_KEY, JSON.stringify(st));
@@ -142,8 +146,9 @@ document.addEventListener("DOMContentLoaded", function () {
           "hero-atk":              "atk",
           "hero-int":              "int",
           "hero-spd":              "spd",
-          "analysis-book":         "analysisBook",
-          "analysis-book-advanced": "analysisBookAdvanced"
+          "analysis-book":          "analysisBook",
+          "analysis-book-advanced": "analysisBookAdvanced",
+          "crystal-count":          "crystalCount"
         };
         Object.keys(map).forEach(id => {
           const el = document.getElementById(id);
@@ -275,11 +280,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // --- 主人公ステータス取得 ---
   function getHeroInts() {
     return {
-      atk:                 Math.max(0, parseFormattedInt(document.getElementById("hero-atk"), 0)),
-      int:                 Math.max(0, parseFormattedInt(document.getElementById("hero-int"), 0)),
-      spd:                 Math.max(0, parseFormattedInt(document.getElementById("hero-spd"), 0)),
-      analysisBook:        Math.max(0, parseFormattedInt(document.getElementById("analysis-book"), 0)),
-      analysisBookAdvanced: Math.max(0, parseFormattedInt(document.getElementById("analysis-book-advanced"), 0))
+      atk:                  Math.max(0, parseFormattedInt(document.getElementById("hero-atk"), 0)),
+      int:                  Math.max(0, parseFormattedInt(document.getElementById("hero-int"), 0)),
+      spd:                  Math.max(0, parseFormattedInt(document.getElementById("hero-spd"), 0)),
+      analysisBook:         Math.max(0, parseFormattedInt(document.getElementById("analysis-book"), 0)),
+      analysisBookAdvanced: Math.max(0, parseFormattedInt(document.getElementById("analysis-book-advanced"), 0)),
+      crystalCount:         Math.max(0, parseFormattedInt(document.getElementById("crystal-count"), 0))
     };
   }
 
@@ -289,7 +295,7 @@ document.addEventListener("DOMContentLoaded", function () {
   applyModeUI();
   setCalcEnabled();
 
-  ["hero-atk", "hero-int", "hero-spd", "analysis-book", "analysis-book-advanced"].forEach(id => {
+  ["hero-atk", "hero-int", "hero-spd", "analysis-book", "analysis-book-advanced", "crystal-count"].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
     el.addEventListener("blur", saveState);
@@ -429,6 +435,7 @@ document.addEventListener("DOMContentLoaded", function () {
         heroInt: hero.int,
         analysisBook: hero.analysisBook,
         analysisBookAdvanced: hero.analysisBookAdvanced,
+        crystalCount: hero.crystalCount,
         spell: state.spell,
         enemyMagDef,
         heroElement: state.heroElement,
@@ -440,6 +447,7 @@ document.addEventListener("DOMContentLoaded", function () {
         hp: enemyHp,
         analysisBook: hero.analysisBook,
         analysisBookAdvanced: hero.analysisBookAdvanced,
+        crystalCount: hero.crystalCount,
         spell: state.spell,
         enemyMagDef,
         heroElement: state.heroElement,
@@ -451,6 +459,7 @@ document.addEventListener("DOMContentLoaded", function () {
         hp: enemyHp * 10,
         analysisBook: hero.analysisBook,
         analysisBookAdvanced: hero.analysisBookAdvanced,
+        crystalCount: hero.crystalCount,
         spell: state.spell,
         enemyMagDef,
         heroElement: state.heroElement,
@@ -459,15 +468,16 @@ document.addEventListener("DOMContentLoaded", function () {
       outMagOverkill.textContent = `int${fmt(reqIntOverkill)}以上`;
 
     } else {
-      outHits.textContent       = "-";
-      outPhyDmg.textContent     = "-";
-      outPhyOne.textContent     = "-";
+      outHits.textContent        = "-";
+      outPhyDmg.textContent      = "-";
+      outPhyOne.textContent      = "-";
       outPhyOverkill.textContent = "-";
 
       const mag = calcMagicDamageRange({
         heroInt: hero.int,
         analysisBook: hero.analysisBook,
         analysisBookAdvanced: hero.analysisBookAdvanced,
+        crystalCount: hero.crystalCount,
         spell: state.spell,
         enemyMagDef,
         heroElement: state.heroElement,
@@ -479,6 +489,7 @@ document.addEventListener("DOMContentLoaded", function () {
         hp: enemyHp,
         analysisBook: hero.analysisBook,
         analysisBookAdvanced: hero.analysisBookAdvanced,
+        crystalCount: hero.crystalCount,
         spell: state.spell,
         enemyMagDef,
         heroElement: state.heroElement,
@@ -490,6 +501,7 @@ document.addEventListener("DOMContentLoaded", function () {
         hp: enemyHp * 10,
         analysisBook: hero.analysisBook,
         analysisBookAdvanced: hero.analysisBookAdvanced,
+        crystalCount: hero.crystalCount,
         spell: state.spell,
         enemyMagDef,
         heroElement: state.heroElement,
