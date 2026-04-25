@@ -21,13 +21,9 @@
       <!-- Lv1は常に表示 -->
       <button class="d-btn" type="button" data-lv="1">Lv 1</button>
 
-      <!-- level_shortcuts がある場合のみ追加表示（1は除外） -->
-      {{ with .Params.level_shortcuts }}
-        {{ range . }}
-          {{ if ne . 1 }}
-            <button class="d-btn" type="button" data-lv="{{ . }}">Lv {{ . }}</button>
-          {{ end }}
-        {{ end }}
+      <!-- level_shortcuts がある場合のみ追加表示 -->
+      {{ range .Params.level_shortcuts }}
+        <button class="d-btn" type="button" data-lv="{{ .lv }}">{{ .label }}</button>
       {{ end }}
     </div>
 
