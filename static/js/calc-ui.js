@@ -225,11 +225,15 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!picked || arr.length === 0) return;
 
     arr.forEach(v => {
-      const lv = Math.floor(Number(v));
+      // A案：{lv, label} / 旧形式：数値 の両方に対応
+      const lv    = Math.floor(Number(v?.lv ?? v));
+      const label = v?.label ? String(v.label) : String(lv);
       if (!Number.isFinite(lv) || lv < 1) return;
+
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.textContent = String(lv);
+      btn.textContent = label;
+      btn.title = `Lv ${formatIntString(lv)}`;
       btn.addEventListener("click", () => {
         currentLv = lv;
         lvInput.value = formatIntString(lv);
