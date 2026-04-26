@@ -182,8 +182,8 @@
     var hits = q
       ? monsters.filter(function (m) {
           return m.title.toLowerCase().indexOf(q) !== -1 || m.id.indexOf(q) !== -1;
-        }).slice(0, 20)
-      : monsters.slice(0, 20);
+        })
+      : monsters.slice();
 
     if (!hits.length) {
       dropdown.innerHTML = '<div class="drop-item drop-empty">見つかりません</div>';
