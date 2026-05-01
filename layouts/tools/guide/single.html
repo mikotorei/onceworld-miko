@@ -4,6 +4,9 @@
   {{/* ───── ページヘッダー（タイトルのみ） ───── */}}
   <header class="guide-header">
     <h1 class="guide-header__title">{{ .Title }}</h1>
+    {{ if .Params.show_floor_tool }}
+      <p class="guide-header__tool-hint">📊 ページ下部に便利ツールあり</p>
+    {{ end }}
   </header>
 
   <div class="guide-body">
