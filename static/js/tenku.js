@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "245",
     "246",
     "247",
-    "248",
-    "249",
+    '248',
+    '249',
   ];
 
   const TOP_N = 15;
