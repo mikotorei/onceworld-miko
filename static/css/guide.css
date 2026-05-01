@@ -28,6 +28,13 @@
   color: var(--fg);
 }
 
+.guide-header__tool-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: right;
+}
+
 /* =============================================
    本文エリア
    ============================================= */
