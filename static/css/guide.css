@@ -197,8 +197,14 @@
 .floor-tool__controls {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   margin-bottom: 1.5rem;
+}
+
+.floor-tool__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .floor-tool__label {
@@ -206,6 +212,29 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   color: var(--color-text-muted, #aaa);
+}
+
+/* ラジオボタン */
+.floor-tool__radio-group {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.floor-tool__radio {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--color-text, #f0f0f0);
+}
+
+.floor-tool__radio input[type="radio"] {
+  accent-color: var(--color-accent, #e8a000);
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
 }
 
 .floor-tool__input-row {
