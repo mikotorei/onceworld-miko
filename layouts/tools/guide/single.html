@@ -21,47 +21,31 @@
         階層到達アイテム早見表
       </h2>
       <p class="guide-tool__desc">
-        目標の階層に<strong>ちょうど</strong>到達するための
-        「天空像～悪魔～」と「天空像～冒険者～」の所持数の組み合わせを表示します。<br>
-        スカイガーディアン撃破（100層毎 +99F）は自動で計算に含まれます。
+        <strong>最適戦略</strong>を前提に、目標階層にちょうど到達できる
+        天空像の所持数の組み合わせを表示します。<br>
+        目標階層は<strong>100の倍数</strong>で入力してください。<br>
+        ※ 初回は冒険者像を2個一時的に置いて片側撃破することで最初の100の倍数Fに到達します。
       </p>
 
       <div class="floor-tool">
 
         <div class="floor-tool__controls">
-
-          {{/* 片側/両側 切り替え */}}
           <div class="floor-tool__field">
-            <span class="floor-tool__label">戦闘スタイル</span>
-            <div class="floor-tool__radio-group">
-              <label class="floor-tool__radio">
-                <input type="radio" name="battleMode" value="2" checked />
-                <span>両側撃破（+2F）</span>
-              </label>
-              <label class="floor-tool__radio">
-                <input type="radio" name="battleMode" value="1" />
-                <span>片側撃破（+1F）</span>
-              </label>
-            </div>
-          </div>
-
-          {{/* 目標階層 入力 */}}
-          <div class="floor-tool__field">
-            <label class="floor-tool__label" for="targetFloor">目標階層</label>
+            <label class="floor-tool__label" for="targetFloor">目標階層（100の倍数）</label>
             <div class="floor-tool__input-row">
               <input
                 type="number"
                 id="targetFloor"
                 class="floor-tool__input"
-                min="1"
-                placeholder="例：300"
+                min="100"
+                step="100"
+                placeholder="例：1200"
               />
               <span class="floor-tool__unit">F</span>
               <button class="floor-tool__btn" id="calcFloorBtn">計算する</button>
             </div>
           </div>
-
-        </div>{{/* /.floor-tool__controls */}}
+        </div>
 
         <div class="floor-tool__result" id="floorResult" hidden>
           <p class="floor-tool__result-title" id="floorResultTitle"></p>
@@ -69,8 +53,10 @@
             <table class="floor-tool__table" id="floorResultTable">
               <thead>
                 <tr>
-                  <th>天空像～悪魔～（個）</th>
-                  <th>天空像～冒険者～（個）</th>
+                  <th>冒険者像（個）</th>
+                  <th>悪魔像（個）</th>
+                  <th>サイクル数</th>
+                  <th>1サイクルの進行</th>
                 </tr>
               </thead>
               <tbody id="floorResultBody"></tbody>
