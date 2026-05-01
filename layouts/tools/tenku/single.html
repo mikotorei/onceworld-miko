@@ -62,9 +62,6 @@
   </div>
 </div>
 
-{{ $monsterDataJS := resources.Get "js/MonsterData.js" }}
-{{ if $monsterDataJS }}
-  <script src="{{ $monsterDataJS.RelPermalink }}"></script>
-{{ end }}
+<script src="{{ "monsters-data.js" | relURL }}"></script>
 <script src="{{ "js/tenku.js" | relURL }}"></script>
 {{ end }}
