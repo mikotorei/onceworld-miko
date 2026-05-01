@@ -1,8 +1,0 @@
-+++
-title = "VITプロテイン"
-slug = "VITプロテイン"
-image = "img/item/vit_protein.png"
-category = "効果素材"
-sell = 600
-effect = "VIT+1"
-+++
