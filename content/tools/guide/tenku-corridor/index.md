@@ -20,7 +20,7 @@ tags        = ["天空回廊", "初心者向け"]
   title = "攻略のコツ"
 
 # 早見表ツール（不要なら false に変更）
-show_floor_tool = false
+show_floor_tool = true
 +++
 
 ## 概要 {#overview}
