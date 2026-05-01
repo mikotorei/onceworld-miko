@@ -6,16 +6,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 12,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 12, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -24,16 +15,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 9,
-        "atk": 27,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 9, "atk": 27, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -42,16 +24,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 89,
-        "int": 0,
-        "def": 18,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 89, "int": 0, "def": 18, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -60,16 +33,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 5,
-        "atk": 0,
-        "int": 85,
-        "def": 0,
-        "mdef": 12,
-        "luk": 12,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 5, "atk": 0, "int": 85, "def": 0, "mdef": 12, "luk": 12, "mov": 0},
       "base_rate": {}
     },
     {
@@ -78,16 +42,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 151,
-        "atk": 151,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 151, "atk": 151, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -96,16 +51,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 20,
-        "atk": 5,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 20, "atk": 5, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -114,16 +60,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 433,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 433, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -132,16 +69,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 315,
-        "def": 0,
-        "mdef": 0,
-        "luk": 150,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 315, "def": 0, "mdef": 0, "luk": 150, "mov": 0},
       "base_rate": {}
     },
     {
@@ -150,16 +78,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 250,
-        "atk": 360,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 250, "atk": 360, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -168,16 +87,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 211,
-        "int": 311,
-        "def": 0,
-        "mdef": 0,
-        "luk": 71,
-        "mov": 1
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 211, "int": 311, "def": 0, "mdef": 0, "luk": 71, "mov": 1},
       "base_rate": {}
     },
     {
@@ -186,16 +96,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 150,
-        "spd": 150,
-        "atk": 250,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 150, "spd": 150, "atk": 250, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -204,16 +105,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 990,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 490,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 990, "int": 0, "def": 0, "mdef": 0, "luk": 490, "mov": 0},
       "base_rate": {}
     },
     {
@@ -222,16 +114,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 500,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 500,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 500, "spd": 0, "atk": 0, "int": 0, "def": 500, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -240,16 +123,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 4900,
-        "def": 0,
-        "mdef": 1900,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 4900, "def": 0, "mdef": 1900, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -258,16 +132,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 3000,
-        "atk": 3000,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 1
-      },
+      "base_add": {"vit": 0, "spd": 3000, "atk": 3000, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 1},
       "base_rate": {}
     },
     {
@@ -276,16 +141,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 5555,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 2
-      },
+      "base_add": {"vit": 0, "spd": 5555, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 2},
       "base_rate": {}
     },
     {
@@ -294,16 +150,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 388,
-        "spd": 0,
-        "atk": 0,
-        "int": 688,
-        "def": 388,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 388, "spd": 0, "atk": 0, "int": 688, "def": 388, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -312,16 +159,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 99,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 3
-      },
+      "base_add": {"vit": 0, "spd": 99, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 3},
       "base_rate": {}
     },
     {
@@ -330,16 +168,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 5,
-        "atk": 25,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 5,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 5, "atk": 25, "int": 0, "def": 0, "mdef": 0, "luk": 5, "mov": 0},
       "base_rate": {}
     },
     {
@@ -348,16 +177,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 25,
-        "atk": 0,
-        "int": 142,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 25, "atk": 0, "int": 142, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -366,16 +186,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 55,
-        "spd": 0,
-        "atk": 4,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 55, "spd": 0, "atk": 4, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -384,16 +195,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 190,
-        "atk": 180,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 110,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 190, "atk": 180, "int": 0, "def": 0, "mdef": 0, "luk": 110, "mov": 0},
       "base_rate": {}
     },
     {
@@ -402,16 +204,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 323,
-        "def": 0,
-        "mdef": 223,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 323, "def": 0, "mdef": 223, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -420,16 +213,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 255,
-        "spd": 0,
-        "atk": 55,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 55,
-        "mov": 0
-      },
+      "base_add": {"vit": 255, "spd": 0, "atk": 55, "int": 0, "def": 0, "mdef": 0, "luk": 55, "mov": 0},
       "base_rate": {}
     },
     {
@@ -438,16 +222,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 519,
-        "atk": 519,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 219,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 519, "atk": 519, "int": 0, "def": 0, "mdef": 0, "luk": 219, "mov": 0},
       "base_rate": {}
     },
     {
@@ -456,16 +231,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 888,
-        "def": 333,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 888, "def": 333, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -474,16 +240,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 7777,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 77777,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 7777, "int": 0, "def": 0, "mdef": 0, "luk": 77777, "mov": 0},
       "base_rate": {}
     },
     {
@@ -492,16 +249,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 1000,
-        "spd": 0,
-        "atk": 0,
-        "int": 1000,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 1000, "spd": 0, "atk": 0, "int": 1000, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -510,16 +258,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -528,16 +267,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 100,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 5
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 100, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 5},
       "base_rate": {}
     },
     {
@@ -546,16 +276,7 @@
       "category": "weapon",
       "slot": "weapon",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 3999,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 3999, "mov": 0},
       "base_rate": {}
     },
     {
@@ -564,16 +285,7 @@
       "category": "armor",
       "slot": "head",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -582,16 +294,7 @@
       "category": "armor",
       "slot": "head",
       "series": "leather",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 9,
-        "def": 0,
-        "mdef": 0,
-        "luk": 9,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 9, "def": 0, "mdef": 0, "luk": 9, "mov": 0},
       "base_rate": {}
     },
     {
@@ -600,16 +303,7 @@
       "category": "armor",
       "slot": "head",
       "series": "metal",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 51,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 51, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -618,16 +312,7 @@
       "category": "armor",
       "slot": "head",
       "series": "platinum",
-      "base_add": {
-        "vit": 0,
-        "spd": 31,
-        "atk": 0,
-        "int": 0,
-        "def": 78,
-        "mdef": 78,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 31, "atk": 0, "int": 0, "def": 78, "mdef": 78, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -636,16 +321,7 @@
       "category": "armor",
       "slot": "head",
       "series": "mage",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 96,
-        "def": 0,
-        "mdef": 121,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 96, "def": 0, "mdef": 121, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -654,16 +330,7 @@
       "category": "armor",
       "slot": "head",
       "series": "inferno",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 140,
-        "int": 140,
-        "def": 0,
-        "mdef": 0,
-        "luk": 100,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 140, "int": 140, "def": 0, "mdef": 0, "luk": 100, "mov": 0},
       "base_rate": {}
     },
     {
@@ -672,16 +339,7 @@
       "category": "armor",
       "slot": "head",
       "series": "dragon",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 1050,
-        "int": 550,
-        "def": 0,
-        "mdef": 0,
-        "luk": 350,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 1050, "int": 550, "def": 0, "mdef": 0, "luk": 350, "mov": 0},
       "base_rate": {}
     },
     {
@@ -690,16 +348,7 @@
       "category": "armor",
       "slot": "head",
       "series": "tyrant",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 2900,
-        "int": 0,
-        "def": 600,
-        "mdef": 0,
-        "luk": 1200,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 2900, "int": 0, "def": 600, "mdef": 0, "luk": 1200, "mov": 0},
       "base_rate": {}
     },
     {
@@ -708,16 +357,7 @@
       "category": "armor",
       "slot": "head",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 2555,
-        "int": 0,
-        "def": 1555,
-        "mdef": 3555,
-        "luk": 555,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 2555, "int": 0, "def": 1555, "mdef": 3555, "luk": 555, "mov": 0},
       "base_rate": {}
     },
     {
@@ -726,16 +366,7 @@
       "category": "armor",
       "slot": "body",
       "series": "cloth",
-      "base_add": {
-        "vit": 11,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 5,
-        "mdef": 3,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 11, "spd": 0, "atk": 0, "int": 0, "def": 5, "mdef": 3, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -744,16 +375,7 @@
       "category": "armor",
       "slot": "body",
       "series": "leather",
-      "base_add": {
-        "vit": 21,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 8,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 21, "spd": 0, "atk": 0, "int": 0, "def": 8, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -762,16 +384,7 @@
       "category": "armor",
       "slot": "body",
       "series": "metal",
-      "base_add": {
-        "vit": 40,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 38,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 40, "spd": 0, "atk": 0, "int": 0, "def": 38, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -780,16 +393,7 @@
       "category": "armor",
       "slot": "body",
       "series": "platinum",
-      "base_add": {
-        "vit": 115,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 40,
-        "mdef": 88,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 115, "spd": 0, "atk": 0, "int": 0, "def": 40, "mdef": 88, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -798,16 +402,7 @@
       "category": "armor",
       "slot": "body",
       "series": "mage",
-      "base_add": {
-        "vit": 88,
-        "spd": 0,
-        "atk": 0,
-        "int": 65,
-        "def": 38,
-        "mdef": 38,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 88, "spd": 0, "atk": 0, "int": 65, "def": 38, "mdef": 38, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -816,16 +411,7 @@
       "category": "armor",
       "slot": "body",
       "series": "inferno",
-      "base_add": {
-        "vit": 188,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 131,
-        "mdef": 31,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 188, "spd": 0, "atk": 0, "int": 0, "def": 131, "mdef": 31, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -834,16 +420,7 @@
       "category": "armor",
       "slot": "body",
       "series": "dragon",
-      "base_add": {
-        "vit": 750,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 650,
-        "mdef": 450,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 750, "spd": 0, "atk": 0, "int": 0, "def": 650, "mdef": 450, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -852,16 +429,7 @@
       "category": "armor",
       "slot": "body",
       "series": "tyrant",
-      "base_add": {
-        "vit": 2500,
-        "spd": 0,
-        "atk": 800,
-        "int": 400,
-        "def": 950,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 333
-      },
+      "base_add": {"vit": 2500, "spd": 0, "atk": 800, "int": 400, "def": 950, "mdef": 0, "luk": 0, "mov": 333},
       "base_rate": {}
     },
     {
@@ -870,16 +438,7 @@
       "category": "armor",
       "slot": "body",
       "series": "",
-      "base_add": {
-        "vit": 7555,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 955,
-        "mdef": 0,
-        "luk": 955,
-        "mov": 0
-      },
+      "base_add": {"vit": 7555, "spd": 0, "atk": 0, "int": 0, "def": 955, "mdef": 0, "luk": 955, "mov": 0},
       "base_rate": {}
     },
     {
@@ -888,16 +447,7 @@
       "category": "armor",
       "slot": "shield",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -906,16 +456,7 @@
       "category": "armor",
       "slot": "shield",
       "series": "leather",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 15,
-        "mdef": 14,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 15, "mdef": 14, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -924,16 +465,7 @@
       "category": "armor",
       "slot": "shield",
       "series": "metal",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 70,
-        "mdef": 33,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 70, "mdef": 33, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -942,16 +474,7 @@
       "category": "armor",
       "slot": "shield",
       "series": "platinum",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 130,
-        "mdef": 109,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 130, "mdef": 109, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -960,16 +483,7 @@
       "category": "armor",
       "slot": "shield",
       "series": "mage",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 55,
-        "def": 25,
-        "mdef": 155,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 55, "def": 25, "mdef": 155, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -978,16 +492,7 @@
       "category": "armor",
       "slot": "shield",
       "series": "inferno",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 155,
-        "int": 0,
-        "def": 155,
-        "mdef": 155,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 155, "int": 0, "def": 155, "mdef": 155, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -996,16 +501,7 @@
       "category": "armor",
       "slot": "shield",
       "series": "dragon",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 850,
-        "int": 0,
-        "def": 550,
-        "mdef": 550,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 850, "int": 0, "def": 550, "mdef": 550, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -1014,16 +510,7 @@
       "category": "armor",
       "slot": "shield",
       "series": "tyrant",
-      "base_add": {
-        "vit": 99000,
-        "spd": 0,
-        "atk": 99000,
-        "int": 0,
-        "def": 99000,
-        "mdef": 99000,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 99000, "spd": 0, "atk": 99000, "int": 0, "def": 99000, "mdef": 99000, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -1032,16 +519,7 @@
       "category": "armor",
       "slot": "shield",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 6565,
-        "mdef": 2555,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 6565, "mdef": 2555, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -1050,16 +528,7 @@
       "category": "armor",
       "slot": "hands",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -1068,16 +537,7 @@
       "category": "armor",
       "slot": "hands",
       "series": "leather",
-      "base_add": {
-        "vit": 0,
-        "spd": 11,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 13,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 11, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 13, "mov": 0},
       "base_rate": {}
     },
     {
@@ -1086,16 +546,7 @@
       "category": "armor",
       "slot": "hands",
       "series": "metal",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 23,
-        "mdef": 23,
-        "luk": 23,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 23, "mdef": 23, "luk": 23, "mov": 0},
       "base_rate": {}
     },
     {
@@ -1104,16 +555,7 @@
       "category": "armor",
       "slot": "hands",
       "series": "platinum",
-      "base_add": {
-        "vit": 0,
-        "spd": 79,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 125,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 79, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 125, "mov": 0},
       "base_rate": {}
     },
     {
@@ -1122,16 +564,7 @@
       "category": "armor",
       "slot": "hands",
       "series": "mage",
-      "base_add": {
-        "vit": 0,
-        "spd": 57,
-        "atk": 0,
-        "int": 57,
-        "def": 0,
-        "mdef": 45,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 57, "atk": 0, "int": 57, "def": 0, "mdef": 45, "luk": 0, "mov": 0},
       "base_rate": {}
     },
     {
@@ -1140,16 +573,7 @@
       "category": "armor",
       "slot": "hands",
       "series": "inferno",
-      "base_add": {
-        "vit": 0,
-        "spd": 200,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 130,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 200, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 130, "mov": 0},
       "base_rate": {}
     },
     {
@@ -1158,16 +582,7 @@
       "category": "armor",
       "slot": "hands",
       "series": "dragon",
-      "base_add": {
-        "vit": 0,
-        "spd": 1250,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 350,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 1250, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 350, "mov": 0},
       "base_rate": {}
     },
     {
@@ -1176,16 +591,7 @@
       "category": "armor",
       "slot": "hands",
       "series": "tyrant",
-      "base_add": {
-        "vit": 800,
-        "spd": 0,
-        "atk": 800,
-        "int": 800,
-        "def": 0,
-        "mdef": 800,
-        "luk": 400,
-        "mov": 0
-      },
+      "base_add": {"vit": 800, "spd": 0, "atk": 800, "int": 800, "def": 0, "mdef": 800, "luk": 400, "mov": 0},
       "base_rate": {}
     },
     {
@@ -1194,16 +600,7 @@
       "category": "armor",
       "slot": "hands",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 2555,
-        "def": 0,
-        "mdef": 1655,
-        "luk": 4655,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 2555, "def": 0, "mdef": 1655, "luk": 4655, "mov": 0},
       "base_rate": {}
     },
     {
@@ -1212,16 +609,7 @@
       "category": "armor",
       "slot": "feet",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 5,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 4
-      },
+      "base_add": {"vit": 0, "spd": 5, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 4},
       "base_rate": {}
     },
     {
@@ -1230,16 +618,7 @@
       "category": "armor",
       "slot": "feet",
       "series": "leather",
-      "base_add": {
-        "vit": 0,
-        "spd": 16,
-        "atk": 0,
-        "int": 0,
-        "def": 11,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 5
-      },
+      "base_add": {"vit": 0, "spd": 16, "atk": 0, "int": 0, "def": 11, "mdef": 0, "luk": 0, "mov": 5},
       "base_rate": {}
     },
     {
@@ -1248,16 +627,7 @@
       "category": "armor",
       "slot": "feet",
       "series": "metal",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 41,
-        "mdef": 11,
-        "luk": 11,
-        "mov": 3
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 41, "mdef": 11, "luk": 11, "mov": 3},
       "base_rate": {}
     },
     {
@@ -1266,16 +636,7 @@
       "category": "armor",
       "slot": "feet",
       "series": "platinum",
-      "base_add": {
-        "vit": 0,
-        "spd": 53,
-        "atk": 0,
-        "int": 0,
-        "def": 25,
-        "mdef": 75,
-        "luk": 0,
-        "mov": 6
-      },
+      "base_add": {"vit": 0, "spd": 53, "atk": 0, "int": 0, "def": 25, "mdef": 75, "luk": 0, "mov": 6},
       "base_rate": {}
     },
     {
@@ -1284,16 +645,7 @@
       "category": "armor",
       "slot": "feet",
       "series": "mage",
-      "base_add": {
-        "vit": 0,
-        "spd": 70,
-        "atk": 0,
-        "int": 0,
-        "def": 50,
-        "mdef": 63,
-        "luk": 0,
-        "mov": 5
-      },
+      "base_add": {"vit": 0, "spd": 70, "atk": 0, "int": 0, "def": 50, "mdef": 63, "luk": 0, "mov": 5},
       "base_rate": {}
     },
     {
@@ -1302,16 +654,7 @@
       "category": "armor",
       "slot": "feet",
       "series": "inferno",
-      "base_add": {
-        "vit": 0,
-        "spd": 140,
-        "atk": 170,
-        "int": 0,
-        "def": 90,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 5
-      },
+      "base_add": {"vit": 0, "spd": 140, "atk": 170, "int": 0, "def": 90, "mdef": 0, "luk": 0, "mov": 5},
       "base_rate": {}
     },
     {
@@ -1320,16 +663,7 @@
       "category": "armor",
       "slot": "feet",
       "series": "dragon",
-      "base_add": {
-        "vit": 0,
-        "spd": 350,
-        "atk": 850,
-        "int": 0,
-        "def": 350,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 6
-      },
+      "base_add": {"vit": 0, "spd": 350, "atk": 850, "int": 0, "def": 350, "mdef": 0, "luk": 0, "mov": 6},
       "base_rate": {}
     },
     {
@@ -1338,16 +672,7 @@
       "category": "armor",
       "slot": "feet",
       "series": "tyrant",
-      "base_add": {
-        "vit": 0,
-        "spd": 1300,
-        "atk": 600,
-        "int": 0,
-        "def": 1200,
-        "mdef": 600,
-        "luk": 0,
-        "mov": 4
-      },
+      "base_add": {"vit": 0, "spd": 1300, "atk": 600, "int": 0, "def": 1200, "mdef": 600, "luk": 0, "mov": 4},
       "base_rate": {}
     },
     {
@@ -1356,16 +681,7 @@
       "category": "armor",
       "slot": "feet",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 5515,
-        "atk": 0,
-        "int": 0,
-        "def": 3315,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 5
-      },
+      "base_add": {"vit": 0, "spd": 5515, "atk": 0, "int": 0, "def": 3315, "mdef": 0, "luk": 0, "mov": 5},
       "base_rate": {}
     },
     {
@@ -1374,26 +690,8 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 100000,
       "display_effects": []
     },
@@ -1403,35 +701,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 155,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 155, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 100,
-      "display_effects": [
-        {
-          "type": "flat",
-          "target": "vit",
-          "initial": 155,
-          "max": 1690
-        }
-      ]
+      "display_effects": [{"type": "flat", "target": "vit", "initial": 155, "max": 1690}]
     },
     {
       "id": "heartbeat_core",
@@ -1439,35 +712,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 15,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 15, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 500,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "vit",
-          "initial": "15%",
-          "max": "89.9%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "vit", "initial": "15%", "max": "89.9%"}]
     },
     {
       "id": "sun_soul_ring_vit",
@@ -1475,35 +723,21 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 30,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 30, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 1000,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "vit",
-          "initial": "30%",
-          "max": "329.7%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "vit", "initial": "30%", "max": "329.7%"}]
+    },
+    {
+      "id": "enmei_gene",
+      "name": "延命の遺伝子",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 300, "spd": 0, "atk": 0, "int": 0, "def": 150, "mdef": 150, "luk": 0, "mov": 0},
+      "max_level": 10,
+      "display_effects": [{"type": "rate", "target": "vit", "initial": "300%", "max": "309.9%"}, {"type": "rate", "target": "def", "initial": "150%", "max": "159.9%"}, {"type": "rate", "target": "mdef", "initial": "150%", "max": "159.9%"}]
     },
     {
       "id": "wind_crest",
@@ -1511,35 +745,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 135,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 135, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 100,
-      "display_effects": [
-        {
-          "type": "flat",
-          "target": "spd",
-          "initial": 135,
-          "max": 1472
-        }
-      ]
+      "display_effects": [{"type": "flat", "target": "spd", "initial": 135, "max": 1472}]
     },
     {
       "id": "sen_ga_star",
@@ -1547,35 +756,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 15,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 15, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 500,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "spd",
-          "initial": "15%",
-          "max": "89.9%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "spd", "initial": "15%", "max": "89.9%"}]
     },
     {
       "id": "blood_tonic",
@@ -1583,41 +767,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 90,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 5,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 90, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 5, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 100,
-      "display_effects": [
-        {
-          "type": "flat",
-          "target": "atk",
-          "initial": 90,
-          "max": 981
-        },
-        {
-          "type": "rate",
-          "target": "atk",
-          "initial": "5%",
-          "max": "10.0%"
-        }
-      ]
+      "display_effects": [{"type": "flat", "target": "atk", "initial": 90, "max": 981}, {"type": "rate", "target": "atk", "initial": "5%", "max": "10.0%"}]
     },
     {
       "id": "power_bottle",
@@ -1625,35 +778,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 20,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 20, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 500,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "atk",
-          "initial": "20%",
-          "max": "119.8%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "atk", "initial": "20%", "max": "119.8%"}]
     },
     {
       "id": "weapon_sync_atk",
@@ -1661,35 +789,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 30,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 30, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 1000,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "atk",
-          "initial": "30%",
-          "max": "329.7%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "atk", "initial": "30%", "max": "329.7%"}]
     },
     {
       "id": "arc_grimoire",
@@ -1697,41 +800,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 30,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 25,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 30, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 25, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 100,
-      "display_effects": [
-        {
-          "type": "flat",
-          "target": "int",
-          "initial": 30,
-          "max": 327
-        },
-        {
-          "type": "rate",
-          "target": "int",
-          "initial": "25%",
-          "max": "49.8%"
-        }
-      ]
+      "display_effects": [{"type": "flat", "target": "int", "initial": 30, "max": 327}, {"type": "rate", "target": "int", "initial": "25%", "max": "49.8%"}]
     },
     {
       "id": "creation_orb",
@@ -1739,35 +811,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 20,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 20, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 500,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "int",
-          "initial": "20%",
-          "max": "119.8%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "int", "initial": "20%", "max": "119.8%"}]
     },
     {
       "id": "mana_lantern_int",
@@ -1775,35 +822,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 30,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 30, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 1000,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "int",
-          "initial": "30%",
-          "max": "329.7%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "int", "initial": "30%", "max": "329.7%"}]
     },
     {
       "id": "force_module",
@@ -1811,41 +833,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 80,
-        "mdef": 90,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 80, "mdef": 90, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 100,
-      "display_effects": [
-        {
-          "type": "flat",
-          "target": "def",
-          "initial": 80,
-          "max": 872
-        },
-        {
-          "type": "flat",
-          "target": "mdef",
-          "initial": 90,
-          "max": 981
-        }
-      ]
+      "display_effects": [{"type": "flat", "target": "def", "initial": 80, "max": 872}, {"type": "flat", "target": "mdef", "initial": 90, "max": 981}]
     },
     {
       "id": "knights_mind",
@@ -1853,35 +844,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 15,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 15, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 500,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "def",
-          "initial": "15%",
-          "max": "89.9%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "def", "initial": "15%", "max": "89.9%"}]
     },
     {
       "id": "meijin_jin",
@@ -1889,35 +855,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 50,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 50, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 1000,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "def",
-          "initial": "50%",
-          "max": "549.5%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "def", "initial": "50%", "max": "549.5%"}]
     },
     {
       "id": "magi_bind",
@@ -1925,35 +866,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 25,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 25, "luk": 0, "mov": 0},
       "max_level": 100,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "mdef",
-          "initial": "25%",
-          "max": "49.8%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "mdef", "initial": "25%", "max": "49.8%"}]
     },
     {
       "id": "barrier_storm",
@@ -1961,35 +877,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 15,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 15, "luk": 0, "mov": 0},
       "max_level": 500,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "mdef",
-          "initial": "15%",
-          "max": "89.9%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "mdef", "initial": "15%", "max": "89.9%"}]
     },
     {
       "id": "hexa_skull",
@@ -1997,35 +888,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 50,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 50, "luk": 0, "mov": 0},
       "max_level": 1000,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "mdef",
-          "initial": "50%",
-          "max": "549.5%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "mdef", "initial": "50%", "max": "549.5%"}]
     },
     {
       "id": "lucky_trump",
@@ -2033,41 +899,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 99,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 15,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 99, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 15, "mov": 0},
       "max_level": 100,
-      "display_effects": [
-        {
-          "type": "flat",
-          "target": "luk",
-          "initial": 99,
-          "max": 1079
-        },
-        {
-          "type": "rate",
-          "target": "luk",
-          "initial": "15%",
-          "max": "29.9%"
-        }
-      ]
+      "display_effects": [{"type": "flat", "target": "luk", "initial": 99, "max": 1079}, {"type": "rate", "target": "luk", "initial": "15%", "max": "29.9%"}]
     },
     {
       "id": "fate_eye",
@@ -2075,35 +910,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 25,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 25, "mov": 0},
       "max_level": 500,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "luk",
-          "initial": "25%",
-          "max": "149.8%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "luk", "initial": "25%", "max": "149.8%"}]
     },
     {
       "id": "gallop_talisman",
@@ -2111,35 +921,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 2
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 2},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 1,
-      "display_effects": [
-        {
-          "type": "flat",
-          "target": "mov",
-          "initial": 2,
-          "max": 2
-        }
-      ]
+      "display_effects": [{"type": "flat", "target": "mov", "initial": 2, "max": 2}]
     },
     {
       "id": "vortex_core",
@@ -2147,35 +932,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 3
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 3},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 1,
-      "display_effects": [
-        {
-          "type": "flat",
-          "target": "mov",
-          "initial": 3,
-          "max": 3
-        }
-      ]
+      "display_effects": [{"type": "flat", "target": "mov", "initial": 3, "max": 3}]
     },
     {
       "id": "jibakushin",
@@ -2183,35 +943,21 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 1000,
-      "display_effects": [
-        {
-          "type": "special",
-          "target": "recovery",
-          "initial": 100,
-          "max": 20080
-        }
-      ]
+      "display_effects": [{"type": "special", "target": "recovery", "initial": 100, "max": 20080}]
+    },
+    {
+      "id": "regene_core",
+      "name": "リジェネコア",
+      "category": "accessory",
+      "slot": "accessory",
+      "series": "",
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "max_level": 1,
+      "display_effects": [{"type": "special_rate", "target": "recovery", "initial": "5%", "max": "5%"}]
     },
     {
       "id": "memorial_page",
@@ -2219,35 +965,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 300,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "exp",
-          "initial": "30%",
-          "max": "119.7%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "exp", "initial": "30%", "max": "119.7%"}]
     },
     {
       "id": "sages_cup",
@@ -2255,35 +976,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 300,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "exp",
-          "initial": "50%",
-          "max": "199.5%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "exp", "initial": "50%", "max": "199.5%"}]
     },
     {
       "id": "expedia_compass",
@@ -2291,35 +987,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 300,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "exp",
-          "initial": "100%",
-          "max": "399.0%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "exp", "initial": "100%", "max": "399.0%"}]
     },
     {
       "id": "chiyou_hai",
@@ -2327,35 +998,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 1000,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "exp",
-          "initial": "180%",
-          "max": "1978.2%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "exp", "initial": "180%", "max": "1978.2%"}]
     },
     {
       "id": "arc_gate",
@@ -2363,41 +1009,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 10,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "exp",
-          "initial": "500%",
-          "max": "545.0%"
-        },
-        {
-          "type": "special_rate",
-          "target": "drop",
-          "initial": "500%",
-          "max": "545.0%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "exp", "initial": "500%", "max": "545.0%"}, {"type": "special_rate", "target": "drop", "initial": "500%", "max": "545.0%"}]
     },
     {
       "id": "tame_mask",
@@ -2405,35 +1020,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 300,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "capture",
-          "initial": "30%",
-          "max": "119.7%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "capture", "initial": "30%", "max": "119.7%"}]
     },
     {
       "id": "miyuu_hai",
@@ -2441,35 +1031,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 300,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "capture",
-          "initial": "50%",
-          "max": "199.5%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "capture", "initial": "50%", "max": "199.5%"}]
     },
     {
       "id": "contact_letter",
@@ -2477,35 +1042,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 300,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "capture",
-          "initial": "80%",
-          "max": "319.2%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "capture", "initial": "80%", "max": "319.2%"}]
     },
     {
       "id": "soul_chain",
@@ -2513,35 +1053,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 1000,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "capture",
-          "initial": "100%",
-          "max": "1099.0%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "capture", "initial": "100%", "max": "1099.0%"}]
     },
     {
       "id": "dominus_throne",
@@ -2549,41 +1064,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 10,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "exp",
-          "initial": "500%",
-          "max": "545.0%"
-        },
-        {
-          "type": "special_rate",
-          "target": "capture",
-          "initial": "500%",
-          "max": "545.0%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "exp", "initial": "500%", "max": "545.0%"}, {"type": "special_rate", "target": "capture", "initial": "500%", "max": "545.0%"}]
     },
     {
       "id": "orbital_ring",
@@ -2591,35 +1075,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 300,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "drop",
-          "initial": "30%",
-          "max": "119.7%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "drop", "initial": "30%", "max": "119.7%"}]
     },
     {
       "id": "search_unit",
@@ -2627,35 +1086,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 1000,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "drop",
-          "initial": "50%",
-          "max": "549.5%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "drop", "initial": "50%", "max": "549.5%"}]
     },
     {
       "id": "fortune_pot",
@@ -2663,35 +1097,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
       "max_level": 10,
-      "display_effects": [
-        {
-          "type": "special_rate",
-          "target": "drop",
-          "initial": "1000%",
-          "max": "1090.0%"
-        }
-      ]
+      "display_effects": [{"type": "special_rate", "target": "drop", "initial": "1000%", "max": "1090.0%"}]
     },
     {
       "id": "shichiri_houkan",
@@ -2699,71 +1108,10 @@
       "category": "accessory",
       "slot": "accessory",
       "series": "",
-      "base_add": {
-        "vit": 0,
-        "spd": 0,
-        "atk": 0,
-        "int": 0,
-        "def": 0,
-        "mdef": 0,
-        "luk": 0,
-        "mov": 0
-      },
-      "base_rate": {
-        "vit": 50,
-        "spd": 50,
-        "atk": 50,
-        "int": 50,
-        "def": 50,
-        "mdef": 50,
-        "luk": 50,
-        "mov": 0
-      },
+      "base_add": {"vit": 0, "spd": 0, "atk": 0, "int": 0, "def": 0, "mdef": 0, "luk": 0, "mov": 0},
+      "base_rate": {"vit": 50, "spd": 50, "atk": 50, "int": 50, "def": 50, "mdef": 50, "luk": 50, "mov": 0},
       "max_level": 100,
-      "display_effects": [
-        {
-          "type": "rate",
-          "target": "vit",
-          "initial": "50%",
-          "max": "99.5%"
-        },
-        {
-          "type": "rate",
-          "target": "spd",
-          "initial": "50%",
-          "max": "99.5%"
-        },
-        {
-          "type": "rate",
-          "target": "atk",
-          "initial": "50%",
-          "max": "99.5%"
-        },
-        {
-          "type": "rate",
-          "target": "int",
-          "initial": "50%",
-          "max": "99.5%"
-        },
-        {
-          "type": "rate",
-          "target": "def",
-          "initial": "50%",
-          "max": "99.5%"
-        },
-        {
-          "type": "rate",
-          "target": "mdef",
-          "initial": "50%",
-          "max": "99.5%"
-        },
-        {
-          "type": "rate",
-          "target": "luk",
-          "initial": "50%",
-          "max": "99.5%"
-        }
-      ]
+      "display_effects": [{"type": "rate", "target": "vit", "initial": "50%", "max": "99.5%"}, {"type": "rate", "target": "spd", "initial": "50%", "max": "99.5%"}, {"type": "rate", "target": "atk", "initial": "50%", "max": "99.5%"}, {"type": "rate", "target": "int", "initial": "50%", "max": "99.5%"}, {"type": "rate", "target": "def", "initial": "50%", "max": "99.5%"}, {"type": "rate", "target": "mdef", "initial": "50%", "max": "99.5%"}, {"type": "rate", "target": "luk", "initial": "50%", "max": "99.5%"}]
     }
   ]
 }
