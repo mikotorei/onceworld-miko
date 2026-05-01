@@ -11,6 +11,20 @@ document.addEventListener("DOMContentLoaded", function () {
   // 天空マップに出現しないモンスターのIDを列挙する
   const EXCLUDED_IDS = [
     // 例: "m001", "m002"
+    "m201",
+    "m202",
+    "m203",
+    "m204",
+    "m205",
+    "m206",
+    "m207",
+    "m241",
+    "m242",
+    "m243",
+    "m244",
+    "m245",
+    "m246",
+    "m247",
   ];
 
   const TOP_N = 15;
