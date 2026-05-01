@@ -1,0 +1,70 @@
+{{ define "main" }}
+<div class="tenku-tool">
+  <div class="tenku-header">
+    <h1 class="tenku-title">{{ .Title }}</h1>
+    <p class="tenku-desc">{{ .Description }}</p>
+  </div>
+
+  <div class="tenku-controls">
+    <!-- 階層入力 -->
+    <div class="control-group">
+      <label for="tenku-floor">階層（n）</label>
+      <div class="floor-input-wrap">
+        <input type="number" id="tenku-floor" min="1" max="999" value="1" placeholder="1">
+        <span class="floor-label">階　→　Lv <span id="tenku-lv-display">10100</span></span>
+      </div>
+    </div>
+
+    <!-- デバフトグル -->
+    <div class="control-group">
+      <label>デバフ</label>
+      <div class="toggle-group">
+        <label class="toggle-label">
+          <input type="checkbox" id="debuff-dark">
+          <span class="toggle-btn">闇魔法（LUK半減）</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- ステータス列選択 -->
+    <div class="control-group full-width">
+      <label>表示・ソート列</label>
+      <div class="col-select-group" id="col-select-group">
+        <label class="col-btn active" data-col="vit"><input type="radio" name="sort-col" value="vit" checked> VIT</label>
+        <label class="col-btn" data-col="spd"><input type="radio" name="sort-col" value="spd"> SPD</label>
+        <label class="col-btn" data-col="atk"><input type="radio" name="sort-col" value="atk"> ATK</label>
+        <label class="col-btn" data-col="int"><input type="radio" name="sort-col" value="int"> INT</label>
+        <label class="col-btn" data-col="def"><input type="radio" name="sort-col" value="def"> DEF</label>
+        <label class="col-btn" data-col="mdef"><input type="radio" name="sort-col" value="mdef"> MDEF</label>
+        <label class="col-btn" data-col="luk"><input type="radio" name="sort-col" value="luk"> LUK</label>
+        <label class="col-btn" data-col="mov"><input type="radio" name="sort-col" value="mov"> MOV</label>
+        <label class="col-btn" data-col="req_def"><input type="radio" name="sort-col" value="req_def"> 無効DEF</label>
+        <label class="col-btn" data-col="req_mdef"><input type="radio" name="sort-col" value="req_mdef"> 無効MDEF</label>
+        <label class="col-btn" data-col="evade_luk"><input type="radio" name="sort-col" value="evade_luk"> 回避LUK</label>
+        <label class="col-btn" data-col="hit_min_luk"><input type="radio" name="sort-col" value="hit_min_luk"> 最低命中LUK</label>
+        <label class="col-btn" data-col="hit_stable_luk"><input type="radio" name="sort-col" value="hit_stable_luk"> 安定命中LUK</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- 結果テーブル -->
+  <div class="tenku-result">
+    <div class="result-meta" id="result-meta"></div>
+    <div class="table-wrap">
+      <table class="tenku-table" id="tenku-table">
+        <thead>
+          <tr id="tenku-thead-row"></tr>
+        </thead>
+        <tbody id="tenku-tbody"></tbody>
+      </table>
+    </div>
+    <div class="no-result" id="tenku-no-result" style="display:none;">該当するモンスターが見つかりません</div>
+  </div>
+</div>
+
+{{ $monsterDataJS := resources.Get "js/MonsterData.js" }}
+{{ if $monsterDataJS }}
+  <script src="{{ $monsterDataJS.RelPermalink }}"></script>
+{{ end }}
+<script src="{{ "js/tenku.js" | relURL }}"></script>
+{{ end }}
