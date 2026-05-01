@@ -1,5 +1,5 @@
 // ============================================================
-// tenku.js  天空マップ モンスターステータスツール
+// tenku.js  天空回廊計算表
 // ============================================================
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -10,23 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 天空マップに出現しないモンスターのIDを列挙する
   const EXCLUDED_IDS = [
-    // 例: "001", "002"
-    "201",
-    "202",
-    "203",
-    "204",
-    "205",
-    "206",
-    "207",
-    "241",
-    "242",
-    "243",
-    "244",
-    "245",
-    "246",
-    "247",
-    '248',
-    '249',
+    // 例: "001", "042"
   ];
 
   const TOP_N = 15;
@@ -36,28 +20,23 @@ document.addEventListener("DOMContentLoaded", function () {
   // ============================================================
 
   const COLUMNS = [
-    { key: "vit",           label: "VIT",       statType: "enemy" },
-    { key: "spd",           label: "SPD",       statType: "enemy" },
-    { key: "atk",           label: "ATK",       statType: "enemy" },
-    { key: "int",           label: "INT",       statType: "enemy" },
-    { key: "def",           label: "DEF",       statType: "enemy" },
-    { key: "mdef",          label: "MDEF",      statType: "enemy" },
-    { key: "luk",           label: "LUK",       statType: "enemy" },
-    { key: "mov",           label: "MOV",       statType: "enemy" },
-    { key: "req_def",       label: "無効DEF",   statType: "req",
-      tooltip: "この敵の物理攻撃を無効化するために必要な自分のDEF" },
-    { key: "req_mdef",      label: "無効MDEF",  statType: "req",
-      tooltip: "この敵の魔法攻撃を無効化するために必要な自分のMDEF" },
-    { key: "evade_luk",     label: "回避LUK",   statType: "req",
-      tooltip: "この敵の攻撃を回避するために必要な自分のLUK" },
-    { key: "hit_min_luk",   label: "最低命中LUK", statType: "req",
-      tooltip: "この敵に最低限命中するために必要な自分のLUK" },
-    { key: "hit_stable_luk",label: "安定命中LUK", statType: "req",
-      tooltip: "この敵に安定して命中するために必要な自分のLUK" },
+    { key: "vit",            label: "VIT",         tooltip: "" },
+    { key: "spd",            label: "SPD",         tooltip: "" },
+    { key: "atk",            label: "ATK",         tooltip: "" },
+    { key: "int",            label: "INT",         tooltip: "" },
+    { key: "def",            label: "DEF",         tooltip: "" },
+    { key: "mdef",           label: "MDEF",        tooltip: "" },
+    { key: "luk",            label: "LUK",         tooltip: "" },
+    { key: "mov",            label: "MOV",         tooltip: "" },
+    { key: "req_def",        label: "無効DEF",     tooltip: "物理攻撃を無効化するために必要な自分のDEF" },
+    { key: "req_mdef",       label: "無効MDEF",    tooltip: "魔法攻撃を無効化するために必要な自分のMDEF" },
+    { key: "evade_luk",      label: "回避LUK",     tooltip: "攻撃を回避するために必要な自分のLUK" },
+    { key: "hit_min_luk",    label: "最低命中LUK", tooltip: "最低限命中するために必要な自分のLUK" },
+    { key: "hit_stable_luk", label: "安定命中LUK", tooltip: "安定して命中するために必要な自分のLUK" },
   ];
 
   // ============================================================
-  // ユーティリティ
+  // 計算ユーティリティ
   // ============================================================
 
   function scaleStat(base, lv) {
@@ -76,18 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return Math.floor((i * 7 - 10) / 4) + 1;
   }
 
-  function evadeLuk(enemyLuk) {
-    return Math.floor(Number(enemyLuk) * 3);
-  }
-
-  function hitMinLuk(enemyLuk) {
-    return Math.floor(Number(enemyLuk) / 2);
-  }
-
-  function hitStableLuk(enemyLuk) {
-    return Math.floor(Number(enemyLuk));
-  }
-
   function fmt(n) {
     if (!Number.isFinite(n)) return "—";
     return n.toLocaleString();
@@ -102,14 +69,13 @@ document.addEventListener("DOMContentLoaded", function () {
       ? Math.floor(scaleStat(monster.luk, lv) / 2)
       : scaleStat(monster.luk, lv);
 
-    const atkScaled  = scaleStat(monster.atk, lv);
-    const intScaled  = scaleStat(monster.int, lv);
+    const atkScaled = scaleStat(monster.atk, lv);
+    const intScaled = scaleStat(monster.int, lv);
 
     return {
       id:    monster.id,
       title: monster.title,
 
-      // 敵ステータス
       vit:  scaleStat(monster.vit,  lv),
       spd:  scaleStat(monster.spd,  lv),
       atk:  atkScaled,
@@ -119,12 +85,11 @@ document.addEventListener("DOMContentLoaded", function () {
       luk:  lukScaled,
       mov:  scaleStat(monster.mov,  lv),
 
-      // 要求ステータス
       req_def:        requiredDefForNullify(atkScaled),
       req_mdef:       requiredMdefForNullify(intScaled),
-      evade_luk:      evadeLuk(lukScaled),
-      hit_min_luk:    hitMinLuk(lukScaled),
-      hit_stable_luk: hitStableLuk(lukScaled),
+      evade_luk:      Math.floor(lukScaled * 3),
+      hit_min_luk:    Math.floor(lukScaled / 2),
+      hit_stable_luk: lukScaled,
     };
   }
 
@@ -144,17 +109,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ============================================================
-  // UI 更新
+  // DOM参照
   // ============================================================
 
-  const floorInput    = document.getElementById("tenku-floor");
-  const lvDisplay     = document.getElementById("tenku-lv-display");
-  const debuffDarkCb  = document.getElementById("debuff-dark");
-  const theadRow      = document.getElementById("tenku-thead-row");
-  const tbody         = document.getElementById("tenku-tbody");
-  const resultMeta    = document.getElementById("result-meta");
-  const noResult      = document.getElementById("tenku-no-result");
-  const colBtns       = document.querySelectorAll(".col-btn");
+  const floorInput   = document.getElementById("tenku-floor");
+  const lvDisplay    = document.getElementById("tenku-lv-display");
+  const debuffDarkCb = document.getElementById("debuff-dark");
+  const theadRow     = document.getElementById("tenku-thead-row");
+  const tbody        = document.getElementById("tenku-tbody");
+  const resultMeta   = document.getElementById("result-meta");
+  const noResult     = document.getElementById("tenku-no-result");
+  const colBtns      = document.querySelectorAll(".col-btn");
+
+  // ============================================================
+  // UI更新
+  // ============================================================
 
   function getFloor() {
     const v = parseInt(floorInput.value, 10);
@@ -172,6 +141,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function getColDef(key) {
     return COLUMNS.find(c => c.key === key);
+  }
+
+  function rankClass(i) {
+    if (i === 0) return "rank-1";
+    if (i === 1) return "rank-2";
+    if (i === 2) return "rank-3";
+    return "rank-other";
   }
 
   function renderTable() {
@@ -203,35 +179,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
     noResult.style.display = "none";
 
-    // ヘッダ
-    const sortColDef = getColDef(sortKey);
-    const colLabel   = sortColDef ? sortColDef.label : sortKey;
+    const colDef   = getColDef(sortKey);
+    const colLabel = colDef ? colDef.label : sortKey;
+
+    // result meta
     resultMeta.textContent =
       `${floor}階（Lv ${lv.toLocaleString()}）／ ${colLabel} 上位${rows.length}体`;
 
     // thead
     theadRow.innerHTML = "";
+
     const thName = document.createElement("th");
     thName.textContent = "モンスター";
     theadRow.appendChild(thName);
+
     const thVal = document.createElement("th");
     thVal.textContent = colLabel;
     thVal.className = "col-highlight";
-    if (sortColDef && sortColDef.tooltip) thVal.title = sortColDef.tooltip;
+    if (colDef && colDef.tooltip) thVal.title = colDef.tooltip;
     theadRow.appendChild(thVal);
 
     // tbody
     tbody.innerHTML = "";
     rows.forEach((row, i) => {
       const tr = document.createElement("tr");
-      if (i === 0) tr.className = "rank-1";
-      else if (i < 3) tr.className = "rank-top3";
+      tr.className = rankClass(i);
 
+      // モンスター名セル（ランクバッジ付き）
       const tdName = document.createElement("td");
-      tdName.className = "monster-name";
-      tdName.textContent = row.title;
+      const nameWrap = document.createElement("span");
+      nameWrap.className = "monster-name-cell";
+
+      const badge = document.createElement("span");
+      badge.className = "rank-badge";
+      badge.textContent = i + 1;
+
+      nameWrap.appendChild(badge);
+      nameWrap.appendChild(document.createTextNode(row.title));
+      tdName.appendChild(nameWrap);
       tr.appendChild(tdName);
 
+      // 値セル
       const tdVal = document.createElement("td");
       tdVal.className = "col-highlight";
       tdVal.textContent = fmt(row[sortKey]);
@@ -248,7 +236,6 @@ document.addEventListener("DOMContentLoaded", function () {
   floorInput.addEventListener("input", renderTable);
   debuffDarkCb.addEventListener("change", renderTable);
 
-  // ラジオボタン切り替え時にアクティブクラスを更新
   colBtns.forEach(btn => {
     btn.addEventListener("click", function () {
       colBtns.forEach(b => b.classList.remove("active"));
