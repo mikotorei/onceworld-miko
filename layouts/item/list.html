@@ -1,61 +1,47 @@
 {{ define "main" }}
 <link rel="stylesheet" href="{{ "css/item.css" | relURL }}">
 
-<h1 class="d-title">素材一覧</h1>
+<h1 class="d-title">{{ .Title }}</h1>
 
-{{/* カテゴリでグループ化 */}}
-{{ $items := where site.Pages "Section" "item" }}
-{{ $items = where $items "Kind" "page" }}
+{{/* カテゴリ別に分類しweightで並び替え */}}
+{{ $normal := where .Pages "Params.category" "通常素材" }}
+{{ $effect := where .Pages "Params.category" "効果素材" }}
 
-{{ $categories := slice }}
-{{ range $items }}
-  {{ $cat := .Params.category | default "その他" }}
-  {{ if not (in $categories $cat) }}
-    {{ $categories = $categories | append $cat }}
-  {{ end }}
-{{ end }}
-
-{{ range $categories }}
-{{ $cat := . }}
-{{ $catItems := where $items ".Params.category" $cat }}
-{{ with $catItems }}
+{{ if $normal }}
 <section class="d-block">
-  <h2 class="d-h2">{{ $cat }}</h2>
-  <ul class="item-list-grid">
-    {{ range . }}
-    <li class="item-list-card">
-      <a href="{{ .RelPermalink }}">
+  <h2 class="d-h2">通常素材</h2>
+  <ul class="d-item-list">
+    {{ range $normal.ByWeight }}
+    <li>
+      <a class="d-item-link" href="{{ .RelPermalink }}">
         {{ with .Params.image }}
           {{ $img := strings.TrimPrefix "/" . }}
-          <img src="{{ $img | relURL }}" alt="{{ $.Title }}">
+          <img class="d-item-icon" src="{{ $img | relURL }}" alt="{{ $.Title }}">
         {{ else }}
-          <div class="item-thumb-placeholder"></div>
+          <span class="d-item-icon d-item-icon--empty"></span>
         {{ end }}
-        <span>{{ .Title }}</span>
+        <span class="d-item-name">{{ .Title }}</span>
       </a>
     </li>
     {{ end }}
   </ul>
 </section>
 {{ end }}
-{{ end }}
 
-{{/* カテゴリ未設定のアイテム */}}
-{{ $uncategorized := where $items ".Params.category" nil }}
-{{ with $uncategorized }}
+{{ if $effect }}
 <section class="d-block">
-  <h2 class="d-h2">その他</h2>
-  <ul class="item-list-grid">
-    {{ range . }}
-    <li class="item-list-card">
-      <a href="{{ .RelPermalink }}">
+  <h2 class="d-h2">効果素材</h2>
+  <ul class="d-item-list">
+    {{ range $effect.ByWeight }}
+    <li>
+      <a class="d-item-link" href="{{ .RelPermalink }}">
         {{ with .Params.image }}
           {{ $img := strings.TrimPrefix "/" . }}
-          <img src="{{ $img | relURL }}" alt="{{ $.Title }}">
+          <img class="d-item-icon" src="{{ $img | relURL }}" alt="{{ $.Title }}">
         {{ else }}
-          <div class="item-thumb-placeholder"></div>
+          <span class="d-item-icon d-item-icon--empty"></span>
         {{ end }}
-        <span>{{ .Title }}</span>
+        <span class="d-item-name">{{ .Title }}</span>
       </a>
     </li>
     {{ end }}
