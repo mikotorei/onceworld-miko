@@ -31,6 +31,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const TOP_N = 15;
 
+  // 列ごとのattack_typeフィルタ定義
+  // null = フィルタなし（全モンスター対象）
+  const ATTACK_TYPE_FILTER = {
+    req_def:  "物理",
+    req_mdef: "魔法",
+  };
+
   // ============================================================
   // 列定義
   // ============================================================
@@ -44,8 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
     { key: "mdef",           label: "MDEF",        tooltip: "" },
     { key: "luk",            label: "LUK",         tooltip: "" },
     { key: "mov",            label: "MOV",         tooltip: "" },
-    { key: "req_def",        label: "無効DEF",     tooltip: "物理攻撃を無効化するために必要な自分のDEF" },
-    { key: "req_mdef",       label: "無効MDEF",    tooltip: "魔法攻撃を無効化するために必要な自分のMDEF" },
+    { key: "req_def",        label: "無効DEF",     tooltip: "物理攻撃を無効化するために必要な自分のDEF（物理型のみ）" },
+    { key: "req_mdef",       label: "無効MDEF",    tooltip: "魔法攻撃を無効化するために必要な自分のMDEF（魔法型のみ）" },
     { key: "evade_luk",      label: "回避LUK",     tooltip: "攻撃を回避するために必要な自分のLUK" },
     { key: "hit_min_luk",    label: "最低命中LUK", tooltip: "最低限命中するために必要な自分のLUK" },
     { key: "hit_stable_luk", label: "安定命中LUK", tooltip: "安定して命中するために必要な自分のLUK" },
@@ -113,9 +120,19 @@ document.addEventListener("DOMContentLoaded", function () {
   // フィルタ・ソート
   // ============================================================
 
-  function getFilteredMonsters() {
+  function getFilteredMonsters(sortKey) {
     if (!window.MONSTERS || !Array.isArray(window.MONSTERS)) return [];
-    return window.MONSTERS.filter(m => !EXCLUDED_IDS.includes(m.id));
+
+    // ID除外
+    let list = window.MONSTERS.filter(m => !EXCLUDED_IDS.includes(m.id));
+
+    // attack_typeフィルタ（列によって物理/魔法に絞る）
+    const attackTypeFilter = ATTACK_TYPE_FILTER[sortKey] || null;
+    if (attackTypeFilter) {
+      list = list.filter(m => m.attack_type === attackTypeFilter);
+    }
+
+    return list;
   }
 
   function calcAndSort(monsters, lv, sortKey, debuffDark) {
@@ -171,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const lv         = getLv(floor);
     const sortKey    = getSortKey();
     const debuffDark = debuffDarkCb.checked;
-    const monsters   = getFilteredMonsters();
+    const monsters   = getFilteredMonsters(sortKey);
 
     lvDisplay.textContent = lv.toLocaleString();
 
@@ -198,9 +215,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const colDef   = getColDef(sortKey);
     const colLabel = colDef ? colDef.label : sortKey;
 
-    // result meta
+    // attack_typeフィルタ中の場合はメタ情報に補足を表示
+    const attackTypeFilter = ATTACK_TYPE_FILTER[sortKey] || null;
+    const filterNote = attackTypeFilter ? `（${attackTypeFilter}型）` : "";
+
     resultMeta.textContent =
-      `${floor}階（Lv ${lv.toLocaleString()}）／ ${colLabel} 上位${rows.length}体`;
+      `${floor}階（Lv ${lv.toLocaleString()}）／ ${colLabel} 上位${rows.length}体${filterNote}`;
 
     // thead
     theadRow.innerHTML = "";
@@ -221,7 +241,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const tr = document.createElement("tr");
       tr.className = rankClass(i);
 
-      // モンスター名セル（ランクバッジ付き）
       const tdName = document.createElement("td");
       const nameWrap = document.createElement("span");
       nameWrap.className = "monster-name-cell";
@@ -235,7 +254,6 @@ document.addEventListener("DOMContentLoaded", function () {
       tdName.appendChild(nameWrap);
       tr.appendChild(tdName);
 
-      // 値セル
       const tdVal = document.createElement("td");
       tdVal.className = "col-highlight";
       tdVal.textContent = fmt(row[sortKey]);
