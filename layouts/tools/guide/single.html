@@ -1,0 +1,118 @@
+{{ define "main" }}
+<div class="guide-wrap">
+
+  {{/* ───── ページヘッダー ───── */}}
+  <header class="guide-header">
+    <div class="guide-header__inner">
+      <p class="guide-header__category">{{ .Params.category | default "攻略ガイド" }}</p>
+      <h1 class="guide-header__title">{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+        <p class="guide-header__subtitle">{{ . }}</p>
+      {{ end }}
+      <div class="guide-header__meta">
+        {{ with .Params.difficulty }}
+          <span class="guide-badge guide-badge--diff guide-badge--diff-{{ . }}">
+            難易度：{{ . }}
+          </span>
+        {{ end }}
+        {{ with .Params.floors }}
+          <span class="guide-badge">全{{ . }}階層</span>
+        {{ end }}
+        {{ with .Params.tags }}
+          {{ range . }}
+            <span class="guide-badge guide-badge--tag">{{ . }}</span>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </header>
+
+  <div class="guide-body">
+
+    {{/* ───── 目次（sections が定義されている場合） ───── */}}
+    {{ if .Params.sections }}
+    <nav class="guide-toc">
+      <p class="guide-toc__label">目次</p>
+      <ol class="guide-toc__list">
+        {{ range .Params.sections }}
+          <li><a href="#{{ .id }}">{{ .title }}</a></li>
+        {{ end }}
+      </ol>
+    </nav>
+    {{ end }}
+
+    {{/* ───── 本文 ───── */}}
+    <article class="guide-content">
+      {{ .Content }}
+    </article>
+
+    {{/* ───── 早見表ツール ───── */}}
+    {{ if .Params.show_floor_tool }}
+    <section class="guide-tool" id="floor-tool">
+      <h2 class="guide-tool__title">
+        <span class="guide-tool__icon">🗺</span>
+        階層到達アイテム早見表
+      </h2>
+      <p class="guide-tool__desc">
+        目標の階層に<strong>ちょうど</strong>到達するための
+        「{{ .Params.item_a_name | default "アイテムA" }}」と
+        「{{ .Params.item_b_name | default "アイテムB" }}」の個数の組み合わせを表示します。
+      </p>
+
+      <div class="floor-tool">
+        {{/* 設定値をdata属性でJSに渡す */}}
+        <div class="floor-tool__config"
+          data-item-a-name="{{ .Params.item_a_name | default "アイテムA" }}"
+          data-item-a-floors="{{ .Params.item_a_floors | default 5 }}"
+          data-item-a-max="{{ .Params.item_a_max | default 10 }}"
+          data-item-b-name="{{ .Params.item_b_name | default "アイテムB" }}"
+          data-item-b-floors="{{ .Params.item_b_floors | default 1 }}"
+          data-item-b-max="{{ .Params.item_b_max | default 30 }}"
+          data-floor-max="{{ .Params.floors | default 50 }}"
+        ></div>
+
+        <div class="floor-tool__controls">
+          <label class="floor-tool__label" for="targetFloor">
+            目標階層
+          </label>
+          <div class="floor-tool__input-row">
+            <input
+              type="number"
+              id="targetFloor"
+              class="floor-tool__input"
+              min="1"
+              placeholder="例：30"
+            />
+            <span class="floor-tool__unit">階</span>
+            <button class="floor-tool__btn" id="calcFloorBtn">計算する</button>
+          </div>
+        </div>
+
+        <div class="floor-tool__result" id="floorResult" hidden>
+          <p class="floor-tool__result-title" id="floorResultTitle"></p>
+          <div class="floor-tool__table-wrap">
+            <table class="floor-tool__table" id="floorResultTable">
+              <thead>
+                <tr>
+                  <th id="thItemA"></th>
+                  <th id="thItemB"></th>
+                </tr>
+              </thead>
+              <tbody id="floorResultBody"></tbody>
+            </table>
+          </div>
+          <p class="floor-tool__no-result" id="floorNoResult" hidden>
+            その階層にちょうど到達できる組み合わせはありません。
+          </p>
+        </div>
+      </div>
+    </section>
+    {{ end }}
+
+  </div>{{/* /.guide-body */}}
+</div>{{/* /.guide-wrap */}}
+
+{{ if .Params.show_floor_tool }}
+  <script src="{{ "js/guide-floor-calc.js?v=1" | relURL }}" defer></script>
+{{ end }}
+{{ end }}
