@@ -18,6 +18,10 @@
   {{ if eq .Layout "tenku" }}
     <link rel="stylesheet" href="{{ "css/tenku.css?v=1" | relURL }}" />
   {{ end }}
+  <!-- 攻略ガイドCSS -->
+  {{ if eq .Layout "guide" }}
+    <link rel="stylesheet" href="{{ "css/guide.css?v=1" | relURL }}" />
+  {{ end }}
 </head>
 <body>
   {{ partial "header.html" . }}
