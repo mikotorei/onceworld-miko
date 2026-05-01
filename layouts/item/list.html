@@ -4,8 +4,8 @@
 <h1 class="d-title">{{ .Title }}</h1>
 
 {{/* カテゴリ別に分類しweightで並び替え */}}
-{{ $normal := where .Pages "Params.category" "通常素材" | sort "Params.weight" }}
-{{ $effect := where .Pages "Params.category" "効果素材" | sort "Params.weight" }}
+{{ $normal := where (.Pages.ByWeight) "Params.category" "通常素材" }}
+{{ $effect := where (.Pages.ByWeight) "Params.category" "効果素材" }}
 
 {{ if $normal }}
 <section class="d-block">
