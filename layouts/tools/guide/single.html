@@ -22,38 +22,46 @@
       </h2>
       <p class="guide-tool__desc">
         目標の階層に<strong>ちょうど</strong>到達するための
-        「{{ .Params.item_a_name | default "アイテムA" }}」と
-        「{{ .Params.item_b_name | default "アイテムB" }}」の個数の組み合わせを表示します。
+        「天空像～悪魔～」と「天空像～冒険者～」の所持数の組み合わせを表示します。<br>
+        スカイガーディアン撃破（100層毎 +99F）は自動で計算に含まれます。
       </p>
 
       <div class="floor-tool">
-        {{/* 設定値をdata属性でJSに渡す */}}
-        <div class="floor-tool__config"
-          data-item-a-name="{{ .Params.item_a_name | default "アイテムA" }}"
-          data-item-a-floors="{{ .Params.item_a_floors | default 5 }}"
-          data-item-a-max="{{ .Params.item_a_max | default 10 }}"
-          data-item-b-name="{{ .Params.item_b_name | default "アイテムB" }}"
-          data-item-b-floors="{{ .Params.item_b_floors | default 1 }}"
-          data-item-b-max="{{ .Params.item_b_max | default 30 }}"
-          data-floor-max="{{ .Params.floors | default 50 }}"
-        ></div>
 
         <div class="floor-tool__controls">
-          <label class="floor-tool__label" for="targetFloor">
-            目標階層
-          </label>
-          <div class="floor-tool__input-row">
-            <input
-              type="number"
-              id="targetFloor"
-              class="floor-tool__input"
-              min="1"
-              placeholder="例：30"
-            />
-            <span class="floor-tool__unit">階</span>
-            <button class="floor-tool__btn" id="calcFloorBtn">計算する</button>
+
+          {{/* 片側/両側 切り替え */}}
+          <div class="floor-tool__field">
+            <span class="floor-tool__label">戦闘スタイル</span>
+            <div class="floor-tool__radio-group">
+              <label class="floor-tool__radio">
+                <input type="radio" name="battleMode" value="2" checked />
+                <span>両側撃破（+2F）</span>
+              </label>
+              <label class="floor-tool__radio">
+                <input type="radio" name="battleMode" value="1" />
+                <span>片側撃破（+1F）</span>
+              </label>
+            </div>
           </div>
-        </div>
+
+          {{/* 目標階層 入力 */}}
+          <div class="floor-tool__field">
+            <label class="floor-tool__label" for="targetFloor">目標階層</label>
+            <div class="floor-tool__input-row">
+              <input
+                type="number"
+                id="targetFloor"
+                class="floor-tool__input"
+                min="1"
+                placeholder="例：300"
+              />
+              <span class="floor-tool__unit">F</span>
+              <button class="floor-tool__btn" id="calcFloorBtn">計算する</button>
+            </div>
+          </div>
+
+        </div>{{/* /.floor-tool__controls */}}
 
         <div class="floor-tool__result" id="floorResult" hidden>
           <p class="floor-tool__result-title" id="floorResultTitle"></p>
@@ -61,8 +69,8 @@
             <table class="floor-tool__table" id="floorResultTable">
               <thead>
                 <tr>
-                  <th id="thItemA"></th>
-                  <th id="thItemB"></th>
+                  <th>天空像～悪魔～（個）</th>
+                  <th>天空像～冒険者～（個）</th>
                 </tr>
               </thead>
               <tbody id="floorResultBody"></tbody>
@@ -72,7 +80,8 @@
             その階層にちょうど到達できる組み合わせはありません。
           </p>
         </div>
-      </div>
+
+      </div>{{/* /.floor-tool */}}
     </section>
     {{ end }}
 
