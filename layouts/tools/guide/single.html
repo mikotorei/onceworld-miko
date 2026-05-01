@@ -1,45 +1,12 @@
 {{ define "main" }}
 <div class="guide-wrap">
 
-  {{/* ───── ページヘッダー ───── */}}
+  {{/* ───── ページヘッダー（タイトルのみ） ───── */}}
   <header class="guide-header">
-    <div class="guide-header__inner">
-      <p class="guide-header__category">{{ .Params.category | default "攻略ガイド" }}</p>
-      <h1 class="guide-header__title">{{ .Title }}</h1>
-      {{ with .Params.subtitle }}
-        <p class="guide-header__subtitle">{{ . }}</p>
-      {{ end }}
-      <div class="guide-header__meta">
-        {{ with .Params.difficulty }}
-          <span class="guide-badge guide-badge--diff guide-badge--diff-{{ . }}">
-            難易度：{{ . }}
-          </span>
-        {{ end }}
-        {{ with .Params.floors }}
-          <span class="guide-badge">全{{ . }}階層</span>
-        {{ end }}
-        {{ with .Params.tags }}
-          {{ range . }}
-            <span class="guide-badge guide-badge--tag">{{ . }}</span>
-          {{ end }}
-        {{ end }}
-      </div>
-    </div>
+    <h1 class="guide-header__title">{{ .Title }}</h1>
   </header>
 
   <div class="guide-body">
-
-    {{/* ───── 目次（sections が定義されている場合） ───── */}}
-    {{ if .Params.sections }}
-    <nav class="guide-toc">
-      <p class="guide-toc__label">目次</p>
-      <ol class="guide-toc__list">
-        {{ range .Params.sections }}
-          <li><a href="#{{ .id }}">{{ .title }}</a></li>
-        {{ end }}
-      </ol>
-    </nav>
-    {{ end }}
 
     {{/* ───── 本文 ───── */}}
     <article class="guide-content">
