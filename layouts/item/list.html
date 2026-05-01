@@ -4,14 +4,14 @@
 <h1 class="d-title">{{ .Title }}</h1>
 
 {{/* カテゴリ別に分類しweightで並び替え */}}
-{{ $normal := where .Pages "Params.category" "通常素材" }}
-{{ $effect := where .Pages "Params.category" "効果素材" }}
+{{ $normal := where .Pages "Params.category" "通常素材" | sort "Params.weight" }}
+{{ $effect := where .Pages "Params.category" "効果素材" | sort "Params.weight" }}
 
 {{ if $normal }}
 <section class="d-block">
   <h2 class="d-h2">通常素材</h2>
   <ul class="d-item-list">
-    {{ range $normal.ByWeight }}
+    {{ range $normal }}
     <li>
       <a class="d-item-link" href="{{ .RelPermalink }}">
         {{ with .Params.image }}
@@ -32,7 +32,7 @@
 <section class="d-block">
   <h2 class="d-h2">効果素材</h2>
   <ul class="d-item-list">
-    {{ range $effect.ByWeight }}
+    {{ range $effect }}
     <li>
       <a class="d-item-link" href="{{ .RelPermalink }}">
         {{ with .Params.image }}
