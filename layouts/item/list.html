@@ -10,17 +10,17 @@
 {{ if $normal }}
 <section class="d-block">
   <h2 class="d-h2">通常素材</h2>
-  <ul class="d-item-grid">
+  <ul class="item-list-grid">
     {{ range $normal }}
-    <li class="d-item-cell">
+    <li class="item-list-card">
       <a href="{{ .RelPermalink }}">
         {{ with .Params.image }}
           {{ $img := strings.TrimPrefix "/" . }}
-          <img class="d-item-thumb" src="{{ $img | relURL }}" alt="{{ $.Title }}">
+          <img src="{{ $img | relURL }}" alt="{{ $.Title }}">
         {{ else }}
-          <span class="d-item-thumb--empty"></span>
+          <span class="item-thumb-placeholder"></span>
         {{ end }}
-        <span class="d-item-label">{{ .Title }}</span>
+        <span>{{ .Title }}</span>
       </a>
     </li>
     {{ end }}
@@ -31,17 +31,17 @@
 {{ if $effect }}
 <section class="d-block">
   <h2 class="d-h2">効果素材</h2>
-  <ul class="d-item-grid">
+  <ul class="item-list-grid">
     {{ range $effect }}
-    <li class="d-item-cell">
+    <li class="item-list-card">
       <a href="{{ .RelPermalink }}">
         {{ with .Params.image }}
           {{ $img := strings.TrimPrefix "/" . }}
-          <img class="d-item-thumb" src="{{ $img | relURL }}" alt="{{ $.Title }}">
+          <img src="{{ $img | relURL }}" alt="{{ $.Title }}">
         {{ else }}
-          <span class="d-item-thumb--empty"></span>
+          <span class="item-thumb-placeholder"></span>
         {{ end }}
-        <span class="d-item-label">{{ .Title }}</span>
+        <span>{{ .Title }}</span>
       </a>
     </li>
     {{ end }}
