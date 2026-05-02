@@ -21,3 +21,7 @@ disableKinds = ["taxonomy", "term"]
 
 [outputs]
   home = ["HTML", "MonsterData"]
+
+[services]
+  [services.googleAnalytics]
+    ID = 'G-EKWR5CP90C'
