@@ -22,12 +22,16 @@
   {{ if eq .Layout "guide" }}
     <link rel="stylesheet" href="{{ "css/guide.css?v=1" | relURL }}" />
   {{ end }}
+  <!-- Google Analytics -->
+  {{ if not .Site.IsServer }}
+  {{ with .Site.Config.Services.GoogleAnalytics.ID }}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ . }}');
+  </script>
+  {{ end }}
+  {{ end }}
 </head>
-<body>
-  {{ partial "header.html" . }}
-  <main>
-    {{ block "main" . }}{{ end }}
-  </main>
-  <script src="{{ "js/header-nav.js?v=1" | relURL }}" defer></script>
-</body>
-</html>
