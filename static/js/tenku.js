@@ -11,22 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // 天空マップに出現しないモンスターのIDを列挙する
   const EXCLUDED_IDS = [
     // 例: "001", "042"
-    "201",
-    "202",
-    "203",
-    "204",
-    "205",
-    "206",
-    "207",
-    "241",
-    "242",
-    "243",
-    "244",
-    "245",
-    "246",
-    "247",
-    "248",
-    "249",
   ];
 
   const TOP_N = 15;
@@ -57,6 +41,20 @@ document.addEventListener("DOMContentLoaded", function () {
     { key: "hit_min_luk",    label: "最低命中LUK", tooltip: "最低限命中するために必要な自分のLUK" },
     { key: "hit_stable_luk", label: "安定命中LUK", tooltip: "安定して命中するために必要な自分のLUK" },
   ];
+
+  // ============================================================
+  // レベル計算
+  // ============================================================
+
+  function getLv(floor) {
+    const n = Math.floor(floor);
+    // 100の倍数F（SG・特殊エリア含む）
+    if (n % 100 === 0) return 100 * n + 9900;
+    // 10000F以降（100の倍数除く）
+    if (n >= 10000) return 100 * n;
+    // 1F〜9999F（100の倍数除く）
+    return 100 * n + 10000;
+  }
 
   // ============================================================
   // 計算ユーティリティ
@@ -123,10 +121,8 @@ document.addEventListener("DOMContentLoaded", function () {
   function getFilteredMonsters(sortKey) {
     if (!window.MONSTERS || !Array.isArray(window.MONSTERS)) return [];
 
-    // ID除外
     let list = window.MONSTERS.filter(m => !EXCLUDED_IDS.includes(m.id));
 
-    // attack_typeフィルタ（列によって物理/魔法に絞る）
     const attackTypeFilter = ATTACK_TYPE_FILTER[sortKey] || null;
     if (attackTypeFilter) {
       list = list.filter(m => m.attack_type === attackTypeFilter);
@@ -161,10 +157,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function getFloor() {
     const v = parseInt(floorInput.value, 10);
     return Number.isFinite(v) && v >= 1 ? v : 1;
-  }
-
-  function getLv(floor) {
-    return 10000 + 100 * floor;
   }
 
   function getSortKey() {
@@ -215,7 +207,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const colDef   = getColDef(sortKey);
     const colLabel = colDef ? colDef.label : sortKey;
 
-    // attack_typeフィルタ中の場合はメタ情報に補足を表示
     const attackTypeFilter = ATTACK_TYPE_FILTER[sortKey] || null;
     const filterNote = attackTypeFilter ? `（${attackTypeFilter}型）` : "";
 
