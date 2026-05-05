@@ -44,7 +44,7 @@
     </div>
 
     <!-- 3行目：ステータスのソート選択（ステータス選択時のみ表示） -->
-    <div class="control-group full-width" id="status-sort-row">
+    <div class="control-group full-width" id="status-sort-row" style="display:none;">
       <span class="control-label">ソート</span>
       <div class="col-select-group" id="status-sort-group">
         <label class="col-btn active" data-sort="vit"><input type="radio" name="sort-col" value="vit" checked>VIT</label>
@@ -54,6 +54,17 @@
         <label class="col-btn" data-sort="def"><input type="radio" name="sort-col" value="def">DEF</label>
         <label class="col-btn" data-sort="mdef"><input type="radio" name="sort-col" value="mdef">MDEF</label>
         <label class="col-btn" data-sort="luk"><input type="radio" name="sort-col" value="luk">LUK</label>
+      </div>
+    </div>
+
+    <!-- 4行目：無効MDEF遠距離トグル（無効MDEF選択時のみ表示） -->
+    <div class="control-group full-width" id="mdef-range-row" style="display:none;">
+      <span class="control-label">絞り込み</span>
+      <div class="toggle-group">
+        <label class="toggle-label">
+          <input type="checkbox" id="include-ranged">
+          <span class="toggle-btn">遠距離型を含める</span>
+        </label>
       </div>
     </div>
 
