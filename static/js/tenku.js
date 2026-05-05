@@ -124,18 +124,18 @@ document.addEventListener("DOMContentLoaded", function () {
   // フィルタ・ソート
   // ============================================================
 
-  function getAttackTypeFilter(sortKey, includeRanged) {
+  function getAttackTypeFilter(sortKey, rangedOnly) {
     if (sortKey === "req_def")  return ["物理"];
-    if (sortKey === "req_mdef") return includeRanged ? ["魔法", "遠距離"] : ["魔法"];
+    if (sortKey === "req_mdef") return rangedOnly ? ["遠距離"] : ["魔法"];
     return null;
   }
 
-  function getFilteredMonsters(sortKey, includeRanged) {
+  function getFilteredMonsters(sortKey, rangedOnly) {
     if (!window.MONSTERS || !Array.isArray(window.MONSTERS)) return [];
 
     let list = window.MONSTERS.filter(m => !EXCLUDED_IDS.includes(m.id));
 
-    const attackTypeFilter = getAttackTypeFilter(sortKey, includeRanged);
+    const attackTypeFilter = getAttackTypeFilter(sortKey, rangedOnly);
     if (attackTypeFilter) {
       list = list.filter(m => attackTypeFilter.includes(m.attack_type));
     }
@@ -197,11 +197,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // ============================================================
 
   function renderTable() {
-    const floor         = getFloor();
-    const lv            = getLv(floor);
-    const viewGroup     = getViewGroup();
-    const debuffDark    = debuffDarkCb.checked;
-    const includeRanged = includeRangedCb.checked;
+    const floor      = getFloor();
+    const lv         = getLv(floor);
+    const viewGroup  = getViewGroup();
+    const debuffDark = debuffDarkCb.checked;
+    const rangedOnly = includeRangedCb.checked;
 
     lvDisplay.textContent = lv.toLocaleString();
 
@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ソートキーを決定
     const sortKey = viewGroup === "status" ? getStatusSortKey() : viewGroup;
 
-    const monsters = getFilteredMonsters(sortKey, includeRanged);
+    const monsters = getFilteredMonsters(sortKey, rangedOnly);
 
     if (monsters.length === 0) {
       noResult.style.display = "";
@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
     noResult.style.display = "none";
 
     // result meta
-    const attackTypeFilter = getAttackTypeFilter(sortKey, includeRanged);
+    const attackTypeFilter = getAttackTypeFilter(sortKey, rangedOnly);
     const filterNote = attackTypeFilter ? `（${attackTypeFilter.join("・")}型）` : "";
     const sortLabel = viewGroup === "status"
       ? STATUS_COLUMNS.find(c => c.key === sortKey)?.label || sortKey
