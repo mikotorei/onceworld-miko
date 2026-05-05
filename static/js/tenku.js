@@ -14,7 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "241", "242", "243", "244", "245", "246", "247", "248", "249"
   ];
 
-  const TOP_N = 15;
+  const TOP_N       = 15;
+  const SAFE_MAX_F  = 99999;
 
   // ステータス列定義
   const STATUS_COLUMNS = [
@@ -27,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
     { key: "luk",  label: "LUK"  },
   ];
 
-  // 単一列表示の列定義
   const SINGLE_COLUMNS = [
     { key: "req_def",        label: "無効DEF",     tooltip: "物理攻撃を無効化するために必要な自分のDEF（物理型のみ）" },
     { key: "req_mdef",       label: "無効MDEF",    tooltip: "魔法攻撃を無効化するために必要な自分のMDEF" },
@@ -144,11 +144,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const neededPreDef   = neededAfterDef + enemyMagDef;
     const neededInt      = Math.ceil(neededPreDef / (1.25 * spellMultiplier * crystalMult) - analysisBonus);
     const required       = Math.max(0, neededInt);
+    const heroInt        = Math.max(0, Math.floor(Number(params.heroInt) || 0));
 
-    const heroInt    = Math.max(0, Math.floor(Number(params.heroInt) || 0));
-    const canOneshot = heroInt >= required;
-
-    return { required, canOneshot, enemyHp, enemyMagDef, elementModifier };
+    return { required, canOneshot: heroInt >= required, enemyHp, enemyMagDef, elementModifier };
   }
 
   // ============================================================
@@ -185,23 +183,22 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ============================================================
-  // フィルタ・ソート
+  // フィルタ
   // ============================================================
 
-  function getFilteredMonsters(sortKey, rangedOnly) {
+  function getBaseMonsters() {
     if (!window.MONSTERS || !Array.isArray(window.MONSTERS)) return [];
+    return window.MONSTERS.filter(m => !EXCLUDED_IDS.includes(m.id));
+  }
 
-    let list = window.MONSTERS.filter(m => !EXCLUDED_IDS.includes(m.id));
-
+  function getFilteredMonsters(sortKey, rangedOnly) {
+    let list = getBaseMonsters();
     if (sortKey === "req_def") {
       list = list.filter(m => m.attack_type === "物理");
     } else if (sortKey === "req_mdef") {
       list = list.filter(m => m.attack_type === "魔法");
-      if (rangedOnly) {
-        list = list.filter(m => m.attack_range === "遠距離");
-      }
+      if (rangedOnly) list = list.filter(m => m.attack_range === "遠距離");
     }
-
     return list;
   }
 
@@ -217,9 +214,81 @@ document.addEventListener("DOMContentLoaded", function () {
       const result = calcMagicOneshotRequired(row, magicParams);
       return { ...row, ...result };
     });
-    // 必要INTが高い順（より強い敵を上位に）
     rows.sort((a, b) => b.required - a.required);
     return rows.slice(0, TOP_N);
+  }
+
+  // ============================================================
+  // 安全フロア判定
+  // ============================================================
+
+  // 1体のモンスターに対して安全かどうかを判定
+  // 戻り値: { safe: bool, reasons: ["DEF"|"MDEF"|"LUK"] }
+  function checkMonsterSafe(monster, lv, heroDef, heroMdef, heroLuk) {
+    const row = calcMonsterRow(monster, lv, false);
+    const reasons = [];
+
+    // DEF安全：自DEF > (敵ATK×7-10)/4
+    if (heroDef > (row.atk * 7 - 10) / 4) reasons.push("DEF");
+
+    // MDEF安全：自MDEF > (敵INT×7-10)/4
+    if (heroMdef > (row.int * 7 - 10) / 4) reasons.push("MDEF");
+
+    // LUK安全：自LUK >= 敵LUK×3
+    if (heroLuk >= row.luk * 3) reasons.push("LUK");
+
+    return { safe: reasons.length > 0, reasons };
+  }
+
+  // フロアの全モンスターに対して安全かどうかを判定
+  function isFloorSafe(monsters, floor, heroDef, heroMdef, heroLuk) {
+    const lv = getLv(floor);
+    for (const monster of monsters) {
+      const { safe } = checkMonsterSafe(monster, lv, heroDef, heroMdef, heroLuk);
+      if (!safe) return false;
+    }
+    return true;
+  }
+
+  // 安全な最大フロアを探索（1Fから順に探索）
+  function findMaxSafeFloor(monsters, heroDef, heroMdef, heroLuk) {
+    if (monsters.length === 0) return null;
+
+    // 1Fが既に危険な場合
+    if (!isFloorSafe(monsters, 1, heroDef, heroMdef, heroLuk)) {
+      return { maxFloor: 0, reachedLimit: false };
+    }
+
+    let lo = 1;
+    let hi = SAFE_MAX_F;
+
+    // hi（上限）が安全なら上限到達
+    if (isFloorSafe(monsters, hi, heroDef, heroMdef, heroLuk)) {
+      return { maxFloor: hi, reachedLimit: true };
+    }
+
+    // 二分探索で安全な最大フロアを特定
+    while (lo < hi - 1) {
+      const mid = Math.floor((lo + hi) / 2);
+      if (isFloorSafe(monsters, mid, heroDef, heroMdef, heroLuk)) {
+        lo = mid;
+      } else {
+        hi = mid;
+      }
+    }
+
+    return { maxFloor: lo, reachedLimit: false };
+  }
+
+  // 危険になるフロアで各モンスターの安全状況を取得
+  function getDangerDetails(monsters, floor, heroDef, heroMdef, heroLuk) {
+    const lv = getLv(floor);
+    return monsters
+      .map(m => {
+        const { safe, reasons } = checkMonsterSafe(m, lv, heroDef, heroMdef, heroLuk);
+        return { title: m.title, safe, reasons };
+      })
+      .filter(m => !m.safe);
   }
 
   // ============================================================
@@ -246,6 +315,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const analysisAdvInput  = document.getElementById("analysis-book-adv");
   const crystalInput      = document.getElementById("crystal-count");
 
+  // 安全フロア判定
+  const safeDefInput      = document.getElementById("safe-def");
+  const safeMdefInput     = document.getElementById("safe-mdef");
+  const safeLukInput      = document.getElementById("safe-luk");
+  const safeResult        = document.getElementById("safe-result");
+
+  // タブ
+  const tabBtns           = document.querySelectorAll(".tenku-tab");
+  const tabContents       = document.querySelectorAll(".tenku-tab-content");
+
   // ============================================================
   // UI状態取得
   // ============================================================
@@ -269,8 +348,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const heroElement = document.querySelector('input[name="hero-element"]:checked')?.value || "fire";
     const spell       = document.querySelector('input[name="spell"]:checked')?.value || "water";
     return {
-      heroElement,
-      spell,
+      heroElement, spell,
       heroInt: heroIntInput.value,
       book:    analysisBookInput.value,
       bookAdv: analysisAdvInput.value,
@@ -286,7 +364,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ============================================================
-  // テーブル描画
+  // 計算表描画
   // ============================================================
 
   function renderTable() {
@@ -298,7 +376,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     lvDisplay.textContent = lv.toLocaleString();
 
-    // オプション行の表示切り替え
     statusSortRow.style.display   = viewGroup === "status"        ? "" : "none";
     mdefRangeRow.style.display    = viewGroup === "req_mdef"      ? "" : "none";
     magicOneshotRow.style.display = viewGroup === "magic_oneshot" ? "" : "none";
@@ -314,23 +391,14 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // ---- 魔法ワンパン表示 ----
+    // 魔法ワンパン表示
     if (viewGroup === "magic_oneshot") {
       const magicParams = getMagicParams();
       const rows = calcAndSortMagicOneshot(monsters, lv, debuffDark, magicParams);
 
-      if (rows.length === 0) {
-        noResult.style.display = "";
-        tbody.innerHTML = "";
-        theadRow.innerHTML = "";
-        resultMeta.textContent = "";
-        return;
-      }
-
       noResult.style.display = "none";
       resultMeta.textContent = `${floor}階（Lv ${lv.toLocaleString()}）／ 必要INT 降順`;
 
-      // thead
       theadRow.innerHTML = "";
       ["モンスター", "HP", "必要INT", "判定"].forEach((label, i) => {
         const th = document.createElement("th");
@@ -339,13 +407,11 @@ document.addEventListener("DOMContentLoaded", function () {
         theadRow.appendChild(th);
       });
 
-      // tbody
       tbody.innerHTML = "";
       rows.forEach((row, i) => {
         const tr = document.createElement("tr");
         tr.className = rankClass(i);
 
-        // モンスター名
         const tdName = document.createElement("td");
         const nameWrap = document.createElement("span");
         nameWrap.className = "monster-name-cell";
@@ -357,18 +423,15 @@ document.addEventListener("DOMContentLoaded", function () {
         tdName.appendChild(nameWrap);
         tr.appendChild(tdName);
 
-        // HP
         const tdHp = document.createElement("td");
         tdHp.textContent = fmt(row.enemyHp);
         tr.appendChild(tdHp);
 
-        // 必要INT
         const tdReq = document.createElement("td");
         tdReq.className = "col-highlight";
         tdReq.textContent = fmt(row.required);
         tr.appendChild(tdReq);
 
-        // 判定
         const tdJudge = document.createElement("td");
         tdJudge.textContent = row.canOneshot ? "✓ ワンパン" : "✗ 不可";
         tdJudge.className   = row.canOneshot ? "judge-ok" : "judge-ng";
@@ -376,20 +439,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         tbody.appendChild(tr);
       });
-
       return;
     }
 
-    // ---- 通常表示 ----
+    // 通常表示
     const rows = calcAndSort(monsters, lv, sortKey, debuffDark);
-
-    if (rows.length === 0) {
-      noResult.style.display = "";
-      tbody.innerHTML = "";
-      theadRow.innerHTML = "";
-      resultMeta.textContent = "";
-      return;
-    }
 
     noResult.style.display = "none";
 
@@ -404,7 +458,6 @@ document.addEventListener("DOMContentLoaded", function () {
     resultMeta.textContent =
       `${floor}階（Lv ${lv.toLocaleString()}）／ ${sortLabel} 上位${rows.length}体${filterNote}`;
 
-    // ---- ステータス表示（全7列） ----
     if (viewGroup === "status") {
       theadRow.innerHTML = "";
       const thName = document.createElement("th");
@@ -443,7 +496,6 @@ document.addEventListener("DOMContentLoaded", function () {
         tbody.appendChild(tr);
       });
 
-    // ---- 単一列表示 ----
     } else {
       const colDef   = SINGLE_COLUMNS.find(c => c.key === sortKey);
       const colLabel = colDef ? colDef.label : sortKey;
@@ -485,6 +537,86 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ============================================================
+  // 安全フロア判定描画
+  // ============================================================
+
+  function renderSafe() {
+    const heroDef  = Math.max(0, Math.floor(Number(safeDefInput.value)  || 0));
+    const heroMdef = Math.max(0, Math.floor(Number(safeMdefInput.value) || 0));
+    const heroLuk  = Math.max(0, Math.floor(Number(safeLukInput.value)  || 0));
+
+    if (heroDef === 0 && heroMdef === 0 && heroLuk === 0) {
+      safeResult.innerHTML = '<div class="safe-placeholder">ステータスを入力してください</div>';
+      return;
+    }
+
+    const monsters = getBaseMonsters();
+    if (monsters.length === 0) {
+      safeResult.innerHTML = '<div class="safe-placeholder">モンスターデータが読み込まれていません</div>';
+      return;
+    }
+
+    safeResult.innerHTML = '<div class="safe-placeholder">計算中...</div>';
+
+    // 非同期で重い計算を実行（UIをブロックしない）
+    setTimeout(() => {
+      const { maxFloor, reachedLimit } = findMaxSafeFloor(monsters, heroDef, heroMdef, heroLuk);
+
+      let html = "";
+
+      if (maxFloor === 0) {
+        html = `
+          <div class="safe-card safe-danger">
+            <div class="safe-card-title">⚠ 1階から安全ではありません</div>
+            <div class="safe-card-desc">入力されたステータスでは1階のモンスターに対しても安全条件を満たせません。</div>
+          </div>`;
+      } else if (reachedLimit) {
+        html = `
+          <div class="safe-card safe-ok">
+            <div class="safe-card-title">✓ ${SAFE_MAX_F.toLocaleString()}階まで安全</div>
+            <div class="safe-card-desc">探索上限（${SAFE_MAX_F.toLocaleString()}F）まで全モンスターに対して安全条件を満たしています。</div>
+          </div>`;
+      } else {
+        const dangerFloor  = maxFloor + 1;
+        const dangerDetail = getDangerDetails(monsters, dangerFloor, heroDef, heroMdef, heroLuk);
+
+        const dangerList = dangerDetail.slice(0, 10).map(m =>
+          `<li>${m.title}</li>`
+        ).join("");
+        const moreCount = dangerDetail.length > 10 ? `<li>他 ${dangerDetail.length - 10} 体...</li>` : "";
+
+        html = `
+          <div class="safe-card safe-ok">
+            <div class="safe-card-title">✓ 安全な最大フロア：<span class="safe-floor">${maxFloor.toLocaleString()}階</span></div>
+            <div class="safe-card-lv">（Lv ${getLv(maxFloor).toLocaleString()}）</div>
+          </div>
+          <div class="safe-card safe-danger">
+            <div class="safe-card-title">⚠ ${dangerFloor.toLocaleString()}階から危険</div>
+            <div class="safe-card-desc">以下のモンスターに対して安全条件を満たせません：</div>
+            <ul class="safe-danger-list">${dangerList}${moreCount}</ul>
+          </div>`;
+      }
+
+      safeResult.innerHTML = html;
+    }, 0);
+  }
+
+  // ============================================================
+  // タブ切り替え
+  // ============================================================
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener("click", function () {
+      tabBtns.forEach(b => b.classList.remove("active"));
+      this.classList.add("active");
+      const target = this.dataset.tab;
+      tabContents.forEach(c => {
+        c.style.display = c.id === `tab-${target}` ? "" : "none";
+      });
+    });
+  });
+
+  // ============================================================
   // イベント登録
   // ============================================================
 
@@ -495,6 +627,10 @@ document.addEventListener("DOMContentLoaded", function () {
   analysisBookInput.addEventListener("input", renderTable);
   analysisAdvInput.addEventListener("input", renderTable);
   crystalInput.addEventListener("input", renderTable);
+
+  safeDefInput.addEventListener("input",  renderSafe);
+  safeMdefInput.addEventListener("input", renderSafe);
+  safeLukInput.addEventListener("input",  renderSafe);
 
   groupBtns.forEach(btn => {
     btn.addEventListener("click", function () {
