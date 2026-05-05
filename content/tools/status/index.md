@@ -898,6 +898,7 @@ feet: "脚", shield: "盾",
 accessory1: "アクセ1", accessory2: "アクセ2",
 accessory3: "アクセ3", accessory4: "アクセ4",
 };
+let lastFinalTotal = null;
 
 function renderBuildPreview(name) {
 const box = $("buildPreview");
@@ -953,7 +954,9 @@ const name = String(input.value || "").trim();
 if (!name) { setErr("保存名を入力してください"); return; }
 const builds = loadBuildSlots();
 if (builds[name] && !window.confirm(`「${name}」は既に存在します。上書きしますか？`)) return;
-builds[name] = collectState();
+const snap = collectState();
+snap.finalTotal = lastFinalTotal ? Object.assign({}, lastFinalTotal) : null;
+builds[name] = snap;
 saveBuildSlots(builds);
 refreshBuildSelect();
 const sel = $("buildSlotSelect");
@@ -1060,6 +1063,7 @@ if (remain < 0) err.push(`ポイント超過：残り ${remain}`);
 updateAccessoryEffectDisplays();
 renderTable(basePlusProtein, equipDisplay, finalTotal);
 setErr(err.join("\n"));
+lastFinalTotal = finalTotal;
 saveAutoState(state);
 }
 
