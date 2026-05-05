@@ -126,6 +126,14 @@
   <h2>結果</h2>
 
   <div class="result-block">
+    <div class="result-title">敵情報</div>
+    <div class="result-row">
+      <div class="result-label">実体力</div>
+      <div class="result-value" id="out-enemy-hp">-</div>
+    </div>
+  </div>
+
+  <div class="result-block" id="result-physical">
     <div class="result-title">物理</div>
     <div class="result-row">
       <div class="result-label">与ダメ範囲</div>
@@ -133,6 +141,10 @@
         <span id="out-phy-dmg">-</span>
         <span class="muted">（多段: <span id="out-hits">-</span>）</span>
       </div>
+    </div>
+    <div class="result-row">
+      <div class="result-label">平均nパン</div>
+      <div class="result-value" id="out-phy-npan">-</div>
     </div>
     <div class="result-row">
       <div class="result-label">ワンパンライン</div>
@@ -144,11 +156,15 @@
     </div>
   </div>
 
-  <div class="result-block">
+  <div class="result-block" id="result-magic">
     <div class="result-title">魔法</div>
     <div class="result-row">
       <div class="result-label">与ダメ範囲</div>
       <div class="result-value" id="out-mag-dmg">-</div>
+    </div>
+    <div class="result-row">
+      <div class="result-label">平均nパン</div>
+      <div class="result-value" id="out-mag-npan">-</div>
     </div>
     <div class="result-row">
       <div class="result-label">ワンパンライン</div>
