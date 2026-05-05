@@ -401,12 +401,14 @@ document.addEventListener("DOMContentLoaded", function () {
     state.godEyeCount = 0;
     setDebuffButtons();
     saveState();
+    calcBtn.click();
   });
 
   godEye1000Btn.addEventListener("click", () => {
     state.godEyeCount = 1000;
     setDebuffButtons();
     saveState();
+    calcBtn.click();
   });
 
   search.addEventListener("input", () => {
