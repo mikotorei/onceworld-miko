@@ -11,22 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // 天空マップに出現しないモンスターのIDを列挙する
   const EXCLUDED_IDS = [
     // 例: "001", "042"
-    "201",
-    "202",
-    "203",
-    "204",
-    "205",
-    "206",
-    "207",
-    "241",
-    "242",
-    "243",
-    "244",
-    "245",
-    "246",
-    "247",
-    "248",
-    "249",
   ];
 
   const TOP_N = 15;
@@ -50,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
     { key: "def",            label: "DEF",         tooltip: "" },
     { key: "mdef",           label: "MDEF",        tooltip: "" },
     { key: "luk",            label: "LUK",         tooltip: "" },
-    { key: "mov",            label: "MOV",         tooltip: "" },
     { key: "req_def",        label: "無効DEF",     tooltip: "物理攻撃を無効化するために必要な自分のDEF（物理型のみ）" },
     { key: "req_mdef",       label: "無効MDEF",    tooltip: "魔法攻撃を無効化するために必要な自分のMDEF（魔法型のみ）" },
     { key: "evade_luk",      label: "回避LUK",     tooltip: "攻撃を回避するために必要な自分のLUK" },
@@ -64,11 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function getLv(floor) {
     const n = Math.floor(floor);
-    // 100の倍数F（SG・特殊エリア含む）
     if (n % 100 === 0) return 100 * n + 9900;
-    // 10000F以降（100の倍数除く）
-    if (n >= 10000) return 100 * n;
-    // 1F〜9999F（100の倍数除く）
+    if (n >= 10000)    return 100 * n;
     return 100 * n + 10000;
   }
 
@@ -120,7 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
       def:  scaleStat(monster.def,  lv),
       mdef: scaleStat(monster.mdef, lv),
       luk:  lukScaled,
-      mov:  Math.floor(Number(monster.mov)),
 
       req_def:        requiredDefForNullify(atkScaled),
       req_mdef:       requiredMdefForNullify(intScaled),
