@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
       def:  scaleStat(monster.def,  lv),
       mdef: scaleStat(monster.mdef, lv),
       luk:  lukScaled,
-      mov:  scaleStat(monster.mov,  lv),
+      mov:  Math.floor(Number(monster.mov)),
 
       req_def:        requiredDefForNullify(atkScaled),
       req_mdef:       requiredMdefForNullify(intScaled),
