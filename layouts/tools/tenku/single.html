@@ -40,6 +40,7 @@
         <label class="col-btn" data-group="evade_luk"><input type="radio" name="view-group" value="evade_luk">回避LUK</label>
         <label class="col-btn" data-group="hit_min_luk"><input type="radio" name="view-group" value="hit_min_luk">最低命中LUK</label>
         <label class="col-btn" data-group="hit_stable_luk"><input type="radio" name="view-group" value="hit_stable_luk">安定命中LUK</label>
+        <label class="col-btn" data-group="magic_oneshot"><input type="radio" name="view-group" value="magic_oneshot">魔法ワンパン</label>
       </div>
     </div>
 
@@ -65,6 +66,55 @@
           <input type="checkbox" id="include-ranged">
           <span class="toggle-btn">遠距離型のみ</span>
         </label>
+      </div>
+    </div>
+
+    <!-- 5行目：魔法ワンパン入力（魔法ワンパン選択時のみ表示） -->
+    <div class="control-group full-width" id="magic-oneshot-row" style="display:none;">
+      <span class="control-label">魔法ワンパン設定</span>
+      <div class="magic-inputs">
+
+        <div class="magic-input-group">
+          <label class="magic-input-label">主人公属性</label>
+          <div class="col-select-group">
+            <label class="col-btn active" data-hero-element="fire"><input type="radio" name="hero-element" value="fire" checked>火</label>
+            <label class="col-btn" data-hero-element="water"><input type="radio" name="hero-element" value="water">水</label>
+            <label class="col-btn" data-hero-element="wood"><input type="radio" name="hero-element" value="wood">木</label>
+            <label class="col-btn" data-hero-element="light"><input type="radio" name="hero-element" value="light">光</label>
+            <label class="col-btn" data-hero-element="dark"><input type="radio" name="hero-element" value="dark">闇</label>
+          </div>
+        </div>
+
+        <div class="magic-input-group">
+          <label class="magic-input-label">使用魔法</label>
+          <div class="col-select-group">
+            <label class="col-btn" data-spell="fire"><input type="radio" name="spell" value="fire">火（×1.0）</label>
+            <label class="col-btn active" data-spell="water"><input type="radio" name="spell" value="water" checked>水（×1.0）</label>
+            <label class="col-btn" data-spell="wood"><input type="radio" name="spell" value="wood">木（×1.3）</label>
+            <label class="col-btn" data-spell="dark"><input type="radio" name="spell" value="dark">闇（×1.4）</label>
+            <label class="col-btn" data-spell="light"><input type="radio" name="spell" value="light">光（×2.0）</label>
+          </div>
+        </div>
+
+        <div class="magic-input-group magic-input-row">
+          <div class="magic-input-field">
+            <label class="magic-input-label" for="hero-int">INT</label>
+            <input type="number" id="hero-int" min="0" value="0" placeholder="0">
+          </div>
+          <div class="magic-input-field">
+            <label class="magic-input-label" for="analysis-book">解析書</label>
+            <input type="number" id="analysis-book" min="0" value="0" placeholder="0">
+          </div>
+          <div class="magic-input-field">
+            <label class="magic-input-label" for="analysis-book-adv">上級解析書</label>
+            <input type="number" id="analysis-book-adv" min="0" value="0" placeholder="0">
+          </div>
+          <div class="magic-input-field">
+            <label class="magic-input-label" for="crystal-count">魔晶数</label>
+            <input type="number" id="crystal-count" min="0" value="0" placeholder="0">
+          </div>
+        </div>
+
       </div>
     </div>
 
