@@ -32,12 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const TOP_N = 15;
 
-  // 配列で複数のattack_typeを指定可能
-  const ATTACK_TYPE_FILTER = {
-    req_def:  ["物理"],
-    req_mdef: ["魔法", "遠距離"],
-  };
-
   // ステータス列定義
   const STATUS_COLUMNS = [
     { key: "vit",  label: "VIT"  },
@@ -52,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // 単一列表示の列定義
   const SINGLE_COLUMNS = [
     { key: "req_def",        label: "無効DEF",     tooltip: "物理攻撃を無効化するために必要な自分のDEF（物理型のみ）" },
-    { key: "req_mdef",       label: "無効MDEF",    tooltip: "魔法攻撃を無効化するために必要な自分のMDEF（魔法・遠距離型）" },
+    { key: "req_mdef",       label: "無効MDEF",    tooltip: "魔法攻撃を無効化するために必要な自分のMDEF" },
     { key: "evade_luk",      label: "回避LUK",     tooltip: "攻撃を回避するために必要な自分のLUK" },
     { key: "hit_min_luk",    label: "最低命中LUK", tooltip: "最低限命中するために必要な自分のLUK" },
     { key: "hit_stable_luk", label: "安定命中LUK", tooltip: "安定して命中するために必要な自分のLUK" },
@@ -130,12 +124,18 @@ document.addEventListener("DOMContentLoaded", function () {
   // フィルタ・ソート
   // ============================================================
 
-  function getFilteredMonsters(sortKey) {
+  function getAttackTypeFilter(sortKey, includeRanged) {
+    if (sortKey === "req_def")  return ["物理"];
+    if (sortKey === "req_mdef") return includeRanged ? ["魔法", "遠距離"] : ["魔法"];
+    return null;
+  }
+
+  function getFilteredMonsters(sortKey, includeRanged) {
     if (!window.MONSTERS || !Array.isArray(window.MONSTERS)) return [];
 
     let list = window.MONSTERS.filter(m => !EXCLUDED_IDS.includes(m.id));
 
-    const attackTypeFilter = ATTACK_TYPE_FILTER[sortKey] || null;
+    const attackTypeFilter = getAttackTypeFilter(sortKey, includeRanged);
     if (attackTypeFilter) {
       list = list.filter(m => attackTypeFilter.includes(m.attack_type));
     }
@@ -153,16 +153,18 @@ document.addEventListener("DOMContentLoaded", function () {
   // DOM参照
   // ============================================================
 
-  const floorInput     = document.getElementById("tenku-floor");
-  const lvDisplay      = document.getElementById("tenku-lv-display");
-  const debuffDarkCb   = document.getElementById("debuff-dark");
-  const theadRow       = document.getElementById("tenku-thead-row");
-  const tbody          = document.getElementById("tenku-tbody");
-  const resultMeta     = document.getElementById("result-meta");
-  const noResult       = document.getElementById("tenku-no-result");
-  const groupBtns      = document.querySelectorAll("#group-select-group .col-btn");
-  const sortBtns       = document.querySelectorAll("#status-sort-group .col-btn");
-  const statusSortRow  = document.getElementById("status-sort-row");
+  const floorInput      = document.getElementById("tenku-floor");
+  const lvDisplay       = document.getElementById("tenku-lv-display");
+  const debuffDarkCb    = document.getElementById("debuff-dark");
+  const includeRangedCb = document.getElementById("include-ranged");
+  const theadRow        = document.getElementById("tenku-thead-row");
+  const tbody           = document.getElementById("tenku-tbody");
+  const resultMeta      = document.getElementById("result-meta");
+  const noResult        = document.getElementById("tenku-no-result");
+  const groupBtns       = document.querySelectorAll("#group-select-group .col-btn");
+  const sortBtns        = document.querySelectorAll("#status-sort-group .col-btn");
+  const statusSortRow   = document.getElementById("status-sort-row");
+  const mdefRangeRow    = document.getElementById("mdef-range-row");
 
   // ============================================================
   // UI状態取得
@@ -195,20 +197,22 @@ document.addEventListener("DOMContentLoaded", function () {
   // ============================================================
 
   function renderTable() {
-    const floor      = getFloor();
-    const lv         = getLv(floor);
-    const viewGroup  = getViewGroup();
-    const debuffDark = debuffDarkCb.checked;
+    const floor         = getFloor();
+    const lv            = getLv(floor);
+    const viewGroup     = getViewGroup();
+    const debuffDark    = debuffDarkCb.checked;
+    const includeRanged = includeRangedCb.checked;
 
     lvDisplay.textContent = lv.toLocaleString();
 
-    // ステータスソート行の表示切り替え
-    statusSortRow.style.display = viewGroup === "status" ? "" : "none";
+    // 各オプション行の表示切り替え
+    statusSortRow.style.display = viewGroup === "status"   ? "" : "none";
+    mdefRangeRow.style.display  = viewGroup === "req_mdef" ? "" : "none";
 
     // ソートキーを決定
     const sortKey = viewGroup === "status" ? getStatusSortKey() : viewGroup;
 
-    const monsters = getFilteredMonsters(sortKey);
+    const monsters = getFilteredMonsters(sortKey, includeRanged);
 
     if (monsters.length === 0) {
       noResult.style.display = "";
@@ -231,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
     noResult.style.display = "none";
 
     // result meta
-    const attackTypeFilter = ATTACK_TYPE_FILTER[sortKey] || null;
+    const attackTypeFilter = getAttackTypeFilter(sortKey, includeRanged);
     const filterNote = attackTypeFilter ? `（${attackTypeFilter.join("・")}型）` : "";
     const sortLabel = viewGroup === "status"
       ? STATUS_COLUMNS.find(c => c.key === sortKey)?.label || sortKey
@@ -242,7 +246,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---- ステータス表示（全7列） ----
     if (viewGroup === "status") {
-      // thead
       theadRow.innerHTML = "";
       const thName = document.createElement("th");
       thName.textContent = "モンスター";
@@ -254,7 +257,6 @@ document.addEventListener("DOMContentLoaded", function () {
         theadRow.appendChild(th);
       });
 
-      // tbody
       tbody.innerHTML = "";
       rows.forEach((row, i) => {
         const tr = document.createElement("tr");
@@ -283,10 +285,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---- 単一列表示 ----
     } else {
-      const colDef = SINGLE_COLUMNS.find(c => c.key === sortKey);
+      const colDef   = SINGLE_COLUMNS.find(c => c.key === sortKey);
       const colLabel = colDef ? colDef.label : sortKey;
 
-      // thead
       theadRow.innerHTML = "";
       const thName = document.createElement("th");
       thName.textContent = "モンスター";
@@ -297,7 +298,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (colDef && colDef.tooltip) thVal.title = colDef.tooltip;
       theadRow.appendChild(thVal);
 
-      // tbody
       tbody.innerHTML = "";
       rows.forEach((row, i) => {
         const tr = document.createElement("tr");
@@ -330,6 +330,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   floorInput.addEventListener("input", renderTable);
   debuffDarkCb.addEventListener("change", renderTable);
+  includeRangedCb.addEventListener("change", renderTable);
 
   groupBtns.forEach(btn => {
     btn.addEventListener("click", function () {
