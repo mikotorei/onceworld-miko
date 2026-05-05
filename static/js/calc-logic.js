@@ -1,586 +1,207 @@
 // ============================================================
-// calc-ui.js  UI・状態管理・イベント処理
+// calc-logic.js  ゲーム計算ロジック（DOM非依存）
 // ============================================================
 
-document.addEventListener("DOMContentLoaded", function () {
+function normalizeElement(value) {
+  const raw = (value ?? "").toString().trim().toLowerCase();
 
-(function () {
-  // --- 入力フィールドのカンマ整形 ---
-  attachCommaInputBehavior("hero-atk", 0);
-  attachCommaInputBehavior("hero-int", 0);
-  attachCommaInputBehavior("hero-spd", 0);
-  attachCommaInputBehavior("analysis-book", 0);
-  attachCommaInputBehavior("analysis-book-advanced", 0);
-  attachCommaInputBehavior("crystal-count", 0);
-  attachCommaInputBehavior("enemy-lv", 1);
-})();
-
-(function () {
-  const LS_KEY = "calc_state_v5";
-
-  // --- 出力要素 ---
-  const outEnemyHp     = document.getElementById("out-enemy-hp");
-  const outPhyDmg      = document.getElementById("out-phy-dmg");
-  const outHits        = document.getElementById("out-hits");
-  const outPhyNpan     = document.getElementById("out-phy-npan");
-  const outPhyOne      = document.getElementById("out-phy-one");
-  const outPhyOverkill = document.getElementById("out-phy-overkill");
-  const outMagDmg      = document.getElementById("out-mag-dmg");
-  const outMagNpan     = document.getElementById("out-mag-npan");
-  const outMagOne      = document.getElementById("out-mag-one");
-  const outMagOverkill = document.getElementById("out-mag-overkill");
-  const outHitLuk       = document.getElementById("out-hit-luk");
-  const outHitLukStable = document.getElementById("out-hit-luk-stable");
-  const outEvadeLuk     = document.getElementById("out-evade-luk");
-  const outNullDef     = document.getElementById("out-null-def");
-  const outNullMdef    = document.getElementById("out-null-mdef");
-
-  // --- 結果ブロック ---
-  const resultPhysical = document.getElementById("result-physical");
-  const resultMagic    = document.getElementById("result-magic");
-
-  // --- 操作要素 ---
-  const calcBtn        = document.getElementById("calc-btn");
-  const criticalToggle = document.getElementById("critical-toggle");
-  const godEyeRow      = document.getElementById("god-eye-row");
-  const godEye0Btn     = document.getElementById("god-eye-0");
-  const godEye1000Btn  = document.getElementById("god-eye-1000");
-
-  const search       = document.getElementById("monster-search");
-  const suggest      = document.getElementById("monster-suggest");
-  const selectedBox  = document.getElementById("monster-selected");
-  const selectedName = document.getElementById("monster-selected-name");
-
-  const lvInput      = document.getElementById("enemy-lv");
-  const shortcutWrap = document.getElementById("lv-shortcuts");
-
-  const physicalPanel          = document.getElementById("physical-panel");
-  const magicPanel             = document.getElementById("magic-panel");
-  const analysisBookRow         = document.getElementById("analysis-book-row");
-  const analysisBookAdvancedRow = document.getElementById("analysis-book-advanced-row");
-  const crystalRow              = document.getElementById("crystal-row");
-
-  const attackTypeButtons  = Array.from(document.querySelectorAll("[data-attack-type]"));
-  const heroElementButtons = Array.from(document.querySelectorAll("[data-hero-element]"));
-  const spellButtons       = Array.from(document.querySelectorAll("[data-spell]"));
-
-  const debuffWoodBtn      = document.getElementById("debuff-wood");
-  const debuffDarkBtn      = document.getElementById("debuff-dark");
-  const debuffWoodMagicBtn = document.getElementById("debuff-wood-magic");
-
-  // --- 状態 ---
-  let picked      = null;
-  let currentLv   = 1;
-  let enemyScaled = null;
-
-  const state = {
-    heroElement: "fire",
-    attackType:  "physical",
-    spell:       "fire",
-    debuffWood:  false,
-    debuffDark:  false,
-    critical:    false,
-    godEyeCount: 0
+  const map = {
+    fire: "fire",
+    "火": "fire",
+    "火属性": "fire",
+    water: "water",
+    "水": "water",
+    "水属性": "water",
+    wood: "wood",
+    tree: "wood",
+    "木": "wood",
+    "木属性": "wood",
+    light: "light",
+    "光": "light",
+    "光属性": "light",
+    dark: "dark",
+    "闇": "dark",
+    "闇属性": "dark"
   };
 
-  // --- UI ヘルパー ---
-  function setCalcEnabled() {
-    calcBtn.disabled = !picked;
+  return map[raw] || raw;
+}
+
+function hitsFromSpd(spd) {
+  const s = Math.floor(Number(spd));
+  if (!Number.isFinite(s)) return 1;
+  if (s < 3000)       return 1;
+  if (s < 9000)       return 2;
+  if (s < 27000)      return 3;
+  if (s < 81000)      return 4;
+  if (s < 243000)     return 5;
+  if (s < 729000)     return 6;
+  if (s < 2187000)    return 7;
+  if (s < 6561000)    return 8;
+  if (s < 19683000)   return 9;
+  return 10;
+}
+
+function scaleStat(base, lv) {
+  return Math.floor(Number(base) * (1 + lv * 0.1));
+}
+
+function buildEnemyScaled(monster, lv, state) {
+  const wood = !!state.debuffWood;
+  const dark = !!state.debuffDark;
+
+  const defScaled = scaleStat(monster.def, lv);
+  const lukScaled = scaleStat(monster.luk, lv);
+
+  return {
+    id: monster.id,
+    title: monster.title,
+    lv,
+    vit:  scaleStat(monster.vit, lv),
+    spd:  scaleStat(monster.spd, lv),
+    atk:  scaleStat(monster.atk, lv),
+    int:  scaleStat(monster.int, lv),
+    def:  wood ? Math.floor(defScaled / 2) : defScaled,
+    mdef: scaleStat(monster.mdef, lv),
+    luk:  dark ? Math.floor(lukScaled / 2) : lukScaled,
+    element: normalizeElement(monster.element),
+    level_shortcuts: Array.isArray(monster.level_shortcuts) ? monster.level_shortcuts : []
+  };
+}
+
+function getElementModifier(heroElement, enemyElement) {
+  const h = normalizeElement(heroElement);
+  const e = normalizeElement(enemyElement);
+
+  if (!h || !e) return 1.0;
+
+  if (
+    (h === "fire"  && e === "wood")  ||
+    (h === "wood"  && e === "water") ||
+    (h === "water" && e === "fire")  ||
+    (h === "light" && e === "dark")  ||
+    (h === "dark"  && e === "light")
+  ) return 1.3;
+
+  if (
+    (h === "fire"  && e === "water") ||
+    (h === "water" && e === "wood")  ||
+    (h === "wood"  && e === "fire")  ||
+    (h === "light" && e === "light") ||
+    (h === "dark"  && e === "dark")
+  ) return 0.8;
+
+  return 1.0;
+}
+
+function getCriticalModifier(godCount) {
+  const count = Math.max(0, Math.min(1000, Math.floor(Number(godCount) || 0)));
+  return 1 + 1.50 + count * 0.003;
+}
+
+function damageRangeTotal(attack, defense, hits, elementModifier, criticalModifier = 1.0) {
+  const base = (attack * 7) - (defense * 4);
+  if (base <= 0) return { min: 0, max: 0, base };
+  const modifiedBase = base * elementModifier * criticalModifier;
+  const min = Math.floor(modifiedBase * 0.9 * hits);
+  const max = Math.floor(modifiedBase * 1.1 * hits);
+  return { min: Math.max(0, min), max: Math.max(0, max), base: modifiedBase };
+}
+
+function formatMinMax(min, max) {
+  return `${fmt(min)}～${fmt(max)}`;
+}
+
+function oneShotLineRequiredAttack(defense, hits, hp, elementModifier, criticalModifier = 1.0) {
+  const need = hp / (0.9 * hits * elementModifier * criticalModifier);
+  const x = (defense * 4 + need) / 7;
+  return Math.max(0, Math.ceil(x));
+}
+
+function requiredDefenseForNullify(enemyAttack) {
+  const a = Math.floor(Number(enemyAttack));
+  if (!Number.isFinite(a)) return 0;
+  const x = (a * 7 - 10) / 4;
+  return Math.max(0, Math.floor(x) + 1);
+}
+
+function clampAnalysisBonus(v) {
+  return Math.min(101000, Math.max(0, Math.floor(Number(v) || 0)));
+}
+
+function getSpellMultiplier(spell) {
+  switch (normalizeElement(spell)) {
+    case "fire":  return 1.0;
+    case "water": return 1.0;
+    case "wood":  return 1.3;
+    case "light": return 2.0;
+    case "dark":  return 1.4;
+    default:      return 1.0;
+  }
+}
+
+function calcAnalysisBonus(bookCount, advancedBookCount) {
+  const book = Math.max(0, Math.floor(Number(bookCount) || 0));
+  const adv  = Math.max(0, Math.floor(Number(advancedBookCount) || 0));
+  const value = book * (1 + adv / 10);
+  return clampAnalysisBonus(value);
+}
+
+function getCrystalMultiplier(crystalCount) {
+  const count = Math.max(0, Math.floor(Number(crystalCount) || 0));
+  return Math.min(11.0, 1 + count * 0.01);
+}
+
+function calcMagicDamageRange(params) {
+  const heroInt           = Math.max(0, Math.floor(Number(params.heroInt) || 0));
+  const analysisBonus     = calcAnalysisBonus(params.analysisBook, params.analysisBookAdvanced);
+  const spellMultiplier   = getSpellMultiplier(params.spell);
+  const crystalMultiplier = getCrystalMultiplier(params.crystalCount);
+  const enemyMagDef       = Number(params.enemyMagDef) || 0;
+  const elementModifier   = getElementModifier(params.heroElement, params.enemyElement);
+  const criticalModifier  = 1.0;
+
+  const preDefense   = (heroInt + analysisBonus) * 1.25 * spellMultiplier * crystalMultiplier;
+  const afterDefense = preDefense - enemyMagDef;
+  const base         = afterDefense * 4;
+  const finalBase    = base * elementModifier * criticalModifier;
+
+  if (finalBase <= 0) {
+    return { min: 0, max: 0, analysisBonus, spellMultiplier, crystalMultiplier, elementModifier, criticalModifier, enemyMagDef, finalBase: 0 };
   }
 
-  function setPressed(buttons, selectedValue, attrName) {
-    buttons.forEach(btn => {
-      const value = btn.getAttribute(attrName);
-      btn.setAttribute("aria-pressed", value === selectedValue ? "true" : "false");
-    });
-  }
+  const min = Math.floor(finalBase * 0.9);
+  const max = Math.floor(finalBase * 1.1);
 
-  function setHiddenForce(el, isHidden) {
-    if (!el) return;
-    el.hidden = isHidden;
-    el.style.setProperty("display", isHidden ? "none" : "", isHidden ? "important" : "");
-  }
+  return {
+    min: Math.max(0, min),
+    max: Math.max(0, max),
+    analysisBonus,
+    spellMultiplier,
+    crystalMultiplier,
+    elementModifier,
+    criticalModifier,
+    enemyMagDef,
+    finalBase
+  };
+}
 
-  function setDebuffButtons() {
-    debuffWoodBtn.setAttribute("aria-pressed",      state.debuffWood && state.attackType === "physical" ? "true" : "false");
-    debuffDarkBtn.setAttribute("aria-pressed",      state.debuffDark && state.attackType === "physical" ? "true" : "false");
-    debuffWoodMagicBtn.setAttribute("aria-pressed", state.debuffWood && state.attackType === "magic"    ? "true" : "false");
-    criticalToggle.setAttribute("aria-pressed", state.critical ? "true" : "false");
-    criticalToggle.textContent = state.critical ? "クリティカルON" : "クリティカルOFF";
-    godEye0Btn.setAttribute("aria-pressed",    state.godEyeCount === 0    ? "true" : "false");
-    godEye1000Btn.setAttribute("aria-pressed", state.godEyeCount === 1000 ? "true" : "false");
-  }
+function calcMagicOneShotRequiredInt(params) {
+  const hp                = Math.max(0, Number(params.hp) || 0);
+  const analysisBonus     = calcAnalysisBonus(params.analysisBook, params.analysisBookAdvanced);
+  const spellMultiplier   = getSpellMultiplier(params.spell);
+  const crystalMultiplier = getCrystalMultiplier(params.crystalCount);
+  const enemyMagDef       = Number(params.enemyMagDef) || 0;
+  const elementModifier   = getElementModifier(params.heroElement, params.enemyElement);
+  const criticalModifier  = 1.0;
 
-  function applyModeUI() {
-    const isMagic = state.attackType === "magic";
+  const totalModifier = 0.9 * 4 * elementModifier * criticalModifier;
+  if (totalModifier <= 0 || spellMultiplier <= 0 || crystalMultiplier <= 0) return 0;
 
-    setHiddenForce(physicalPanel,           isMagic);
-    setHiddenForce(magicPanel,              !isMagic);
-    setHiddenForce(analysisBookRow,         !isMagic);
-    setHiddenForce(analysisBookAdvancedRow, !isMagic);
-    setHiddenForce(crystalRow,              !isMagic);
-    setHiddenForce(criticalToggle,          isMagic);
-    setHiddenForce(godEyeRow, isMagic || !state.critical);
-    setHiddenForce(resultPhysical,          isMagic);
-    setHiddenForce(resultMagic,             !isMagic);
+  const neededAfterDefense = hp / totalModifier;
+  const neededPreDefense   = neededAfterDefense + enemyMagDef;
+  const neededIntPlusBook  = neededPreDefense / (1.25 * spellMultiplier * crystalMultiplier);
+  const neededInt          = Math.ceil(neededIntPlusBook - analysisBonus);
 
-    setPressed(attackTypeButtons,  state.attackType,  "data-attack-type");
-    setPressed(heroElementButtons, state.heroElement, "data-hero-element");
-    setPressed(spellButtons,       state.spell,       "data-spell");
-    setDebuffButtons();
-
-    if (picked) {
-      enemyScaled = buildEnemyScaled(picked, currentLv, state);
-    }
-    saveState();
-  }
-
-  // --- localStorage ---
-  function saveState() {
-    try {
-      const hero = {
-        atk:                 normalizeFormattedNonNegIntValue(document.getElementById("hero-atk").value, 0),
-        int:                 normalizeFormattedNonNegIntValue(document.getElementById("hero-int").value, 0),
-        spd:                 normalizeFormattedNonNegIntValue(document.getElementById("hero-spd").value, 0),
-        analysisBook:         normalizeFormattedNonNegIntValue(document.getElementById("analysis-book").value, 0),
-        analysisBookAdvanced: normalizeFormattedNonNegIntValue(document.getElementById("analysis-book-advanced").value, 0),
-        crystalCount:         normalizeFormattedNonNegIntValue(document.getElementById("crystal-count").value, 0)
-      };
-      const st = { monster_id: picked ? picked.id : "", lv: currentLv, hero, state };
-      localStorage.setItem(LS_KEY, JSON.stringify(st));
-    } catch (e) {}
-  }
-
-  function loadState() {
-    try {
-      const raw = localStorage.getItem(LS_KEY);
-      if (!raw) return;
-      const st = JSON.parse(raw);
-
-      if (st?.hero) {
-        const map = {
-          "hero-atk":              "atk",
-          "hero-int":              "int",
-          "hero-spd":              "spd",
-          "analysis-book":          "analysisBook",
-          "analysis-book-advanced": "analysisBookAdvanced",
-          "crystal-count":          "crystalCount"
-        };
-        Object.keys(map).forEach(id => {
-          const el = document.getElementById(id);
-          if (!el) return;
-          const v = st.hero[map[id]];
-          if (v !== undefined && v !== null) {
-            el.value = formatIntString(v);
-          }
-        });
-      }
-
-      if (Number.isFinite(Number(st?.lv))) {
-        currentLv = Math.max(1, Math.floor(Number(st.lv)));
-      }
-
-      if (st?.state) {
-        if (["fire", "water", "wood", "light", "dark"].includes(st.state.heroElement)) {
-          state.heroElement = st.state.heroElement;
-        }
-        if (["physical", "magic"].includes(st.state.attackType)) {
-          state.attackType = st.state.attackType;
-        }
-        if (["fire", "water", "wood", "light", "dark"].includes(st.state.spell)) {
-          state.spell = st.state.spell;
-        }
-        state.debuffWood = !!st.state.debuffWood;
-        state.debuffDark = !!st.state.debuffDark;
-        state.critical   = state.attackType === "physical" ? !!st.state.critical : false;
-        state.godEyeCount = state.critical ? (Number(st.state.godEyeCount) === 1000 ? 1000 : 0) : 0;
-      }
-    } catch (e) {}
-  }
-
-  // --- モンスターサジェスト ---
-  function closeSuggest() {
-    suggest.hidden = true;
-    suggest.innerHTML = "";
-  }
-
-  function normalizeJP(s) {
-    const str = (s ?? "").toString().trim().toLowerCase();
-    return str.replace(/[\u30A1-\u30F6]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
-  }
-
-  function filterMonsters(q) {
-    if (!Array.isArray(window.MONSTERS)) return [];
-    const query = normalizeJP(q);
-    if (query.length === 0) return [];
-    return window.MONSTERS
-      .filter(m => normalizeJP(m.title ?? "").includes(query))
-      .slice(0, 50);
-  }
-
-  function openSuggest(items) {
-    suggest.hidden = false;
-    suggest.innerHTML = "";
-    items.forEach(m => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.textContent = m.title;
-      btn.addEventListener("click", () => {
-        picked = m;
-        search.value = m.title;
-        applyPickedUI();
-        closeSuggest();
-      });
-      suggest.appendChild(btn);
-    });
-  }
-
-  // --- レベルショートカット ---
-  function renderShortcuts(shortcuts) {
-    shortcutWrap.innerHTML = "";
-    const arr = Array.isArray(shortcuts) ? shortcuts : [];
-    if (!picked || arr.length === 0) return;
-
-    arr.forEach(v => {
-      // A案：{lv, label} / 旧形式：数値 の両方に対応
-      const lv    = Math.floor(Number(v?.lv ?? v));
-      const label = v?.label ? String(v.label) : String(lv);
-      if (!Number.isFinite(lv) || lv < 1) return;
-
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.textContent = label;
-      btn.title = `Lv ${formatIntString(lv)}`;
-      btn.addEventListener("click", () => {
-        currentLv = lv;
-        lvInput.value = formatIntString(lv);
-        enemyScaled = buildEnemyScaled(picked, currentLv, state);
-        saveState();
-      });
-      shortcutWrap.appendChild(btn);
-    });
-  }
-
-  // --- モンスター選択 UI ---
-  function applyPickedUI() {
-    if (!picked) {
-      selectedBox.hidden = true;
-      selectedName.textContent = "";
-      lvInput.disabled = true;
-      lvInput.value = formatIntString(currentLv);
-      shortcutWrap.innerHTML = "";
-      enemyScaled = null;
-      setCalcEnabled();
-      return;
-    }
-
-    selectedName.textContent = picked.title;
-    selectedBox.hidden = false;
-    lvInput.disabled = false;
-    lvInput.value = formatIntString(currentLv);
-
-    renderShortcuts(picked.level_shortcuts);
-
-    enemyScaled = buildEnemyScaled(picked, currentLv, state);
-    saveState();
-    setCalcEnabled();
-  }
-
-  function clearPicked() {
-    picked = null;
-    enemyScaled = null;
-    selectedBox.hidden = true;
-    selectedName.textContent = "";
-    lvInput.disabled = true;
-    lvInput.value = formatIntString(currentLv);
-    shortcutWrap.innerHTML = "";
-    saveState();
-    setCalcEnabled();
-  }
-
-  // --- 主人公ステータス取得 ---
-  function getHeroInts() {
-    return {
-      atk:                  Math.max(0, parseFormattedInt(document.getElementById("hero-atk"), 0)),
-      int:                  Math.max(0, parseFormattedInt(document.getElementById("hero-int"), 0)),
-      spd:                  Math.max(0, parseFormattedInt(document.getElementById("hero-spd"), 0)),
-      analysisBook:         Math.max(0, parseFormattedInt(document.getElementById("analysis-book"), 0)),
-      analysisBookAdvanced: Math.max(0, parseFormattedInt(document.getElementById("analysis-book-advanced"), 0)),
-      crystalCount:         Math.max(0, parseFormattedInt(document.getElementById("crystal-count"), 0))
-    };
-  }
-
-  // --- 初期化 ---
-  loadState();
-  lvInput.value = formatIntString(currentLv);
-  applyModeUI();
-  setCalcEnabled();
-
-  ["hero-atk", "hero-int", "hero-spd", "analysis-book", "analysis-book-advanced", "crystal-count"].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.addEventListener("blur", saveState);
-  });
-
-  // localStorage からモンスターを復元
-  (function restorePicked() {
-    try {
-      const raw = localStorage.getItem(LS_KEY);
-      if (!raw) return;
-      const st = JSON.parse(raw);
-      const mid = (st?.monster_id ?? "").toString();
-      if (!mid || !Array.isArray(window.MONSTERS)) return;
-      const found = window.MONSTERS.find(m => String(m.id) === mid);
-      if (!found) return;
-      picked = found;
-      search.value = found.title;
-      applyPickedUI();
-    } catch (e) {}
-  })();
-
-  // --- イベントリスナー ---
-  heroElementButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.heroElement = btn.getAttribute("data-hero-element") || "fire";
-      applyModeUI();
-    });
-  });
-
-  attackTypeButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.attackType = btn.getAttribute("data-attack-type") || "physical";
-      if (state.attackType !== "physical") {
-        state.debuffDark = false;
-        state.critical   = false;
-      }
-      applyModeUI();
-    });
-  });
-
-  spellButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.spell = btn.getAttribute("data-spell") || "fire";
-      applyModeUI();
-    });
-  });
-
-  debuffWoodBtn.addEventListener("click", () => {
-    if (state.attackType !== "physical") return;
-    state.debuffWood = !state.debuffWood;
-    enemyScaled = picked ? buildEnemyScaled(picked, currentLv, state) : null;
-    setDebuffButtons();
-    saveState();
-  });
-
-  debuffDarkBtn.addEventListener("click", () => {
-    if (state.attackType !== "physical") return;
-    state.debuffDark = !state.debuffDark;
-    enemyScaled = picked ? buildEnemyScaled(picked, currentLv, state) : null;
-    setDebuffButtons();
-    saveState();
-  });
-
-  debuffWoodMagicBtn.addEventListener("click", () => {
-    if (state.attackType !== "magic") return;
-    state.debuffWood = !state.debuffWood;
-    enemyScaled = picked ? buildEnemyScaled(picked, currentLv, state) : null;
-    setDebuffButtons();
-    saveState();
-  });
-
-  criticalToggle.addEventListener("click", () => {
-    if (state.attackType !== "physical") return;
-    state.critical = !state.critical;
-    if (!state.critical) state.godEyeCount = 0;
-    setHiddenForce(godEyeRow, !state.critical);
-    setDebuffButtons();
-    saveState();
-    calcBtn.click();
-  });
-
-  godEye0Btn.addEventListener("click", () => {
-    state.godEyeCount = 0;
-    setDebuffButtons();
-    saveState();
-    calcBtn.click();
-  });
-
-  godEye1000Btn.addEventListener("click", () => {
-    state.godEyeCount = 1000;
-    setDebuffButtons();
-    saveState();
-    calcBtn.click();
-  });
-
-  search.addEventListener("input", () => {
-    const q = search.value;
-    if (q.trim() === "") {
-      clearPicked();
-      closeSuggest();
-      return;
-    }
-    if (picked && q !== picked.title) {
-      clearPicked();
-    }
-    const items = filterMonsters(q);
-    if (items.length === 0) closeSuggest();
-    else openSuggest(items);
-  });
-
-  search.addEventListener("focus", () => {
-    const items = filterMonsters(search.value);
-    if (items.length === 0) closeSuggest();
-    else openSuggest(items);
-  });
-
-  document.addEventListener("click", (e) => {
-    const t = e.target;
-    if (t === search || suggest.contains(t)) return;
-    closeSuggest();
-  });
-
-  lvInput.addEventListener("blur", () => {
-    if (!picked) return;
-    currentLv = normalizeLv(lvInput);
-    enemyScaled = buildEnemyScaled(picked, currentLv, state);
-    saveState();
-  });
-
-  // --- 計算ボタン ---
-  calcBtn.addEventListener("click", () => {
-    if (!picked || !enemyScaled) return;
-
-    const hero         = getHeroInts();
-    const enemyPhysDef = enemyScaled.def  + enemyScaled.mdef * 0.1;
-    const enemyMagDef  = enemyScaled.mdef + enemyScaled.def  * 0.1;
-    const enemyHp      = enemyScaled.vit * 18 + 100;
-    const elementModifier   = getElementModifier(state.heroElement, enemyScaled.element);
-    const criticalModifier  = state.critical ? getCriticalModifier(state.godEyeCount) : 1.0;
-
-    // 実体力
-    outEnemyHp.textContent = fmt(enemyHp);
-
-    if (state.attackType === "physical") {
-      const hits = hitsFromSpd(hero.spd);
-      outHits.textContent = fmt(hits);
-
-      const phy = damageRangeTotal(hero.atk, enemyPhysDef, hits, elementModifier, criticalModifier);
-      outPhyDmg.textContent = formatMinMax(phy.min, phy.max);
-
-      // 物理 平均nパン
-      const phyAvg = Math.floor((phy.min + phy.max) / 2);
-      if (phyAvg > 0) {
-        const phyNpan = Math.ceil(enemyHp / phyAvg);
-        outPhyNpan.textContent = `${phyNpan}パン（平均ダメ: ${fmt(phyAvg)}）`;
-      } else {
-        outPhyNpan.textContent = "-";
-      }
-
-      const reqAtk = oneShotLineRequiredAttack(enemyPhysDef, hits, enemyHp, elementModifier, criticalModifier);
-      outPhyOne.textContent = `atk${fmt(reqAtk)}以上`;
-
-      const reqAtkOverkill = oneShotLineRequiredAttack(enemyPhysDef, hits, enemyHp * 10, elementModifier, criticalModifier);
-      outPhyOverkill.textContent = `atk${fmt(reqAtkOverkill)}以上`;
-
-      const mag = calcMagicDamageRange({
-        heroInt: hero.int,
-        analysisBook: hero.analysisBook,
-        analysisBookAdvanced: hero.analysisBookAdvanced,
-        crystalCount: hero.crystalCount,
-        spell: state.spell,
-        enemyMagDef,
-        heroElement: state.heroElement,
-        enemyElement: enemyScaled.element
-      });
-
-      // 魔法 平均nパン（物理モードでも参考表示）
-      const magAvg = Math.floor((mag.min + mag.max) / 2);
-      if (magAvg > 0) {
-        const magNpan = Math.ceil(enemyHp / magAvg);
-        outMagNpan.textContent = `${magNpan}パン（平均ダメ: ${fmt(magAvg)}）`;
-      } else {
-        outMagNpan.textContent = "-";
-      }
-      outMagDmg.textContent = `${formatMinMax(mag.min, mag.max)}（この範囲内）`;
-
-      const reqInt = calcMagicOneShotRequiredInt({
-        hp: enemyHp,
-        analysisBook: hero.analysisBook,
-        analysisBookAdvanced: hero.analysisBookAdvanced,
-        crystalCount: hero.crystalCount,
-        spell: state.spell,
-        enemyMagDef,
-        heroElement: state.heroElement,
-        enemyElement: enemyScaled.element
-      });
-      outMagOne.textContent = `int${fmt(reqInt)}以上`;
-
-      const reqIntOverkill = calcMagicOneShotRequiredInt({
-        hp: enemyHp * 10,
-        analysisBook: hero.analysisBook,
-        analysisBookAdvanced: hero.analysisBookAdvanced,
-        crystalCount: hero.crystalCount,
-        spell: state.spell,
-        enemyMagDef,
-        heroElement: state.heroElement,
-        enemyElement: enemyScaled.element
-      });
-      outMagOverkill.textContent = `int${fmt(reqIntOverkill)}以上`;
-
-    } else {
-      const mag = calcMagicDamageRange({
-        heroInt: hero.int,
-        analysisBook: hero.analysisBook,
-        analysisBookAdvanced: hero.analysisBookAdvanced,
-        crystalCount: hero.crystalCount,
-        spell: state.spell,
-        enemyMagDef,
-        heroElement: state.heroElement,
-        enemyElement: enemyScaled.element
-      });
-
-      // 魔法 平均nパン
-      const magAvg = Math.floor((mag.min + mag.max) / 2);
-      if (magAvg > 0) {
-        const magNpan = Math.ceil(enemyHp / magAvg);
-        outMagNpan.textContent = `${magNpan}パン（平均ダメ: ${fmt(magAvg)}）`;
-      } else {
-        outMagNpan.textContent = "-";
-      }
-      outMagDmg.textContent = `${formatMinMax(mag.min, mag.max)}（この範囲内）`;
-
-      const reqInt = calcMagicOneShotRequiredInt({
-        hp: enemyHp,
-        analysisBook: hero.analysisBook,
-        analysisBookAdvanced: hero.analysisBookAdvanced,
-        crystalCount: hero.crystalCount,
-        spell: state.spell,
-        enemyMagDef,
-        heroElement: state.heroElement,
-        enemyElement: enemyScaled.element
-      });
-      outMagOne.textContent = `int${fmt(reqInt)}以上`;
-
-      const reqIntOverkill = calcMagicOneShotRequiredInt({
-        hp: enemyHp * 10,
-        analysisBook: hero.analysisBook,
-        analysisBookAdvanced: hero.analysisBookAdvanced,
-        crystalCount: hero.crystalCount,
-        spell: state.spell,
-        enemyMagDef,
-        heroElement: state.heroElement,
-        enemyElement: enemyScaled.element
-      });
-      outMagOverkill.textContent = `int${fmt(reqIntOverkill)}以上`;
-    }
-
-    outHitLuk.textContent      = `${fmt(Math.floor(enemyScaled.luk / 2))}以上`;
-    outHitLukStable.textContent = `${fmt(enemyScaled.luk)}以上`;
-    outEvadeLuk.textContent    = `${fmt(Math.floor(enemyScaled.luk * 3))}以上`;
-
-    outNullDef.textContent  = `${fmt(requiredDefenseForNullify(enemyScaled.atk))}以上`;
-    outNullMdef.textContent = `${fmt(requiredDefenseForNullify(enemyScaled.int))}以上`;
-  });
-})();
-
-}); // DOMContentLoaded
+  return Math.max(0, neededInt);
+}
