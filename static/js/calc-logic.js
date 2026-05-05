@@ -94,10 +94,16 @@ function getElementModifier(heroElement, enemyElement) {
   return 1.0;
 }
 
-function damageRangeTotal(attack, defense, hits, elementModifier) {
+function getCriticalModifier(godCount) {
+  const count = Math.max(0, Math.floor(Number(godCount) || 0));
+  const clamped = Math.min(1000, count);
+  return 1 + clamped * 0.003;
+}
+
+function damageRangeTotal(attack, defense, hits, elementModifier, criticalModifier = 1.0) {
   const base = (attack * 7) - (defense * 4);
   if (base <= 0) return { min: 0, max: 0, base };
-  const modifiedBase = base * elementModifier;
+  const modifiedBase = base * elementModifier * criticalModifier;
   const min = Math.floor(modifiedBase * 0.9 * hits);
   const max = Math.floor(modifiedBase * 1.1 * hits);
   return { min: Math.max(0, min), max: Math.max(0, max), base: modifiedBase };
@@ -107,8 +113,8 @@ function formatMinMax(min, max) {
   return `${fmt(min)}～${fmt(max)}`;
 }
 
-function oneShotLineRequiredAttack(defense, hits, hp, elementModifier) {
-  const need = hp / (0.9 * hits * elementModifier);
+function oneShotLineRequiredAttack(defense, hits, hp, elementModifier, criticalModifier = 1.0) {
+  const need = hp / (0.9 * hits * elementModifier * criticalModifier);
   const x = (defense * 4 + need) / 7;
   return Math.max(0, Math.ceil(x));
 }
