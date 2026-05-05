@@ -124,20 +124,20 @@ document.addEventListener("DOMContentLoaded", function () {
   // フィルタ・ソート
   // ============================================================
 
-  function getAttackTypeFilter(sortKey, rangedOnly) {
-    if (sortKey === "req_def")  return ["物理"];
-    if (sortKey === "req_mdef") return rangedOnly ? ["遠距離"] : ["魔法"];
-    return null;
-  }
-
   function getFilteredMonsters(sortKey, rangedOnly) {
     if (!window.MONSTERS || !Array.isArray(window.MONSTERS)) return [];
 
     let list = window.MONSTERS.filter(m => !EXCLUDED_IDS.includes(m.id));
 
-    const attackTypeFilter = getAttackTypeFilter(sortKey, rangedOnly);
-    if (attackTypeFilter) {
-      list = list.filter(m => attackTypeFilter.includes(m.attack_type));
+    // attack_type による絞り込み
+    if (sortKey === "req_def") {
+      list = list.filter(m => m.attack_type === "物理");
+    } else if (sortKey === "req_mdef") {
+      list = list.filter(m => m.attack_type === "魔法");
+      // 遠距離型のみトグルON時はさらにattack_rangeで絞り込む
+      if (rangedOnly) {
+        list = list.filter(m => m.attack_range === "遠距離");
+      }
     }
 
     return list;
@@ -235,8 +235,10 @@ document.addEventListener("DOMContentLoaded", function () {
     noResult.style.display = "none";
 
     // result meta
-    const attackTypeFilter = getAttackTypeFilter(sortKey, rangedOnly);
-    const filterNote = attackTypeFilter ? `（${attackTypeFilter.join("・")}型）` : "";
+    let filterNote = "";
+    if (sortKey === "req_def")  filterNote = "（物理型）";
+    if (sortKey === "req_mdef") filterNote = rangedOnly ? "（魔法・遠距離型）" : "（魔法型）";
+
     const sortLabel = viewGroup === "status"
       ? STATUS_COLUMNS.find(c => c.key === sortKey)?.label || sortKey
       : SINGLE_COLUMNS.find(c => c.key === sortKey)?.label || sortKey;
