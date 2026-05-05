@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "241", "242", "243", "244", "245", "246", "247", "248", "249"
   ];
 
-  const TOP_N       = 15;
-  const SAFE_MAX_F  = 99999;
+  const TOP_N      = 15;
+  const SAFE_MAX_F = 99999;
 
   // ステータス列定義
   const STATUS_COLUMNS = [
@@ -219,76 +219,58 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ============================================================
-  // 安全フロア判定
+  // 安全フロア判定（各ステータス独立）
   // ============================================================
 
-  // 1体のモンスターに対して安全かどうかを判定
-  // 戻り値: { safe: bool, reasons: ["DEF"|"MDEF"|"LUK"] }
-  function checkMonsterSafe(monster, lv, heroDef, heroMdef, heroLuk) {
-    const row = calcMonsterRow(monster, lv, false);
-    const reasons = [];
-
-    // DEF安全：自DEF > (敵ATK×7-10)/4
-    if (heroDef > (row.atk * 7 - 10) / 4) reasons.push("DEF");
-
-    // MDEF安全：自MDEF > (敵INT×7-10)/4
-    if (heroMdef > (row.int * 7 - 10) / 4) reasons.push("MDEF");
-
-    // LUK安全：自LUK >= 敵LUK×3
-    if (heroLuk >= row.luk * 3) reasons.push("LUK");
-
-    return { safe: reasons.length > 0, reasons };
-  }
-
-  // フロアの全モンスターに対して安全かどうかを判定
-  function isFloorSafe(monsters, floor, heroDef, heroMdef, heroLuk) {
+  // 1フロアのDEF安全チェック（全モンスターのATKに対して）
+  function isFloorSafeDef(monsters, floor, heroDef) {
     const lv = getLv(floor);
-    for (const monster of monsters) {
-      const { safe } = checkMonsterSafe(monster, lv, heroDef, heroMdef, heroLuk);
-      if (!safe) return false;
+    for (const m of monsters) {
+      const atk = scaleStat(m.atk, lv);
+      if (heroDef <= (atk * 7 - 10) / 4) return false;
     }
     return true;
   }
 
-  // 安全な最大フロアを探索（1Fから順に探索）
-  function findMaxSafeFloor(monsters, heroDef, heroMdef, heroLuk) {
-    if (monsters.length === 0) return null;
-
-    // 1Fが既に危険な場合
-    if (!isFloorSafe(monsters, 1, heroDef, heroMdef, heroLuk)) {
-      return { maxFloor: 0, reachedLimit: false };
+  // 1フロアのMDEF安全チェック（全モンスターのINTに対して）
+  function isFloorSafeMdef(monsters, floor, heroMdef) {
+    const lv = getLv(floor);
+    for (const m of monsters) {
+      const int_ = scaleStat(m.int, lv);
+      if (heroMdef <= (int_ * 7 - 10) / 4) return false;
     }
+    return true;
+  }
+
+  // 1フロアのLUK安全チェック（全モンスターのLUKに対して）
+  function isFloorSafeLuk(monsters, floor, heroLuk) {
+    const lv = getLv(floor);
+    for (const m of monsters) {
+      const luk = scaleStat(m.luk, lv);
+      if (heroLuk < luk * 3) return false;
+    }
+    return true;
+  }
+
+  // 二分探索で安全な最大フロアを取得
+  function findMaxSafeFloorBy(monsters, checkFn) {
+    if (!checkFn(1)) return { maxFloor: 0, reachedLimit: false };
+    if (checkFn(SAFE_MAX_F)) return { maxFloor: SAFE_MAX_F, reachedLimit: true };
 
     let lo = 1;
     let hi = SAFE_MAX_F;
-
-    // hi（上限）が安全なら上限到達
-    if (isFloorSafe(monsters, hi, heroDef, heroMdef, heroLuk)) {
-      return { maxFloor: hi, reachedLimit: true };
-    }
-
-    // 二分探索で安全な最大フロアを特定
     while (lo < hi - 1) {
       const mid = Math.floor((lo + hi) / 2);
-      if (isFloorSafe(monsters, mid, heroDef, heroMdef, heroLuk)) {
-        lo = mid;
-      } else {
-        hi = mid;
-      }
+      if (checkFn(mid)) lo = mid;
+      else              hi = mid;
     }
-
     return { maxFloor: lo, reachedLimit: false };
   }
 
-  // 危険になるフロアで各モンスターの安全状況を取得
-  function getDangerDetails(monsters, floor, heroDef, heroMdef, heroLuk) {
+  // 危険フロアで安全条件を満たせないモンスター一覧
+  function getDangerMonsters(monsters, floor, checkFn) {
     const lv = getLv(floor);
-    return monsters
-      .map(m => {
-        const { safe, reasons } = checkMonsterSafe(m, lv, heroDef, heroMdef, heroLuk);
-        return { title: m.title, safe, reasons };
-      })
-      .filter(m => !m.safe);
+    return monsters.filter(m => !checkFn(m, lv));
   }
 
   // ============================================================
@@ -315,15 +297,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const analysisAdvInput  = document.getElementById("analysis-book-adv");
   const crystalInput      = document.getElementById("crystal-count");
 
-  // 安全フロア判定
-  const safeDefInput      = document.getElementById("safe-def");
-  const safeMdefInput     = document.getElementById("safe-mdef");
-  const safeLukInput      = document.getElementById("safe-luk");
-  const safeResult        = document.getElementById("safe-result");
+  const safeDefInput  = document.getElementById("safe-def");
+  const safeMdefInput = document.getElementById("safe-mdef");
+  const safeLukInput  = document.getElementById("safe-luk");
+  const safeResult    = document.getElementById("safe-result");
 
-  // タブ
-  const tabBtns           = document.querySelectorAll(".tenku-tab");
-  const tabContents       = document.querySelectorAll(".tenku-tab-content");
+  const tabBtns      = document.querySelectorAll(".tenku-tab");
+  const tabContents  = document.querySelectorAll(".tenku-tab-content");
 
   // ============================================================
   // UI状態取得
@@ -444,7 +424,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 通常表示
     const rows = calcAndSort(monsters, lv, sortKey, debuffDark);
-
     noResult.style.display = "none";
 
     let filterNote = "";
@@ -558,46 +537,77 @@ document.addEventListener("DOMContentLoaded", function () {
 
     safeResult.innerHTML = '<div class="safe-placeholder">計算中...</div>';
 
-    // 非同期で重い計算を実行（UIをブロックしない）
     setTimeout(() => {
-      const { maxFloor, reachedLimit } = findMaxSafeFloor(monsters, heroDef, heroMdef, heroLuk);
+      // 各ステータスを独立して計算
+      const defResult  = heroDef  > 0
+        ? findMaxSafeFloorBy(monsters, f => isFloorSafeDef(monsters,  f, heroDef))
+        : null;
+      const mdefResult = heroMdef > 0
+        ? findMaxSafeFloorBy(monsters, f => isFloorSafeMdef(monsters, f, heroMdef))
+        : null;
+      const lukResult  = heroLuk  > 0
+        ? findMaxSafeFloorBy(monsters, f => isFloorSafeLuk(monsters,  f, heroLuk))
+        : null;
 
-      let html = "";
+      // 各ステータスのカードを生成
+      function makeCard(label, result, dangerCheckFn) {
+        if (!result) return "";
 
-      if (maxFloor === 0) {
-        html = `
-          <div class="safe-card safe-danger">
-            <div class="safe-card-title">⚠ 1階から安全ではありません</div>
-            <div class="safe-card-desc">入力されたステータスでは1階のモンスターに対しても安全条件を満たせません。</div>
-          </div>`;
-      } else if (reachedLimit) {
-        html = `
-          <div class="safe-card safe-ok">
-            <div class="safe-card-title">✓ ${SAFE_MAX_F.toLocaleString()}階まで安全</div>
-            <div class="safe-card-desc">探索上限（${SAFE_MAX_F.toLocaleString()}F）まで全モンスターに対して安全条件を満たしています。</div>
-          </div>`;
-      } else {
-        const dangerFloor  = maxFloor + 1;
-        const dangerDetail = getDangerDetails(monsters, dangerFloor, heroDef, heroMdef, heroLuk);
+        if (result.maxFloor === 0) {
+          return `
+            <div class="safe-stat-card safe-danger">
+              <div class="safe-stat-label">${label}</div>
+              <div class="safe-stat-floor">1階から安全ではありません</div>
+            </div>`;
+        }
 
-        const dangerList = dangerDetail.slice(0, 10).map(m =>
-          `<li>${m.title}</li>`
-        ).join("");
-        const moreCount = dangerDetail.length > 10 ? `<li>他 ${dangerDetail.length - 10} 体...</li>` : "";
+        if (result.reachedLimit) {
+          return `
+            <div class="safe-stat-card safe-ok">
+              <div class="safe-stat-label">${label}</div>
+              <div class="safe-stat-floor">${SAFE_MAX_F.toLocaleString()}階まで安全</div>
+              <div class="safe-stat-lv">（上限到達）</div>
+            </div>`;
+        }
 
-        html = `
-          <div class="safe-card safe-ok">
-            <div class="safe-card-title">✓ 安全な最大フロア：<span class="safe-floor">${maxFloor.toLocaleString()}階</span></div>
-            <div class="safe-card-lv">（Lv ${getLv(maxFloor).toLocaleString()}）</div>
-          </div>
-          <div class="safe-card safe-danger">
-            <div class="safe-card-title">⚠ ${dangerFloor.toLocaleString()}階から危険</div>
-            <div class="safe-card-desc">以下のモンスターに対して安全条件を満たせません：</div>
-            <ul class="safe-danger-list">${dangerList}${moreCount}</ul>
+        const dangerFloor   = result.maxFloor + 1;
+        const dangerLv      = getLv(dangerFloor);
+        const dangerMonsters = dangerCheckFn(dangerFloor);
+        const list = dangerMonsters.slice(0, 5).map(m => `<li>${m.title}</li>`).join("");
+        const more = dangerMonsters.length > 5 ? `<li>他 ${dangerMonsters.length - 5} 体...</li>` : "";
+
+        return `
+          <div class="safe-stat-card safe-ok">
+            <div class="safe-stat-label">${label}</div>
+            <div class="safe-stat-floor">${result.maxFloor.toLocaleString()}階まで安全</div>
+            <div class="safe-stat-lv">Lv ${getLv(result.maxFloor).toLocaleString()}</div>
+            <div class="safe-stat-danger">
+              <span class="safe-stat-danger-title">⚠ ${dangerFloor.toLocaleString()}階（Lv ${dangerLv.toLocaleString()}）から危険</span>
+              <ul class="safe-danger-list">${list}${more}</ul>
+            </div>
           </div>`;
       }
 
-      safeResult.innerHTML = html;
+      const defCard  = makeCard("DEF（物理無効化）",  defResult,
+        f => monsters.filter(m => {
+          const atk = scaleStat(m.atk, getLv(f));
+          return heroDef <= (atk * 7 - 10) / 4;
+        })
+      );
+      const mdefCard = makeCard("MDEF（魔法無効化）", mdefResult,
+        f => monsters.filter(m => {
+          const int_ = scaleStat(m.int, getLv(f));
+          return heroMdef <= (int_ * 7 - 10) / 4;
+        })
+      );
+      const lukCard  = makeCard("LUK（回避）",        lukResult,
+        f => monsters.filter(m => {
+          const luk = scaleStat(m.luk, getLv(f));
+          return heroLuk < luk * 3;
+        })
+      );
+
+      safeResult.innerHTML = `<div class="safe-stat-grid">${defCard}${mdefCard}${lukCard}</div>`;
     }, 0);
   }
 
