@@ -95,9 +95,8 @@ function getElementModifier(heroElement, enemyElement) {
 }
 
 function getCriticalModifier(godCount) {
-  const count = Math.max(0, Math.floor(Number(godCount) || 0));
-  const clamped = Math.min(1000, count);
-  return 1 + clamped * 0.003;
+  const count = Math.max(0, Math.min(1000, Math.floor(Number(godCount) || 0)));
+  return 1 + 1.50 + count * 0.003;
 }
 
 function damageRangeTotal(attack, defense, hits, elementModifier, criticalModifier = 1.0) {
