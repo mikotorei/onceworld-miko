@@ -30,22 +30,30 @@
       </div>
     </div>
 
-    <!-- 2行目：列選択 -->
+    <!-- 2行目：表示グループ選択 -->
     <div class="control-group full-width">
-      <span class="control-label">表示・ソート列</span>
-      <div class="col-select-group" id="col-select-group">
-        <label class="col-btn active" data-col="vit"><input type="radio" name="sort-col" value="vit" checked>VIT</label>
-        <label class="col-btn" data-col="spd"><input type="radio" name="sort-col" value="spd">SPD</label>
-        <label class="col-btn" data-col="atk"><input type="radio" name="sort-col" value="atk">ATK</label>
-        <label class="col-btn" data-col="int"><input type="radio" name="sort-col" value="int">INT</label>
-        <label class="col-btn" data-col="def"><input type="radio" name="sort-col" value="def">DEF</label>
-        <label class="col-btn" data-col="mdef"><input type="radio" name="sort-col" value="mdef">MDEF</label>
-        <label class="col-btn" data-col="luk"><input type="radio" name="sort-col" value="luk">LUK</label>
-        <label class="col-btn" data-col="req_def"><input type="radio" name="sort-col" value="req_def">無効DEF</label>
-        <label class="col-btn" data-col="req_mdef"><input type="radio" name="sort-col" value="req_mdef">無効MDEF</label>
-        <label class="col-btn" data-col="evade_luk"><input type="radio" name="sort-col" value="evade_luk">回避LUK</label>
-        <label class="col-btn" data-col="hit_min_luk"><input type="radio" name="sort-col" value="hit_min_luk">最低命中LUK</label>
-        <label class="col-btn" data-col="hit_stable_luk"><input type="radio" name="sort-col" value="hit_stable_luk">安定命中LUK</label>
+      <span class="control-label">表示</span>
+      <div class="col-select-group" id="group-select-group">
+        <label class="col-btn active" data-group="status"><input type="radio" name="view-group" value="status" checked>ステータス</label>
+        <label class="col-btn" data-group="req_def"><input type="radio" name="view-group" value="req_def">無効DEF</label>
+        <label class="col-btn" data-group="req_mdef"><input type="radio" name="view-group" value="req_mdef">無効MDEF</label>
+        <label class="col-btn" data-group="evade_luk"><input type="radio" name="view-group" value="evade_luk">回避LUK</label>
+        <label class="col-btn" data-group="hit_min_luk"><input type="radio" name="view-group" value="hit_min_luk">最低命中LUK</label>
+        <label class="col-btn" data-group="hit_stable_luk"><input type="radio" name="view-group" value="hit_stable_luk">安定命中LUK</label>
+      </div>
+    </div>
+
+    <!-- 3行目：ステータスのソート選択（ステータス選択時のみ表示） -->
+    <div class="control-group full-width" id="status-sort-row">
+      <span class="control-label">ソート</span>
+      <div class="col-select-group" id="status-sort-group">
+        <label class="col-btn active" data-sort="vit"><input type="radio" name="sort-col" value="vit" checked>VIT</label>
+        <label class="col-btn" data-sort="spd"><input type="radio" name="sort-col" value="spd">SPD</label>
+        <label class="col-btn" data-sort="atk"><input type="radio" name="sort-col" value="atk">ATK</label>
+        <label class="col-btn" data-sort="int"><input type="radio" name="sort-col" value="int">INT</label>
+        <label class="col-btn" data-sort="def"><input type="radio" name="sort-col" value="def">DEF</label>
+        <label class="col-btn" data-sort="mdef"><input type="radio" name="sort-col" value="mdef">MDEF</label>
+        <label class="col-btn" data-sort="luk"><input type="radio" name="sort-col" value="luk">LUK</label>
       </div>
     </div>
 
