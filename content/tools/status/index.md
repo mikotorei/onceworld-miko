@@ -495,12 +495,11 @@ tbody.innerHTML = "";
 STATS.forEach((stat) => {
 const tr = document.createElement("tr");
 tr.dataset.stat = stat;
-tr.innerHTML = `
-<td>${stat}</td>
-<td class="num" data-col="base"></td>
-<td class="num" data-col="equip"></td>
-<td class="num" data-col="total"></td>
-`;
+var td0 = document.createElement("td"); td0.textContent = stat;
+var td1 = document.createElement("td"); td1.className = "num"; td1.dataset.col = "base";
+var td2 = document.createElement("td"); td2.className = "num"; td2.dataset.col = "equip";
+var td3 = document.createElement("td"); td3.className = "num"; td3.dataset.col = "total";
+tr.appendChild(td0); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3);
 tbody.appendChild(tr);
 });
 }
@@ -923,11 +922,28 @@ const label = id ? (petNameMap.get(String(id)) || `ID:${id}`) : "（なし）";
 return `ペット${i + 1}：${label}${id ? `  段階${stage}` : ""}`;
 }).join("\n");
 
+var dl = document.createElement("dl");
+var dt1 = document.createElement("dt");
+dt1.textContent = "装備";
+var dd1 = document.createElement("dd");
+var pre1 = document.createElement("pre");
+pre1.style.cssText = "margin:0;font:inherit;white-space:pre-wrap";
+pre1.textContent = equipLines;
+dd1.appendChild(pre1);
+var dt2 = document.createElement("dt");
+dt2.textContent = "ペット";
+var dd2 = document.createElement("dd");
+var pre2 = document.createElement("pre");
+pre2.style.cssText = "margin:0;font:inherit;white-space:pre-wrap";
+pre2.textContent = petLines;
+dd2.appendChild(pre2);
+dl.appendChild(dt1);
+dl.appendChild(dd1);
+dl.appendChild(dt2);
+dl.appendChild(dd2);
+box.innerHTML = "";
+box.appendChild(dl);
 box.hidden = false;
-box.innerHTML = `<dl>
-<dt>装備</dt><dd><pre style="margin:0;font:inherit;white-space:pre-wrap">${equipLines}</pre></dd>
-<dt>ペット</dt><dd><pre style="margin:0;font:inherit;white-space:pre-wrap">${petLines}</pre></dd>
-</dl>`;
 }
 
 function saveNamedBuild() {
