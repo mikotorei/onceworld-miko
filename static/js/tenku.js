@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // ============================================================
 
   const EXCLUDED_IDS = [
-    // 例: "001", "042"
     "201",
     "202",
     "203",
@@ -33,9 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const TOP_N = 15;
 
+  // 配列で複数のattack_typeを指定可能
   const ATTACK_TYPE_FILTER = {
-    req_def:  "物理",
-    req_mdef: "魔法",
+    req_def:  ["物理"],
+    req_mdef: ["魔法", "遠距離"],
   };
 
   // ステータス列定義
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // 単一列表示の列定義
   const SINGLE_COLUMNS = [
     { key: "req_def",        label: "無効DEF",     tooltip: "物理攻撃を無効化するために必要な自分のDEF（物理型のみ）" },
-    { key: "req_mdef",       label: "無効MDEF",    tooltip: "魔法攻撃を無効化するために必要な自分のMDEF（魔法型のみ）" },
+    { key: "req_mdef",       label: "無効MDEF",    tooltip: "魔法攻撃を無効化するために必要な自分のMDEF（魔法・遠距離型）" },
     { key: "evade_luk",      label: "回避LUK",     tooltip: "攻撃を回避するために必要な自分のLUK" },
     { key: "hit_min_luk",    label: "最低命中LUK", tooltip: "最低限命中するために必要な自分のLUK" },
     { key: "hit_stable_luk", label: "安定命中LUK", tooltip: "安定して命中するために必要な自分のLUK" },
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const attackTypeFilter = ATTACK_TYPE_FILTER[sortKey] || null;
     if (attackTypeFilter) {
-      list = list.filter(m => m.attack_type === attackTypeFilter);
+      list = list.filter(m => attackTypeFilter.includes(m.attack_type));
     }
 
     return list;
@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // result meta
     const attackTypeFilter = ATTACK_TYPE_FILTER[sortKey] || null;
-    const filterNote = attackTypeFilter ? `（${attackTypeFilter}型）` : "";
+    const filterNote = attackTypeFilter ? `（${attackTypeFilter.join("・")}型）` : "";
     const sortLabel = viewGroup === "status"
       ? STATUS_COLUMNS.find(c => c.key === sortKey)?.label || sortKey
       : SINGLE_COLUMNS.find(c => c.key === sortKey)?.label || sortKey;
