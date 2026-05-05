@@ -19,18 +19,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const LS_KEY = "calc_state_v5";
 
   // --- 出力要素 ---
-  const outPhyDmg  = document.getElementById("out-phy-dmg");
-  const outHits    = document.getElementById("out-hits");
-  const outPhyOne  = document.getElementById("out-phy-one");
+  const outEnemyHp     = document.getElementById("out-enemy-hp");
+  const outPhyDmg      = document.getElementById("out-phy-dmg");
+  const outHits        = document.getElementById("out-hits");
+  const outPhyNpan     = document.getElementById("out-phy-npan");
+  const outPhyOne      = document.getElementById("out-phy-one");
   const outPhyOverkill = document.getElementById("out-phy-overkill");
-  const outMagDmg  = document.getElementById("out-mag-dmg");
-  const outMagOne  = document.getElementById("out-mag-one");
+  const outMagDmg      = document.getElementById("out-mag-dmg");
+  const outMagNpan     = document.getElementById("out-mag-npan");
+  const outMagOne      = document.getElementById("out-mag-one");
   const outMagOverkill = document.getElementById("out-mag-overkill");
-  const outHitLuk      = document.getElementById("out-hit-luk");
+  const outHitLuk       = document.getElementById("out-hit-luk");
   const outHitLukStable = document.getElementById("out-hit-luk-stable");
-  const outEvadeLuk    = document.getElementById("out-evade-luk");
-  const outNullDef  = document.getElementById("out-null-def");
-  const outNullMdef = document.getElementById("out-null-mdef");
+  const outEvadeLuk     = document.getElementById("out-evade-luk");
+  const outNullDef     = document.getElementById("out-null-def");
+  const outNullMdef    = document.getElementById("out-null-mdef");
+
+  // --- 結果ブロック ---
+  const resultPhysical = document.getElementById("result-physical");
+  const resultMagic    = document.getElementById("result-magic");
 
   // --- 操作要素 ---
   const calcBtn       = document.getElementById("calc-btn");
@@ -107,6 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
     setHiddenForce(analysisBookAdvancedRow, !isMagic);
     setHiddenForce(crystalRow,              !isMagic);
     setHiddenForce(criticalToggle,          isMagic);
+    setHiddenForce(resultPhysical,          isMagic);
+    setHiddenForce(resultMagic,             !isMagic);
 
     setPressed(attackTypeButtons,  state.attackType,  "data-attack-type");
     setPressed(heroElementButtons, state.heroElement, "data-hero-element");
@@ -422,12 +431,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const enemyHp      = enemyScaled.vit * 18 + 100;
     const elementModifier = getElementModifier(state.heroElement, enemyScaled.element);
 
+    // 実体力
+    outEnemyHp.textContent = fmt(enemyHp);
+
     if (state.attackType === "physical") {
       const hits = hitsFromSpd(hero.spd);
       outHits.textContent = fmt(hits);
 
       const phy = damageRangeTotal(hero.atk, enemyPhysDef, hits, elementModifier);
       outPhyDmg.textContent = formatMinMax(phy.min, phy.max);
+
+      // 物理 平均nパン
+      const phyAvg = Math.floor((phy.min + phy.max) / 2);
+      if (phyAvg > 0) {
+        const phyNpan = Math.ceil(enemyHp / phyAvg);
+        outPhyNpan.textContent = `${phyNpan}パン（平均ダメ: ${fmt(phyAvg)}）`;
+      } else {
+        outPhyNpan.textContent = "-";
+      }
 
       const reqAtk = oneShotLineRequiredAttack(enemyPhysDef, hits, enemyHp, elementModifier);
       outPhyOne.textContent = `atk${fmt(reqAtk)}以上`;
@@ -445,6 +466,15 @@ document.addEventListener("DOMContentLoaded", function () {
         heroElement: state.heroElement,
         enemyElement: enemyScaled.element
       });
+
+      // 魔法 平均nパン（物理モードでも参考表示）
+      const magAvg = Math.floor((mag.min + mag.max) / 2);
+      if (magAvg > 0) {
+        const magNpan = Math.ceil(enemyHp / magAvg);
+        outMagNpan.textContent = `${magNpan}パン（平均ダメ: ${fmt(magAvg)}）`;
+      } else {
+        outMagNpan.textContent = "-";
+      }
       outMagDmg.textContent = `${formatMinMax(mag.min, mag.max)}（この範囲内）`;
 
       const reqInt = calcMagicOneShotRequiredInt({
@@ -472,11 +502,6 @@ document.addEventListener("DOMContentLoaded", function () {
       outMagOverkill.textContent = `int${fmt(reqIntOverkill)}以上`;
 
     } else {
-      outHits.textContent        = "-";
-      outPhyDmg.textContent      = "-";
-      outPhyOne.textContent      = "-";
-      outPhyOverkill.textContent = "-";
-
       const mag = calcMagicDamageRange({
         heroInt: hero.int,
         analysisBook: hero.analysisBook,
@@ -487,6 +512,15 @@ document.addEventListener("DOMContentLoaded", function () {
         heroElement: state.heroElement,
         enemyElement: enemyScaled.element
       });
+
+      // 魔法 平均nパン
+      const magAvg = Math.floor((mag.min + mag.max) / 2);
+      if (magAvg > 0) {
+        const magNpan = Math.ceil(enemyHp / magAvg);
+        outMagNpan.textContent = `${magNpan}パン（平均ダメ: ${fmt(magAvg)}）`;
+      } else {
+        outMagNpan.textContent = "-";
+      }
       outMagDmg.textContent = `${formatMinMax(mag.min, mag.max)}（この範囲内）`;
 
       const reqInt = calcMagicOneShotRequiredInt({
