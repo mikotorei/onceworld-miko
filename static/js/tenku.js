@@ -130,20 +130,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function calcMagicOneshotRequired(row, params) {
-    const enemyMagDef      = row.mdef + Math.floor(row.def * 0.1);
-    const enemyHp          = row.vit * 18 + 100;
-    const analysisBonus    = calcAnalysisBonus(params.book, params.bookAdv);
-    const spellMultiplier  = getSpellMultiplier(params.spell);
-    const crystalMult      = getCrystalMultiplier(params.crystal);
-    const elementModifier  = getElementModifier(params.heroElement, row.element);
+    const enemyMagDef     = row.mdef + Math.floor(row.def * 0.1);
+    const enemyHp         = row.vit * 18 + 100;
+    const analysisBonus   = calcAnalysisBonus(params.book, params.bookAdv);
+    const spellMultiplier = getSpellMultiplier(params.spell);
+    const crystalMult     = getCrystalMultiplier(params.crystal);
+    const elementModifier = getElementModifier(params.heroElement, row.element);
 
     const totalMod = 0.9 * 4 * elementModifier;
     if (totalMod <= 0 || spellMultiplier <= 0 || crystalMult <= 0) return { required: 0, canOneshot: false };
 
-    const neededAfterDef  = enemyHp / totalMod;
-    const neededPreDef    = neededAfterDef + enemyMagDef;
-    const neededInt       = Math.ceil(neededPreDef / (1.25 * spellMultiplier * crystalMult) - analysisBonus);
-    const required        = Math.max(0, neededInt);
+    const neededAfterDef = enemyHp / totalMod;
+    const neededPreDef   = neededAfterDef + enemyMagDef;
+    const neededInt      = Math.ceil(neededPreDef / (1.25 * spellMultiplier * crystalMult) - analysisBonus);
+    const required       = Math.max(0, neededInt);
 
     const heroInt    = Math.max(0, Math.floor(Number(params.heroInt) || 0));
     const canOneshot = heroInt >= required;
@@ -217,8 +217,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const result = calcMagicOneshotRequired(row, magicParams);
       return { ...row, ...result };
     });
-    // 必要INTが低い順（ワンパンしやすい順）
-    rows.sort((a, b) => a.required - b.required);
+    // 必要INTが高い順（より強い敵を上位に）
+    rows.sort((a, b) => b.required - a.required);
     return rows.slice(0, TOP_N);
   }
 
@@ -303,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mdefRangeRow.style.display    = viewGroup === "req_mdef"      ? "" : "none";
     magicOneshotRow.style.display = viewGroup === "magic_oneshot" ? "" : "none";
 
-    const sortKey = viewGroup === "status" ? getStatusSortKey() : viewGroup;
+    const sortKey  = viewGroup === "status" ? getStatusSortKey() : viewGroup;
     const monsters = getFilteredMonsters(sortKey, rangedOnly);
 
     if (monsters.length === 0) {
@@ -328,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       noResult.style.display = "none";
-      resultMeta.textContent = `${floor}階（Lv ${lv.toLocaleString()}）／ 必要INT 昇順`;
+      resultMeta.textContent = `${floor}階（Lv ${lv.toLocaleString()}）／ 必要INT 降順`;
 
       // thead
       theadRow.innerHTML = "";
