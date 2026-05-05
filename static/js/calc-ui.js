@@ -315,6 +315,7 @@ document.addEventListener("DOMContentLoaded", function () {
   lvInput.value = formatIntString(currentLv);
   applyModeUI();
   setCalcEnabled();
+  initBuildImport();
 
   ["hero-atk", "hero-int", "hero-spd", "analysis-book", "analysis-book-advanced", "crystal-count"].forEach(id => {
     const el = document.getElementById(id);
@@ -581,6 +582,56 @@ document.addEventListener("DOMContentLoaded", function () {
     outNullDef.textContent  = `${fmt(requiredDefenseForNullify(enemyScaled.atk))}以上`;
     outNullMdef.textContent = `${fmt(requiredDefenseForNullify(enemyScaled.int))}以上`;
   });
+
+  // --- ビルド引用 ---
+  function initBuildImport() {
+    const BUILD_STORAGE_KEY = "status_sim_build_slots_v1";
+    const importSelect = document.getElementById("build-import-select");
+    const importBtn    = document.getElementById("build-import-btn");
+    if (!importSelect || !importBtn) return;
+
+    function loadBuilds() {
+      try { return JSON.parse(localStorage.getItem(BUILD_STORAGE_KEY) || "{}"); } catch { return {}; }
+    }
+
+    function refreshImportSelect() {
+      const builds = loadBuilds();
+      const names  = Object.keys(builds).sort(function(a, b) { return a.localeCompare(b, "ja"); });
+      importSelect.innerHTML = "";
+      importSelect.appendChild(new Option("（未選択）", ""));
+      names.forEach(function(name) { importSelect.appendChild(new Option(name, name)); });
+    }
+
+    function applyBuildToCalc(name) {
+      const builds = loadBuilds();
+      const build  = builds[name];
+      if (!build) return;
+      const ft = build.finalTotal;
+      if (!ft) {
+        alert("このビルドには最終ステータスが記録されていません。\nステータスシミュレーターで再保存してください。");
+        return;
+      }
+      var atkEl = document.getElementById("hero-atk");
+      var intEl = document.getElementById("hero-int");
+      var spdEl = document.getElementById("hero-spd");
+      if (atkEl) { atkEl.value = formatIntString(Math.round(ft.atk || 0)); }
+      if (intEl) { intEl.value = formatIntString(Math.round(ft.int || 0)); }
+      if (spdEl) { spdEl.value = formatIntString(Math.round(ft.spd || 0)); }
+      saveState();
+    }
+
+    refreshImportSelect();
+    importBtn.addEventListener("click", function() {
+      const name = importSelect.value;
+      if (!name) return;
+      applyBuildToCalc(name);
+    });
+
+    // ステシミュ側で保存が行われたとき（別タブ等）にselectを更新
+    window.addEventListener("storage", function(e) {
+      if (e.key === BUILD_STORAGE_KEY) refreshImportSelect();
+    });
+  }
 })();
 
 }); // DOMContentLoaded
