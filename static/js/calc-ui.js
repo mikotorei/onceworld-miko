@@ -395,6 +395,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setHiddenForce(godEyeRow, !state.critical);
     setDebuffButtons();
     saveState();
+    calcBtn.click();
   });
 
   godEye0Btn.addEventListener("click", () => {
