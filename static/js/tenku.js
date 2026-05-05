@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "241", "242", "243", "244", "245", "246", "247", "248", "249"
   ];
 
-  const TOP_N      = 15;
+  const TOP_N      = 30;
   const SAFE_MAX_F = 99999;
 
   // ステータス列定義
