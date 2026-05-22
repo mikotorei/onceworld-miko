@@ -20,7 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 特定フロアのみ出現するモンスター { id, floor }
   const SPECIAL_IDS = [
-    { id: "223", floor: 1000000 },
+    { id: "227", floor: 10000 },
+    { id: "228", floor: 100000},
+    { id: "229", floor: 1000000}
   ];
 
   // 魔法が効かないモンスターのID（魔法ワンパン表示から除外）
